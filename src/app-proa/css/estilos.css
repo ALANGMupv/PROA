@@ -1,0 +1,530 @@
+/* region --- RESET (Importante para cada CSS) --- */
+* { margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; }
+
+body { min-height: 100dvh; }
+input, button, textarea, select { font: inherit; }
+
+p { text-wrap: pretty; }
+h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+
+img, video, svg { height: auto; max-width: 100%; }
+
+@media (prefers-reduced-motion: reduce)  {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+        transition: none;
+    }
+}
+
+a { color: inherit; }
+/* endregion */
+
+/* region --- FUENTES --- */
+@font-face {
+    font-family: 'Lato';
+    src: url('../../fonts/Lato/Lato-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Lato';
+    src: url('../../fonts/Lato/Lato-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Lato';
+    src: url('../../fonts/Lato/Lato-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+/* endregion */
+
+:root {
+    /* Colores */
+    --color-primario: #459CFF;
+    --color-secundario: #51A3FD;
+    --color-terciario: #DCEBFF;
+    --color-resalteOscuro: #05204A;
+    --color-inputError: #F0ADAD;
+    --color-mensajeError: #FF4040;
+    --color-exito: #BAE6A2;
+    --color-bordes: #CCCCCC;
+    --color-fondoPROAGris: #F9FAFB;
+    --color-panelesBlancoPuro: #FFFFFF;
+
+    /* Tipografía */
+    --fuente-principal: 'Lato', sans-serif;
+
+    background-color: var(--color-fondoPROAGris);
+}
+
+body {
+    font-family: var(--fuente-principal);
+}
+
+/* region --- HEADLINES PC Y MÓVIL --- */
+h1 {
+    font-family: var(--fuente-principal);
+    font-size: 1.875em; /* 30px */
+    font-weight: 700;
+}
+
+h2 {
+    font-family: var(--fuente-principal);
+    font-size: 1.5625em; /* 25px */
+    font-weight: 700;
+}
+
+h3 {
+    font-family: var(--fuente-principal);
+    font-size: 1.25em; /* 20px */
+    font-weight: 700;
+}
+
+h4 {
+    font-family: var(--fuente-principal);
+    font-size: 1.25em; /* 20px */
+    font-weight: 400; /* Regular */
+}
+
+h5 {
+    font-family: var(--fuente-principal);
+    font-size: 1.125em; /* 18px */
+    font-weight: 500; /* Medium */
+}
+
+h6 {
+    font-family: var(--fuente-principal);
+    font-size: 1em; /* 16px */
+    font-weight: 300; /* Light */
+}
+
+p {
+    font-family: var(--fuente-principal);
+    font-size: 1.125em; /* 18px */
+    font-weight: 300; /* Light */
+    line-height: 1.5;
+}
+
+label {
+    font-family: var(--fuente-principal);
+    font-size: 1.125em; /* 18px */
+    font-weight: 400; /* Regular */
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.4375em; /* 23px */
+    }
+
+    h2 {
+        font-size: 1.25em; /* 20px */
+    }
+
+    h3 {
+        font-size: 1.125em; /* 18px */
+    }
+
+    h4 {
+        font-size: 1em; /* 16px */
+    }
+
+    h5 {
+        font-size: 0.875em; /* 14px */
+    }
+
+    h6 {
+        font-size: 0.75em; /* 12px */
+        font-weight: 400; /* Regular */
+    }
+
+    p {
+        font-size: 0.875em; /* 14px */
+    }
+}
+/* endregion */
+
+/* region --- TITULOS EN AZUL SECUNDARIO --- */
+.titulo-azul {
+    color: var(--color-secundario);
+}
+/* endregion */
+
+/* region --- ICONOS AZULES --- */
+.icono-azul {
+    filter: invert(53%) sepia(97%) saturate(447%) hue-rotate(181deg) brightness(99%) contrast(101%);
+}
+/* endregion */
+
+/* region --- BOTONES --- */
+.btn {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-primario);
+    font-size: 1.125em;
+    font-weight: 400;
+    color: white;
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    color: var(--color-primario);
+    background-color: var(--color-panelesBlancoPuro);
+    border: 2px solid var(--color-primario);
+}
+
+.btn-secundario {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-panelesBlancoPuro);
+    font-size: 1.125em;
+    font-weight: 400;
+    color: var(--color-primario);
+    padding: 0.75em 1.5em;
+    border: 2px solid var(--color-primario);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-secundario:active {
+    transform: scale(0.98);
+}
+
+.btn-secundario:hover {
+    color: white;
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+/* Botones oscuros (sin invertir colores) */
+.btn-oscuros {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-primario);
+    font-size: 1.125em;
+    font-weight: 400;
+    color: white;
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: filter 0.2s ease-in-out;
+}
+
+.btn-oscuros:hover,
+.btn-oscuros:focus {
+    filter: brightness(0.9);
+}
+
+.btn-oscuros-secundario {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-panelesBlancoPuro);
+    font-size: 1.125em;
+    font-weight: 400;
+    color: var(--color-primario);
+    padding: 0.75em 1.5em;
+    border: 2px solid var(--color-primario);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: filter 0.2s ease-in-out;
+}
+
+.btn-oscuros-secundario:hover,
+.btn-oscuros-secundario:focus {
+    filter: brightness(0.95);
+}
+
+@media (max-width: 768px) {
+    .btn,
+    .btn-secundario,
+    .btn-oscuros,
+    .btn-oscuros-secundario {
+        font-size: 1em;
+        padding: 0.5em 1em;
+        border-radius: 8px;
+    }
+
+    .btn-agregar {
+        font-size: 0.875em;
+        padding: 0.5em;
+    }
+
+    .boton-opcion {
+        font-size: 0.875em;
+        padding: 0.5em 0.75em;
+    }
+}
+/* endregion */
+
+/* region --- FONDO PANEL --- */
+.fondoPanel {
+    background-color: var(--color-panelesBlancoPuro);
+    padding: 2em;
+    border: 2px solid var(--color-bordes);
+    border-radius: 5px;
+}
+/* endregion */
+
+/* region --- INPUTS BASE --- */
+.input-base {
+    font-family: var(--fuente-principal);
+    font-size: 1em;
+    color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--color-bordes);
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 0.75em 1em;
+}
+
+.input-base:focus {
+    border-color: var(--color-primario);
+    outline: none;
+}
+/* endregion */
+
+/* region --- CONTENEDOR CON ICONO --- */
+.input-con-icono {
+    position: relative;
+    display: inline-block;
+}
+/* endregion */
+
+/* region --- ICONO BÚSQUEDA --- */
+.icono-buscador {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.75em;
+    width: 1em;
+    height: 1em;
+    color: #7F7F7F;
+    pointer-events: none;
+}
+/* endregion */
+
+/* region --- INPUT DE BUSQUEDA (con icono izquierda) --- */
+.input-textoBusqueda {
+    padding-left: 2.5em; /* deja espacio al ícono */
+    font-weight: 400;
+}
+/* endregion */
+
+/* region --- DROPDOWNS ---*/
+.icono-dropdown {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0.75em;
+    width: 1em;
+    height: 1em;
+    pointer-events: none;
+}
+
+.seleccionador-dropdown {
+    font-weight: 500;
+    color: #000000;
+    padding-right: 2.5em; /* espacio para el ícono */
+    appearance: none; /* Oculta el icono nativo y así podemos poner el nuestro y modificarlo */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+#dropdown-asignaturas {
+    color: var(--color-primario);
+    background-color: var(--color-panelesBlancoPuro);
+    border: 2px solid var(--color-primario);
+    border-radius: 4px
+}
+/* endregion */
+
+/* region --- PANEL DE PREGUNTAS --- */
+.pregunta-contenedor {
+    background-color: var(--color-fondoPROAGris);
+    padding: 2em;
+    border: 2px solid var(--color-bordes);
+    border-radius: 5px;
+}
+
+.respuestas-contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 1.5em;
+}
+
+.respuesta-opcion {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.radio-grupo {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    min-width: 40px;
+}
+
+.radio-grupo label {
+    font-family: var(--fuente-principal);
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.input-respuesta {
+    flex: 1;
+    background-color: var(--color-panelesBlancoPuro);
+}
+
+.icono-eliminar {
+    width: 25px;
+    height: 25px;
+    cursor: pointer; /* Muestra el icono de la mano en el navegador */
+}
+
+.btn-agregar {
+    width: 100%;
+    padding: 0.75em;
+    border: 2px dashed var(--color-bordes);
+    border-radius: 5px;
+    background: var(--color-panelesBlancoPuro);
+    color: var(--color-primario);
+    font-family: var(--fuente-principal);
+    font-weight: 500;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-agregar:hover {
+    background-color: var(--color-terciario);
+}
+
+.icono-mas {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+/* endregion */
+
+/* region --- BOTÓN RESPUESTA --- */
+.boton-opcion {
+    background-color: rgba(204, 204, 204, 0.18); /* CCCCCC al 18% */
+    border-radius: 8px;
+    padding: 0.75em 1em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.boton-opcion:hover {
+    background-color: var(--color-terciario);
+}
+
+.letra {
+    font-family: 'Lato', sans-serif;
+    font-weight: 600; /* Semibold */
+    font-size: 1em;
+}
+
+.texto {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300; /* Light */
+    font-size: 0.875em;
+}
+/* endregion */
+
+/* region --- ¡PROVISIONAL! PARA VER BIEN EL HTML --- */
+.fondoPanel > * {
+    margin-bottom: 1em;
+    margin-right: 1em;
+}
+
+.fondoPanel > *:last-child {
+    margin-bottom: 0;
+}
+
+.paleta-colores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 2em;
+}
+
+.color-box {
+    background-color: var(--color);
+    padding: 1em;
+    color: #000;
+    font-family: var(--fuente-principal);
+    font-weight: 500;
+    font-size: 0.875em;
+    border-radius: 5px;
+    min-width: 8em;
+    text-align: center;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.galeria-iconos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    margin-top: 2em;
+}
+
+.icono-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    text-align: center;
+    font-size: 0.75em;
+    font-family: var(--fuente-principal);
+    color: #444;
+}
+
+.icono-item img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.5em;
+    object-fit: contain;
+}
+/* endregion */
+
+/* region --- MENSAJES DE ERROR FORMULARIOS --- */
+.error-texto {
+    display: inline-block;
+    font-size: 0.85em;
+    color: var(--color-inputError);
+    margin-left: 0.5em;
+    vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .error-texto {
+        font-size: 0.7em;
+    }
+}
+/* endregion */
+
+
+
+
+
+
+
+
+

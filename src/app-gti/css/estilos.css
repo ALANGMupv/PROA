@@ -1,0 +1,598 @@
+/* region --- RESET (Importante para cada CSS) --- */
+* { margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; }
+
+body { min-height: 100dvh; }
+
+input, button, textarea, select { font: inherit; }
+
+p { text-wrap: pretty; }
+h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+
+img, video, svg { height: auto; max-width: 100%; }
+
+@media (prefers-reduced-motion: reduce)  {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+        transition: none;
+    }
+}
+
+a { color: inherit; }
+/* endregion */
+
+/* region --- FUENTES --- */
+/* LATO */
+@font-face {
+    font-family: 'Lato';
+    src: url('../../fonts/Lato/Lato-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('../../fonts/Lato/Lato-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('../../fonts/Lato/Lato-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* LORA */
+@font-face {
+    font-family: 'Lora';
+    src: url('../../fonts/Lora/Lora-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lora';
+    src: url('../../fonts/Lora/Lora-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+/* endregion */
+
+:root {
+    --color-principal: #A03A6F;
+    --color-PROA: #459CFF;
+    --color-sombra-imagen: #C7B2C4;
+    --color-fondo-diferenciador: #F9F9F9;
+    --color-blancoPuro: #FFFFFF;
+
+    --color-footer-fondo: #101827;
+    --color-textos: #000000;
+    --color-panelesBordesGris: #CCCCCC;
+
+    --color-rojoError: #fda7a7;
+
+    --fuente-lato: 'Lato', sans-serif;
+    --fuente-lora: 'Lora', serif;
+}
+
+body {
+    font-family: var(--fuente-lato);
+}
+
+/* region --- HEADLINES PC Y MÓVIL --- */
+h1 {
+    font-family: var(--fuente-lora);
+    font-size: 4.5em;
+    font-weight: 700;
+}
+
+h2 {
+    font-family: var(--fuente-lora);
+    font-size: 1.875em;
+    font-weight: 700;
+}
+
+h3 {
+    font-family: var(--fuente-lato);
+    font-size: 1.25em;
+    font-weight: 700;
+}
+
+h4 {
+    font-family: var(--fuente-lato);
+    font-size: 1.25em;
+    font-weight: 400;
+}
+
+h5 {
+    font-family: var(--fuente-lato);
+    font-size: 1.125em;
+    font-weight: 400;
+}
+
+h6 {
+    font-family: var(--fuente-lato);
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+label {
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.125em;
+    }
+
+    h2 {
+        font-size: 1.375em;
+    }
+
+    h3 {
+        font-size: 1.125em;
+    }
+
+    h4 {
+        font-size: 1em;
+    }
+
+    h5 {
+        font-size: 0.875em;
+    }
+
+    h6 {
+        font-size: 0.9em;
+    }
+
+    label {
+        font-size: 0.9em;
+    }
+
+}
+/* endregion */
+
+/* region --- PÁRRAFOS --- */
+.parrafo-principal {
+    font-family: var(--fuente-lato);
+    font-weight: 400;
+    font-size: 1.25em;
+    line-height: 1.5;
+}
+
+.parrafo-secundario {
+    font-family: var(--fuente-lato);
+    font-weight: 400;
+    font-size: 1.125em;
+    line-height: 1.5;
+}
+
+.parrafo-terciario {
+    font-family: var(--fuente-lato);
+    font-weight: 300;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+    .parrafo-principal {
+        font-size: 1.125em;
+    }
+
+    .parrafo-secundario,
+    .parrafo-terciario {
+        font-size: 1em;
+        font-weight: 400;
+    }
+}
+/* endregion */
+
+
+/* region --- BOTONES GTI --- */
+.btnCTA {
+    font-family: var(--fuente-lato);
+    background-color: var(--color-principal);
+    font-size: 1.4em;
+    font-weight: 400;
+    color: var(--color-blancoPuro);
+    padding: 1.25em 1.25em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btnCTA:active {
+    transform: scale(0.98);
+}
+
+.btnCTA:hover {
+    background-color: var(--color-blancoPuro);
+    color: var(--color-principal);
+    border: 2px solid var(--color-principal);
+}
+
+.btn {
+    font-family: var(--fuente-lato);
+    background-color: var(--color-principal);
+    font-size: 1.2em;
+    font-weight: 400;
+    color: var(--color-blancoPuro);
+    padding: 0.65em 0.75em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn:hover {
+    background-color: var(--color-blancoPuro);
+    color: var(--color-principal);
+    border: 2px solid var(--color-principal);
+}
+
+.btn-secundario {
+    background-color: var(--color-blancoPuro);
+    color: var(--color-principal);
+    border: 2px solid var(--color-principal);
+}
+.btn-secundario:hover {
+    filter: brightness(0.95);
+}
+
+.btn-principal:hover {
+    background-color: var(--color-principal) !important;
+    color: var(--color-blancoPuro) !important;
+    border: none !important;
+    filter: brightness(0.9);
+}
+/* endregion */
+
+/* region --- BOTONES PROA --- */
+.btnCTA-PROA {
+    font-family: var(--fuente-lato);
+    background-color: var(--color-PROA);
+    font-size: 1.4em;
+    font-weight: 400;
+    color: var(--color-blancoPuro);
+    padding: 0.75em 1.75em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btnCTA-PROA:active {
+    transform: scale(0.98);
+}
+
+
+.btnCTA-PROA:hover {
+    background-color: var(--color-blancoPuro);
+    color: var(--color-PROA);
+    border: 2px solid var(--color-PROA);
+}
+
+.btnPROA {
+    font-family: var(--fuente-lato);
+    background-color: var(--color-PROA);
+    font-size: 1.2em;
+    font-weight: 400;
+    color: var(--color-blancoPuro);
+    padding: 0.75em 2em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btnPROA:active {
+    transform: scale(0.98);
+}
+
+.btnPROA:hover {
+    background-color: var(--color-blancoPuro);
+    color: var(--color-PROA);
+    border: 2px solid var(--color-PROA);
+}
+
+.btnPROA-secundario {
+    font-family: var(--fuente-lato);
+    background-color: var(--color-blancoPuro);
+    font-size: 1.2em;
+    font-weight: 400;
+    color: var(--color-PROA);
+    padding: 0.75em 0.75em;
+    border: 2px solid var(--color-PROA);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btnPROA-secundario:active {
+    transform: scale(0.98);
+}
+
+.btnPROA-secundario:hover {
+    background-color: var(--color-PROA);
+    color: var(--color-blancoPuro);
+    border: 2px solid var(--color-PROA);
+}
+/* endregion */
+
+/* region --- BOTONES RESPONSIVES --- */
+@media (max-width: 480px) {
+    .btn,
+    .btnCTA,
+    .btnCTA-PROA,
+    .btnPROA,
+    .btnPROA-secundario,
+    .btn-principal,
+    .btn-secundario {
+        font-size: 1em;
+        border-radius: 8px;
+    }
+
+    .btnCTA,
+    .btnCTA-PROA {
+        font-size: 1.125em;
+    }
+
+    .btnPROA,
+    .btnPROA-secundario {
+        font-size: 1em;
+    }
+
+    .btn-principal,
+    .btn-secundario {
+        font-size: 1em;
+    }
+}
+/* endregion */
+
+/* region --- POPUPS - CIERRE DE SESIÓN --- */
+.popup {
+    position: fixed;
+    inset: 0;
+    z-index: 9999; /* Se superpone a todo lo que tenga z-index menor */
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup.activo {
+    display: flex;
+}
+
+.popup-contenido {
+    background-color: var(--color-blancoPuro);
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.popup-botones {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1.5em;
+    flex-wrap: wrap;
+}
+
+.popup-botones .btn {
+    width: 100%;
+    padding: 0.7em;
+    font-size: 1.2em;
+    border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .popup-contenido {
+        padding: 1.5em;
+    }
+
+    .popup-botones .btn {
+        padding: 0.5em;
+    }
+}
+/* endregion */
+
+/* region --- ESTILOS FORMULARIO, CAMPOS LOGIN, REGISTRO Y SUGERENCIAS/CONTACTO--- */
+.input-contacto {
+    font-family: var(--fuente-lato);
+    font-weight: 400;
+    font-size: 1em;
+    color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--color-panelesBordesGris);
+    border-radius: 5px;
+    background-color: var(--color-blancoPuro);
+    padding: 0.6em 1em;
+}
+
+.input-contacto:focus {
+    border-color: var(--color-principal);
+    outline: none;
+}
+
+.input-base {
+    font-family: var(--fuente-lato);
+    font-weight: 400;
+    font-size: 1em;
+    color: rgba(0, 0, 0, 0.8);
+
+    border: none;
+    border-bottom: 1px solid var(--color-panelesBordesGris);
+    border-radius: 0;
+
+    background-color: transparent;
+    padding: 0.6em 0;
+    padding-left: 1em;
+}
+
+.input-base:focus {
+    outline: none;
+    border-bottom: 1px solid var(--color-principal);
+}
+
+
+textarea {
+    resize: none;
+}
+/* endregion */
+
+/* region --- DROPDOWN--- */
+.input-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.seleccionador-dropdown {
+    font-family: var(--fuente-lato);
+    font-weight: 400;
+    font-size: 1em;
+    color: rgba(0, 0, 0, 0.8);
+
+    width: 100%;
+    padding: 0.6em 2.5em 0.6em 1em; /* espacio a la derecha para el ícono */
+
+    border: 1px solid var(--color-panelesBordesGris);
+    border-radius: 5px;
+    background-color: var(--color-blancoPuro);
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    cursor: pointer;
+}
+
+.seleccionador-dropdown:focus {
+    border-color: var(--color-principal);
+    outline: none;
+}
+
+.icono-dropdown {
+    position: absolute;
+    top: 50%;
+    right: 1em;
+    transform: translateY(-50%);
+    width: 1em;
+    height: 1em;
+    pointer-events: none;
+}
+
+/*endregion*/
+
+/* region --- ¡PROVISIONAL! PARA VER BIEN EL HTML --- */
+.paleta-colores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-bottom: 3em;
+}
+
+.color-box {
+    background-color: var(--color);
+    width: 160px;
+    height: 100px;
+    border-radius: 10px;
+    padding: 1em;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.color-box.light {
+    color: #000;
+}
+
+.titulares {
+    text-align: center;
+}
+.titulares h1,
+.titulares h2,
+.titulares h3,
+.titulares h4,
+.titulares h5,
+.titulares h6 {
+    margin-top: 1em;
+}
+
+.seccion {
+    margin-bottom: 4em;
+}
+.seccion > * {
+    margin-block: 0.5em;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 1em; /* espacio entre campos */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.galeria-iconos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    margin-top: 2em;
+}
+
+.icono-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    text-align: center;
+    font-size: 0.75em;
+    font-family: var(--fuente-principal);
+    color: #444;
+}
+
+.icono-item img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0.5em;
+    object-fit: contain;
+}
+/* endregion */
+
+/* region --- MENSAJES DE ERROR FORMULARIOS --- */
+.error-texto {
+    display: inline-block;
+    font-size: 0.75em;
+    color: var(--color-rojoError);
+    margin-left: 0.5em;
+    vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .error-texto {
+        font-size: 0.6em;
+    }
+}
+/* endregion */

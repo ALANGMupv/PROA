@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/registro.css">
+    <script src="js/header.js" defer></script>
+    <script src="js/registro.js" defer></script>
+</head>
+<body>
+
+<!-- Header - En el archivo js está el html en sí, según esté logueado se muestra uno y si no lo está otro. -->
+<div id="contenedor-header"></div>
+<!-- Cerramos sección header -->
+
+<!-- Sección principal de registro -->
+<section class="registro">
+    <div class="contenedor-registro">
+
+        <!-- Texto explicativo que acompaña el formulario -->
+        <div class="registro-texto">
+            <h2>Regístrate y empieza a probar la demo de nuestros módulos educativos</h2>
+            <p class="parrafo-principal">
+                Si representas a una institución educativa, completa el registro y recibirás por correo las credenciales de acceso a las demos disponibles. Prueba nuestros módulos educativos desde dentro y evalúa cómo pueden adaptarse a tu centro.
+            </p>
+        </div>
+
+        <!-- Formulario para el registro de usuarios -->
+        <form class="registro-formulario">
+
+            <!-- Campos para el nombre y apellidos del usuario -->
+            <div class="campo-doble">
+                <div class="campo mitad">
+                    <label for="nombre">Nombre *</label>
+                    <input type="text" id="nombre" class="input-base" />
+                </div>
+                <div class="campo mitad">
+                    <label for="apellidos">Apellidos *</label>
+                    <input type="text" id="apellidos" class="input-base" />
+                </div>
+            </div>
+
+            <!-- Campo doble para institución y tipo -->
+            <div class="campo-doble">
+                <div class="campo mitad">
+                    <label for="institucion">Nombre de la institución *</label>
+                    <input type="text" id="institucion" class="input-base" />
+                </div>
+                <div class="campo mitad">
+                    <label for="tipo">Tipo de institución *</label>
+                    <div class="input-dropdown">
+                        <select id="tipo" class="seleccionador-dropdown">
+                            <option selected disabled hidden>Selecciona tu institución</option>
+                            <option>Universidad</option>
+                            <option>Instituto</option>
+                            <option>Colegio</option>
+                            <option>Academia Particular</option>
+                            <option>Otros</option>
+                        </select>
+                        <img src="icons/dropdown.svg" alt="Flecha" class="icono-dropdown" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campo doble para teléfono y correo -->
+            <div class="campo-doble">
+                <div class="campo mitad">
+                    <label for="telefono">Teléfono *</label>
+                    <input type="tel" id="telefono" class="input-base" />
+                </div>
+                <div class="campo mitad">
+                    <label for="correo">Correo de la institución *</label>
+                    <input type="email" id="correo" class="input-base" />
+                </div>
+            </div>
+
+            <!-- Campo doble para contraseña y repetir contraseña -->
+            <div class="campo-doble">
+                <div class="campo mitad">
+                    <div class="fila-label">
+                        <label for="contrasena">Contraseña *</label>
+                    </div>
+                    <input type="password" id="contrasena" class="input-base" />
+                </div>
+                <div class="campo mitad">
+                    <label for="repetir">Repetir contraseña *</label>
+                    <input type="password" id="repetir" class="input-base" />
+                </div>
+            </div>
+            <span class="indicacion-contrasena">
+                La contraseña debe contener al menos 6 caracteres e incluir números o símbolos.
+            </span>
+
+
+            <!-- Botón para enviar el formulario -->
+            <button type="submit" class="btn">Registrarse</button>
+
+            <!-- Enlace para usuarios que ya tienen cuenta -->
+            <p class="texto-secundario">
+                ¿Ya tienes cuenta? <a href="login.html" class="enlace-secundario">Iniciar sesión</a>
+            </p>
+        </form>
+    </div>
+</section>
+<!-- Fin de la sección del formulario de registro -->
+
+</body>
+</html>
