@@ -10,13 +10,14 @@ if (usuarioLogueado) {
                 (u.rol === "alumno" || u.rol === "profesor" || u.rol === "pas")
             );
 
-            if (usuarioValido) {
-                if (usuarioValido.rol === "pas") {
-                    window.location.replace('../app-proa/pas/index.html');
-                } else {
-                    window.location.replace('../app-proa/inicio-asignaturas.html');
-                }
+            if (usuarioValido.rol === "pas") {
+                window.location.replace('pas/index.html');
+            } else if (usuarioValido.rol === "alumno") {
+                window.location.replace('alumno/index.html');
+            } else if (usuarioValido.rol === "profesor") {
+                window.location.replace('profesor/index.html');
             }
+
         });
 }
 
@@ -92,9 +93,11 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
                 setTimeout(() => {
                     toast.remove();
                     if (usuario.rol === "pas") {
-                        window.location.href = '../app-proa/pas/index.html';
-                    } else {
-                        window.location.href = '../app-proa/inicio-asignaturas.html';
+                        window.location.replace('pas/index.html');
+                    } else if (usuario.rol === "alumno") {
+                        window.location.replace('alumno/index.html');
+                    } else if (usuario.rol === "profesor") {
+                        window.location.replace('profesor/index.html');
                     }
                 }, 2000);
 

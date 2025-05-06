@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Asignatura</title>
-    <!-- Estilos comunes -->
-    <link rel="stylesheet" href="css/estilos.css" />
-    <!-- Estilo específico del submenú -->
-    <link rel="stylesheet" href="css/submenu-asignatura.css" />
-    <!-- Header dinámico -->
-    <script src="js/header-proa.js" defer></script>
-    <script src="js/panel-usuario.js" defer></script>
+    <title>Asignatura Profesor</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/submenu-asignatura.css">
+    <script src="../js/header-proa.js" defer></script>
+    <script src="js/asignatura-profesor.js" defer></script>
 </head>
-
 <body>
 <main class="contenido-asignatura-wrapper">
 
     <!-- Cabecera superior con nombre y código de la asignatura -->
     <section class="cabecera-asignatura">
         <h2 class="titulo-con-icono titulo-azul">
-            <img src="icons/book.svg" alt="Icono libro" class="icono-inicio icono-azul" />
+            <img src="../icons/book.svg" alt="Icono libro" class="icono-inicio icono-azul" />
             <span id="titulo-asignatura">Nombre de la asignatura</span>
         </h2>
         <p id="codigo-asignatura" class="codigo-asignatura centrado-horizontal"></p>
     </section>
 
-
-    <!-- Contenido dividido: menú lateral + contenido dinámico -->
+    <!-- Contenido dividido -->
     <div class="contenido-principal">
         <aside id="submenu-asignatura" class="submenu-asignatura"></aside>
 
@@ -37,6 +31,5 @@
         </section>
     </div>
 </main>
-
 </body>
 </html>
