@@ -103,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Lógica del popup
-
     const mostrarPopup = (mensajeTexto, onConfirmar, onCancelar) => {
         const popup = document.querySelector(".popup");
         if (!popup) return;
