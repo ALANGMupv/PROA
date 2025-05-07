@@ -6,41 +6,47 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Landing Page</title>
+
+    <!-- Estilos globales y específicos -->
     <link rel="stylesheet" href="app-gti/css/estilos.css">
     <link rel="stylesheet" href="app-gti/css/header.css">
     <link rel="stylesheet" href="app-gti/css/landing.css">
+    <link rel="stylesheet" href="app-gti/css/footer.css">
+
+    <!-- Scripts para insertar el header dinámicamente y gestionar el CTA -->
     <script src="app-gti/js/header.js" defer></script>
     <script src="app-gti/js/landing.js" defer></script>
 </head>
 <body>
 
-<!-- Header - En el archivo js está el html en sí, según esté logueado se muestra uno y si no lo está otro -->
+<!-- HEADER dinámico según estado de login -->
 <div id="contenedor-header"></div>
-<!-- Cerramos sección header -->
 
-<!-- Primera seccion -->
+<!-- SECCIÓN HERO / PRINCIPAL -->
 <section class="contenedor">
     <div class="contenido">
         <h1>Innovación en Tecnología Educativa</h1>
         <p class="parrafo-principal">
             Ayudamos a instituciones educativas a gestionar sus contenidos a través de módulos intuitivos y fáciles de usar que garantizan una conexión efectiva entre docentes y alumnos.
         </p>
-        <a id="cta" class="btnCTA">Conoce nuestra solución</a>
+        <a id="cta" class="btnCTA" href="#">Conoce nuestra solución</a>
     </div>
 </section>
 
-<!-- Segunda seccion -->
+<!-- SECCIÓN DIFERENCIADORA -->
 <section class="seccion-diferenciadora">
     <div class="contenedor-diferenciador">
         <div class="texto-diferenciador">
             <h2>¿Quiénes somos?</h2>
             <p class="parrafo-secundario">
-                GTI es una empresa emergente especializada en el desarrollo de productos digitales para el sector educativo. Nuestro enfoque está en crear herramientas modernas, intuitivas y accesibles que respondan a las necesidades reales de las instituciones académicas.
+                GTI es una empresa emergente especializada en el desarrollo de productos digitales para el sector educativo.
             </p>
             <p class="parrafo-secundario">
-                Actualmente nos encontramos en fase de lanzamiento de nuestro primer producto, PROA, una interfaz de gestión diseñada para mejorar la organización y comunicación interna en entornos educativos.            </p>
+                Actualmente nos encontramos en fase de lanzamiento de nuestro primer producto, PROA, una interfaz de gestión diseñada para mejorar la organización y comunicación interna en entornos educativos.
+            </p>
             <p class="parrafo-secundario">
-                Nuestro compromiso es ofrecer soluciones funcionales y efectivas, priorizando la experiencia de usuario y la simplicidad en cada módulo que desarrollamos. GTI nace con la misión de transformar la gestión educativa a través de la tecnología.            </p>
+                Nuestro compromiso es ofrecer soluciones funcionales y efectivas, priorizando la experiencia de usuario y la simplicidad.
+            </p>
         </div>
         <div class="imagen-diferenciador">
             <img src="app-gti/img/imagenBrainGTI.svg" alt="Personas trabajando en una mesa">
@@ -48,6 +54,37 @@
     </div>
 </section>
 
+<!-- FOOTER global -->
+<footer>
+    <div class="contenido-footer">
+        <div class="columna-footer">
+            <ul>
+                <li><div><img src="app-gti/img/logoGTI.svg" alt="logo"></div></li>
+                <li class="parrafo-terciario">Liderando la innovación en tecnología educativa</li>
+            </ul>
+        </div>
+        <div class="columna-footer-contenedor">
+            <div class="columna-footer">
+                <h4>Enlaces rápidos</h4>
+                <ul>
+                    <li><a class="parrafo-terciario" href="app-gti/catalogo.html">Catálogo</a></li>
+                    <li><a class="parrafo-terciario" href="app-gti/preguntasFrecuentes.html">Preguntas Frecuentes</a></li>
+                    <li><a class="parrafo-terciario" href="app-gti/contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="columna-footer">
+                <h4>Contacto</h4>
+                <ul>
+                    <li class="parrafo-terciario">Email: info@gti.edu</li>
+                    <li class="parrafo-terciario">Tel: +34 900 123 456</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="derechos parrafo-terciario">
+        © 2025 TuEmpresa. Todos los derechos reservados.
+    </div>
+</footer>
 
 </body>
 </html>
