@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Inicio Alumno</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+  <link rel="stylesheet" href="../css/submenu-asignatura.css">
+  <link rel="stylesheet" href="css/realizar-examen.css">
+  <script src="../js/header-proa.js" defer></script>
+  <script src="js/asignatura-alumno.js" defer></script>
+  <script src="js/realizar-examen.js" defer></script>
+</head>
+<body>
+
+<main class="contenido-asignatura-wrapper">
+
+  <!-- Cabecera superior con nombre y código de la asignatura -->
+  <section class="cabecera-asignatura">
+    <h2 class="titulo-con-icono titulo-azul">
+      <img src="../icons/book.svg" alt="Icono libro" class="icono-inicio icono-azul" />
+      <span id="titulo-asignatura">Nombre de la asignatura</span>
+    </h2>
+    <p id="codigo-asignatura" class="codigo-asignatura centrado-horizontal"></p>
+  </section>
+
+  <!-- Contenido dividido: menú lateral + contenido dinámico -->
+  <div class="contenido-principal">
+    <aside id="submenu-asignatura" class="submenu-asignatura"></aside>
+
+    <section class="panel-asignaturas fondoPanel">
+
+      <form id="formulario-examen">
+        <section class="titulo">
+          <h1>Cuestionario 1</h1>
+        </section>
+
+        <div class="mensaje-exito " id="mensajeExito">
+          <span>Calificacion: </span> <p class="calificacion"> 1/1</p>
+        </div>
+
+        <section class="descripcion">
+          <h2>Descripción</h2>
+          <p class="parrafo-principal">
+            Este cuestionario evalúa los conocimientos adquiridos en los temas fundamentales de Álgebra Matricial,
+            incluyendo operaciones con matrices, tipos de matrices, determinantes y sistemas de ecuaciones lineales.
+            Consta de preguntas tipo test con una única respuesta correcta por cada ítem.
+          </p>
+          <p class="parrafo-principal fecha-limite">
+            <strong>Fecha límite para completarlo:</strong> 5 de mayo de 2025 a las 23:59.
+          </p>
+        </section>
+
+        <hr class="separador">
+
+        <section class="preguntas">
+
+          <!-- Pregunta 1 -->
+          <section class="pregunta" data-puntaje="2">
+            <h3>Pregunta 1</h3>
+            <p class="parrafo-principal"><strong>¿Qué condición debe cumplir una matriz cuadrada para que tenga inversa?</strong></p>
+
+            <div class="calificacion-pregunta"></div>
+
+            <div class="opciones">
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta1" value="A" required>
+                <span class="letra">A.</span>
+                <span class="texto">Ser semántica</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta1" value="B">
+                <span class="letra">B.</span>
+                <span class="texto">Tener determinante distinto de cero</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta1" value="C">
+                <span class="letra">C.</span>
+                <span class="texto">Ser triangular</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta1" value="D">
+                <span class="letra">D.</span>
+                <span class="texto">Tener todos sus elementos positivos</span>
+              </label>
+            </div>
+          </section>
+
+          <!-- Pregunta 2 -->
+          <section class="pregunta" data-puntaje="2">
+            <h3>Pregunta 2</h3>
+            <p class="parrafo-principal"><strong>¿Cuál es el resultado de multiplicar una matriz A de orden 2×3 por una matriz B de orden 3×2?</strong></p>
+
+            <div class="calificacion-pregunta"></div>
+
+            <div class="opciones">
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta2" value="A" required>
+                <span class="letra">A.</span>
+                <span class="texto">Una matriz 3x3</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta2" value="B">
+                <span class="letra">B.</span>
+                <span class="texto">Una matriz 2x2</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta2" value="C">
+                <span class="letra">C.</span>
+                <span class="texto">Una matriz 2x3</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta2" value="D">
+                <span class="letra">D.</span>
+                <span class="texto">No se puede multiplicar</span>
+              </label>
+            </div>
+          </section>
+
+          <!-- Pregunta 3 -->
+          <section class="pregunta" data-puntaje="2">
+            <h3>Pregunta 3</h3>
+            <p class="parrafo-principal"><strong>¿Qué propiedad tiene una matriz simétrica?</strong></p>
+
+            <div class="calificacion-pregunta"></div>
+
+            <div class="opciones">
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta3" value="A" required>
+                <span class="letra">A.</span>
+                <span class="texto">Tiene sólo valores negativos</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta3" value="B">
+                <span class="letra">B.</span>
+                <span class="texto">Su traspuesta es igual a ella misma</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta3" value="C">
+                <span class="letra">C.</span>
+                <span class="texto">Tiene determinante igual a 0</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta3" value="D">
+                <span class="letra">D.</span>
+                <span class="texto">Está llena de ceros</span>
+              </label>
+            </div>
+          </section>
+
+          <!-- Pregunta 4 -->
+          <section class="pregunta" data-puntaje="2">
+            <h3>Pregunta 4</h3>
+            <p class="parrafo-principal"><strong>¿Cuál es el resultado del producto de cualquier matriz por una matriz nula del mismo tamaño compatible?</strong></p>
+
+            <div class="calificacion-pregunta"></div>
+
+            <div class="opciones">
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta4" value="A" required>
+                <span class="letra">A.</span>
+                <span class="texto">Una matriz identidad</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta4" value="B">
+                <span class="letra">B.</span>
+                <span class="texto">La misma matriz</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta4" value="C">
+                <span class="letra">C.</span>
+                <span class="texto">Una matriz nula</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta4" value="D">
+                <span class="letra">D.</span>
+                <span class="texto">Una matriz diagonal</span>
+              </label>
+            </div>
+          </section>
+
+          <!-- Pregunta 5 -->
+          <section class="pregunta" data-puntaje="2">
+            <h3>Pregunta 5</h3>
+            <p class="parrafo-principal"><strong>El rango de una matriz es:</strong></p>
+
+            <div class="calificacion-pregunta"></div>
+
+            <div class="opciones">
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta5" value="A" required>
+                <span class="letra">A.</span>
+                <span class="texto">El número de columnas</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta5" value="B">
+                <span class="letra">B.</span>
+                <span class="texto">El número de ceros en la matriz</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta5" value="C">
+                <span class="letra">C.</span>
+                <span class="texto">La cantidad de filas no nulas</span>
+              </label>
+              <label class="boton-opcion">
+                <input type="radio" name="pregunta5" value="D">
+                <span class="letra">D.</span>
+                <span class="texto">La suma de los elementos de la diagonal</span>
+              </label>
+            </div>
+          </section>
+
+        </section>
+
+
+
+        <div id="botones">
+          <button class="btn-secundario btn-inicial" type="reset">Cancelar</button>
+          <button class="btn btn-inicial" type="submit">Enviar</button>
+          <button class="btn btn-atras" onclick="irAtras()">Atrás</button>
+        </div>
+
+
+      </form>
+
+    </section>
+  </div>
+</main>
+</body>
+</html>

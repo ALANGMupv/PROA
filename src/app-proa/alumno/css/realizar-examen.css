@@ -1,0 +1,144 @@
+/* Estructura general del cuestionario */
+#formulario-examen{
+    margin: 0;
+}
+
+.cuestionario {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Secciones */
+.titulo,
+.descripcion,
+.pregunta,
+.preguntas{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.pregunta{
+    margin-top: 10px;
+}
+
+.descripcion{
+    margin-top: 15px;
+}
+
+/* Opciones tipo test */
+.opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#botones{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    gap: 2em;
+}
+
+#botones button{
+    width: 9em;
+    height: 2.5em;
+    padding: 0;
+}
+
+
+
+.btn-atras{
+    display: none;
+}
+
+.mensaje-exito {
+    display: none;
+    margin-top: 5px;
+    font-weight: bold;
+    justify-content: flex-end;
+    align-items: baseline;
+}
+
+.mensaje-exito p{
+    margin-left: 10px;
+    font-size: 1.5em;
+}
+
+.mensaje-exito span{
+    font-size: 1.25em;
+    font-weight: 600;
+}
+
+.separador {
+    border: none;
+    height: 2px;
+    background-color: #ccc;
+    margin: 2rem 0;
+}
+
+.calificacion-pregunta{
+    display: none;
+    font-weight: bold;
+    justify-content: flex-end;
+    align-items: baseline;
+    color: #459CFF;
+}
+
+.color-box{
+    font-size: 1.125em;
+    padding: 0.75em 1em;
+}
+
+.boton-deshabilitado {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.boton-opcion-deshabilitado{
+    cursor: not-allowed;
+    transition: unset;
+}
+
+.boton-opcion-deshabilitado:hover {
+    background-color: transparent;
+    background-color:rgba(204, 204, 204, 0.18)
+}
+
+.boton-opcion-correcta-deshabilitado{
+    cursor: not-allowed;
+    transition: unset;
+}
+
+.boton-opcion-correcta-deshabilitado:hover {
+    background-color: #bae6a2;
+}
+
+.boton-opcion-incorrecta-deshabilitado{
+    cursor: not-allowed;
+    transition: unset;
+}
+
+.boton-opcion-incorrecta-deshabilitado:hover {
+    background-color: #f0adad;
+}
+
+.calificacion{
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #459CFF;
+}
+
+@media (max-width: 770px){
+    .botones{
+        justify-content: center;
+    }
+
+    .color-box{
+        font-size: 0.875em;;
+    }
+}
