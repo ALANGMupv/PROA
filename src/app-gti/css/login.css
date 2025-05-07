@@ -1,5 +1,57 @@
-/* ESTILOS USADOS EN: login.htmL, olvidoContrasenya.html, nuevaContrasenya.html */
+/* ESTILOS USADOS EN: login.html, olvidoContrasenya.html, nuevaContrasenya.html */
 
+/* === LOGIN MODERNO CON IMAGEN SOLO EN login.html === */
+.login-container.login-solo {
+    display: flex;
+    height: calc(100vh - var(--header-height));
+    background: linear-gradient(to right, #fdfbfb, #ebedee);
+}
+
+.login-solo .login-imagen {
+    flex: 1;
+    background-image: url('../img/imagenLogin.svg');
+    background-size: cover;
+    background-position: center;
+    display: none; /* Oculto en móviles por defecto */
+    position: relative;
+}
+
+/* Contenido centrado sobre la imagen */
+.login-solo .contenido-imagen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.logo-login {
+    max-width: 350px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1em;
+}
+
+.texto-login-imagen {
+    color: var(--color-blancoPuro);
+    font-family: var(--fuente-lora);
+    font-size: 1.5em;
+    max-width: 90%;
+}
+
+.login-solo .login-formulario {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+}
+
+/* === LOGIN CLÁSICO USADO EN OTRAS PÁGINAS === */
 .login {
     min-height: calc(100vh - var(--header-height));
     display: flex;
@@ -8,12 +60,21 @@
     padding: 2em;
 }
 
+/* === FORMULARIO === */
 .formulario-login {
     max-width: 420px;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1.5em;
+}
+
+.formulario-login-pagLogin {
+    max-width: 550px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
 }
 
 .formulario-login h2 {
@@ -23,14 +84,25 @@
     margin-bottom: 0.5em;
 }
 
+.formulario-login-pagLogin h2 {
+    text-align: center;
+}
+
 .formulario-login .campo {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
 }
 
+.grupo-final {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
 .input-base {
     width: 100%;
+    padding: 0.8em 0;
 }
 
 .formulario-login .btn {
@@ -58,8 +130,24 @@
     text-decoration: underline;
 }
 
+header {
+    border:none;
+}
+
+/* === RESPONSIVE === */
+@media (min-width: 880px) {
+    .login-solo .login-imagen {
+        display: flex;
+    }
+
+    .login-solo .login-formulario {
+        padding: 4em;
+    }
+}
+
 @media (max-width: 480px) {
-    .login {
+    .login,
+    .login-solo .login-formulario {
         padding: 2em 1em;
     }
 

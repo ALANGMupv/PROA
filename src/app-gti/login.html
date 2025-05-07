@@ -20,41 +20,48 @@
 <!-- Cerramos sección header -->
 
 <!-- Formulario de inicio de sesión -->
-<section class="login">
-    <form class="formulario-login">
-        <h2>Iniciar sesión</h2>
-
-        <!-- Campo para el correo institucional del usuario -->
-        <div class="campo">
-            <label for="correo">Correo de la institución *</label>
-            <input type="email" id="correo" class="input-base">
+<section class="login-container login-solo">
+    <div class="login-imagen">
+        <div class="contenido-imagen">
+            <img src="img/gtiBlanco.svg" alt="Logo GTI" class="logo-login">
+            <h2 class="texto-login-imagen">Solo un paso más… inicia sesión y empieza.</h2>
         </div>
+    </div>
 
-        <!-- Campo para la contraseña del usuario -->
-        <div class="campo">
-            <label for="contrasena">Contraseña *</label>
-            <input type="password" id="contrasena" class="input-base">
-        </div>
+    <div class="login-formulario">
+        <form class="formulario-login-pagLogin">
+            <h2>Iniciar sesión</h2>
 
-        <!-- Enlace en caso de olvidar la contraseña -->
-        <a href="olvidoContrasenya.html" class="enlace-secundario">¿Olvidaste tu contraseña?</a>
+            <div class="campo">
+                <label for="correo">Correo de la institución *</label>
+                <input type="email" id="correo" class="input-base">
+            </div>
 
-        <!-- Botón para enviar el formulario de login -->
-        <button type="submit" class="btn">Iniciar sesión</button>
+            <div class="campo">
+                <label for="contrasena">Contraseña *</label>
+                <input type="password" id="contrasena" class="input-base">
+            </div>
 
-        <!-- Texto con enlace a la página de registro para nuevos usuarios -->
-        <p class="texto-secundario">
-            ¿No tienes una cuenta?
-            <a href="registro.html" class="enlace-secundario">Regístrate</a>
-        </p>
-    </form>
+            <div class="grupo-final">
+                <a href="olvidoContrasenya.html" class="enlace-secundario">¿Olvidaste tu contraseña?</a>
+                <button type="submit" class="btn">Iniciar sesión</button>
+                <p class="texto-secundario">
+                    ¿No tienes una cuenta?
+                    <a href="registro.html" class="enlace-secundario">Regístrate</a>
+                </p>
+            </div>
+        </form>
+    </div>
 </section>
 <!-- Fin de la sección del formulario de login -->
+
+
+<!-- Footer-->
 <footer>
     <div class="contenido-footer">
         <div class="columna-footer">
             <ul>
-                <li><div><img src="img/logoGTI.svg" alt="logo"></div></li>
+                <li><div><img src="img/gtiBlanco.svg" alt="logo"></div></li>
                 <li class="parrafo-terciario">Liderando la innovación en tecnología educativa</li>
             </ul>
         </div>
@@ -81,6 +88,7 @@
         © 2025 TuEmpresa. Todos los derechos reservados.
     </div>
 </footer>
+<!-- Fin del footer-->
 
 </body>
 </html>
