@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <h4>${ex.titulo}</h4>
                         <p class="fecha-limite">Fecha límite: ${ex.fechaLimite}</p>
                     </div>
-                    <button class="btn">Comenzar</button>
+                    <button class="btn" onclick="redireccionarPagina()">Comenzar</button>
                 </div>`;
             } else if (tipo === 'porRevisar') {
                 html += `
@@ -71,3 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         seccion.insertAdjacentHTML("beforeend", `<p>${mensaje}</p>`);
     }
 });
+
+function redireccionarPagina(){
+    window.location.replace("realizar-examen.html");
+}

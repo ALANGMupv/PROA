@@ -52,10 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const rutaActual = window.location.pathname.split('/').pop();
     document.querySelectorAll("#submenu a").forEach(enlace => {
         const href = enlace.getAttribute("href");
+
+        // Activar si el archivo actual coincide directamente
         if (href !== "#" && href === rutaActual) {
             enlace.classList.add("activo");
         }
+
+        // También activar "Exámenes" si estamos en realizar-examen.html
+        if (rutaActual === "realizar-examen.html" && href === "examenes-alumno.html") {
+            enlace.classList.add("activo");
+        }
     });
+
 
     // Colapsable
     const toggleBtn = document.querySelector(".submenu-toggle-btn");

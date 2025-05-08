@@ -16,7 +16,10 @@
     ]
   },
   "ECO201": {
-    "realizar": [],
+    "realizar": [{
+      "titulo": "Parcial Economía",
+      "fechaLimite": "2025-05-06, 11:00"
+    }],
     "porRevisar": [],
     "calificados": [
       {
