@@ -6,20 +6,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    const submenu = document.getElementById("submenu-asignatura");
+    const submenu = document.getElementById("submenu");
 
     const opciones = [
-        { texto: "Asignaturas", href: "#" },
+        { texto: "Creación de Asignaturas", href: "asignaturas.html" },
         { texto: "Asignaciones Profesores", href: "#" },
         { texto: "Asignaciones Alumnos", href: "#" }
     ];
 
     const htmlSubmenu = `
-        <div class="titulo-submenu-pas">
-            <img src="../icons/administracionPAS.svg" alt="Administración" class="icono-inicio" />
+        <div class="titulo-submenu">
             <h2>Administración</h2>
         </div>
-        <nav class="menu-pas colapsable" id="submenu-toggle">
+        <nav class="menu colapsable" id="submenu-toggle">
             <button class="submenu-toggle-btn">
                 Administración <span class="flecha">&#9662;</span>
             </button>
@@ -34,6 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     submenu.innerHTML = htmlSubmenu;
+
+    // Marcar como activa la opción actual según la URL
+    const rutaActual = window.location.pathname.split('/').pop();
+
+    document.querySelectorAll("#submenu a").forEach(enlace => {
+        const href = enlace.getAttribute("href");
+        if (href !== "#" && href === rutaActual) {
+            enlace.classList.add("activo");
+        }
+    });
 
     const toggleBtn = document.querySelector(".submenu-toggle-btn");
     const items = document.querySelector(".submenu-items");

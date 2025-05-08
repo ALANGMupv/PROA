@@ -28,20 +28,45 @@
 }
 
 .bloque-cabecera-asignaturas {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: flex-start;
     gap: 2em;
     margin-bottom: 1em;
 }
 
-/* FILTROS */
+.cabecera-superior {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-bottom: 1em;
+}
+
 .filtros-asignaturas {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+}
+
+.fila-filtros {
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
-    flex: 1;
+    width: 100%;
+}
+
+.fila-superior > * {
+    flex: 1 1 250px;
+    max-width: 100%;
+}
+
+.fila-selects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1em;
+    width: 100%;
+}
+
+.fila-selects .contenedor-select {
+    width: 100%;
 }
 
 .input-base {
@@ -94,6 +119,18 @@
     filter: brightness(0) invert(1); /* vuelve el icono blanco */
 }
 
+.mensaje-vacio {
+    font-size: 1em;
+    color: #666;
+    font-style: italic;
+    background-color: #f9f9f9;
+    padding: 1em;
+    border-radius: 8px;
+    border: 1px dashed #ccc;
+    text-align: center;
+}
+
+
 /* INPUTS Y DROPDOWNS */
 .input-con-icono {
     position: relative;
@@ -114,6 +151,10 @@
     border-radius: 5px;
     background-color: var(--color-panelesBlancoPuro);
     font-family: var(--fuente-principal);
+    background-image: url('../icons/dropdown.svg');
+    background-repeat: no-repeat;
+    background-position: right 0.75em center;
+    background-size: 1em;
 }
 
 .icono-buscador,
@@ -155,6 +196,7 @@
 
 .item-asignatura:hover {
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .asignatura-izquierda {
@@ -191,7 +233,29 @@
 }
 
 /* PANEL NOTIFICACIONES */
+.toggle-notificaciones {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 0.4em;
+    margin-right: 0.5em;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.toggle-notificaciones label {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    cursor: pointer;
+}
+
+.toggle-notificaciones input {
+    transform: scale(1.1);
+}
+
 .panel-notificaciones {
+    position: relative;
     display: flex;
     flex-direction: column;
     min-width: 280px;
@@ -199,7 +263,6 @@
     border: none;
     border-radius: 8px;
     align-self: flex-start;
-    margin-top: 3.7em;
 }
 
 .subtitulo-panel {
@@ -216,8 +279,6 @@
     background-color: var(--color-mensajeError);
     border-radius: 50%;
 }
-
-
 
 /* TARJETAS DE NOTIFICACIONES */
 .lista-notificaciones {
@@ -243,6 +304,7 @@
     color: #888;
     font-size: 0.875em;
 }
+
 /* Pantallas de 900px de ancho */
 @media (max-width: 1040px) {
     .contenido-principal {

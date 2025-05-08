@@ -1,27 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Asignatura Profesor</title>
+    <title>Exámenes Alumno</title>
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/submenu-asignatura.css">
+    <link rel="stylesheet" href="css/examenes-alumno.css">
     <script src="../js/header-proa.js" defer></script>
-    <script src="js/asignatura-profesor.js" defer></script>
+    <script src="js/asignatura-alumno.js" defer></script>
+    <script src="js/examenes-alumno.js" defer></script>
 </head>
 <body>
+
 <main class="contenido-wrapper">
+
 
     <!-- Contenido dividido: menú lateral + contenido dinámico -->
     <div class="contenido-principal">
         <aside id="submenu" class="submenu"></aside>
 
-        <section class="panel-contenido fondoPanel">
-            <p>Selecciona una opción del submenú lateral para ver los contenidos de esta asignatura.</p>
+        <section class="fondoPanel">
+            <!--aqui carga dinámicamente los exámenes desde el json-->
         </section>
     </div>
 </main>
+
 
 </body>
 </html>

@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
             renderizarAsignaturas(asignaturasUsuario);
         });
 
+    function formatearAnyo(anyo) {
+        const inicio = parseInt(anyo);
+        const fin = inicio + 1;
+        return `${inicio}/${fin.toString().slice(-2)}`; // quedaría: 2024/25
+    }
+
     function renderizarAsignaturas(asignaturas) {
         const lista = document.getElementById("lista-asignaturas");
         lista.innerHTML = "";
@@ -28,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
             div.classList.add("item-asignatura");
             div.dataset.nombre = asig.nombre.toLowerCase();
             div.dataset.codigo = asig.codigo.toLowerCase();
+            div.dataset.curso = asig.curso;
+            div.dataset.semestre = asig.semestre;
+            div.dataset.anyo = asig.anyo;
             if (asig.favorita) div.classList.add("favorita");
 
             div.innerHTML = `
@@ -35,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <img src="../icons/book.svg" alt="Libro" class="icono-azul" />
                     <div>
                         <h4>${asig.nombre}</h4>
-                        <p>${asig.codigo}</p>
+                        <p>${asig.codigo} — ${asig.curso}º curso, ${asig.semestre === "1" ? "1º semestre" : "2º semestre"}, ${formatearAnyo(asig.anyo)}</p>
                     </div>
                 </div>
                 <div class="asignatura-derecha">
@@ -79,19 +88,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function aplicarFiltros() {
         const mostrarSoloFavoritas = document.getElementById("btnFavoritas").classList.contains("activo");
-        const textoBusqueda = document.getElementById("filtroTexto").value.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+        const textoBusqueda = normalizarTexto(document.getElementById("filtroTexto").value);
+        const filtroCurso = document.getElementById("filtroCurso").value;
+        const filtroSemestre = document.getElementById("filtroSemestre").value;
+        const filtroAnyo = document.getElementById("filtroAnyo").value;
+
+        let asignaturasVisibles = 0;
 
         document.querySelectorAll(".item-asignatura").forEach(asignatura => {
             const esFavorita = asignatura.classList.contains("favorita");
-            const nombre = asignatura.dataset.nombre.normalize("NFD").replace(/\p{Diacritic}/gu, "");
-            const codigo = asignatura.dataset.codigo.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+            const nombre = normalizarTexto(asignatura.dataset.nombre);
+            const codigo = normalizarTexto(asignatura.dataset.codigo);
+            const curso = asignatura.dataset.curso;
+            const semestre = asignatura.dataset.semestre;
+            const anyo = asignatura.dataset.anyo;
 
             const coincideTexto = nombre.includes(textoBusqueda) || codigo.includes(textoBusqueda);
-            const pasaFiltro = !mostrarSoloFavoritas || esFavorita;
+            const pasaFiltroFavoritas = !mostrarSoloFavoritas || esFavorita;
+            const pasaFiltroCurso = !filtroCurso || curso === filtroCurso;
+            const pasaFiltroSemestre = !filtroSemestre || semestre === filtroSemestre;
+            const pasaFiltroAnyo = !filtroAnyo || anyo === filtroAnyo;
 
-            asignatura.style.display = (coincideTexto && pasaFiltro) ? "flex" : "none";
+            const visible = coincideTexto && pasaFiltroFavoritas && pasaFiltroCurso && pasaFiltroSemestre && pasaFiltroAnyo;
+            asignatura.style.display = visible ? "flex" : "none";
+
+            if (visible) asignaturasVisibles++;
         });
+
+        const mensajeVacio = document.getElementById("mensaje-sin-favoritas");
+        mensajeVacio.style.display = (mostrarSoloFavoritas && asignaturasVisibles === 0) ? "block" : "none";
     }
+
+    function normalizarTexto(str) {
+        return str.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
+    }
+
 
     document.getElementById("btnFavoritas").addEventListener("click", e => {
         e.currentTarget.classList.toggle("activo");
@@ -99,6 +130,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("filtroTexto").addEventListener("input", aplicarFiltros);
+    document.getElementById("filtroCurso").addEventListener("change", aplicarFiltros);
+    document.getElementById("filtroSemestre").addEventListener("change", aplicarFiltros);
+    document.getElementById("filtroAnyo").addEventListener("change", aplicarFiltros);
+
 
     fetch("../../api/data/notificaciones.json")
         .then(res => res.json())
@@ -121,4 +156,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
             }
         });
+
+    // Control de visibilidad del panel de notificaciones
+    const checkboxNotificaciones = document.getElementById("mostrarNotificaciones");
+    const contenidoNotificaciones = document.getElementById("contenido-notificaciones");
+
+    if (checkboxNotificaciones && contenidoNotificaciones) {
+        contenidoNotificaciones.style.display = checkboxNotificaciones.checked ? "block" : "none";
+
+        checkboxNotificaciones.addEventListener("change", () => {
+            contenidoNotificaciones.style.display = checkboxNotificaciones.checked ? "block" : "none";
+        });
+    }
+
+
 });
