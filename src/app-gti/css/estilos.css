@@ -643,7 +643,7 @@ textarea {
 /* region --- MENSAJES DE ERROR FORMULARIOS --- */
 .error-texto {
     display: inline-block;
-    font-size: 0.75em;
+    font-size: 0.95em;
     color: var(--color-rojoError);
     margin-left: 0.5em;
     vertical-align: middle;
@@ -651,7 +651,7 @@ textarea {
 
 @media (max-width: 768px) {
     .error-texto {
-        font-size: 0.6em;
+        font-size: 0.75em;
     }
 }
 /* endregion */

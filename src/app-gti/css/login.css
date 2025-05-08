@@ -1,6 +1,6 @@
 /* ESTILOS USADOS EN: login.html, olvidoContrasenya.html, nuevaContrasenya.html */
 
-/* === LOGIN MODERNO CON IMAGEN SOLO EN login.html === */
+/* region --- Estilos solo para página de login--- */
 .login-container.login-solo {
     display: flex;
     height: calc(100vh - var(--header-height));
@@ -16,7 +16,6 @@
     position: relative;
 }
 
-/* Contenido centrado sobre la imagen */
 .login-solo .contenido-imagen {
     position: absolute;
     inset: 0;
@@ -51,24 +50,6 @@
     padding: 2em;
 }
 
-/* === LOGIN CLÁSICO USADO EN OTRAS PÁGINAS === */
-.login {
-    min-height: calc(100vh - var(--header-height));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2em;
-}
-
-/* === FORMULARIO === */
-.formulario-login {
-    max-width: 420px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5em;
-}
-
 .formulario-login-pagLogin {
     max-width: 550px;
     width: 100%;
@@ -77,27 +58,52 @@
     gap: 3em;
 }
 
-.formulario-login h2 {
-    font-family: var(--fuente-lora);
-    font-size: 1.75em;
-    font-weight: 700;
-    margin-bottom: 0.5em;
-}
-
 .formulario-login-pagLogin h2 {
     text-align: center;
-}
-
-.formulario-login .campo {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
 }
 
 .grupo-final {
     display: flex;
     flex-direction: column;
     gap: 1.5em;
+}
+
+@media (min-width: 880px) {
+    .login-solo .login-imagen {
+        display: flex;
+    }
+
+    .login-solo .login-formulario {
+        padding: 4em;
+    }
+}
+/* endregion */
+
+/* region --- Estilos generales para página login, olvido de contraseña y recuperar contraseña --- */
+.login {
+    min-height: calc(100vh - var(--header-height));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+}
+
+.formulario-login {
+    max-width: 420px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.formulario-login h2 {
+    margin-bottom: 0.2em;
+}
+
+.formulario-login .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 .input-base {
@@ -111,7 +117,6 @@
 
 .texto-secundario {
     text-align: center;
-    font-family: var(--fuente-lato);
     font-weight: 400;
     font-size: 1.1em;
     margin-top: -0.5em;
@@ -121,7 +126,6 @@
     color: var(--color-principal);
     text-decoration: none;
     margin-left: 0.5em;
-    font-family: var(--fuente-lato);
     font-weight: 500;
     font-size: 1em;
 }
@@ -130,20 +134,13 @@
     text-decoration: underline;
 }
 
-header {
+/*header {
     border:none;
 }
 
-/* === RESPONSIVE === */
-@media (min-width: 880px) {
-    .login-solo .login-imagen {
-        display: flex;
-    }
-
-    .login-solo .login-formulario {
-        padding: 4em;
-    }
-}
+.btn:hover {
+    background-color: #f0f0f0;
+}*/
 
 @media (max-width: 480px) {
     .login,
@@ -165,3 +162,4 @@ header {
         font-size: 1em;
     }
 }
+/* endregion */

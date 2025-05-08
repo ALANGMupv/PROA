@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-document.querySelector('.formulario-login')?.addEventListener('submit', function (e) {
+document.querySelector('.formulario-login-pagLogin')?.addEventListener('submit', function (e) {
     e.preventDefault(); // Prevenimos el envío del formulario (recarga de la página)
 
     // Obtenemos los campos del formulario
