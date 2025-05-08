@@ -69,8 +69,8 @@
 }
 
 .scroll-flecha img {
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     opacity: 0.85;
     transition: opacity 0.3s ease;
 }
