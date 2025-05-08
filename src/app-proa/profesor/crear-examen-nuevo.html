@@ -16,20 +16,11 @@
   <script src="js/pop-up.js " defer></script>
 </head>
 <body>
-<main class="contenido-asignatura-wrapper">
-
-  <!-- Cabecera superior con nombre y código de la asignatura -->
-  <section class="cabecera-asignatura">
-    <h2 class="titulo-con-icono titulo-azul">
-      <img src="../icons/book.svg" alt="Icono libro" class="icono-inicio icono-azul" />
-      <span id="titulo-asignatura">Nombre de la asignatura</span>
-    </h2>
-    <p id="codigo-asignatura" class="codigo-asignatura centrado-horizontal"></p>
-  </section>
+<main class="contenido-wrapper">
 
   <!-- Contenido dividido -->
   <div class="contenido-principal">
-    <aside id="submenu-asignatura" class="submenu-asignatura"></aside>
+    <aside id="submenu" class="submenu"></aside>
 
     <section class="panel-asignaturas fondoPanel">
 
@@ -116,18 +107,18 @@
           </button>
 
           <div id="botones">
-            <button class="btn-secundario btn-inicial" type="reset">Cancelar</button>
-            <button class="btn btn-inicial" type="button">Guardar Borrador</button>
-            <button class="btn btn-atras" type="button" onclick="activarPopPup()">Publicar</button>
+            <button class="btn-oscuros-secundario btn-inicial" type="reset">Cancelar</button>
+            <button class="btn-oscuros btn-inicial" type="button">Guardar Borrador</button>
+            <button class="btn-oscuros btn-atras" type="button" onclick="activarPopPup()">Publicar</button>
           </div>
 
           <!-- Pop-up de confirmación -->
           <div id="popup-confirmacion" class="popup">
-            <div class="popup-contenido">
+            <div class="contenido-popup">
               <p class="parrafo-principal">¿Estás seguro de que quieres publicar el examen?</p>
-              <div class="popup-botones">
-                <button id="popup-aceptar" type="submit" class="btn">Aceptar</button>
-                <button id="popup-cancelar" class="btn-secundario">Cancelar</button>
+              <div class="btn-popup">
+                <button id="popup-aceptar" type="submit" class="btn-oscuros">Aceptar</button>
+                <button id="popup-cancelar" class="btn-oscuros-secundario">Cancelar</button>
               </div>
             </div>
           </div>

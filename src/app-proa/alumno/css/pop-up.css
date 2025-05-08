@@ -11,22 +11,22 @@
     align-items: center;
 }
 
-.popup-contenido {
+.contenido-popup {
     display: flex;
     background: white;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
-    gap: 1.5em;
+    gap: 1em;
     flex-direction: column;
 }
 
-.popup-botones {
+.btn-popup {
     display: flex;
     justify-content: space-evenly;
     gap: 1.2em;
 }
 
-.popup-botones button{
+.btn-popup button{
     width: 45%;
 }
