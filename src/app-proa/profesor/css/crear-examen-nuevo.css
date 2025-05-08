@@ -29,19 +29,21 @@
     width: 100%;
 }
 
-.contenedor-peso{
+.contenedor-valor-peso{
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 1em;
 }
 
-.contenedor-peso div{
+.contenedor-valor-peso div{
     display: flex;
     gap: 0.5em;
     align-items: center;
+    max-width: 6em;
 }
 
-.contenedor-peso input{
-    max-width: 5em;
+.contenedor-valor-peso div input{
+    width: 100%;
 }
 
 .contenedor-fecha-hora{
@@ -76,8 +78,6 @@
     width: 35px;
     height: 35px;
 }
-
-
 
 #botones{
     display: flex;

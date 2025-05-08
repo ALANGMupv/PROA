@@ -97,7 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault(); // Evita que se recargue la página
 
         const datos = {
-                titulo: formulario.querySelector('#titulo-examen').value,
+            titulo: formulario.querySelector('#titulo-examen').value,
+            valor:formulario.querySelector('#valor-examen').value,
             peso: formulario.querySelector('#peso-examen').value,
             fecha: formulario.querySelector('#fecha-examen').value,
             hora: formulario.querySelector('#hora-examen').value,
