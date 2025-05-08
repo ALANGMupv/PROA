@@ -1,27 +1,39 @@
 /* region --- Primera sección --- */
 .contenedor {
     position: relative;
-    min-height: calc(100vh - 80px); /* Ajusta la altura restando la del header */
-    background: url('../img/fondoLanding.svg') no-repeat center center;
-    background-size: cover;
+    min-height: calc(100vh - 80px);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    color: var(--color-textos);
     padding: 2rem;
     overflow: hidden;
+    z-index: 1;
 }
 
 .contenedor::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-color: rgba(160, 58, 111, 0.15);
+    background: url('../img/fondoLanding.svg') no-repeat center center;
+    background-size: cover;
+    filter: blur(4px); /* <- desenfoque de la imagen */
+    z-index: -2;
+}
+
+.contenedor::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(160, 58, 111, 0.1); /* capa de aclarado opcional */
     z-index: -1;
 }
 
+.contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 
 .contenedor h1,
 .contenedor p,
@@ -99,10 +111,6 @@
     line-height: 1.5; /* El navegador asigna 24px de altura total para cada línea */
 }
 
-.imagen-diferenciador {
-
-}
-
 @media (max-width: 900px) {
     .caracteristicas-grid {
         flex-direction: column;
@@ -123,7 +131,7 @@
 
 .contenedor-diferenciador {
     display: flex;
-    gap: 3em;
+    gap: 5em;
     max-width: 1300px;
     margin: 0 auto;
     flex-wrap: wrap;
@@ -142,7 +150,7 @@
     max-width: 500px;
     display: flex;
     align-items: flex-start;
-    margin-top: 5.5em;
+    margin-top: 3em;
 }
 
 .imagen-diferenciador img {

@@ -2,6 +2,10 @@
   {
     "codigo": "MAT101",
     "nombre": "Álgebra Matricial",
+    "curso": "1",
+    "semestre": "1",
+    "anyo": "2024",
+    "favorita": false,
     "titular": "Kevan Pounds Mainston",
     "colaboradores": ["Eolande Merriton Mizzi"],
     "alumnos": ["Lief Simants Dredge", "Merline Kirdsch Kampshell"]
@@ -9,6 +13,10 @@
   {
     "codigo": "ECO201",
     "nombre": "Economía de la Empresa",
+    "curso": "2",
+    "semestre": "1",
+    "anyo": "2024",
+    "favorita": false,
     "titular": "Luelle Pridmore Starsmeare",
     "colaboradores": [],
     "alumnos": ["Debora Rawstorne", "Merline Kirdsch Kampshell"]
@@ -16,6 +24,10 @@
   {
     "codigo": "SEG301",
     "nombre": "Ciberseguridad",
+    "curso": "3",
+    "semestre": "2",
+    "anyo": "2024",
+    "favorita": false,
     "titular": "Eolande Merriton Mizzi",
     "colaboradores": ["Kevan Pounds Mainston"],
     "alumnos": ["Lief Simants Dredge", "Debora Rawstorne"]
@@ -23,6 +35,10 @@
   {
     "codigo": "PRO303",
     "nombre": "Programación 3",
+    "curso": "3",
+    "semestre": "1",
+    "anyo": "2024",
+    "favorita": false,
     "titular": "Kevan Pounds Mainston",
     "colaboradores": ["Luelle Pridmore Starsmeare"],
     "alumnos": ["Debora Rawstorne"]
@@ -30,6 +46,10 @@
   {
     "codigo": "ALG201",
     "nombre": "Algorítmica",
+    "curso": "2",
+    "semestre": "2",
+    "anyo": "2024",
+    "favorita": false,
     "titular": "Eolande Merriton Mizzi",
     "colaboradores": [],
     "alumnos": ["Lief Simants Dredge", "Merline Kirdsch Kampshell", "Debora Rawstorne"]
