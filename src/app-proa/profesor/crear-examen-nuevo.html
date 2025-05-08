@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Realizar Examen</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+  <link rel="stylesheet" href="../css/submenu-asignatura.css">
+  <link rel="stylesheet" href="css/pop-up.css">
+  <link rel="stylesheet" href="css/crear-examen-nuevo.css">
+  <script src="../js/header-proa.js" defer></script>
+  <script src="js/asignatura-profesor.js" defer></script>
+  <script src="js/crear-examen-nuevo.js" defer></script>
+  <script src="js/pop-up.js " defer></script>
+</head>
+<body>
+<main class="contenido-asignatura-wrapper">
+
+  <!-- Cabecera superior con nombre y código de la asignatura -->
+  <section class="cabecera-asignatura">
+    <h2 class="titulo-con-icono titulo-azul">
+      <img src="../icons/book.svg" alt="Icono libro" class="icono-inicio icono-azul" />
+      <span id="titulo-asignatura">Nombre de la asignatura</span>
+    </h2>
+    <p id="codigo-asignatura" class="codigo-asignatura centrado-horizontal"></p>
+  </section>
+
+  <!-- Contenido dividido -->
+  <div class="contenido-principal">
+    <aside id="submenu-asignatura" class="submenu-asignatura"></aside>
+
+    <section class="panel-asignaturas fondoPanel">
+
+      <h2>Panel de creación de examen</h2>
+
+      <form id="formulario-examen">
+
+        <div class="datos">
+
+          <div class="titulo-texto">
+            <h4>Titulo del Examen: *</h4>
+            <input type="text" class="input-base" id="titulo-examen" placeholder="Ej: Cuestionario 1 del tema 1" required>
+          </div>
+
+          <div class="parametros">
+
+            <div class="contenedor-valor-peso">
+              <label>
+                <span>Valor: *</span>
+                <div>
+                  <input type="text" class="input-base" id="valor-examen" required>
+                </div>
+
+                <span>Peso: *</span>
+                <div>
+                  <input type="text" class="input-base" id="peso-examen" required>
+                  <span>%</span>
+                </div>
+              </label>
+            </div>
+            <div class="contenedor-fecha-hora">
+              <label>
+                <span>Fecha de entrega: *</span>
+                <input type="date" class="input-base con-icono" id="fecha-examen" required>
+              </label>
+              <label>
+                <span>Hora: *</span>
+                <input type="time" class="input-base with-icon" id="hora-examen" required>
+              </label>
+            </div>
+          </div>
+
+          <div class="pregunta-contenedor" data-id="pregunta1">
+
+            <div class="titulo-texto-pregunta">
+              <div class="titulo-pregunta">
+                <h4>Pregunta 1</h4>
+                <img src="../icons/trash.svg" alt="Eliminar" class="icono-eliminar" onclick="eliminarElemento(this)">
+              </div>
+
+              <textarea name="pregunta1" id="pregunta1" cols="30" rows="3" class="input-base input-pregunta"
+                        placeholder="Escribe la pregunta aquí..." required></textarea>
+            </div>
+
+            <div class="respuestas-contenedor">
+              <div class="respuesta-opcion">
+                <div class="radio-grupo">
+                  <input type="radio" id="pregunta1-a" name="pregunta1" required>
+                  <label for="pregunta1-a">A.</label>
+                </div>
+                <input type="text" class="input-base input-respuesta" placeholder="Escribe la respuesta aquí..." required>
+                <img src="../icons/trash.svg" alt="Eliminar" class="icono-eliminar" onclick="eliminarElemento(this)">
+              </div>
+
+              <div class="respuesta-opcion">
+                <div class="radio-grupo">
+                  <input type="radio" id="pregunta1-b" name="pregunta1" required>
+                  <label for="pregunta1-b">B.</label>
+                </div>
+                <input type="text" class="input-base input-respuesta" placeholder="Escribe la respuesta aquí..." required>
+                <img src="../icons/trash.svg" alt="Eliminar" class="icono-eliminar" onclick="eliminarElemento(this)">
+              </div>
+            </div>
+
+            <button class="btn-agregar" onclick="añadirRespuesta(this)">
+              <span class="icono-mas">+</span>
+              Añadir respuesta
+            </button>
+          </div>
+
+          <button class="btn-agregar"  onclick="agregarPregunta(this)" id="btn-agregar-pregunta">
+            <span class="icono-mas">+</span>
+            Añadir respuesta
+          </button>
+
+          <div id="botones">
+            <button class="btn-secundario btn-inicial" type="reset">Cancelar</button>
+            <button class="btn btn-inicial" type="button">Guardar Borrador</button>
+            <button class="btn btn-atras" type="button" onclick="activarPopPup()">Publicar</button>
+          </div>
+
+          <!-- Pop-up de confirmación -->
+          <div id="popup-confirmacion" class="popup">
+            <div class="popup-contenido">
+              <p class="parrafo-principal">¿Estás seguro de que quieres publicar el examen?</p>
+              <div class="popup-botones">
+                <button id="popup-aceptar" type="submit" class="btn">Aceptar</button>
+                <button id="popup-cancelar" class="btn-secundario">Cancelar</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+
+
+
+    </section>
+  </div>
+</main>
+
+</body>
+</html>
