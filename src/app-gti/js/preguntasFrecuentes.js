@@ -20,9 +20,11 @@ document.querySelectorAll('.faq-pregunta').forEach(button => {
         // Si está abierta, la cierra
         if (isActive) {
             respuesta.classList.remove('activa');
+            button.classList.remove('activa');
             icono.style.transform = 'rotate(0deg)';
         } else {
             respuesta.classList.add('activa');
+            button.classList.add('activa');
             icono.style.transform = 'rotate(180deg)';
         }
     });

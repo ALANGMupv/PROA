@@ -33,6 +33,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: background-color 0.3s ease, border-left 0.3s ease;
+}
+
+.faq-pregunta:hover {
+    background-color: #f5f5f5;
 }
 
 .faq-icono {
@@ -49,8 +54,9 @@
     background-color: var(--color-blancoPuro);
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease;
     padding: 0 1.25em;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
 }
 
 .faq-respuesta p {
@@ -59,10 +65,17 @@
 
 .faq-respuesta.activa {
     max-height: 300px;
+    opacity: 1;
 }
 
 .parrafo-principal {
     font-size: 1.2em;
+}
+
+.faq-pregunta.activa,
+.faq-pregunta.activa:hover {
+    background-color: #f5f5f5;
+    border-left: 4px solid var(--color-principal);
 }
 
 @media (max-width: 480px) {
