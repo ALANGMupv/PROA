@@ -34,7 +34,7 @@
 }
 
 .contenedor p.parrafo-principal {
-    margin-bottom: 4.5rem;
+    margin-bottom: 5.5rem;
     max-width: 1000px;
 }
 
@@ -50,6 +50,46 @@
 .btnCTA-PROA {
     text-decoration: none;
     display: inline-block;
+}
+
+.parrafo-principal {
+    font-size: 1.5em;
+}
+
+/* Flecha scroll */
+.scroll-flecha {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: saltar 1.8s infinite;
+    z-index: 2;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.scroll-flecha img {
+    width: 45px;
+    height: 45px;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-flecha:hover img {
+    opacity: 1;
+}
+
+/* Animación de rebote suave */
+@keyframes saltar {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-8px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-4px);
+    }
 }
 /*endregion*/
 

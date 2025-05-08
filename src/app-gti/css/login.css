@@ -1,5 +1,85 @@
-/* ESTILOS USADOS EN: login.htmL, olvidoContrasenya.html, nuevaContrasenya.html */
+/* ESTILOS USADOS EN: login.html, olvidoContrasenya.html, nuevaContrasenya.html */
 
+/* region --- Estilos solo para página de login--- */
+.login-container.login-solo {
+    display: flex;
+    height: calc(100vh - var(--header-height));
+    background: linear-gradient(to right, #fdfbfb, #ebedee);
+}
+
+.login-solo .login-imagen {
+    flex: 1;
+    background-image: url('../img/imagenLogin.svg');
+    background-size: cover;
+    background-position: center;
+    display: none; /* Oculto en móviles por defecto */
+    position: relative;
+}
+
+.login-solo .contenido-imagen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.logo-login {
+    max-width: 350px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1em;
+}
+
+.texto-login-imagen {
+    color: var(--color-blancoPuro);
+    font-family: var(--fuente-lora);
+    font-size: 1.5em;
+    max-width: 90%;
+}
+
+.login-solo .login-formulario {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+}
+
+.formulario-login-pagLogin {
+    max-width: 550px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+
+.formulario-login-pagLogin h2 {
+    text-align: center;
+}
+
+.grupo-final {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+@media (min-width: 880px) {
+    .login-solo .login-imagen {
+        display: flex;
+    }
+
+    .login-solo .login-formulario {
+        padding: 4em;
+    }
+}
+/* endregion */
+
+/* region --- Estilos generales para página login, olvido de contraseña y recuperar contraseña --- */
 .login {
     min-height: calc(100vh - var(--header-height));
     display: flex;
@@ -17,10 +97,7 @@
 }
 
 .formulario-login h2 {
-    font-family: var(--fuente-lora);
-    font-size: 1.75em;
-    font-weight: 700;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.2em;
 }
 
 .formulario-login .campo {
@@ -31,6 +108,7 @@
 
 .input-base {
     width: 100%;
+    padding: 0.8em 0;
 }
 
 .formulario-login .btn {
@@ -39,7 +117,6 @@
 
 .texto-secundario {
     text-align: center;
-    font-family: var(--fuente-lato);
     font-weight: 400;
     font-size: 1.1em;
     margin-top: -0.5em;
@@ -49,7 +126,6 @@
     color: var(--color-principal);
     text-decoration: none;
     margin-left: 0.5em;
-    font-family: var(--fuente-lato);
     font-weight: 500;
     font-size: 1em;
 }
@@ -58,8 +134,17 @@
     text-decoration: underline;
 }
 
+/*header {
+    border:none;
+}
+
+.btn:hover {
+    background-color: #f0f0f0;
+}*/
+
 @media (max-width: 480px) {
-    .login {
+    .login,
+    .login-solo .login-formulario {
         padding: 2em 1em;
     }
 
@@ -77,3 +162,4 @@
         font-size: 1em;
     }
 }
+/* endregion */

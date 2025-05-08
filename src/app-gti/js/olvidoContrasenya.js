@@ -32,14 +32,19 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
                 const toast = document.createElement('div');
                 toast.textContent = 'Enlace de recuperación enviado al correo';
                 toast.style.position = 'fixed';
-                toast.style.bottom = '20px';
-                toast.style.right = '20px';
-                toast.style.padding = '1em 2em';
+                toast.style.top = '50%';
+                toast.style.left = '50%';
+                toast.style.transform = 'translate(-50%, -50%)';
+                toast.style.padding = '1.5em 2.5em';
+                toast.style.width = 'max-content';
+                toast.style.maxWidth = '80%';
+                toast.style.fontSize = '1.25rem';
                 toast.style.backgroundColor = 'var(--color-principal)';
                 toast.style.color = '#fff';
-                toast.style.borderRadius = '8px';
-                toast.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+                toast.style.borderRadius = '12px';
+                toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
                 toast.style.fontFamily = 'var(--fuente-lato)';
+                toast.style.textAlign = 'center';
                 document.body.appendChild(toast);
 
                 setTimeout(() => {

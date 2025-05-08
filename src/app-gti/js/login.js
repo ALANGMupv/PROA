@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-document.querySelector('.formulario-login')?.addEventListener('submit', function (e) {
+document.querySelector('.formulario-login-pagLogin')?.addEventListener('submit', function (e) {
     e.preventDefault(); // Prevenimos el envío del formulario (recarga de la página)
 
     // Obtenemos los campos del formulario
@@ -77,15 +77,21 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
                 const toast = document.createElement('div');
                 toast.textContent = 'Inicio de sesión exitoso. Redirigiendo...';
                 toast.style.position = 'fixed';
-                toast.style.bottom = '20px';
-                toast.style.right = '20px';
-                toast.style.padding = '1em 2em';
+                toast.style.top = '50%';
+                toast.style.left = '50%';
+                toast.style.transform = 'translate(-50%, -50%)';
+                toast.style.padding = '1.5em 2.5em';
+                toast.style.width = 'max-content';
+                toast.style.maxWidth = '80%';
+                toast.style.fontSize = '1.25rem';
                 toast.style.backgroundColor = 'var(--color-principal)';
                 toast.style.color = '#fff';
-                toast.style.borderRadius = '8px';
-                toast.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+                toast.style.borderRadius = '12px';
+                toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
                 toast.style.fontFamily = 'var(--fuente-lato)';
+                toast.style.textAlign = 'center';
                 document.body.appendChild(toast);
+
 
                 // Esperamos 2 segundos, quitamos el toast y redirigimos al inicio
                 setTimeout(() => {
@@ -98,15 +104,21 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
                 const toastError = document.createElement('div');
                 toastError.textContent = 'Usuario o contraseña incorrectos';
                 toastError.style.position = 'fixed';
-                toastError.style.bottom = '20px';
-                toastError.style.right = '20px';
-                toastError.style.padding = '1em 2em';
-                toastError.style.backgroundColor = '#FF6666';
+                toastError.style.top = '50%';
+                toastError.style.left = '50%';
+                toastError.style.transform = 'translate(-50%, -50%)';
+                toastError.style.padding = '1.5em 2.5em';
+                toastError.style.width = 'max-content';
+                toastError.style.maxWidth = '80%';
+                toastError.style.fontSize = '1.25rem';
+                toastError.style.backgroundColor = '#c45f5f';
                 toastError.style.color = '#fff';
-                toastError.style.borderRadius = '8px';
-                toastError.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+                toastError.style.borderRadius = '12px';
+                toastError.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
                 toastError.style.fontFamily = 'var(--fuente-lato)';
+                toastError.style.textAlign = 'center';
                 document.body.appendChild(toastError);
+
 
                 setTimeout(() => {
                     toastError.remove();
