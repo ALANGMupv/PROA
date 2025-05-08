@@ -5,13 +5,15 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Inicio Alumno</title>
+  <title>Realizar Examen</title>
   <link rel="stylesheet" href="../css/estilos.css">
   <link rel="stylesheet" href="../css/submenu-asignatura.css">
+  <link rel="stylesheet" href="css/pop-up.css">
   <link rel="stylesheet" href="css/realizar-examen.css">
   <script src="../js/header-proa.js" defer></script>
   <script src="js/asignatura-alumno.js" defer></script>
   <script src="js/realizar-examen.js" defer></script>
+  <script src="js/pop-up.js " defer></script>
 </head>
 <body>
 
@@ -32,7 +34,7 @@
 
     <section class="panel-asignaturas fondoPanel">
 
-      <form id="formulario-examen">
+      <form id="formulario-con-pop-up">
         <section class="titulo">
           <h1>Cuestionario 1</h1>
         </section>
@@ -222,8 +224,19 @@
           <button class="btn btn-atras" onclick="irAtras()">Atrás</button>
         </div>
 
-
       </form>
+
+      <!-- Pop-up de confirmación -->
+      <div id="popup-confirmacion" class="popup">
+        <div class="popup-contenido">
+          <p class="parrafo-principal">¿Estás seguro de que deseas enviar el formulario?</p>
+          <div class="popup-botones">
+            <button id="popup-aceptar" class="btn">Aceptar</button>
+            <button id="popup-cancelar" class="btn-secundario">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
 
     </section>
   </div>
