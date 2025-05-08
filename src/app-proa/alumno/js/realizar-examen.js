@@ -7,7 +7,7 @@ const respuestasCorrectas = {
 };
 
 
-/*document.getElementById('formulario-examen').addEventListener('submit', function(e) {
+document.getElementById('formulario-examen').addEventListener('submit', function(e) {
     e.preventDefault(); // evita el envío real del formulario
 
     const respuestas = {};
@@ -87,8 +87,8 @@ const respuestasCorrectas = {
     });
 
 });
-*/
-function procesarEnvio() {
+
+/*function procesarEnvio() {
     const respuestas = {};
     const preguntas = document.querySelectorAll('#formulario-con-pop-up .pregunta');
     let respuestasCorrectasTotal = 0;
@@ -159,7 +159,7 @@ function procesarEnvio() {
         }
     });
 }
-
+*/
 
 function irAtras(){
     window.history.back();

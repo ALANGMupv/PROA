@@ -5,17 +5,14 @@ const botonCancelar = document.getElementById('popup-cancelar');
 
 let confirmarEnvio = false;
 
-formulario.addEventListener('submit', function (e) {
-    if (!confirmarEnvio) {
-        e.preventDefault(); // Evita el envío inmediato
-        popup.style.display = 'flex'; // Muestra el pop-up
-    }
-});
+
+function activarPopPup(){
+    popup.style.display = 'flex'; // Muestra el pop-up
+}
 
 botonAceptar.addEventListener('click', function () {
     confirmarEnvio = true;
     popup.style.display = 'none';
-    procesarEnvio(); // Envia el formulario manualmente
 });
 
 botonCancelar.addEventListener('click', function () {

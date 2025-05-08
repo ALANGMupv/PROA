@@ -34,7 +34,7 @@
 
     <section class="panel-asignaturas fondoPanel">
 
-      <form id="formulario-con-pop-up">
+      <form id="formulario-examen">
         <section class="titulo">
           <h1>Cuestionario 1</h1>
         </section>
@@ -220,22 +220,24 @@
 
         <div id="botones">
           <button class="btn-secundario btn-inicial" type="reset">Cancelar</button>
-          <button class="btn btn-inicial" type="submit">Enviar</button>
+          <button class="btn btn-inicial" onclick="activarPopPup()" type="button">Enviar</button>
           <button class="btn btn-atras" onclick="irAtras()">Atrás</button>
+        </div>
+
+        <!-- Pop-up de confirmación -->
+        <div id="popup-confirmacion" class="popup">
+          <div class="popup-contenido">
+            <p class="parrafo-principal">¿Estás seguro de que deseas enviar el formulario?</p>
+            <div class="popup-botones">
+              <button id="popup-aceptar" type="submit" class="btn">Aceptar</button>
+              <button id="popup-cancelar" class="btn-secundario">Cancelar</button>
+            </div>
+          </div>
         </div>
 
       </form>
 
-      <!-- Pop-up de confirmación -->
-      <div id="popup-confirmacion" class="popup">
-        <div class="popup-contenido">
-          <p class="parrafo-principal">¿Estás seguro de que deseas enviar el formulario?</p>
-          <div class="popup-botones">
-            <button id="popup-aceptar" class="btn">Aceptar</button>
-            <button id="popup-cancelar" class="btn-secundario">Cancelar</button>
-          </div>
-        </div>
-      </div>
+
 
 
     </section>
