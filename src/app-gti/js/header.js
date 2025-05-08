@@ -84,8 +84,17 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;  // FIN DE LA SECCIÓN CÓDIGO HTML DEL HEADER
 
-    // Interacciones del menú
+    // Añadir clase activa al enlace correspondiente (queda marcado en el header la página donde se encuentra el usuario)
+    const rutaActual = location.pathname.split('/').pop(); // obtiene 'catalogo.html' o similar
+    const enlacesMenu = document.querySelectorAll("header nav.activo a");
 
+    enlacesMenu.forEach(enlace => {
+        if (enlace.getAttribute("href").includes(rutaActual)) {
+            enlace.classList.add("activo-pagina");
+        }
+    });
+
+    // Interacciones del menú
     const btnHamburguesa = document.getElementById("hamburguesa");
     const menuMovil = document.querySelector("nav.menu-movil");
     const btnCerrar = document.getElementById("cerrar-menu");

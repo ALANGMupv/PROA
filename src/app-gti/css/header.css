@@ -48,6 +48,16 @@ header nav a:focus {
     color: var(--color-principal);
 }
 
+/* region --- CLASE ACTIVA AL ENLACE CORRESPONDIENTE --- */
+@media (min-width: 861px) {
+    header nav a.activo-pagina {
+        color: var(--color-principal);
+        font-weight: 550;
+    }
+}
+/*endregion*/
+
+
 .icono-perfil {
     width: 38px;
     height: 38px;
