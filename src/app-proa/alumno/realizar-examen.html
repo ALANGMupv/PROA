@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<main class="contenido-asignatura-wrapper">
+<main class="contenido-wrapper">
 
   <!-- Contenido dividido: menú lateral + contenido dinámico -->
   <div class="contenido-principal">
@@ -59,7 +59,7 @@
 
             <div class="opciones">
               <label class="boton-opcion">
-                <input type="radio" name="pregunta1" value="A" required>
+                <input type="radio" name="pregunta1" value="A">
                 <span class="letra">A.</span>
                 <span class="texto">Ser semántica</span>
               </label>
@@ -90,7 +90,7 @@
 
             <div class="opciones">
               <label class="boton-opcion">
-                <input type="radio" name="pregunta2" value="A" required>
+                <input type="radio" name="pregunta2" value="A" >
                 <span class="letra">A.</span>
                 <span class="texto">Una matriz 3x3</span>
               </label>
@@ -121,7 +121,7 @@
 
             <div class="opciones">
               <label class="boton-opcion">
-                <input type="radio" name="pregunta3" value="A" required>
+                <input type="radio" name="pregunta3" value="A" >
                 <span class="letra">A.</span>
                 <span class="texto">Tiene sólo valores negativos</span>
               </label>
@@ -152,7 +152,7 @@
 
             <div class="opciones">
               <label class="boton-opcion">
-                <input type="radio" name="pregunta4" value="A" required>
+                <input type="radio" name="pregunta4" value="A" >
                 <span class="letra">A.</span>
                 <span class="texto">Una matriz identidad</span>
               </label>
@@ -183,7 +183,7 @@
 
             <div class="opciones">
               <label class="boton-opcion">
-                <input type="radio" name="pregunta5" value="A" required>
+                <input type="radio" name="pregunta5" value="A">
                 <span class="letra">A.</span>
                 <span class="texto">El número de columnas</span>
               </label>
@@ -210,18 +210,19 @@
 
 
         <div id="botones">
-          <button class="btn-secundario btn-inicial" type="reset">Cancelar</button>
-          <button class="btn btn-inicial" onclick="activarPopPup()" type="button">Enviar</button>
-          <button class="btn btn-atras" onclick="irAtras()">Atrás</button>
+          <button class="btn-oscuros-secundario btn-inicial" type="reset">Cancelar</button>
+          <button class="btn-oscuros btn-inicial" onclick="activarPopPup()" type="button">Enviar</button>
+          <a href="examenes-alumno.html" class="btn-oscuros btn-atras">Atrás</a>
         </div>
 
         <!-- Pop-up de confirmación -->
         <div id="popup-confirmacion" class="popup">
-          <div class="popup-contenido">
+          <div class="contenido-popup">
             <p class="parrafo-principal">¿Estás seguro de que deseas enviar el formulario?</p>
-            <div class="popup-botones">
-              <button id="popup-aceptar" type="submit" class="btn">Aceptar</button>
-              <button id="popup-cancelar" class="btn-secundario">Cancelar</button>
+            <div class="btn-popup">
+              <button id="popup-cancelar" class="btn-oscuros-secundario">Cancelar</button>
+              <button id="popup-aceptar" type="submit" class="btn-oscuros">Aceptar</button>
+
             </div>
           </div>
         </div>
