@@ -22,6 +22,10 @@ img, video, svg { height: auto; max-width: 100%; }
 }
 
 a { color: inherit; }
+
+html {
+    scroll-behavior: smooth;
+}
 /* endregion */
 
 /* region --- FUENTES --- */
