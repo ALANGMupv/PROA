@@ -1,0 +1,104 @@
+.gestion-asignaturas {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+/* Contenedor de filtros para buscar y seleccionar asignaturas */
+.filtros-asignaturas {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Tres columnas de igual ancho */
+    gap: 1em;
+    align-items: center;
+    width: 100%;
+}
+
+/* Todos los inputs, selects y botones del filtro ocupan el ancho completo */
+.filtros-asignaturas .input-con-icono,
+.filtros-asignaturas .dropdown-wrapper,
+.filtros-asignaturas .btn,
+.filtros-asignaturas .input-base,
+.filtros-asignaturas .seleccionador-dropdown {
+    width: 100%;
+}
+
+.dropdown-wrapper {
+    position: relative;
+}
+
+.dropdown-wrapper .icono-dropdown {
+    position: absolute;
+    top: 50%;
+    right: 1em;
+    transform: translateY(-50%);
+}
+
+/* Contenedor de la tabla de asignaturas */
+.tabla-asignaturas {
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    width: 100%;
+}
+
+/* Cada fila de la tabla (incluyendo encabezado y datos) */
+.tabla-asignaturas .fila {
+    display: grid;
+    grid-template-columns: 1.2fr 2.5fr 2.5fr 1fr 1.5fr 1fr; /* Columnas proporcionales */
+    align-items: center;
+    padding: 1em 0;
+    border-bottom: 2px solid var(--color-bordes);
+}
+
+/* Estilos del encabezado de la tabla */
+.tabla-asignaturas .fila.encabezado {
+    font-weight: 900;
+    color: #616976;
+    background-color: var(--color-fondoPROAGris);
+}
+
+/* Centrado de columnas específicas del encabezado y filas */
+.tabla-asignaturas .fila.encabezado span:last-child, /* Columna 'ASIGNAR' */
+.tabla-asignaturas .fila.encabezado span:nth-child(5), /* Columna 'FICHA' */
+.tabla-asignaturas .fila span:nth-child(2), /* 'NOMBRE' */
+.tabla-asignaturas .fila span:nth-child(3), /* 'DEPARTAMENTO' */
+.tabla-asignaturas .fila span:nth-child(4) { /* 'CRÉDITOS' */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Negrita para la primera fila */
+.tabla-asignaturas .fila span:first-child {
+    font-weight: 700;
+    padding-left: 1em;
+}
+
+/* Estilo del botón "Ver detalles" */
+.tabla-asignaturas .btn {
+    font-size: 1em;
+    padding: 0.5em 1em;
+    width: fit-content;
+    justify-self: center;
+    align-self: center;
+}
+
+/* Icono del menú de opciones en cada fila */
+.icono-opciones {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+}
+
+/* Alternar fondo en filas pares (2, 4, 6, etc.) */
+.tabla-asignaturas .fila:nth-child(odd):not(.encabezado) {
+    background-color: var(--color-fondoPROAGris); 
+}
+
+
