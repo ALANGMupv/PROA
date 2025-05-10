@@ -12,7 +12,7 @@ body {
 .panel-login {
     background-color: var(--color-panelesBlancoPuro);
     padding-top: 0;
-    padding-bottom: 4.2em;
+    padding-bottom: 3em;
     border-radius: 10px;
     border: 2px solid var(--color-bordes);
     display: flex;
@@ -38,7 +38,7 @@ body {
 
 .logo-login {
     width: 280px;
-    height: 230px;
+    height: 170px;
 }
 
 h2 {
@@ -73,7 +73,7 @@ label {
 .btn-oscuros-secundario {
     display: inline-block;
     width: 100%;
-    margin-top: 0.5em;
+    margin-top: 1em;
 }
 
 
