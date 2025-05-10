@@ -1,0 +1,122 @@
+/* Layout principal de la página de entregas */
+.contenedor-entregas {
+    display: flex;
+    gap: 2em;
+}
+
+.icono-buscador{
+    left: 1em;
+}
+.lista-alumnos {
+    background-color: var(--color-fondoPROAGris);
+    padding: 1em;
+    border-radius: 5px;
+    max-height: 500px;
+}
+
+.lista-alumnos div {
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.alumno-item {
+    padding: 0.5em;
+    cursor: pointer;
+    border-bottom: 1px solid var(--color-bordes);
+    border-radius: 5px 5px 0 0;
+}
+
+.alumno-item:hover {
+    background-color: var(--color-terciario);
+}
+
+.alumno-item.activo {
+    background-color: var(--color-terciario);
+    border: 1px solid #a7ceff;
+    border-radius: 5px;
+}
+
+.encabezado{
+    display: flex;
+    justify-content: space-between;
+
+}
+#detalle-entrega .btn-atras {
+    padding: 0.5em 1.25em;
+    font-size: 1em;
+}
+
+.entrega-estilo-alumno {
+    margin: unset;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 1em;
+}
+.entrega-estilo-alumno::-webkit-scrollbar {
+    width: 8px;
+}
+
+.entrega-estilo-alumno::-webkit-scrollbar-thumb {
+    background-color: var(--color-bordes);
+    border-radius: 4px;
+}
+
+.entrega-estilo-alumno::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primario);
+}
+
+
+/* Estilo visual del detalle de entrega tipo test */
+.entrega-estilo-alumno .pregunta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.entrega-estilo-alumno .opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.entrega-estilo-alumno .calificacion-pregunta {
+    display: flex;
+    font-weight: bold;
+    justify-content: flex-end;
+    align-items: baseline;
+    color: var(--color-primario);
+}
+
+/* Estado de las respuestas corregidas */
+.boton-opcion{
+    background-color: rgba(204, 204, 204, 0.18);
+}
+.boton-opcion:hover{
+    background-color: rgba(204, 204, 204, 0.18);
+}
+.boton-opcion-correcta-deshabilitado {
+    background-color: var(--color-exito) !important;
+    cursor: not-allowed;
+}
+
+.boton-opcion-incorrecta-deshabilitado {
+    background-color: var(--color-inputError) !important;
+    cursor: not-allowed;
+}
+
+.boton-opcion-deshabilitado {
+    cursor: not-allowed;
+}
+
+.boton-opcion-correcta-deshabilitado,
+.boton-opcion-incorrecta-deshabilitado,
+.boton-opcion-deshabilitado {
+    font-size: 1em; /* mismo tamaño que los botones normales */
+    padding: 0.75em 1em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    border-radius: 8px;
+}
+
+
