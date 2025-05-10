@@ -157,7 +157,7 @@ html, body {
 }
 
 /* Clon del botón submenu en cabecera responsive */
-@media (max-width: 768px) {
+@media (max-width: 799px) {
     .submenu-toggle-btn-cabecera {
         display: block;
         flex: 1 1 48%;
@@ -196,7 +196,7 @@ html, body {
 /* endregion */
 
 /* ESTILOS RESPONSIVE */
-@media (max-width: 768px) {
+@media (max-width: 799px) {
     #submenu {
         min-width: unset;
         width: 100%;
