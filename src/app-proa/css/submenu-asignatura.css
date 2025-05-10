@@ -97,7 +97,8 @@ html, body {
 
 .fondoPanel {
     border: 1px solid var(--color-bordes);
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     padding: 2em;
     margin: 3em 2em;
 }
@@ -147,6 +148,14 @@ html, body {
     pointer-events: none;
 }
 
+#dropdown-asignaturas {
+    background-color: var(--color-primario);
+    color: var(--color-panelesBlancoPuro);
+    font-weight: 700;
+    font-size: 1.1em;
+    border-radius: 6px;
+}
+
 /* Clon del botón submenu en cabecera responsive */
 @media (max-width: 768px) {
     .submenu-toggle-btn-cabecera {
@@ -178,6 +187,10 @@ html, body {
     .cabecera-dropdown-fija .input-con-icono {
         flex: 1 1 48%;
         max-width: 48%;
+    }
+
+    #dropdown-asignaturas {
+        font-size: 1em;
     }
 }
 /* endregion */
