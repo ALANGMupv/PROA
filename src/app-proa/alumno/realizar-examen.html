@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/pop-up.css">
   <link rel="stylesheet" href="css/realizar-examen.css">
   <script src="../js/header-proa.js" defer></script>
+  <script src="js/dropdown-asignaturas.js" defer></script>
   <script src="js/asignatura-alumno.js" defer></script>
   <script src="js/realizar-examen.js" defer></script>
   <script src="js/pop-up.js " defer></script>
@@ -19,9 +20,25 @@
 
 <main class="contenido-wrapper">
 
-  <!-- Contenido dividido: menú lateral + contenido dinámico -->
+  <!-- Contenido general en horizontal: submenú a la izquierda + contenido a la derecha -->
   <div class="contenido-principal">
+
+    <!-- Área lateral para el submenú (se rellena dinámicamente por JS) -->
     <aside id="submenu" class="submenu"></aside>
+
+    <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->
+    <div class="contenido-asignatura">
+
+      <!-- Cabecera superior del contenido (zona fija arriba del panel derecho) -->
+      <!-- Aquí va el dropdown para cambiar de asignatura -->
+      <div class="cabecera-dropdown-fija">
+        <div class="input-con-icono">
+
+          <!-- Dropdown con las asignaturas disponibles (relleno dinámicamente con JS) -->
+          <select id="dropdown-asignaturas" class="input-base seleccionador-dropdown"></select>
+          <img src="../icons/dropdownAsignaturas.svg" alt="Flecha" class="icono-dropdown">
+        </div>
+      </div>
 
     <section class="panel-contenido fondoPanel">
 
@@ -228,12 +245,9 @@
         </div>
 
       </form>
-
-
-
-
     </section>
   </div>
+
 </main>
 </body>
 </html>
