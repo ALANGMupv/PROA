@@ -64,4 +64,28 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleBtn?.addEventListener("click", () => {
         items.classList.toggle("visible");
     });
+
+    // Clona el botón del submenú y lo coloca en la cabecera (versión móvil)
+    const cabecera = document.querySelector(".cabecera-dropdown-fija-profesor");
+
+    if (toggleBtn && items && cabecera) {
+        const botonClonado = toggleBtn.cloneNode(true);
+        botonClonado.classList.add("submenu-toggle-btn-cabecera");
+        cabecera.prepend(botonClonado);
+
+        botonClonado.addEventListener("click", () => {
+            items.classList.toggle("visible");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (items.classList.contains("visible")) {
+                if (
+                    !items.contains(e.target) &&
+                    !botonClonado.contains(e.target)
+                ) {
+                    items.classList.remove("visible");
+                }
+            }
+        });
+    }
 });
