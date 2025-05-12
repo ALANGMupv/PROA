@@ -79,11 +79,15 @@
     text-align: center;
 }
 
-/* Negrita para la primera fila */
+/* Padding para la primera fila */
 .tabla-asignaturas .fila span:first-child {
-    font-weight: 700;
     padding-left: 1em;
 }
+
+.tabla-asignaturas .fila span:last-child {
+    padding-right: 1em;
+}
+
 
 /* Estilo del botón "Ver detalles" */
 .tabla-asignaturas .btn {
@@ -200,15 +204,6 @@
     .tabla-asignaturas .fila button,
     .tabla-asignaturas .fila img {
         width: 100%;
-    }
-
-    /* Mostrar el nombre de cada campo antes del valor */
-    .tabla-asignaturas .fila span::before {
-        content: attr(data-label);
-        font-weight: bold;
-        display: block;
-        color: #616976;
-        margin-bottom: 0.25em;
     }
 
     .menu-opciones-wrapper {
