@@ -92,3 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
 function redireccionarPagina(){
     window.location.replace("crear-examen-nuevo.html");
 }
+
+document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn-visualizar-entregas")) {
+        window.location.href = "entregas-examen-profesor.html";
+    }
+});
