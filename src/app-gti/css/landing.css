@@ -16,7 +16,7 @@
     inset: 0;
     background: url('../img/fondoLanding.svg') no-repeat center center;
     background-size: cover;
-    filter: blur(4px); /* <- desenfoque de la imagen */
+    filter: blur(4px);
     z-index: -2;
 }
 
@@ -24,7 +24,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-color: rgba(160, 58, 111, 0.1); /* capa de aclarado opcional */
+    background-color: rgba(160, 58, 111, 0.1);
     z-index: -1;
 }
 
@@ -66,64 +66,9 @@
 }
 /*endregion*/
 
+
+
 /* region --- Segunda sección --- */
-.caracteristicas-principales {
-    text-align: center;
-    padding: 4em 2em;
-    background-color: var(--color-blancoPuro);
-    color: var(--color-textos);
-}
-
-.caracteristicas-principales h2 {
-    margin-bottom: 2.5em;
-}
-
-.caracteristicas-grid {
-    display: flex;
-    justify-content: space-between;
-    gap: 2em;
-    flex-wrap: wrap;
-}
-
-.caracteristica {
-    flex: 1 1 250px;
-    max-width: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 0 auto;
-}
-
-.caracteristica img {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 1.625em;
-}
-
-.caracteristica h3 {
-    font-family: var(--fuente-lato);
-    margin-bottom: 1.30em;
-}
-
-.caracteristica p {
-    font-family: var(--fuente-lato);
-    line-height: 1.5; /* El navegador asigna 24px de altura total para cada línea */
-}
-
-@media (max-width: 900px) {
-    .caracteristicas-grid {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .caracteristica {
-        margin-bottom: 2.5em;
-    }
-}
-/*endregion*/
-
-/* region --- Tercera sección: ¿Qué hace a PROA diferente? --- */
 .seccion-diferenciadora {
     padding: 6em 3em;
     color: var(--color-textos);
@@ -171,65 +116,21 @@
         flex-direction: column;
         text-align: center;
         align-items: center;
+
     }
 
     .imagen-diferenciador {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: 2.5em;
+        margin-top: 0;
     }
 }
 
 @media (max-width: 480px) {
-    .contenedor-diferenciador {
-        gap: 0.7em;
-    }
     .seccion-diferenciadora {
         padding: 4em 2em;
     }
 }
 /*endregion*/
 
-/* region --- Última sección: CTA final --- */
-.seccion-cta-final {
-    background-color: var(--color-blancoPuro);
-    padding: 6em 2em;
-    color: var(--color-textos);
-}
-
-.cta-final-contenedor {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 1300px;
-    margin: 0 auto;
-    gap: 0em;
-    text-align: center;
-    flex-direction: column;
-}
-
-.cta-final-texto {
-    flex: 2 1;
-}
-
-.cta-final-texto h2 {
-    margin-bottom: 1em;
-}
-
-.cta-final-texto p {
-    line-height: 1.5;
-}
-
-.cta-final-boton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2em;
-}
-
-.btnCTA {
-    text-decoration: none;
-}
-/* endregion */

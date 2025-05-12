@@ -32,8 +32,9 @@
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     transition: background-color 0.3s ease, border-left 0.3s ease;
+    align-items: flex-start;
+    text-align: left;
 }
 
 .faq-pregunta:hover {
@@ -78,8 +79,18 @@
     border-left: 4px solid var(--color-principal);
 }
 
+@media (max-width: 735px) {
+    .faq-pregunta {
+        gap: 0.7em;
+    }
+}
+
 @media (max-width: 480px) {
     .faq-pregunta {
+        font-size: 0.9em;
+    }
+
+    .parrafo-principal{
         font-size: 0.9em;
     }
 }

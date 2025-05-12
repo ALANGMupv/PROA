@@ -85,14 +85,20 @@ document.addEventListener('DOMContentLoaded', () => {
     `;  // FIN DE LA SECCIÓN CÓDIGO HTML DEL HEADER
 
     // Añadir clase activa al enlace correspondiente (queda marcado en el header la página donde se encuentra el usuario)
-    const rutaActual = location.pathname.split('/').pop(); // obtiene 'catalogo.html' o similar
     const enlacesMenu = document.querySelectorAll("header nav.activo a");
 
+    const rutaActual = location.pathname.split('/').pop() || 'index.html';
+
     enlacesMenu.forEach(enlace => {
-        if (enlace.getAttribute("href").includes(rutaActual)) {
+        const href = enlace.getAttribute("href");
+
+        if (rutaActual === 'index.html') return; // No marcamos ninguno en el index
+
+        if (href.includes(rutaActual)) {
             enlace.classList.add("activo-pagina");
         }
     });
+
 
     // Interacciones del menú
     const btnHamburguesa = document.getElementById("hamburguesa");

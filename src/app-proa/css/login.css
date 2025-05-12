@@ -87,13 +87,25 @@ label {
 @media (max-width: 768px) {
     .panel-login {
         max-width: 550px;
-        padding-top: 0;
-        padding-bottom: 2em;
-        padding-right: 1.5em;
-        padding-left: 1.5em;
+        margin: 1.5em;
     }
 
     .logo-login {
         width: 200px;
+    }
+
+    .demo-indicador {
+        padding-left: 0.6em;
+        padding-right: 0.6em;
+    }
+
+    .formulario-login {
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
+    h2{
+        padding-left: 0.6em;
+        padding-right: 0.6em;
     }
 }

@@ -199,6 +199,7 @@
         flex-direction: column;
         text-align: center;
         align-items: center;
+        gap:0
     }
 
     .imagen-diferenciador {
@@ -210,9 +211,6 @@
 }
 
 @media (max-width: 480px) {
-    .contenedor-diferenciador {
-        gap: 0.7em;
-    }
     .seccion-diferenciadora {
         padding: 4em 2em;
     }
