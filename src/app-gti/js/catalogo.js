@@ -1,14 +1,13 @@
+// Validación del formulario de sugerencias
 document.querySelector('.formulario-sugerencia')?.addEventListener('submit', function (e) {
     e.preventDefault();
-
     const formulario = this;
     let valido = true;
 
-    // Limpiar errores anteriores
+    // Eliminar mensajes de error previos
     formulario.querySelectorAll('label small').forEach(el => el.remove());
 
     const campos = formulario.querySelectorAll('input, textarea');
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     function mostrarError(campo, mensaje) {
@@ -22,9 +21,10 @@ document.querySelector('.formulario-sugerencia')?.addEventListener('submit', fun
         valido = false;
     }
 
+    // Validar campos
     campos.forEach(campo => {
         const valor = campo.value.trim();
-        if (valor === '') {
+        if (!valor) {
             mostrarError(campo, 'Campo obligatorio');
         } else if (campo.id === 'email' && !emailRegex.test(valor)) {
             mostrarError(campo, 'Correo inválido');
@@ -35,18 +35,21 @@ document.querySelector('.formulario-sugerencia')?.addEventListener('submit', fun
 
     if (!valido) return;
 
-    // Mostrar mensaje de éxito
+    // Mostrar toast
     const toast = document.createElement('div');
     toast.textContent = '¡Gracias por tu sugerencia!';
-    toast.style.position = 'fixed';
-    toast.style.bottom = '20px';
-    toast.style.right = '20px';
-    toast.style.padding = '1em 2em';
-    toast.style.backgroundColor = 'var(--color-principal)';
-    toast.style.color = '#fff';
-    toast.style.borderRadius = '8px';
-    toast.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-    toast.style.fontFamily = 'var(--fuente-lato)';
+    Object.assign(toast.style, {
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        padding: '1em 2em',
+        backgroundColor: 'var(--color-principal)',
+        color: '#fff',
+        borderRadius: '8px',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+        fontFamily: 'var(--fuente-lato)',
+        zIndex: '9999'
+    });
 
     document.body.appendChild(toast);
 
@@ -56,23 +59,17 @@ document.querySelector('.formulario-sugerencia')?.addEventListener('submit', fun
     }, 1500);
 });
 
-//botones redirigen dependiendo de si está logueado o no el usuario
+// Redirección condicional según login
 document.addEventListener('DOMContentLoaded', () => {
     const btnDemo = document.getElementById('btnProbarDemo');
-    const btnInfo = document.getElementById('btnSolicitarInfo');
-
-    // Simulación de login: revisa si hay un usuario guardado en localStorage/sessionStorage
+    const btnProd = document.getElementById('btnVisualizarProd');
     const usuarioGTI = JSON.parse(localStorage.getItem('usuario'));
 
     btnDemo?.addEventListener('click', () => {
-        if (usuarioGTI) {
-            window.location.href = '../app-proa/index.html'; // login de PROA
-        } else {
-            window.location.href = 'login.html'; // login de GTI
-        }
+        window.location.href = usuarioGTI ? '../app-proa/index.html' : 'login.html';
     });
 
-    btnInfo?.addEventListener('click', () => {
-        window.location.href = 'contacto.html';
+    btnProd?.addEventListener('click', () => {
+        window.location.href = 'pagProducto.html';
     });
 });

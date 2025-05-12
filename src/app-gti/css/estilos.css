@@ -22,6 +22,20 @@ img, video, svg { height: auto; max-width: 100%; }
 }
 
 a { color: inherit; }
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
 /* endregion */
 
 /* region --- FUENTES --- */
@@ -203,7 +217,7 @@ label {
     font-size: 1.4em;
     font-weight: 400;
     color: var(--color-blancoPuro);
-    padding: 1.25em 1.25em;
+    padding: 1em 1em;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -643,7 +657,7 @@ textarea {
 /* region --- MENSAJES DE ERROR FORMULARIOS --- */
 .error-texto {
     display: inline-block;
-    font-size: 0.75em;
+    font-size: 0.95em;
     color: var(--color-rojoError);
     margin-left: 0.5em;
     vertical-align: middle;
@@ -651,7 +665,7 @@ textarea {
 
 @media (max-width: 768px) {
     .error-texto {
-        font-size: 0.6em;
+        font-size: 0.75em;
     }
 }
 /* endregion */

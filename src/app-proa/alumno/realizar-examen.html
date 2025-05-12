@@ -11,28 +11,36 @@
   <link rel="stylesheet" href="css/pop-up.css">
   <link rel="stylesheet" href="css/realizar-examen.css">
   <script src="../js/header-proa.js" defer></script>
+  <script src="js/dropdown-asignaturas.js" defer></script>
   <script src="js/asignatura-alumno.js" defer></script>
   <script src="js/realizar-examen.js" defer></script>
   <script src="js/pop-up.js " defer></script>
 </head>
 <body>
 
-<main class="contenido-asignatura-wrapper">
+<main class="contenido-wrapper">
 
-  <!-- Cabecera superior con nombre y código de la asignatura -->
-  <section class="cabecera-asignatura">
-    <h2 class="titulo-con-icono titulo-azul">
-      <img src="../icons/book.svg" alt="Icono libro" class="icono-inicio icono-azul" />
-      <span id="titulo-asignatura">Nombre de la asignatura</span>
-    </h2>
-    <p id="codigo-asignatura" class="codigo-asignatura centrado-horizontal"></p>
-  </section>
-
-  <!-- Contenido dividido: menú lateral + contenido dinámico -->
+  <!-- Contenido general en horizontal: submenú a la izquierda + contenido a la derecha -->
   <div class="contenido-principal">
-    <aside id="submenu-asignatura" class="submenu-asignatura"></aside>
 
-    <section class="panel-asignaturas fondoPanel">
+    <!-- Área lateral para el submenú (se rellena dinámicamente por JS) -->
+    <aside id="submenu" class="submenu"></aside>
+
+    <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->
+    <div class="contenido-asignatura">
+
+      <!-- Cabecera superior del contenido (zona fija arriba del panel derecho) -->
+      <!-- Aquí va el dropdown para cambiar de asignatura -->
+      <div class="cabecera-dropdown-fija">
+        <div class="input-con-icono">
+
+          <!-- Dropdown con las asignaturas disponibles (relleno dinámicamente con JS) -->
+          <select id="dropdown-asignaturas" class="input-base seleccionador-dropdown"></select>
+          <img src="../icons/dropdownAsignaturas.svg" alt="Flecha" class="icono-dropdown">
+        </div>
+      </div>
+
+    <section class="panel-contenido fondoPanel">
 
       <form id="formulario-examen">
         <section class="titulo">
@@ -68,7 +76,7 @@
 
             <div class="opciones">
               <label class="boton-opcion">
-                <input type="radio" name="pregunta1" value="A" required>
+                <input type="radio" name="pregunta1" value="A">
                 <span class="letra">A.</span>
                 <span class="texto">Ser semántica</span>
               </label>
@@ -99,7 +107,7 @@
 
             <div class="opciones">
               <label class="boton-opcion">
-                <input type="radio" name="pregunta2" value="A" required>
+                <input type="radio" name="pregunta2" value="A" >
                 <span class="letra">A.</span>
                 <span class="texto">Una matriz 3x3</span>
               </label>
@@ -130,7 +138,7 @@
 
             <div class="opciones">
               <label class="boton-opcion">
-                <input type="radio" name="pregunta3" value="A" required>
+                <input type="radio" name="pregunta3" value="A" >
                 <span class="letra">A.</span>
                 <span class="texto">Tiene sólo valores negativos</span>
               </label>
@@ -161,7 +169,7 @@
 
             <div class="opciones">
               <label class="boton-opcion">
-                <input type="radio" name="pregunta4" value="A" required>
+                <input type="radio" name="pregunta4" value="A" >
                 <span class="letra">A.</span>
                 <span class="texto">Una matriz identidad</span>
               </label>
@@ -192,7 +200,7 @@
 
             <div class="opciones">
               <label class="boton-opcion">
-                <input type="radio" name="pregunta5" value="A" required>
+                <input type="radio" name="pregunta5" value="A">
                 <span class="letra">A.</span>
                 <span class="texto">El número de columnas</span>
               </label>
@@ -219,29 +227,27 @@
 
 
         <div id="botones">
-          <button class="btn-secundario btn-inicial" type="reset">Cancelar</button>
-          <button class="btn btn-inicial" onclick="activarPopPup()" type="button">Enviar</button>
-          <button class="btn btn-atras" onclick="irAtras()">Atrás</button>
+          <button class="btn-oscuros-secundario btn-inicial" type="reset">Cancelar</button>
+          <button class="btn-oscuros btn-inicial" onclick="activarPopPup()" type="button">Enviar</button>
+          <a href="examenes-alumno.html" class="btn-oscuros btn-atras">Atrás</a>
         </div>
 
         <!-- Pop-up de confirmación -->
         <div id="popup-confirmacion" class="popup">
-          <div class="popup-contenido">
+          <div class="contenido-popup">
             <p class="parrafo-principal">¿Estás seguro de que deseas enviar el formulario?</p>
-            <div class="popup-botones">
-              <button id="popup-aceptar" type="submit" class="btn">Aceptar</button>
-              <button id="popup-cancelar" class="btn-secundario">Cancelar</button>
+            <div class="btn-popup">
+              <button id="popup-cancelar" class="btn-oscuros-secundario">Cancelar</button>
+              <button id="popup-aceptar" type="submit" class="btn-oscuros">Aceptar</button>
+
             </div>
           </div>
         </div>
 
       </form>
-
-
-
-
     </section>
   </div>
+
 </main>
 </body>
 </html>

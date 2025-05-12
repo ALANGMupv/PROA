@@ -8,29 +8,46 @@
   <title>Realizar Examen</title>
   <link rel="stylesheet" href="../css/estilos.css">
   <link rel="stylesheet" href="../css/submenu-asignatura.css">
+  <link rel="stylesheet" href="css/dropdown-grupo.css">
   <link rel="stylesheet" href="css/pop-up.css">
   <link rel="stylesheet" href="css/crear-examen-nuevo.css">
   <script src="../js/header-proa.js" defer></script>
   <script src="js/asignatura-profesor.js" defer></script>
   <script src="js/crear-examen-nuevo.js" defer></script>
   <script src="js/pop-up.js " defer></script>
+  <script src="js/dropdown-asignaturas.js" defer></script>
 </head>
 <body>
-<main class="contenido-asignatura-wrapper">
 
-  <!-- Cabecera superior con nombre y código de la asignatura -->
-  <section class="cabecera-asignatura">
-    <h2 class="titulo-con-icono titulo-azul">
-      <img src="../icons/book.svg" alt="Icono libro" class="icono-inicio icono-azul" />
-      <span id="titulo-asignatura">Nombre de la asignatura</span>
-    </h2>
-    <p id="codigo-asignatura" class="codigo-asignatura centrado-horizontal"></p>
-  </section>
+<main class="contenido-wrapper"> <!-- Contenedor principal del contenido -->
 
-  <!-- Contenido dividido -->
-  <div class="contenido-principal">
-    <aside id="submenu-asignatura" class="submenu-asignatura"></aside>
+  <div class="contenido-principal"> <!-- Contenedor que agrupa el submenú y el contenido principal -->
+    <aside id="submenu" class="submenu"></aside> <!-- Submenú lateral (se rellena dinámicamente) -->
+    <div class="contenido-asignatura"> <!-- Área principal donde se muestra el contenido relacionado con la asignatura -->
+      <div class="cabecera-dropdown-fija-profesor"> <!-- Barra superior con filtros desplegables para el profesor -->
 
+        <!-- Aquí se inyecta dinámicamente el botón del submenú en responsive -->
+
+        <div class="contenedor-dropdowns"> <!-- Contenedor agrupador de los dos dropdowns -->
+          <!-- Dropdown para seleccionar grupo (PL1, PL2...) -->
+          <div class="input-con-icono grupo-dropdown">
+            <select id="dropdown-grupo" class="input-base seleccionador-dropdown">
+              <option value="todos">Todos</option>
+              <option value="pl1">Grupo PL1</option>
+              <option value="pl2">Grupo PL2</option>
+            </select>
+            <img src="../icons/dropdownAsignaturasAzul.svg" alt="Flecha" class="icono-dropdown">
+          </div>
+
+          <!-- Dropdown para seleccionar asignatura (rellenado dinámicamente con JS) -->
+          <div class="input-con-icono asignatura-dropdown">
+            <select id="dropdown-asignaturas" class="input-base seleccionador-dropdown"></select>
+            <img src="../icons/dropdownAsignaturas.svg" alt="Flecha" class="icono-dropdown">
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN CREAR EXÁMENES PROFESOR -->
     <section class="panel-asignaturas fondoPanel">
 
       <h2>Panel de creación de examen</h2>
@@ -52,7 +69,8 @@
                 <div>
                   <input type="text" class="input-base" id="valor-examen" required>
                 </div>
-
+              </label>
+              <label>
                 <span>Peso: *</span>
                 <div>
                   <input type="text" class="input-base" id="peso-examen" required>
@@ -116,30 +134,49 @@
           </button>
 
           <div id="botones">
-            <button class="btn-secundario btn-inicial" type="reset">Cancelar</button>
-            <button class="btn btn-inicial" type="button">Guardar Borrador</button>
-            <button class="btn btn-atras" type="button" onclick="activarPopPup()">Publicar</button>
+            <button class="btn-oscuros-secundario btn-inicial" type="button" id="cancelar" onclick="activarPopPup(this)">Cancelar</button>
+            <button class="btn-oscuros-secundario btn-inicial" type="button">Guardar Borrador</button>
+            <button class="btn-oscuros" type="button" id="publicar" onclick="activarPopPup(this)">Publicar</button>
           </div>
 
           <!-- Pop-up de confirmación -->
           <div id="popup-confirmacion" class="popup">
-            <div class="popup-contenido">
+            <div class="contenido-popup">
               <p class="parrafo-principal">¿Estás seguro de que quieres publicar el examen?</p>
-              <div class="popup-botones">
-                <button id="popup-aceptar" type="submit" class="btn">Aceptar</button>
-                <button id="popup-cancelar" class="btn-secundario">Cancelar</button>
+              <div class="btn-popup">
+                <button type="submit" class="btn-oscuros" onclick="btnAceptar(this)">Aceptar</button>
+                <button class="btn-oscuros-secundario" onclick="btnCancelar()" >Cancelar</button>
               </div>
             </div>
           </div>
 
-        </div>
+          <!-- Pop-up publicado -->
+          <div id="popup-publicado" class="popup">
+            <div class="contenido-popup">
+              <p class="parrafo-principal">Se ha pulicado exitosamente el examen</p>
+              <div class="btn-popup">
+                <button class="btn-oscuros" id="aceptar-publicado" onclick="btnAceptar(this)">Aceptar</button>
+              </div>
+            </div>
+          </div>
 
+          <!-- Pop-up de salir -->
+          <div id="popup-salir" class="popup">
+            <div class="contenido-popup">
+              <p class="parrafo-principal">¿Estás seguro de que quieres salir y no guardar el borrador?</p>
+              <div class="btn-popup">
+                <button class="btn-oscuros" id="aceptar-salir" onclick="btnAceptar(this)">Aceptar</button>
+                <button class="btn-oscuros-secundario" onclick="btnCancelar()">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </form>
 
+    </section> <!-- FIN DE LA SECCIÓN CREAR EXÁMENES PROFESOR -->
 
-
-    </section>
-  </div>
+    </div>
+  </div> <!-- Fin del contenedor contenido-principal -->
 </main>
 
 </body>

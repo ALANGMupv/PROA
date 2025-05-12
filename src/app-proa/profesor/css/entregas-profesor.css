@@ -1,0 +1,168 @@
+.panel-contenido.fondoPanel {
+    max-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Layout principal de la página de entregas */
+.contenedor-entregas {
+    flex: 1;
+    display: flex;
+    gap: 2em;
+    overflow: hidden;
+}
+
+.icono-buscador{
+    left: 1em;
+}
+.lista-alumnos {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-fondoPROAGris);
+    padding: 1em;
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+.lista-alumnos div {
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.alumno-item {
+    padding: 0.5em;
+    cursor: pointer;
+    border-bottom: 1px solid var(--color-bordes);
+    border-radius: 5px 5px 0 0;
+}
+
+.alumno-item:hover {
+    background-color: var(--color-terciario);
+}
+
+.alumno-item.activo {
+    background-color: var(--color-terciario);
+    border: 1px solid #a7ceff;
+    border-radius: 5px;
+}
+
+.encabezado{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#detalle-entrega.entrega-estilo-alumno {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 1em;
+    max-height: 100%;
+}
+
+#detalle-entrega .btn-atras {
+    padding: 0.5em 1.25em;
+    font-size: 1em;
+}
+
+.entrega-estilo-alumno {
+    margin: unset;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 1em;
+}
+.entrega-estilo-alumno::-webkit-scrollbar {
+    width: 8px;
+}
+
+.entrega-estilo-alumno::-webkit-scrollbar-thumb {
+    background-color: var(--color-bordes);
+    border-radius: 4px;
+}
+
+.entrega-estilo-alumno::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primario);
+}
+
+
+/* Estilo visual del detalle de entrega tipo test */
+.entrega-estilo-alumno .pregunta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.entrega-estilo-alumno .opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.entrega-estilo-alumno .calificacion-pregunta {
+    display: flex;
+    font-weight: bold;
+    justify-content: flex-end;
+    align-items: baseline;
+    color: var(--color-primario);
+}
+
+/* Estado de las respuestas corregidas */
+.boton-opcion{
+    background-color: rgba(204, 204, 204, 0.18);
+}
+.boton-opcion:hover{
+    background-color: rgba(204, 204, 204, 0.18);
+}
+.boton-opcion-correcta-deshabilitado {
+    background-color: var(--color-exito) !important;
+    cursor: not-allowed;
+}
+
+.boton-opcion-incorrecta-deshabilitado {
+    background-color: var(--color-inputError) !important;
+    cursor: not-allowed;
+}
+
+.boton-opcion-deshabilitado {
+    cursor: not-allowed;
+}
+
+.boton-opcion-correcta-deshabilitado,
+.boton-opcion-incorrecta-deshabilitado,
+.boton-opcion-deshabilitado {
+    font-size: 1em;
+    padding: 0.75em 1em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .contenedor-entregas {
+        flex-direction: column;
+        gap: 1em;
+        height: auto;
+    }
+
+    .lista-alumnos {
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    #detalle-entrega.entrega-estilo-alumno {
+        max-height: 60vh;
+        padding-right: 0.5em;
+    }
+
+    #detalle-entrega.entrega-estilo-alumno .pregunta {
+        gap: 0.75rem;
+    }
+
+    #detalle-entrega .btn-atras {
+        font-size: 0.9em;
+        padding: 0.5em 1em;
+    }
+}
+

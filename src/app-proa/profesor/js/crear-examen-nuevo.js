@@ -123,5 +123,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         console.log("Examen creado:", datos);
+
+        popupPublicar();
+
     });
 });
+
+async function popupPublicar() {
+    const popup = document.getElementById('popup-publicado');
+    popup.style.display = 'flex';
+}

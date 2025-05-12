@@ -54,6 +54,7 @@
 
 .btn-atras{
     display: none;
+    text-decoration: none;
 }
 
 .mensaje-exito {
@@ -142,3 +143,5 @@
         font-size: 0.875em;;
     }
 }
+
+
