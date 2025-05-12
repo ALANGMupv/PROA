@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Entregas Examen Profesor</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/submenu-asignatura.css">
+    <link rel="stylesheet" href="css/entregas-profesor.css">
+    <script src="../js/header-proa.js" defer></script>
+    <script src="js/asignatura-profesor.js" defer></script>
+    <script src="js/entregas-profesor.js" defer></script>
+</head>
+<body>
+<main class="contenido-wrapper">
+    <div class="contenido-principal">
+        <aside id="submenu" class="submenu"></aside>
+
+        <section class="panel-contenido fondoPanel">
+            <section class="titulo">
+                <h1>Entregas del Cuestionario 1</h1>
+            </section>
+
+            <div class="contenedor-entregas">
+                <!-- Lista de alumnos -->
+                <aside class="lista-alumnos">
+                    <div class="input-con-icono">
+                        <input type="text" class="input-base input-textoBusqueda" id="filtroTexto" placeholder="Nombre alumno..." />
+                        <img src="../icons/search.svg" class="icono-buscador" alt="Buscar" />
+                    </div>
+                    <div id="lista-alumnos"></div>
+                </aside>
+
+                <!-- Detalle de la entrega -->
+                <section class="entrega-estilo-alumno fondoPanel" id="detalle-entrega">
+                    <p>Selecciona un alumno para ver su entrega.</p>
+                </section>
+            </div>
+        </section>
+    </div>
+</main>
+</body>
+</html>

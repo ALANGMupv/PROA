@@ -1,0 +1,162 @@
+{
+  "MAT101": {
+    "cuestionario1": [
+      {
+        "dni": "01-9218611",
+        "correo": "l.simdre@epsg.upv.es",
+        "nombre": "Lief Simants Dredge",
+        "fechaEntrega": "2025-05-09T22:00:00",
+        "respuestas": {
+          "pregunta1": "B",
+          "pregunta2": "B",
+          "pregunta3": "B",
+          "pregunta4": "C",
+          "pregunta5": "C"
+        },
+        "nota": 10
+      },
+      {
+        "dni": "04-1320191",
+        "correo": "m.kirkam@epsg.upv.es",
+        "nombre": "Merline Kirdsch Kampshell",
+        "fechaEntrega": "2025-05-09T21:00:00",
+        "respuestas": {
+          "pregunta1": "C",
+          "pregunta2": "B",
+          "pregunta3": "A",
+          "pregunta4": "B",
+          "pregunta5": "C"
+        },
+        "nota": 6
+      }
+    ]
+  },
+  "ECO201": {
+    "cuestionario1": [
+      {
+        "dni": "05-9971924",
+        "correo": "d.rawabc@epsg.upv.es",
+        "nombre": "Debora Rawstorne",
+        "fechaEntrega": "2025-05-09T20:30:00",
+        "respuestas": {
+          "pregunta1": "A",
+          "pregunta2": "C",
+          "pregunta3": "B",
+          "pregunta4": "C",
+          "pregunta5": "A"
+        },
+        "nota": 6
+      },
+      {
+        "dni": "04-1320191",
+        "correo": "m.kirkam@epsg.upv.es",
+        "nombre": "Merline Kirdsch Kampshell",
+        "fechaEntrega": "2025-05-09T19:40:00",
+        "respuestas": {
+          "pregunta1": "B",
+          "pregunta2": "A",
+          "pregunta3": "B",
+          "pregunta4": "B",
+          "pregunta5": "C"
+        },
+        "nota": 8
+      }
+    ]
+  },
+  "SEG301": {
+    "cuestionario1": [
+      {
+        "dni": "01-9218611",
+        "correo": "l.simdre@epsg.upv.es",
+        "nombre": "Lief Simants Dredge",
+        "fechaEntrega": "2025-05-09T18:20:00",
+        "respuestas": {
+          "pregunta1": "B",
+          "pregunta2": "D",
+          "pregunta3": "C",
+          "pregunta4": "C",
+          "pregunta5": "C"
+        },
+        "nota": 6
+      },
+      {
+        "dni": "05-9971924",
+        "correo": "d.rawabc@epsg.upv.es",
+        "nombre": "Debora Rawstorne",
+        "fechaEntrega": "2025-05-09T17:50:00",
+        "respuestas": {
+          "pregunta1": "A",
+          "pregunta2": "B",
+          "pregunta3": "B",
+          "pregunta4": "D",
+          "pregunta5": "C"
+        },
+        "nota": 8
+      }
+    ]
+  },
+  "PRO303": {
+    "cuestionario1": [
+      {
+        "dni": "05-9971924",
+        "correo": "d.rawabc@epsg.upv.es",
+        "nombre": "Debora Rawstorne",
+        "fechaEntrega": "2025-05-09T16:30:00",
+        "respuestas": {
+          "pregunta1": "B",
+          "pregunta2": "B",
+          "pregunta3": "C",
+          "pregunta4": "C",
+          "pregunta5": "D"
+        },
+        "nota": 6
+      }
+    ]
+  },
+  "ALG201": {
+    "cuestionario1": [
+      {
+        "dni": "01-9218611",
+        "correo": "l.simdre@epsg.upv.es",
+        "nombre": "Lief Simants Dredge",
+        "fechaEntrega": "2025-05-09T15:15:00",
+        "respuestas": {
+          "pregunta1": "C",
+          "pregunta2": "A",
+          "pregunta3": "B",
+          "pregunta4": "C",
+          "pregunta5": "C"
+        },
+        "nota": 8
+      },
+      {
+        "dni": "04-1320191",
+        "correo": "m.kirkam@epsg.upv.es",
+        "nombre": "Merline Kirdsch Kampshell",
+        "fechaEntrega": "2025-05-09T14:30:00",
+        "respuestas": {
+          "pregunta1": "D",
+          "pregunta2": "D",
+          "pregunta3": "A",
+          "pregunta4": "B",
+          "pregunta5": "B"
+        },
+        "nota": 2
+      },
+      {
+        "dni": "05-9971924",
+        "correo": "d.rawabc@epsg.upv.es",
+        "nombre": "Debora Rawstorne",
+        "fechaEntrega": "2025-05-09T13:45:00",
+        "respuestas": {
+          "pregunta1": "B",
+          "pregunta2": "B",
+          "pregunta3": "B",
+          "pregunta4": "C",
+          "pregunta5": "C"
+        },
+        "nota": 10
+      }
+    ]
+  }
+}
