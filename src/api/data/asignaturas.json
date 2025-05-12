@@ -8,7 +8,9 @@
     "favorita": false,
     "titular": "Kevan Pounds Mainston",
     "colaboradores": ["Eolande Merriton Mizzi"],
-    "alumnos": ["Lief Simants Dredge", "Merline Kirdsch Kampshell"]
+    "alumnos": ["Lief Simants Dredge", "Merline Kirdsch Kampshell"],
+    "departamento": "Matemática Aplicada",
+    "creditos": 6
   },
   {
     "codigo": "ECO201",
@@ -19,7 +21,9 @@
     "favorita": false,
     "titular": "Luelle Pridmore Starsmeare",
     "colaboradores": [],
-    "alumnos": ["Debora Rawstorne", "Merline Kirdsch Kampshell"]
+    "alumnos": ["Debora Rawstorne", "Merline Kirdsch Kampshell"],
+    "departamento": "Economía y Empresa",
+    "creditos": 4.5
   },
   {
     "codigo": "SEG301",
@@ -30,7 +34,9 @@
     "favorita": false,
     "titular": "Eolande Merriton Mizzi",
     "colaboradores": ["Kevan Pounds Mainston"],
-    "alumnos": ["Lief Simants Dredge", "Debora Rawstorne"]
+    "alumnos": ["Lief Simants Dredge", "Debora Rawstorne"],
+    "departamento": "Sistemas Informáticos",
+    "creditos": 6
   },
   {
     "codigo": "PRO303",
@@ -41,7 +47,9 @@
     "favorita": false,
     "titular": "Kevan Pounds Mainston",
     "colaboradores": ["Luelle Pridmore Starsmeare"],
-    "alumnos": ["Debora Rawstorne"]
+    "alumnos": ["Debora Rawstorne"],
+    "departamento": "Ingeniería del Software",
+    "creditos": 12
   },
   {
     "codigo": "ALG201",
@@ -52,6 +60,8 @@
     "favorita": false,
     "titular": "Eolande Merriton Mizzi",
     "colaboradores": [],
-    "alumnos": ["Lief Simants Dredge", "Merline Kirdsch Kampshell", "Debora Rawstorne"]
+    "alumnos": ["Lief Simants Dredge", "Merline Kirdsch Kampshell", "Debora Rawstorne"],
+    "departamento": "Ciencia de Datos",
+    "creditos": 4.5
   }
 ]
