@@ -1,3 +1,7 @@
+.contenido-asignatura { /* Evita que el contenido principal desborde y empuje el margen */
+    min-width: 0;
+}
+
 .gestion-asignaturas {
     display: flex;
     flex-direction: column;
@@ -20,6 +24,12 @@
 .filtros-asignaturas .input-base,
 .filtros-asignaturas .seleccionador-dropdown {
     width: 100%;
+}
+
+/* Estilo del botón "Nueva asignatura" */
+.filtros-asignaturas .btn {
+    padding: 0.65em 1em;
+    border-radius: 6px;
 }
 
 .dropdown-wrapper {
@@ -100,5 +110,70 @@
 .tabla-asignaturas .fila:nth-child(odd):not(.encabezado) {
     background-color: var(--color-fondoPROAGris); 
 }
+
+#dropdown-asignaturas {
+    padding: 0.65em 1em;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--color-bordes);
+    background-color: transparent;
+    font-weight: 400;
+}
+
+
+/* Cuando no cabe bien la tabla, pasa a modo responsive -> 1140px */
+@media screen and (max-width: 1140px) {
+
+    #dropdown-asignaturas {
+        padding: 0.5em 1em;
+        font-size: 1em;
+    }
+
+    .filtros-asignaturas .btn {
+        font-size: 1em;
+    }
+
+    /* Filtros en columna */
+    .filtros-asignaturas {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        width: 100%;
+    }
+
+    /* Fila de asignaturas: todo apilado en columna */
+    .tabla-asignaturas .fila,
+    .tabla-asignaturas .fila.encabezado {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7em;
+        padding: 1em;
+        width: 100%;
+    }
+
+    /* Ocultar el encabezado en móvil */
+    .tabla-asignaturas .fila.encabezado {
+        display: none;
+    }
+
+    /* Estilos para span en modo columna */
+    .tabla-asignaturas .fila span,
+    .tabla-asignaturas .fila button,
+    .tabla-asignaturas .fila img {
+        width: 100%;
+    }
+
+    /* Mostrar el nombre de cada campo antes del valor */
+    .tabla-asignaturas .fila span::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        color: #616976;
+        margin-bottom: 0.25em;
+    }
+
+}
+
 
 
