@@ -133,9 +133,9 @@
           </button>
 
           <div id="botones">
-            <button class="btn-oscuros-secundario btn-inicial" type="reset">Cancelar</button>
-            <button class="btn-oscuros btn-inicial" type="button">Guardar Borrador</button>
-            <button class="btn-oscuros btn-atras" type="button" onclick="activarPopPup()">Publicar</button>
+            <button class="btn-oscuros-secundario btn-inicial" type="button" id="cancelar" onclick="activarPopPup(this)">Cancelar</button>
+            <button class="btn-oscuros-secundario btn-inicial" type="button">Guardar Borrador</button>
+            <button class="btn-oscuros" type="button" id="publicar" onclick="activarPopPup(this)">Publicar</button>
           </div>
 
           <!-- Pop-up de confirmación -->
@@ -143,8 +143,29 @@
             <div class="contenido-popup">
               <p class="parrafo-principal">¿Estás seguro de que quieres publicar el examen?</p>
               <div class="btn-popup">
-                <button id="popup-aceptar" type="submit" class="btn-oscuros">Aceptar</button>
-                <button id="popup-cancelar" class="btn-oscuros-secundario">Cancelar</button>
+                <button type="submit" class="btn-oscuros" onclick="btnAceptar(this)">Aceptar</button>
+                <button class="btn-oscuros-secundario" onclick="btnCancelar()" >Cancelar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pop-up publicado -->
+          <div id="popup-publicado" class="popup">
+            <div class="contenido-popup">
+              <p class="parrafo-principal">Se ha pulicado exitosamente el examen</p>
+              <div class="btn-popup">
+                <button class="btn-oscuros" id="aceptar-publicado" onclick="btnAceptar(this)">Aceptar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pop-up de salir -->
+          <div id="popup-salir" class="popup">
+            <div class="contenido-popup">
+              <p class="parrafo-principal">¿Estás seguro de que quieres salir y no guardar el borrador?</p>
+              <div class="btn-popup">
+                <button class="btn-oscuros" id="aceptar-salir" onclick="btnAceptar(this)">Aceptar</button>
+                <button class="btn-oscuros-secundario" onclick="btnCancelar()">Cancelar</button>
               </div>
             </div>
           </div>

@@ -1,20 +1,30 @@
 const formulario = document.getElementById('formulario-con-pop-up');
-const popup = document.getElementById('popup-confirmacion');
-const botonAceptar = document.getElementById('popup-aceptar');
-const botonCancelar = document.getElementById('popup-cancelar');
+let popup;
+
 
 let confirmarEnvio = false;
 
 
-function activarPopPup(){
-    popup.style.display = 'flex'; // Muestra el pop-up
+function activarPopPup(btn){
+    if (btn.id === 'publicar'){
+        popup = document.getElementById('popup-confirmacion');
+        popup.style.display = 'flex'; // Muestra el pop-up
+    } else if ( btn.id === 'cancelar'){
+        popup = document.getElementById('popup-salir');
+        popup.style.display = 'flex'; // Muestra el pop-up
+    }
+
 }
 
-botonAceptar.addEventListener('click', function () {
-    confirmarEnvio = true;
-    popup.style.display = 'none';
-});
-
-botonCancelar.addEventListener('click', function () {
+function btnAceptar(id){
+    if (id.id === 'aceptar-salir'){
+        window.location.replace("examenes-profesor.html");
+    } else if ( id.id === 'aceptar-publicado'){
+        window.location.replace("examenes-profesor.html");
+    }
     popup.style.display = 'none'; // Oculta el pop-up
-});
+}
+
+function btnCancelar(){
+    popup.style.display = 'none'; // Oculta el pop-up
+}

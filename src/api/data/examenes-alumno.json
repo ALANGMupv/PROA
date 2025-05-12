@@ -57,6 +57,14 @@
         "fechaEnvio": "2025-03-24, 17:15",
         "nota": "7.5/10"
       }
+    ],
+    "borradores": [
+      {
+        "titulo": "borrador 1"
+      },
+      {
+        "titulo": "borrador 2"
+      }
     ]
   }
 }
