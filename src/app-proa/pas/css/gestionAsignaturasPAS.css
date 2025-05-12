@@ -120,6 +120,44 @@
     font-weight: 400;
 }
 
+/* region --- MENÚ 3 RAYITAS ASIGNAR --- */
+.menu-opciones-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-desplegable {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background-color: white;
+    border: 1px solid var(--color-bordes);
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+    min-width: 180px;
+}
+
+.menu-desplegable button {
+    width: 100%;
+    padding: 0.75em 1em;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.menu-desplegable button:hover {
+    background-color: var(--color-terciario);
+}
+
+.menu-opciones-wrapper.abierto .menu-desplegable {
+    display: block;
+}
+/* endregion */
 
 /* Cuando no cabe bien la tabla, pasa a modo responsive -> 1140px */
 @media screen and (max-width: 1140px) {
@@ -173,6 +211,10 @@
         margin-bottom: 0.25em;
     }
 
+    .menu-opciones-wrapper {
+        align-self: center;
+        width: fit-content;
+    }
 }
 
 

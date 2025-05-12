@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/gestionAsignaturasPAS.css">
     <script src="../js/header-proa.js" defer></script>
     <script src="js/panel-pas.js" defer></script>
+    <script src="js/gestionPAS.js" defer></script>
 
 </head>
 
@@ -70,7 +71,15 @@
                         <span>Matemática Aplicada</span>
                         <span>6</span>
                         <button class="btn">Ver detalles</button>
-                        <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" />
+
+                        <!-- Menú Asignar -->
+                        <div class="menu-opciones-wrapper">
+                            <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" onclick="toggleOpciones(this)" />
+                            <div class="menu-desplegable">
+                                <button>Asignar alumno</button>
+                                <button>Asignar profesor</button>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Segunda fila de datos -->
@@ -80,7 +89,15 @@
                         <span>Sistemas Informáticos</span>
                         <span>6</span>
                         <button class="btn">Ver detalles</button>
-                        <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" />
+
+                        <!-- Menú Asignar -->
+                        <div class="menu-opciones-wrapper">
+                            <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" onclick="toggleOpciones(this)" />
+                            <div class="menu-desplegable">
+                                <button>Asignar alumno</button>
+                                <button>Asignar profesor</button>
+                            </div>
+                        </div>
                     </div>
 
                 </div> <!-- Fin tabla-asignaturas -->
