@@ -62,22 +62,6 @@
           </div>
 
           <div class="parametros">
-
-            <div class="contenedor-valor-peso">
-              <label>
-                <span>Valor: *</span>
-                <div>
-                  <input type="text" class="input-base" id="valor-examen" required>
-                </div>
-              </label>
-              <label>
-                <span>Peso: *</span>
-                <div>
-                  <input type="text" class="input-base" id="peso-examen" required>
-                  <span>%</span>
-                </div>
-              </label>
-            </div>
             <div class="contenedor-fecha-hora">
               <label>
                 <span>Fecha de entrega: *</span>
@@ -88,13 +72,46 @@
                 <input type="time" class="input-base with-icon" id="hora-examen" required>
               </label>
             </div>
+            <div class="contenedor-valor-peso">
+              <label>
+                <span>Peso: *</span>
+                <div class="peso">
+                  <input type="number" class="input-base" id="peso-examen" required>
+                  <span>%</span>
+                </div>
+              </label>
+              <label>
+                <span>Distribucion: *</span>
+                  <div class="input-con-icono grupo-dropdown">
+                    <select id="dropdown-valor" class="input-base seleccionador-dropdown">
+                      <option value="automatico">Automatico</option>
+                      <option value="personalizado">Personalizado</option>
+                    </select>
+                    <img src="../icons/dropdown.svg" alt="Flecha" class="icono-dropdown">
+                </div>
+              </label>
+              <label>
+                <div class="puntos">
+                  <span>Puntos Totales:</span> <span id="puntos"></span>
+                </div>
+              </label>
+            </div>
+
           </div>
 
           <div class="pregunta-contenedor" data-id="pregunta1">
 
             <div class="titulo-texto-pregunta">
               <div class="titulo-pregunta">
-                <h4>Pregunta 1</h4>
+
+                <div class="titulo-valor">
+                  <h4>Pregunta 1</h4>
+                  <div>
+                    <span>Valor</span>
+                    <input type="number" class="input-base input-pregunta-valor" placeholder="" oninput="actualizarEstadoValorPreguntas()" required>
+                  </div>
+                </div>
+
                 <img src="../icons/trash.svg" alt="Eliminar" class="icono-eliminar" onclick="eliminarElemento(this)">
               </div>
 

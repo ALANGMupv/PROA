@@ -1,6 +1,15 @@
+*{
+    box-sizing: border-box;
+}
+
+.contenido-asignatura{
+    width: 10vh;
+}
+
 .panel-asignaturas{
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 .datos{
@@ -17,32 +26,58 @@
 
 .parametros{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
+    gap: 1em;
 }
 
 .parametros label{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.5em;
+    gap: 1em;
     width: 100%;
+}
+
+.puntos{
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+    font-size: 1.25em;
+}
+
+#puntos{
+    color: var(--color-primario);
+    font-size: 1.25em;
+    font-weight: 700;
 }
 
 .contenedor-valor-peso{
     display: flex;
     flex-direction: row;
     gap: 1em;
+    justify-content: stretch;
 }
 
-.contenedor-valor-peso div{
+#dropdown-valor{
+    border: solid 1px var(--color-bordes);
+    font-size: 1em;
+    color: black;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.input-respuesta{
+    width: 100%;
+}
+
+.peso{
     display: flex;
-    gap: 0.5em;
-    align-items: center;
-    max-width: 6em;
+    align-items: baseline;
+    gap: 0.33em;
+    width: 100%;
 }
 
-.contenedor-valor-peso div input{
+.peso input{
     width: 100%;
 }
 
@@ -79,6 +114,32 @@
     height: 35px;
 }
 
+.titulo-valor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em
+}
+
+.titulo-valor div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em
+}
+
+.input-pregunta-valor{
+    padding: 0.33em;
+    max-width: 4em;
+}
+
+.input-pregunta-valor:disabled {
+    background-color: #f0f0f0;
+    color: #888;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+}
+
 #botones{
     display: flex;
     justify-content: flex-end;
@@ -92,7 +153,7 @@
     padding: 0;
 }
 
-@media(max-width: 1100px){
+@media(min-width:800px)and (max-width: 1100px){
     .contenedor-valor-peso{
         flex-direction: column;
     }
@@ -102,16 +163,42 @@
     }
 }
 
-@media (max-width:700px ){
+
+
+@media  (min-width: 800px) and (max-width: 900px){
+    .cabecera-dropdown-fija-profesor{
+        justify-content: center;
+    }
+
+    .contenedor-dropdowns{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-self: center;
+        gap: 0.75em;
+        width: 100%;
+    }
+
+    .input-con-icono{
+        max-width: unset;
+        width: 100% ;
+    }
+
+    #dropdown-asignaturas {
+        margin-left: 0;
+    }
+}
+
+@media(max-width: 796px){
+    .contenido-asignatura{
+        width: auto;
+    }
+}
+
+@media (max-width:770px ){
 
     label{
         font-size: 1em;
-    }
-
-
-
-    .input-base{
-        font-size: 0.75em;
     }
 
     .pregunta-contenedor{
@@ -126,13 +213,27 @@
         gap: 0.33em;
         min-width: unset;
     }
-    .input-respuesta{
-        width: 100%;
-    }
 
 
 }
 
+@media (max-width: 680px){
 
+    .parametros{
+        flex-direction: column;
+        max-width: unset;
+        width: 100%;
+    }
+    .contenedor-valor-peso, .contenedor-fecha-hora{
+        flex-direction: column;
+        gap:0.5em;
+    }
+
+    .contenedor-valor-peso div, contenedor-fecha-hora div{
+        max-width: 100%;
+        width: 100%;
+    }
+
+}
 
 
