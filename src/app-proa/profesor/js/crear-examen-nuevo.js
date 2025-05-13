@@ -1,6 +1,35 @@
-let contadorPreguntas = 2; // Ya existe Pregunta 1 en el HTML
+let contadorPreguntas = 1; // Ya existe Pregunta 1 en el HTML
+const dropdownValor = document.getElementById("dropdown-valor");
+let suma;
+function actualizarEstadoValorPreguntas() {
+    const esAutomatico = dropdownValor.value === "automatico";
+    const inputsValor = document.querySelectorAll(".input-pregunta-valor");
+    const spanPuntos = document.getElementById("puntos");
 
+    inputsValor.forEach(input => {
+        input.disabled = esAutomatico;
+    });
+
+    if (esAutomatico) {
+        spanPuntos.textContent = "10";
+        suma = 10;
+        inputsValor.forEach(input => {
+            input.value = ""
+        })
+    } else {
+        // Sumar todos los valores numéricos de los inputs
+        suma = 0;
+        inputsValor.forEach(input => {
+            const valor = parseFloat(input.value);
+            if (!isNaN(valor)) {
+                suma += valor;
+            }
+        });
+        spanPuntos.textContent = suma;
+    }
+}
 function agregarPregunta() {
+    contadorPreguntas++;
     const contenedorPreguntas = document.querySelector(".datos");
     const nuevaPregunta = document.createElement("div");
     const idPregunta = `pregunta${contadorPreguntas}`;
@@ -9,8 +38,16 @@ function agregarPregunta() {
 
     nuevaPregunta.innerHTML = `
     <div class="titulo-texto-pregunta">
+
       <div class="titulo-pregunta">
-        <h4>Pregunta ${contadorPreguntas}</h4>
+
+        <div class="titulo-valor">
+          <h4>Pregunta ${contadorPreguntas}</h4>
+            <div>
+              <span>Valor</span>
+              <input type="number" class="input-base input-pregunta-valor" placeholder="" oninput="actualizarEstadoValorPreguntas()" required>
+            </div>
+        </div>
         <img src="../icons/trash.svg" alt="Eliminar" class="icono-eliminar" onclick="eliminarElemento(this)">
       </div>
       <textarea name="${idPregunta}" id="${idPregunta}" cols="30" rows="3" class="input-base input-pregunta"
@@ -29,7 +66,7 @@ function agregarPregunta() {
   `;
 
     contenedorPreguntas.insertBefore(nuevaPregunta, document.getElementById("btn-agregar-pregunta"));
-    contadorPreguntas++;
+    actualizarEstadoValorPreguntas();
 }
 
 function generarRespuestaHTML(nombreGrupo, letra) {
@@ -43,27 +80,6 @@ function generarRespuestaHTML(nombreGrupo, letra) {
       <img src="../icons/trash.svg" alt="Eliminar" class="icono-eliminar" onclick="eliminarElemento(this)">
     </div>
   `;
-}
-
-function agregarRespuesta(btn) {
-    const contenedor = btn.previousElementSibling; // .respuestas-contenedor justo antes del botón
-    if (!contenedor || !contenedor.classList.contains("respuestas-contenedor")) return;
-
-    const letra = String.fromCharCode(65 + contadorRespuestas); // Genera letras: A, B, C, etc.
-
-    const nuevaRespuesta = document.createElement("div");
-    nuevaRespuesta.classList.add("respuesta-opcion");
-    nuevaRespuesta.innerHTML = `
-    <div class="radio-grupo">
-      <input type="radio" id="opcion-${letra.toLowerCase()}" name="pregunta1" required>
-      <label for="opcion-${letra.toLowerCase()}">${letra}.</label>
-    </div>
-    <input type="text" class="input-base input-respuesta" placeholder="Escribe la respuesta aquí..." required>
-    <img src="../icons/trash.svg" alt="Eliminar" class="icono-eliminar" onclick="eliminarElemento(this)">
-  `;
-
-    contenedor.appendChild(nuevaRespuesta);
-    contadorRespuestas++;
 }
 
 function añadirRespuesta(boton) {
@@ -96,12 +112,18 @@ document.addEventListener("DOMContentLoaded", function () {
     formulario.addEventListener("submit", function (e) {
         e.preventDefault(); // Evita que se recargue la página
 
+        const fechaTexto = formulario.querySelector('#fecha-examen').value; // formato: YYYY-MM-DD
+        const horaTexto = formulario.querySelector('#hora-examen').value;   // formato: HH:MM
+
+        // Combinar fecha y hora en formato ISO 8601 (ej. 2025-05-09T19:40:00)
+        const fechaHora = fechaTexto && horaTexto ? `${fechaTexto}T${horaTexto}:00` : null;
+
+
         const datos = {
-            titulo: formulario.querySelector('#titulo-examen').value,
-            valor:formulario.querySelector('#valor-examen').value,
-            peso: formulario.querySelector('#peso-examen').value,
-            fecha: formulario.querySelector('#fecha-examen').value,
-            hora: formulario.querySelector('#hora-examen').value,
+            titulo: formulario.querySelector('#titulo-examen').value, // string
+            puntos: suma, // número
+            peso: Number(formulario.querySelector('#peso-examen').value), // número
+            fecha: fechaHora, // string con formato ISO (fecha + hora)
             preguntas: [],
         };
 
@@ -109,6 +131,13 @@ document.addEventListener("DOMContentLoaded", function () {
         preguntasDOM.forEach(p => {
             const preguntaTexto = p.querySelector("textarea").value;
             const respuestas = [];
+
+            let valor = p.querySelector(".input-pregunta-valor").value;
+
+            if(valor === ""){
+                valor = 10/contadorPreguntas;
+            }
+
 
             p.querySelectorAll(".respuesta-opcion").forEach(r => {
                 const texto = r.querySelector('input[type="text"]').value;
@@ -118,6 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             datos.preguntas.push({
                 pregunta: preguntaTexto,
+                valor: valor,
                 respuestas
             });
         });
@@ -127,6 +157,12 @@ document.addEventListener("DOMContentLoaded", function () {
         popupPublicar();
 
     });
+
+    // Escuchar cambios en el dropdown
+    dropdownValor.addEventListener("change", actualizarEstadoValorPreguntas);
+
+    // Ejecutar al inicio para establecer el estado inicial correctamente
+    actualizarEstadoValorPreguntas();
 });
 
 async function popupPublicar() {
