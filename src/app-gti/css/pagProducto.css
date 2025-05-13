@@ -195,6 +195,11 @@
 }
 
 @media (max-width: 1100px) {
+
+    .texto-diferenciador{
+        flex: unset;
+    }
+
     .contenedor-diferenciador {
         flex-direction: column;
         text-align: center;
@@ -231,7 +236,7 @@
     flex-wrap: wrap;
     max-width: 1300px;
     margin: 0 auto;
-    gap: 0em;
+    gap: 0;
     text-align: center;
     flex-direction: column;
 }
@@ -259,5 +264,4 @@
     text-decoration: none;
 }
 /* endregion */
-
 

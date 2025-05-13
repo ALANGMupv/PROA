@@ -112,6 +112,11 @@
 }
 
 @media (max-width: 1100px) {
+
+    .texto-diferenciador{
+        flex: unset;
+    }
+
     .contenedor-diferenciador {
         flex-direction: column;
         text-align: center;
