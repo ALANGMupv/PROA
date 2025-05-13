@@ -65,6 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             sinAvisos.innerHTML = `<strong>No tienes notificaciones nuevas</strong>`;
                             contenedorPopover.appendChild(sinAvisos);
                         } else {
+                            // Crear burbuja si hay notificaciones
+                            const yaVistas = localStorage.getItem(`notificacionesVistas_${usuario.correo}`) === 'true';
+                            const botonNotificacion = document.querySelector(".boton-notificacion");
+                            if (botonNotificacion && !yaVistas) {
+                                const burbuja = document.createElement("span");
+                                burbuja.classList.add("burbuja-notificacion");
+                                botonNotificacion.appendChild(burbuja);
+                            }
+
                             notificaciones
                                 .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
                                 .forEach(n => {
@@ -79,17 +88,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Popover de notificaciones
                 const botonNotificacion = document.querySelector(".boton-notificacion");
                 const menuAvisos = document.getElementById("menu-avisos");
-                const burbujaNotificacion = document.querySelector(".burbuja-notificacion");
-
                 botonNotificacion?.addEventListener("click", e => {
                     e.preventDefault();
+
+                    // Alternar popover
                     if (menuAvisos.matches(":popover-open")) {
                         menuAvisos.hidePopover();
                     } else {
                         menuAvisos.showPopover();
                     }
-                    burbujaNotificacion?.remove();
+
+                    // Marcar notificaciones como vistas (por usuario)
+                    localStorage.setItem(`notificacionesVistas_${usuario.correo}`, 'true');
+
+                    // Eliminar burbuja
+                    const burbuja = botonNotificacion.querySelector(".burbuja-notificacion");
+                    if (burbuja) burbuja.remove();
                 });
+
 
                 // Cierre de sesión
                 const cerrarSesion = document.getElementById("cerrar-sesion");
@@ -99,12 +115,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 cerrarSesion?.addEventListener("click", e => {
                     e.preventDefault();
+
+                    // Cerrar el popover del usuario
+                    document.getElementById("menu-usuario")?.hidePopover();
+
+                    // Mostrar el popup de confirmación
                     popup?.classList.add("activo");
                     document.body.classList.add("menu-abierto");
                 });
 
                 confirmar?.addEventListener("click", () => {
                     localStorage.removeItem("usuario");
+                    localStorage.removeItem("notificacionesVistas_" + usuario.correo);
+
 
                     let rutaLogout = './index.html'; // por defecto
                     if (usuario.rol === 'pas') {
