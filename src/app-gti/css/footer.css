@@ -1,51 +1,46 @@
 footer {
     background-color: #101827;
     color: #ffffff;
-    padding: 15px 0;
+    padding: 1em 0;
+    font-size: 0.9em;
     font-family: var(--fuente-principal);
 }
 
 .contenido-footer {
     display: flex;
-    justify-content: space-evenly;
-    margin: auto;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2em; /* equilibrio entre columnas */
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 2em;
     flex-wrap: wrap;
-}
-.columna-footer-contenedor{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 20px;
-}
-.columna-footer-info{
-    display: flex;
-    justify-content: center;
-    padding: 0 20px;
 }
 
 .columna-footer {
-    min-width: 200px;
-    margin: 10px;
-}
-
-.columna-footer h4 {
-    margin-bottom: 15px;
+    margin: 0.5em 0;
 }
 
 .columna-footer img {
-    width: 80%;
-    position: relative;
-    left: -1.5em;
-    top: -1em;
+    width: 8em;
+    margin-bottom: 1em;
+}
+
+.columna-footer h4 {
+    margin-bottom: 1em;
+    font-weight: bold;
+    font-size: 1.25em;
+    font-family: 'Lato', sans-serif;
 }
 
 .columna-footer ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .columna-footer ul li {
-    margin-bottom: 5px;
+    margin-bottom: 0.5em;
 }
 
 .columna-footer ul li a {
@@ -54,34 +49,40 @@ footer {
     transition: color 0.3s ease;
 }
 
-.derechos {
-    text-align: center;
-    padding-top: 20px;
+.parrafo-terciario {
+    font-size: 1em;
+    font-family: 'Lato', sans-serif;
 }
 
+@media (max-width: 700px) {
+    .columna-footer {
+        flex: 1; /* hace que todas las columnas ocupen espacio proporcional */
+        min-width: 12em;
+    }
+}
+
+/* ✅ Responsive: SOLO cambiar tipografías en móvil */
 @media (max-width: 520px) {
     .contenido-footer {
-        justify-content: center;
-    }
-    .columna-footer-info{
-        justify-content: center;
-        flex-wrap: wrap;
-        padding: 0;
-    }
-    .columna-footer{
-       text-align: center;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5em;
+        gap: 2em;
     }
 
-    .derechos{
-        text-align: center;
-        padding: 0 10px;
-    }
-
-    h4{
+    .columna-footer h4 {
+        font-size: 1em; /* Lato bold 16 */
         font-weight: bold;
     }
-    .parrafo-terciario{
-        font-size: 14px;
+
+    .parrafo-terciario,
+    .columna-footer ul li,
+    .columna-footer ul li a {
+        font-size: 0.875em; /* Lato regular 14 */
     }
 
+    .columna-footer img {
+        width: 7em;
+        margin-left: 0;
+    }
 }
