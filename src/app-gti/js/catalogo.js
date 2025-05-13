@@ -35,28 +35,47 @@ document.querySelector('.formulario-sugerencia')?.addEventListener('submit', fun
 
     if (!valido) return;
 
-    // Mostrar toast
+    // Crear fondo difuminado detrás del toast
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backdropFilter = 'blur(4px)';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+    overlay.style.zIndex = '999';
+
+    // Crear el toast encima del fondo
     const toast = document.createElement('div');
     toast.textContent = '¡Gracias por tu sugerencia!';
-    Object.assign(toast.style, {
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        padding: '1em 2em',
-        backgroundColor: 'var(--color-principal)',
-        color: '#fff',
-        borderRadius: '8px',
-        boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-        fontFamily: 'var(--fuente-lato)',
-        zIndex: '9999'
-    });
+    toast.style.position = 'fixed';
+    toast.style.top = '50%';
+    toast.style.left = '50%';
+    toast.style.transform = 'translate(-50%, -50%)';
+    toast.style.padding = '1em 2em';
+    toast.style.width = 'max-content';
+    toast.style.maxWidth = '80%';
+    toast.style.fontSize = '1.15rem';
+    toast.style.backgroundColor = 'var(--color-principal)';
+    toast.style.color = '#fff';
+    toast.style.borderRadius = '12px';
+    toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
+    toast.style.fontFamily = 'var(--fuente-lato)';
+    toast.style.textAlign = 'center';
+    toast.style.zIndex = '1000';
 
+    // Añadir al DOM
+    document.body.appendChild(overlay);
     document.body.appendChild(toast);
 
+    // Esperar, quitar el toast y resetear el formulario
     setTimeout(() => {
         toast.remove();
+        overlay.remove();
         formulario.reset();
     }, 1500);
+
 });
 
 // Redirección condicional según login

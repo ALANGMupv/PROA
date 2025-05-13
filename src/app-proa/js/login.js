@@ -76,26 +76,40 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
 
             if (usuario) {
                 localStorage.setItem('usuario', JSON.stringify(usuario));
+                const overlay = document.createElement('div');
+                overlay.style.position = 'fixed';
+                overlay.style.top = 0;
+                overlay.style.left = 0;
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backdropFilter = 'blur(4px)';
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+                overlay.style.zIndex = '999';
+
                 const toast = document.createElement('div');
                 toast.textContent = 'Inicio de sesión exitoso. Redirigiendo...';
                 toast.style.position = 'fixed';
                 toast.style.top = '50%';
                 toast.style.left = '50%';
                 toast.style.transform = 'translate(-50%, -50%)';
-                toast.style.padding = '1.5em 2.5em';
+                toast.style.padding = '1em 2em';
+                toast.style.width = 'max-content';
+                toast.style.maxWidth = '80%';
+                toast.style.fontSize = '1.15rem';
                 toast.style.backgroundColor = 'var(--color-primario)';
                 toast.style.color = '#fff';
                 toast.style.borderRadius = '12px';
                 toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
-                toast.style.fontFamily = 'var(--fuente-principal)';
-                toast.style.fontSize = '1.25rem';
-                toast.style.zIndex = '9999';
+                toast.style.fontFamily = 'var(--fuente-lato)';
                 toast.style.textAlign = 'center';
-                document.body.appendChild(toast);
+                toast.style.zIndex = '1000';
 
+                document.body.appendChild(overlay);
+                document.body.appendChild(toast);
 
                 setTimeout(() => {
                     toast.remove();
+                    overlay.remove();
                     if (usuario.rol === "pas") {
                         window.location.replace('pas/index.html');
                     } else if (usuario.rol === "alumno") {
@@ -103,29 +117,44 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
                     } else if (usuario.rol === "profesor") {
                         window.location.replace('profesor/index.html');
                     }
-                }, 2000);
+                }, 1500);
 
             } else {
+                const overlayError = document.createElement('div');
+                overlayError.style.position = 'fixed';
+                overlayError.style.top = 0;
+                overlayError.style.left = 0;
+                overlayError.style.width = '100%';
+                overlayError.style.height = '100%';
+                overlayError.style.backdropFilter = 'blur(4px)';
+                overlayError.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+                overlayError.style.zIndex = '999';
+
                 const toastError = document.createElement('div');
                 toastError.textContent = 'Usuario o contraseña incorrectos';
                 toastError.style.position = 'fixed';
                 toastError.style.top = '50%';
                 toastError.style.left = '50%';
                 toastError.style.transform = 'translate(-50%, -50%)';
-                toastError.style.padding = '1.5em 2.5em';
+                toastError.style.padding = '1em 2em';
+                toastError.style.width = 'max-content';
+                toastError.style.maxWidth = '80%';
+                toastError.style.fontSize = '1.15rem';
                 toastError.style.backgroundColor = '#c45f5f';
                 toastError.style.color = '#fff';
                 toastError.style.borderRadius = '12px';
                 toastError.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
                 toastError.style.fontFamily = 'var(--fuente-lato)';
-                toastError.style.fontSize = '1.25rem';
-                toastError.style.zIndex = '9999';
                 toastError.style.textAlign = 'center';
+                toastError.style.zIndex = '1000';
+
+                document.body.appendChild(overlayError);
                 document.body.appendChild(toastError);
 
                 setTimeout(() => {
                     toastError.remove();
-                }, 2000);
+                    overlayError.remove();
+                }, 850);
             }
         })
         .catch(error => {
