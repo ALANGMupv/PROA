@@ -1,42 +1,35 @@
 footer {
     background-color: #101827;
-    color: #ffffff;
-    padding: 1em 0;
-    font-size: 0.9em;
-    font-family: var(--fuente-principal);
+    color: white;
+    padding: 1.5em 0;
 }
 
 .contenido-footer {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 2em; /* equilibrio entre columnas */
+    gap: 2em;
     margin: 0 auto;
     max-width: 1200px;
     padding: 0 2em;
     flex-wrap: wrap;
 }
 
-.columna-footer {
-    margin: 0.5em 0;
-}
-
 .columna-footer img {
-    width: 8em;
     margin-bottom: 1em;
+    width: auto;
+    height: 65px;
 }
 
 .columna-footer h4 {
+    font-size: 1.20em;
     margin-bottom: 1em;
     font-weight: bold;
-    font-size: 1.25em;
-    font-family: 'Lato', sans-serif;
 }
 
 .columna-footer ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
+
 }
 
 .columna-footer ul li {
@@ -44,25 +37,27 @@ footer {
 }
 
 .columna-footer ul li a {
-    color: #ffffff;
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 
-.parrafo-terciario {
-    font-size: 1em;
-    font-family: 'Lato', sans-serif;
+.columna-footer ul li a:hover,
+.columna-footer ul li a:focus {
+    text-decoration: underline;
+}
+
+.parrafo-secundario{
+    font-size: 1.15em;
+    font-weight: 300;
 }
 
 @media (max-width: 700px) {
     .columna-footer {
-        flex: 1; /* hace que todas las columnas ocupen espacio proporcional */
+        flex: 1;
         min-width: 12em;
     }
 }
 
-/* ✅ Responsive: SOLO cambiar tipografías en móvil */
-@media (max-width: 520px) {
+@media (max-width: 841px) {
     .contenido-footer {
         flex-direction: column;
         align-items: flex-start;
@@ -71,18 +66,15 @@ footer {
     }
 
     .columna-footer h4 {
-        font-size: 1em; /* Lato bold 16 */
+        font-size: 1em;
         font-weight: bold;
     }
 
-    .parrafo-terciario,
-    .columna-footer ul li,
-    .columna-footer ul li a {
-        font-size: 0.875em; /* Lato regular 14 */
+    .parrafo-secundario{
+        font-size: 0.875em;
     }
 
     .columna-footer img {
-        width: 7em;
-        margin-left: 0;
+        height:50px
     }
 }
