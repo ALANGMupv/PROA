@@ -133,3 +133,12 @@ async function popupPublicar() {
     const popup = document.getElementById('popup-publicado');
     popup.style.display = 'flex';
 }
+
+function volverAtras() {
+    if (window.location.pathname.includes("crear-examen-nuevo.html")) {
+        window.location.href = "examenes-profesor.html";
+    } else {
+        window.history.back();
+    }
+}
+

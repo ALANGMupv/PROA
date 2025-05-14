@@ -8,6 +8,11 @@
     box-sizing: border-box;
 }
 
+.btn-atras {
+    margin-left: 2em;
+    align-self: flex-start;
+}
+
 /* Panel principal de entregas */
 .panel-contenido.fondoPanel {
     display: flex;

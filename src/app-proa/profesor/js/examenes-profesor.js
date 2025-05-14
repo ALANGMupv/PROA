@@ -45,37 +45,36 @@ document.addEventListener("DOMContentLoaded", () => {
         examenes.forEach(ex => {
             if (tipo === 'abiertos') {
                 html += `
-                <div class="item-examen">
+                <div class="item-examen" data-titulo="${ex.titulo}">
                     <div class="info">
                         <h4>${ex.titulo}</h4>
                         <p class="fecha-envio">Fecha límite: ${ex.fechaLimite}</p>
                         <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
-
                     </div>
                 </div>`;
-            } else if (tipo === 'cerrados') {
+            }else if (tipo === 'cerrados') {
                 html += `
-                <div class="item-examen solo-info">
+                <div class="item-examen solo-info" data-titulo="${ex.titulo}">
                     <h4>${ex.titulo}</h4>
                     <p class="fecha-envio">Enviado: ${ex.fechaEnvio}</p>
                     <button class="btn-oscuros-secundario btn-visualizar-entregas">Calificar entregas</button>
                 </div>`;
             } else if (tipo == 'cerrYCal'){
                 html += `
-                <div class="item-examen solo-info">
+                <div class="item-examen solo-info" data-titulo="${ex.titulo}">
                     <h4>${ex.titulo}</h4>
                     <p class="fecha-envio">Enviado: ${ex.fechaEnvio}</p>
                     <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
-
                 </div>`;
             }else if (tipo === 'borradores') {
                 html += `
-                <div class="item-examen">
+                <div class="item-examen" data-titulo="${ex.titulo}">
                     <div class="info">
                         <h4>${ex.titulo}</h4>
                         <button class="btn-oscuros-secundario btn-visualizar-entregas">Terminar</button>
                     </div>
                 </div>`;
+
             }
         });
 
@@ -94,7 +93,19 @@ function redireccionarPagina(){
 }
 
 document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn-visualizar-entregas")) {
+    if (e.target.closest(".btn-visualizar-entregas")) {
         window.location.href = "entregas-examen-profesor.html";
+        return;
+    }
+
+    const item = e.target.closest(".item-examen");
+    if (item && item.dataset.titulo) {
+        localStorage.setItem("examenSeleccionado", JSON.stringify({
+            titulo: item.dataset.titulo
+        }));
+
+        // Redirige a la ficha del examen
+        window.location.href = "ficha-examen-profesor.html";
     }
 });
+
