@@ -18,13 +18,12 @@ fetch('/src/api/data/asignaturas.json')
             const fila = document.createElement('div');
             fila.classList.add('fila');
 
-            // --- Código HTML filas asignatuaras ---
             fila.innerHTML = `
         <span data-label="Código">${asig.codigo}</span>
         <span data-label="Nombre">${asig.nombre}</span>
         <span data-label="Departamento">${asig.departamento}</span>
         <span data-label="Créditos">${asig.creditos}</span>
-        <button class="btn" data-label="Ficha">Ver detalles</button>
+        <a href="ficha-asignatura-pas.html" class="btn ver-detalles" data-codigo="${asig.codigo}">Ver detalles</a>
         <div class="menu-opciones-wrapper" data-label="Asignar">
           <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" onclick="toggleOpciones(this)" />
           <div class="menu-desplegable">
@@ -32,9 +31,14 @@ fetch('/src/api/data/asignaturas.json')
             <button onclick="alert('Asignar profesor a ${asig.nombre}')">Asignar profesor</button>
           </div>
         </div>
-      `;
+    `;
 
-            tabla.appendChild(fila);
+            // Guardar la asignatura seleccionada al hacer clic
+            fila.querySelector('.ver-detalles').addEventListener('click', () => {
+                localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asig));
+            });
+
+        tabla.appendChild(fila);
         });
     })
     .catch(error => {
