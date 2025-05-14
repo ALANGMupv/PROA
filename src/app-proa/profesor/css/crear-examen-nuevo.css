@@ -12,6 +12,11 @@
     box-sizing: border-box;
 }
 
+.btn-atras {
+    margin-left: 2em;
+    align-self: flex-start;
+}
+
 .datos{
     display: flex;
     flex-direction: column;

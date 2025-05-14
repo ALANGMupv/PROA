@@ -162,3 +162,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+function volverAtras() {
+    window.history.back();
+}
+

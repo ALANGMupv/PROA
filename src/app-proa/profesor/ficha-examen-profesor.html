@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Entregas Examen Profesor</title>
+    <title>Ficha Examen Profesor</title>
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/submenu-asignatura.css">
     <link rel="stylesheet" href="css/dropdown-grupo.css">
-    <link rel="stylesheet" href="css/entregas-profesor.css">
+    <link rel="stylesheet" href="css/ficha-examen-profesor.css">
     <script src="../js/header-proa.js" defer></script>
     <script src="js/asignatura-profesor.js" defer></script>
     <script src="js/dropdown-asignaturas.js" defer></script>
-    <script src="js/entregas-profesor.js" defer></script>
-
+    <script src="js/ficha-examen-profesor.js"></script>
 </head>
 <body>
 
@@ -47,29 +46,36 @@
 
             <button class="btn-oscuros-secundario btn-atras" onclick="volverAtras()">← Volver</button>
 
+
             <section class="panel-contenido fondoPanel">
-            <section class="titulo">
-                <h1>Entregas del Cuestionario 1</h1>
+                <div class="descripcion">
+
+                    <div class="titulo-con-boton">
+                        <h1 id="titulo-examen" class="titulo">Cuestionario 1</h1>
+                        <div class="botones-edicion">
+                            <button id="btn-modificar" class="btn-oscuros-secundario">Modificar</button>
+                            <button id="btn-guardar" class="btn-oscuros" style="display: none;">Guardar</button>
+                        </div>
+                    </div>
+
+                    <h2>Descripción</h2>
+                    <p id="descripcion-examen" class="parrafo-principal">
+                        Este cuestionario evalúa los conocimientos adquiridos en los temas fundamentales de Álgebra Matricial,
+                        incluyendo operaciones con matrices, tipos de matrices, determinantes y sistemas de ecuaciones lineales.
+                        Consta de preguntas tipo test con una única respuesta correcta por cada ítem.
+                    </p>
+                    <p class="parrafo-principal fecha-limite" id="fecha-limite-texto">
+                        <strong>Fecha límite para completarlo:</strong> 5 de mayo de 2025 a las 23:59.
+                    </p>
+                </div>
+
+                <div id="contenedor-preguntas"></div>
             </section>
 
-            <div class="contenedor-entregas">
-                <!-- Lista de alumnos -->
-                <aside class="lista-alumnos">
-                    <div class="input-con-icono input-base">
-                        <input type="text" class="input-base input-textoBusqueda" id="filtroTexto" placeholder="Nombre alumno..." />
-                        <img src="../icons/search.svg" class="icono-buscador" alt="Buscar" />
-                    </div>
-                    <div id="lista-alumnos"></div>
-                </aside>
 
-                <!-- Detalle de la entrega -->
-                <section class="entrega-estilo-alumno fondoPanel" id="detalle-entrega">
-                    <p>Selecciona un alumno para ver su entrega.</p>
-                </section>
-            </div>
-        </section>
         </div>
-    </div>
+    </div> <!-- Fin del contenedor contenido-principal -->
 </main>
+
 </body>
 </html>
