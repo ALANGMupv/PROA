@@ -55,27 +55,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (!valido) return;
 
-                // Simular cambio exitoso
+                // Crear fondo difuminado detrás del toast
+                const overlay = document.createElement('div');
+                overlay.style.position = 'fixed';
+                overlay.style.top = 0;
+                overlay.style.left = 0;
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backdropFilter = 'blur(4px)';
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+                overlay.style.zIndex = '999';
+
+                // Crear el toast encima del fondo
                 const toast = document.createElement('div');
                 toast.textContent = 'Contraseña cambiada con éxito';
                 toast.style.position = 'fixed';
                 toast.style.top = '50%';
                 toast.style.left = '50%';
                 toast.style.transform = 'translate(-50%, -50%)';
-                toast.style.padding = '1.5em 2.5em';
+                toast.style.padding = '1em 2em';
                 toast.style.width = 'max-content';
                 toast.style.maxWidth = '80%';
-                toast.style.fontSize = '1.25rem';
+                toast.style.fontSize = '1.15rem';
                 toast.style.backgroundColor = 'var(--color-principal)';
                 toast.style.color = '#fff';
                 toast.style.borderRadius = '12px';
                 toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
                 toast.style.fontFamily = 'var(--fuente-lato)';
                 toast.style.textAlign = 'center';
+                toast.style.zIndex = '1000';
+
+                // Añadir al DOM
+                document.body.appendChild(overlay);
                 document.body.appendChild(toast);
 
+                // Ocultar y redirigir
                 setTimeout(() => {
                     toast.remove();
+                    overlay.remove();
                     window.location.href = 'login.html';
                 }, 1500);
             });

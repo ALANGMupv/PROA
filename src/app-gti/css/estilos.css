@@ -28,10 +28,12 @@ html {
 }
 
 html, body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    min-height: 100dvh;
+    width: 100%;
+    display: block;
+    overflow-x: hidden;
 }
+
 
 main {
     flex: 1;
@@ -191,7 +193,7 @@ label {
 
 .parrafo-terciario {
     font-family: var(--fuente-lato);
-    font-weight: 300;
+    font-weight: 400;
     font-size: 1em;
     line-height: 1.5;
 }

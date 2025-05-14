@@ -1,87 +1,80 @@
 footer {
     background-color: #101827;
-    color: #ffffff;
-    padding: 15px 0;
-    font-family: var(--fuente-principal);
+    color: white;
+    padding: 1.5em 0;
 }
 
 .contenido-footer {
     display: flex;
-    justify-content: space-evenly;
-    margin: auto;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2em;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 2em;
     flex-wrap: wrap;
-}
-.columna-footer-contenedor{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 20px;
-}
-.columna-footer-info{
-    display: flex;
-    justify-content: center;
-    padding: 0 20px;
-}
-
-.columna-footer {
-    min-width: 200px;
-    margin: 10px;
-}
-
-.columna-footer h4 {
-    margin-bottom: 15px;
 }
 
 .columna-footer img {
-    width: 80%;
-    position: relative;
-    left: -1.5em;
-    top: -1em;
+    margin-bottom: 1em;
+    width: auto;
+    height: 65px;
+}
+
+.columna-footer h4 {
+    font-size: 1.20em;
+    margin-bottom: 1em;
+    font-weight: bold;
 }
 
 .columna-footer ul {
     list-style: none;
-    padding: 0;
+
 }
 
 .columna-footer ul li {
-    margin-bottom: 5px;
+    margin-bottom: 0.5em;
 }
 
 .columna-footer ul li a {
-    color: #ffffff;
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 
-.derechos {
-    text-align: center;
-    padding-top: 20px;
+.columna-footer ul li a:hover,
+.columna-footer ul li a:focus {
+    text-decoration: underline;
 }
 
-@media (max-width: 520px) {
+.parrafo-secundario{
+    font-size: 1.15em;
+    font-weight: 300;
+}
+
+@media (max-width: 700px) {
+    .columna-footer {
+        flex: 1;
+        min-width: 12em;
+    }
+}
+
+@media (max-width: 841px) {
     .contenido-footer {
-        justify-content: center;
-    }
-    .columna-footer-info{
-        justify-content: center;
-        flex-wrap: wrap;
-        padding: 0;
-    }
-    .columna-footer{
-       text-align: center;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5em;
+        gap: 2em;
     }
 
-    .derechos{
-        text-align: center;
-        padding: 0 10px;
-    }
-
-    h4{
+    .columna-footer h4 {
+        font-size: 1em;
         font-weight: bold;
     }
-    .parrafo-terciario{
-        font-size: 14px;
+
+    .parrafo-secundario{
+        font-size: 0.875em;
     }
 
+    .columna-footer img {
+        height:50px
+    }
 }
