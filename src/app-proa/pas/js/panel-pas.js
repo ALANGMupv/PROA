@@ -51,3 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         items.classList.toggle("visible");
     });
 });
+
+function redireccionarPagina() {
+    window.location.replace('nueva-asignatura.html');
+}

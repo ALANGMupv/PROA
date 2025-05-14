@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Gestión de Asignaturas</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+  <link rel="stylesheet" href="../css/submenu-asignatura.css">
+  <link rel="stylesheet" href="css/gestionAsignaturasPAS.css">
+  <link rel="stylesheet" href="css/nueva-asigntura.css">
+  <link rel="stylesheet" href="css/pop-up.css">
+  <script src="../js/header-proa.js" defer></script>
+  <script src="js/panel-pas.js" defer></script>
+  <script src="js/pop-up.js" defer></script>
+
+</head>
+
+<body>
+
+<div class="contenido-wrapper">
+  <div class="contenido-principal">
+
+    <!-- Submenú lateral izquierdo para el PAS (se carga dinámicamente vía JS) -->
+    <aside id="submenu"></aside>
+
+    <!-- Contenido principal derecho del panel -->
+    <section class="contenido-asignatura fondoPanel">
+      <h2>Nueva Asignatura</h2>
+
+      <form class="datos" id="formulario">
+        <div class="contenedor-info-asignatura">
+          <div class="linea"></div>
+          <h3>Información de la asignatura:</h3>
+          <div class="contendor-codigo-nombre-creditos">
+            <label>
+              <span>Codigo</span>
+              <input type="text" class="input-base con-icono" id="codigo" placeholder="EJ: MAT101" required>
+            </label>
+            <label>
+              <span>Nombre</span>
+              <input type="text" class="input-base with-icon" id="Nombre" placeholder="EJ: Álegbra Matricial" required>
+            </label>
+            <label>
+              <span>Créditos</span>
+              <input type="text" class="input-base with-icon" id="creditos" required>
+            </label>
+          </div>
+        </div>
+
+        <div class="contenedor-organizacion-academica">
+          <div class="linea"></div>
+          <h3>Organizacion académida:</h3>
+          <div class="contendor-datos-organizacion">
+            <div class="contenedor-departameto-grupo">
+              <label>
+                <span>Departamento</span>
+                <div class="input-con-icono grupo-dropdown">
+                  <select id="dropdown-departamento" class="input-base seleccionador-dropdown">
+                    <option value="default">Seleccionar Departamento</option>
+                    <option value="departamento1">Departamento 1</option>
+                    <option value="departamento2">Departamento 2</option>
+                    <option value="departamento3">Departamento 3</option>
+                    <option value="departamento4">Departamento 4</option>
+                  </select>
+                  <img src="../icons/dropdown.svg" alt="Flecha" class="icono-dropdown">
+                </div>
+              </label>
+              <label>
+                <span>Grupo</span>
+                <input type="text" class="input-base con-icono" id="grupo" required>
+              </label>
+            </div>
+            <div class="contenedor-caracter-curso-semestre">
+              <label>
+                <span>Carácter de la asignatura</span>
+                <div class="input-con-icono grupo-dropdown">
+                  <select id="dropdown-caracter" class="input-base seleccionador-dropdown">
+                    <option value="obligatoria">Obligatoria</option>
+                    <option value="optativa">Optativa</option>
+                    <option value="basica">Basica</option>
+                    <option value="tfg">TFG / TFM</option>
+                    <option value="troncal">Troncal</option>
+                  </select>
+                  <img src="../icons/dropdown.svg" alt="Flecha" class="icono-dropdown">
+                </div>
+              </label>
+              <div class="contenedor-curso-semestre">
+                <label>
+                  <span>Curso Académico</span>
+                  <div class="input-con-icono grupo-dropdown">
+                    <select id="dropdown-curso" class="input-base seleccionador-dropdown">
+                      <option value="2024-2025">2024-2025</option>
+                      <option value="2025-2026">2025-2026</option>
+                      <option value="2026-2027">2026-2027</option>
+                      <option value="2027-2028">2027-2028</option>
+                    </select>
+                    <img src="../icons/dropdown.svg" alt="Flecha" class="icono-dropdown">
+                  </div>
+                </label>
+                <label>
+                  <span>Semestre</span>
+                  <div class="input-con-icono grupo-dropdown">
+                    <select id="dropdown-semestre" class="input-base seleccionador-dropdown">
+                      <option value="1">1º</option>
+                      <option value="2">2º</option>
+                    </select>
+                    <img src="../icons/dropdown.svg" alt="Flecha" class="icono-dropdown">
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="botones">
+          <button class="btn-oscuros-secundario btn-inicial" type="button" id="cancelar" onclick="activarPopPup(this)">Cancelar</button>
+          <button class="btn-oscuros" type="button" id="guardar" onclick="activarPopPup(this)">Guardar</button>
+        </div>
+
+        <!-- Pop-up de confirmación -->
+        <div id="popup-confirmacion" class="popup">
+          <div class="contenido-popup">
+            <p class="parrafo-principal">¿Estás seguro de que quieres dar de alta esta asignatura?</p>
+            <div class="btn-popup">
+              <button type="submit" class="btn-oscuros" id="aceptar-confirmacion" onclick="btnAceptar(this)">Aceptar</button>
+              <button class="btn-oscuros-secundario" onclick="btnCancelar()" >Cancelar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pop-up dada de alta -->
+        <div id="popup-publicado" class="popup">
+          <div class="contenido-popup">
+            <p class="parrafo-principal">Se ha dado de alta la nueva asiganatura <p>
+            <div class="btn-popup">
+              <button class="btn-oscuros" id="aceptar-gurdado" onclick="btnAceptar(this)">Aceptar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pop-up de salir -->
+        <div id="popup-salir" class="popup">
+          <div class="contenido-popup">
+            <p class="parrafo-principal">¿Estás seguro de que quieres salirte de la pagina? No se guardaran los datos escritos</p>
+            <div class="btn-popup">
+              <button class="btn-oscuros-secundario" onclick="btnCancelar()">Cancelar</button>
+              <button class="btn-oscuros" id="aceptar-salir" onclick="btnAceptar(this)">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </section> <!-- Fin contenido-asignatura -->
+
+  </div> <!-- Fin contenido-principal -->
+</div> <!-- Fin contenido-wrapper -->
+</body>
+
+</html>
