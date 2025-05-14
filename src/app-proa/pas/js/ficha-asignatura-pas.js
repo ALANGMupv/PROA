@@ -28,9 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Botón volver
-    document.getElementById("btn-volver").addEventListener("click", () => {
-        window.location.href = "asignaturas.html";
+    document.getElementById("btn-volver").addEventListener("click", (e) => {
+        e.preventDefault(); // importante para evitar que suba arriba
+        window.history.back();
     });
+
 
     // Mostrar buscador ==ALUMNOS==
     const buscadorWrapper = document.getElementById("buscador-alumno");
