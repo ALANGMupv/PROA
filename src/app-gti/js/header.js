@@ -181,5 +181,3 @@ window.addEventListener('pageshow', (event) => {
         window.location.reload();
     }
 });
-
-
