@@ -1,0 +1,102 @@
+.datos{
+    margin: 0 auto;
+}
+
+.contenedor-info-asignatura{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 1em;
+}
+
+.contenedor-info-asignatura label{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+}
+
+.linea{
+    border: solid 1px var(--color-bordes);
+    width: 100%;
+    align-self: center;
+}
+
+.input-base, .seleccionador-dropdown{
+    width: 100%;
+    padding: 0.5em 0.75em;
+}
+
+.contendor-codigo-nombre-creditos{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 1em;
+    width: 100%;
+    margin-bottom: 2em;
+}
+
+.contenedor-organizacion-academica{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 1em;
+}
+
+.contenedor-organizacion-academica label{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+}
+
+.contendor-datos-organizacion{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 1em;
+    width: 100%;
+}
+
+.contenedor-departameto-grupo{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+}
+
+.contenedor-caracter-curso-semestre{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+}
+
+.contenedor-curso-semestre{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 0.5em;
+    width: 100%;
+}
+
+.seleccionador-dropdown{
+
+}
+
+#botones{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    gap: 2em;
+}
+
+#botones button{
+    width: 9em;
+    height: 2.5em;
+    padding: 0;
+}
