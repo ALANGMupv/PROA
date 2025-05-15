@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let todosAlumnos = [];
     let alumnosAsignados = [...datos.alumnos]; // ya asignados
     let alumnosDisponibles = []; // se calcula después del fetch
+    let hayCambios = false;
+
 
     // Cargar todos los alumnos del JSON
     fetch("/src/api/data/usuarios.json")
@@ -24,6 +26,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
             renderListas();
         });
+
+    const dialog = document.getElementById("dialog-cambios");
+    const btnCancelar = document.getElementById("cancelar-dialogo");
+    const btnConfirmarSalida = document.getElementById("confirmar-salida");
+
+    document.getElementById("btn-volver").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (hayCambios) {
+            dialog.showModal();
+        } else {
+            history.back();
+        }
+    });
+
+    btnCancelar.addEventListener("click", () => {
+        dialog.close();
+    });
+
+    btnConfirmarSalida.addEventListener("click", () => {
+        dialog.close();
+        history.back();
+    });
 
     // Renderiza ambas listas
     function renderListas(filtro = "") {
@@ -89,7 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Confirmar
     document.getElementById("btn-confirmar").addEventListener("click", () => {
         console.log("Alumnos asignados a", datos.nombre, alumnosAsignados);
-        mostrarNotificacion(`Se han asignado ${alumnosAsignados.length} alumno(s) a ${datos.nombre}`);
+        mostrarNotificacion("Alumnos asignados correctamente", () => {
+            window.location.href = "ficha-asignatura-pas.html";
+        });
     });
 
     // Volver
@@ -100,9 +126,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Notificación flotante
-function mostrarNotificacion(mensaje) {
+function mostrarNotificacion(mensaje, callback = null) {
     const notif = document.getElementById("notificacion");
     notif.textContent = mensaje;
     notif.style.display = "block";
-    setTimeout(() => notif.style.display = "none", 3000);
+    setTimeout(() => {
+        notif.style.display = "none";
+        if (callback) callback();
+    }, 2000);
 }

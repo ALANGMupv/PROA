@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let profesoresAsignados = [...(datos.colaboradores || [])];
     let responsable = datos.titular || null;
     let profesoresDisponibles = [];
+    let hayCambios = false;
 
     fetch("/src/api/data/usuarios.json")
         .then(res => res.json())
@@ -24,6 +25,28 @@ document.addEventListener("DOMContentLoaded", () => {
             renderListas();
             renderAsignados();
         });
+
+    const dialog = document.getElementById("dialog-cambios");
+    const btnCancelar = document.getElementById("cancelar-dialogo");
+    const btnConfirmarSalida = document.getElementById("confirmar-salida");
+
+    document.getElementById("btn-volver").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (hayCambios) {
+            dialog.showModal();
+        } else {
+            history.back();
+        }
+    });
+
+    btnCancelar.addEventListener("click", () => {
+        dialog.close();
+    });
+
+    btnConfirmarSalida.addEventListener("click", () => {
+        dialog.close();
+        history.back();
+    });
 
     function renderListas(filtro = "") {
         listaDisponibles.innerHTML = "";
@@ -44,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
             li.querySelector("button").addEventListener("click", () => {
                 agregarAsignado(nombre);
                 profesoresDisponibles = profesoresDisponibles.filter(n => n !== nombre);
+                hayCambios = true; // se hizo un cambio
                 renderListas();
             });
             listaDisponibles.appendChild(li);
@@ -55,29 +79,28 @@ document.addEventListener("DOMContentLoaded", () => {
         profesoresAsignados.forEach(nombre => agregarAsignado(nombre, false));
     }
 
-
     function agregarAsignado(nombre, esResponsable = false) {
         const li = document.createElement("li");
         li.classList.add("item-usuario");
 
         li.innerHTML = `
-        <span>${nombre}</span>
-        <select class="selector-rol">
-            <option value="colaborador">Colaborador</option>
-            <option value="responsable" ${responsable && !esResponsable ? "disabled" : ""}>Responsable</option>
-        </select>
-        <button class="btn-icono eliminar">
-            <img src="../icons/trash.svg" alt="Eliminar">
-        </button>
-    `;
+            <span>${nombre}</span>
+            <select class="selector-rol">
+                <option value="colaborador">Colaborador</option>
+                <option value="responsable" ${responsable && !esResponsable ? "disabled" : ""}>Responsable</option>
+            </select>
+            <button class="btn-icono eliminar">
+                <img src="../icons/trash.svg" alt="Eliminar">
+            </button>
+        `;
 
         const selector = li.querySelector("select");
         const eliminarBtn = li.querySelector(".eliminar");
 
-        // Establecer el valor del selector si ya era responsable
         selector.value = esResponsable ? "responsable" : "colaborador";
 
         selector.addEventListener("change", (e) => {
+            hayCambios = true; // cambio de rol
             if (e.target.value === "responsable") {
                 const yaResponsable = [...listaAsignados.querySelectorAll(".selector-rol")].some(sel =>
                     sel !== e.target && sel.value === "responsable"
@@ -92,12 +115,12 @@ document.addEventListener("DOMContentLoaded", () => {
         eliminarBtn.addEventListener("click", () => {
             profesoresDisponibles.push(nombre);
             li.remove();
+            hayCambios = true; // eliminación = cambio
             renderListas();
         });
 
         listaAsignados.appendChild(li);
     }
-
 
     inputBuscar.addEventListener("input", () => {
         renderListas(inputBuscar.value.toLowerCase());
@@ -123,18 +146,20 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Titular:", nuevoResponsable);
         console.log("Colaboradores:", asignados);
 
-        mostrarNotificacion("Profesores asignados correctamente");
+        hayCambios = false; // los cambios ya fueron guardados
+        mostrarNotificacion("Profesores asignados correctamente", () => {
+            window.location.href = "ficha-asignatura-pas.html";
+        });
     });
 
-    document.getElementById("btn-volver").addEventListener("click", (e) => {
-        e.preventDefault();
-        history.back();
-    });
 });
 
-function mostrarNotificacion(mensaje) {
+function mostrarNotificacion(mensaje, callback = null) {
     const notif = document.getElementById("notificacion");
     notif.textContent = mensaje;
     notif.style.display = "block";
-    setTimeout(() => notif.style.display = "none", 3000);
+    setTimeout(() => {
+        notif.style.display = "none";
+        if (callback) callback();
+    }, 2000);
 }
