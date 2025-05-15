@@ -2,8 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const datos = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
     if (!datos) return;
 
-    // Actualiza el título con el nombre de la asignatura (si existe el ID)
     const titulo = document.getElementById("titulo-asignacion");
+    // Actualiza el título con el nombre de la asignatura (si existe el ID)
+    document.getElementById("nombre-asignatura").textContent = `– ${datos.nombre}`;
     if (titulo) {
         titulo.textContent = `Asignación Alumnos - ${datos.nombre}`;
     }
@@ -29,6 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         alumnosDisponibles.forEach(alumno => {
             const nombreCompleto = `${alumno.nombre} ${alumno.apellidos}`;
+
+            // Mostrar solo si ya está en datos.alumnos
+            if (!datos.alumnos.includes(nombreCompleto)) return;
+
             if (filtro && !nombreCompleto.toLowerCase().includes(filtro)) return;
 
             const li = document.createElement("li");

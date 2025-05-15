@@ -9,9 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submenu = document.getElementById("submenu");
 
     const opciones = [
-        { texto: "Creación de Asignaturas", href: "asignaturas.html" },
-        { texto: "Asignaciones Profesores", href: "asignacion-profesor-pas.html" },
-        { texto: "Asignaciones Alumnos", href: "asignacion-alumnos-pas.html" }
+        { texto: "Creación de Asignaturas", href: "asignaturas.html" }
     ];
 
     const htmlSubmenu = `

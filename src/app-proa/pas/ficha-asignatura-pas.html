@@ -43,10 +43,8 @@
                 <div class="bloque-listas-asignacion">
                     <div class="columna">
                         <div class="titulo-columna">
-                            <h3>Alumnos asignados
-                                <img src="../icons/anyadir.svg" alt="Agregar" id="btn-agregar-alumno" class="icono-agregar" />
-                            </h3>
-                            <div class="buscador" id="buscador-alumno" style="display: none;">
+                            <h3>Alumnos asignados</h3>
+                            <div class="buscador" id="buscador-alumno">
                                 <div class="input-con-icono">
                                     <input type="text" class="input-base" id="input-buscar-alumno" placeholder="Buscar alumno...">
                                     <img src="../icons/search.svg" class="icono-buscador" alt="Buscar">
@@ -54,15 +52,16 @@
                                 <ul id="resultados-alumnos"></ul>
                             </div>
                             <ul id="lista-alumnos"></ul>
+                            <button id="btn-ir-asignacion-alumnos" class="btn-secundario">
+                                <img src="../icons/anyadir-redondo.svg" alt="Agregar" class="icono-azul">Añadir más alumnos
+                            </button>
                         </div>
 
                     </div>
                     <div class="columna">
                         <div class="titulo-columna">
-                            <h3>Profesores asignados
-                                <img src="../icons/anyadir.svg" alt="Agregar" id="btn-agregar-profesor" class="icono-agregar" />
-                            </h3>
-                            <div class="buscador" id="buscador-profesor" style="display: none;">
+                            <h3>Profesores asignados</h3>
+                            <div class="buscador" id="buscador-profesor">
                                 <div class="input-con-icono">
                                     <input type="text" class="input-base" id="input-buscar-profesor" placeholder="Buscar profesor...">
                                     <img src="../icons/search.svg" class="icono-buscador" alt="Buscar">
@@ -70,6 +69,8 @@
                                 <ul id="resultados-profesor"></ul>
                             </div>
                             <ul id="lista-profesores"></ul>
+                            <button id="btn-ir-asignacion-profesores" class="btn-secundario">
+                                <img src="../icons/anyadir-redondo.svg" alt="Agregar" class="icono-azul">Añadir más profesores</button>
 
                         </div>
                     </div>

@@ -44,12 +44,6 @@ li {
     border-bottom: 1px solid var(--color-bordes);
 }
 
-.icono-eliminar {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
-
 .bloque-info {
     background-color: var(--color-fondoPROAGris);
     padding: 2em;
@@ -119,17 +113,6 @@ li {
     margin-bottom: 1em;
 }
 
-.icono-agregar {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.icono-agregar:hover {
-    transform: scale(1.15);
-}
-
 .buscador {
     margin-bottom: 1em;
     border-top: 1px solid var(--color-bordes);
@@ -148,7 +131,7 @@ li {
 }
 
 .input-con-icono input {
-    padding-left: 2.5em; /* deja espacio para el icono */
+    padding-left: 2.5em;
     width: 100%;
 }
 
@@ -171,21 +154,22 @@ li {
 
 }
 
-.resultado-busqueda:hover {
-    background-color: var(--color-terciario);
+.btn-secundario {
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#resultados-alumnos {
-    margin: unset;
-    gap: unset;
+.icono-azul {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 1em;
+    transition: filter 0.2s ease;
 }
 
-.icono-agregar {
-    width: 20px;
-    height: 20px;
-    margin-left: 0.5em;
-    cursor: pointer;
-    vertical-align: middle;
+.btn-secundario:hover .icono-azul {
+    filter: brightness(0) invert(1);
 }
 
 .notificacion {
