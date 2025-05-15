@@ -2,109 +2,97 @@ document.addEventListener("DOMContentLoaded", () => {
     const datos = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
     if (!datos) return;
 
-    const titulo = document.getElementById("titulo-asignacion");
-    // Actualiza el título con el nombre de la asignatura (si existe el ID)
+    // Título dinámico
     document.getElementById("titulo-asignacion").textContent = `Asignación Alumnos – ${datos.nombre}`;
-    if (titulo) {
-        titulo.textContent = `Asignación Alumnos - ${datos.nombre}`;
-    }
 
-    const listaDisponibles = document.getElementById("lista-alumnos-disponibles");
-    const listaSeleccionados = document.getElementById("lista-alumnos-nuevos");
-    const inputBusqueda = document.getElementById("input-buscar-alumno");
+    const listaDisponibles = document.getElementById("lista-disponibles");
+    const listaAsignados = document.getElementById("lista-asignados");
+    const inputBuscar = document.getElementById("input-buscar-disponibles");
 
-    let alumnosDisponibles = [];
-    let seleccionados = [];
+    let todosAlumnos = [];
+    let alumnosAsignados = [...datos.alumnos]; // ya asignados
+    let alumnosDisponibles = []; // se calcula después del fetch
 
-    // Cargar usuarios
+    // Cargar todos los alumnos del JSON
     fetch("/src/api/data/usuarios.json")
         .then(res => res.json())
         .then(data => {
-            alumnosDisponibles = data.filter(u => u.rol === "alumno");
-            renderDisponibles();
+            todosAlumnos = data.filter(u => u.rol === "alumno");
+            alumnosDisponibles = todosAlumnos
+                .map(a => `${a.nombre} ${a.apellidos}`)
+                .filter(n => !alumnosAsignados.includes(n));
+
+            renderListas();
         });
 
-    // Render alumnos disponibles con filtro
-    function renderDisponibles(filtro = "") {
+    // Renderiza ambas listas
+    function renderListas(filtro = "") {
+        // Render disponibles
         listaDisponibles.innerHTML = "";
 
-        alumnosDisponibles.forEach(alumno => {
-            const nombreCompleto = `${alumno.nombre} ${alumno.apellidos}`;
+        const encontrados = alumnosDisponibles.filter(nombre =>
+            nombre.toLowerCase().includes(filtro)
+        );
 
-            // Mostrar solo si ya está en datos.alumnos
-            if (!datos.alumnos.includes(nombreCompleto)) return;
+        const mensaje = document.getElementById("mensaje-sin-resultados");
+        mensaje.style.display = encontrados.length === 0 ? "block" : "none";
 
-            if (filtro && !nombreCompleto.toLowerCase().includes(filtro)) return;
-
+        encontrados.forEach(nombreCompleto => {
             const li = document.createElement("li");
             li.classList.add("item-usuario");
-
             li.innerHTML = `
-                <span>${nombreCompleto}</span>
-                <button class="btn-icono">
-                    <img src="../icons/anyadir.svg" alt="Añadir">
-                </button>
-            `;
-
+            <span>${nombreCompleto}</span>
+            <button class="btn-icono">
+                <img src="../icons/anyadir.svg" alt="Añadir">
+            </button>
+        `;
             li.querySelector("button").addEventListener("click", () => {
-                if (!seleccionados.includes(nombreCompleto)) {
-                    seleccionados.push(nombreCompleto);
-                    renderSeleccionados();
-                    mostrarNotificacion(`Alumno ${nombreCompleto} añadido`);
-                } else {
-                    mostrarNotificacion(`Alumno ${nombreCompleto} ya está en la lista`);
+                if (!alumnosAsignados.includes(nombreCompleto)) {
+                    alumnosAsignados.push(nombreCompleto);
+                    alumnosDisponibles = alumnosDisponibles.filter(n => n !== nombreCompleto);
+                    renderListas(filtro); // mantener filtro activo
+                    mostrarNotificacion(`Alumno ${nombreCompleto} asignado`);
                 }
             });
-
             listaDisponibles.appendChild(li);
         });
-    }
 
-    // Render alumnos seleccionados
-    function renderSeleccionados() {
-        listaSeleccionados.innerHTML = "";
-
-        seleccionados.forEach(nombre => {
+        listaAsignados.innerHTML = "";
+        alumnosAsignados.forEach(nombre => {
             const li = document.createElement("li");
             li.classList.add("item-usuario");
 
             li.innerHTML = `
                 <span>${nombre}</span>
-                <button class="btn-icono eliminar">
+                 <button class="btn-icono eliminar">
                     <img src="../icons/trash.svg" alt="Eliminar">
-                </button>
+                 </button>
             `;
 
             li.querySelector("button").addEventListener("click", () => {
-                seleccionados = seleccionados.filter(n => n !== nombre);
-                renderSeleccionados();
-                mostrarNotificacion(`Alumno ${nombre} eliminado`);
+                // Quitar de asignados y volver a disponibles
+                alumnosAsignados = alumnosAsignados.filter(n => n !== nombre);
+                alumnosDisponibles.push(nombre);
+                renderListas(inputBuscar.value); // mantener filtro si hay
+                mostrarNotificacion(`Alumno ${nombre} desasignado`);
             });
 
-            listaSeleccionados.appendChild(li);
+            listaAsignados.appendChild(li);
         });
     }
 
-    // Búsqueda dinámica
-    inputBusqueda.addEventListener("input", () => {
-        const texto = inputBusqueda.value.toLowerCase();
-        renderDisponibles(texto);
+    // Filtro en tiempo real
+    inputBuscar.addEventListener("input", () => {
+        renderListas(inputBuscar.value);
     });
 
-    // Confirmar asignación
+    // Confirmar
     document.getElementById("btn-confirmar").addEventListener("click", () => {
-        if (seleccionados.length === 0) {
-            mostrarNotificacion("No hay alumnos para asignar");
-            return;
-        }
-
-        console.log("Alumnos asignados a", datos.nombre, seleccionados);
-        mostrarNotificacion(`Asignados ${seleccionados.length} alumno(s) a ${datos.nombre}`);
-        seleccionados = [];
-        renderSeleccionados();
+        console.log("Alumnos asignados a", datos.nombre, alumnosAsignados);
+        mostrarNotificacion(`Se han asignado ${alumnosAsignados.length} alumno(s) a ${datos.nombre}`);
     });
 
-    // Botón volver
+    // Volver
     document.getElementById("btn-volver").addEventListener("click", (e) => {
         e.preventDefault();
         history.back();
@@ -116,7 +104,5 @@ function mostrarNotificacion(mensaje) {
     const notif = document.getElementById("notificacion");
     notif.textContent = mensaje;
     notif.style.display = "block";
-    setTimeout(() => {
-        notif.style.display = "none";
-    }, 3000);
+    setTimeout(() => notif.style.display = "none", 3000);
 }

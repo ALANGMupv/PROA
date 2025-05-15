@@ -127,6 +127,13 @@
     background-color: var(--color-terciario);
 }
 
+.mensaje-auxiliar {
+    margin-top: 0.5em;
+    font-size: 0.9em;
+    padding: 0.5em;
+}
+
+
 .input-base {
     background-color: var(--color-panelesBlancoPuro);
     width: 100%;

@@ -25,20 +25,21 @@
                 <div class="bloque-listas-asignacion">
                     <div class="columna">
                         <div class="titulo-columna">
-                            <h3>Profesores no asignados</h3>
+                            <h3>Profesores disponibles</h3>
                             <div class="buscador">
                                 <div class="input-con-icono">
                                     <input type="text" class="input-base" id="input-buscar-profesor" placeholder="Buscar profesor...">
                                     <img src="../icons/search.svg" class="icono-buscador" alt="Buscar">
                                 </div>
                             </div>
+                            <p id="mensaje-sin-resultados" class="mensaje-auxiliar" style="display: none;">No se encontraron profesores con ese nombre.</p>
                             <ul id="lista-profesor-disponibles"></ul>
                         </div>
                     </div>
 
                     <div class="columna">
                         <div class="titulo-columna">
-                            <h3>Nuevos alumnos a asignar</h3>
+                            <h3>Profesores asignados</h3>
                             <ul id="lista-profesor-nuevos"></ul>
                             <button id="btn-confirmar" class="btn">Confirmar asignación</button>
                         </div>

@@ -5,65 +5,66 @@ document.addEventListener("DOMContentLoaded", () => {
     // Título dinámico
     const titulo = document.getElementById("titulo-asignacion");
     if (titulo) {
-        titulo.textContent = `Asignación Profesores - ${datos.nombre}`;
+        titulo.textContent = `Asignación Profesores – ${datos.nombre}`;
     }
 
+    // Elementos del DOM
     const listaDisponibles = document.getElementById("lista-profesor-disponibles");
-    const listaSeleccionados = document.getElementById("lista-profesor-nuevos");
-    const inputBusqueda = document.getElementById("input-buscar-profesor");
+    const listaAsignados = document.getElementById("lista-profesor-nuevos");
+    const inputBuscar = document.getElementById("input-buscar-profesor");
+    const mensaje = document.getElementById("mensaje-sin-resultados");
 
+    let todosProfesores = [];
+    let profesoresAsignados = [datos.titular, ...(datos.colaboradores || [])].filter(Boolean);
     let profesoresDisponibles = [];
-    let seleccionados = [];
 
-    // Cargar todos los profesores del JSON
+    // Cargar desde el JSON
     fetch("/src/api/data/usuarios.json")
         .then(res => res.json())
         .then(data => {
-            profesoresDisponibles = data.filter(u => u.rol === "profesor");
-            renderDisponibles();
+            todosProfesores = data.filter(u => u.rol === "profesor");
+            profesoresDisponibles = todosProfesores
+                .map(p => `${p.nombre} ${p.apellidos}`)
+                .filter(nombre => !profesoresAsignados.includes(nombre));
+
+            renderListas();
         });
 
-    // Render disponibles (solo los asignados actualmente)
-    function renderDisponibles(filtro = "") {
+    // Render de listas
+    function renderListas(filtro = "") {
         listaDisponibles.innerHTML = "";
+        listaAsignados.innerHTML = "";
 
-        profesoresDisponibles.forEach(prof => {
-            const nombreCompleto = `${prof.nombre} ${prof.apellidos}`;
+        const disponiblesFiltrados = profesoresDisponibles.filter(nombre =>
+            nombre.toLowerCase().includes(filtro.toLowerCase())
+        );
 
-            // Mostrar solo si está en los actuales (colaboradores o titular)
-            const yaAsignado = datos.colaboradores.includes(nombreCompleto) || datos.titular === nombreCompleto;
-            if (!yaAsignado) return;
+        // Mostrar mensaje si no hay resultados
+        if (mensaje) {
+            mensaje.style.display = disponiblesFiltrados.length === 0 ? "block" : "none";
+        }
 
-            if (filtro && !nombreCompleto.toLowerCase().includes(filtro)) return;
-
+        // Render disponibles
+        disponiblesFiltrados.forEach(nombre => {
             const li = document.createElement("li");
             li.classList.add("item-usuario");
             li.innerHTML = `
-                <span>${nombreCompleto}</span>
+                <span>${nombre}</span>
                 <button class="btn-icono">
                     <img src="../icons/anyadir.svg" alt="Añadir">
                 </button>
             `;
-
             li.querySelector("button").addEventListener("click", () => {
-                if (!seleccionados.includes(nombreCompleto)) {
-                    seleccionados.push(nombreCompleto);
-                    renderSeleccionados();
-                    mostrarNotificacion(`Profesor ${nombreCompleto} añadido`);
-                } else {
-                    mostrarNotificacion(`Profesor ${nombreCompleto} ya está en la lista`);
-                }
+                profesoresDisponibles = profesoresDisponibles.filter(n => n !== nombre);
+                profesoresAsignados.push(nombre);
+                renderListas(inputBuscar.value);
+                mostrarNotificacion(`Profesor ${nombre} asignado`);
             });
-
             listaDisponibles.appendChild(li);
         });
-    }
 
-    // Render seleccionados
-    function renderSeleccionados() {
-        listaSeleccionados.innerHTML = "";
-
-        seleccionados.forEach(nombre => {
+        // Render asignados
+        profesoresAsignados.forEach(nombre => {
             const li = document.createElement("li");
             li.classList.add("item-usuario");
             li.innerHTML = `
@@ -72,37 +73,28 @@ document.addEventListener("DOMContentLoaded", () => {
                     <img src="../icons/trash.svg" alt="Eliminar">
                 </button>
             `;
-
             li.querySelector("button").addEventListener("click", () => {
-                seleccionados = seleccionados.filter(n => n !== nombre);
-                renderSeleccionados();
+                profesoresAsignados = profesoresAsignados.filter(n => n !== nombre);
+                profesoresDisponibles.push(nombre);
+                renderListas(inputBuscar.value);
                 mostrarNotificacion(`Profesor ${nombre} eliminado`);
             });
-
-            listaSeleccionados.appendChild(li);
+            listaAsignados.appendChild(li);
         });
     }
 
-    // Buscar profesores
-    inputBusqueda.addEventListener("input", () => {
-        const texto = inputBusqueda.value.toLowerCase();
-        renderDisponibles(texto);
+    // Búsqueda dinámica
+    inputBuscar.addEventListener("input", () => {
+        renderListas(inputBuscar.value);
     });
 
-    // Confirmar asignación
+    // Confirmar
     document.getElementById("btn-confirmar").addEventListener("click", () => {
-        if (seleccionados.length === 0) {
-            mostrarNotificacion("No hay profesores para asignar");
-            return;
-        }
-
-        console.log("Profesores asignados a", datos.nombre, seleccionados);
-        mostrarNotificacion(`Asignados ${seleccionados.length} profesor(es) a ${datos.nombre}`);
-        seleccionados = [];
-        renderSeleccionados();
+        console.log("Profesores asignados a", datos.nombre, profesoresAsignados);
+        mostrarNotificacion(`Se han asignado ${profesoresAsignados.length} profesor(es) a ${datos.nombre}`);
     });
 
-    // Volver atrás
+    // Volver
     document.getElementById("btn-volver").addEventListener("click", (e) => {
         e.preventDefault();
         history.back();
