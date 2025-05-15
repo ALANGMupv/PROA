@@ -9,7 +9,7 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1em;
+    gap: 0.25em;
 }
 
 .item-examen-realizar {
@@ -22,7 +22,7 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1em;
+    gap: 0.25em;
 }
 
 .item-examen.solo-info {
