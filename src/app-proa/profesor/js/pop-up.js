@@ -25,7 +25,7 @@ function btnAceptar(id){
     } else if ( id.id === 'aceptar-publicado'){
         window.location.replace("examenes-profesor.html");
     } else if (id.id === 'aceptar-borrador'){
-
+        window.location.replace("examenes-profesor.html");
     }
     popup.style.display = 'none'; // Oculta el pop-up
 }
