@@ -77,3 +77,25 @@
         width: 100%;
     }
 }
+
+/* Adaptado para pantallas grandes - para que no quede mucho espacio en blanco alrededor */
+@media screen and (min-width: 2000px)  {
+    .formulario-contacto {
+        padding: 4em 5em;
+        font-size: 1.15em; /* Hace crecer texto e inputs proporcionalmente */
+    }
+
+    .formulario-contacto h2 {
+        font-size: 2em;
+    }
+
+    .formulario-contacto p {
+        font-size: 1.25em;
+    }
+
+    .btn {
+        padding: 1em 3.5em;
+        font-size: 1.1em;
+    }
+}
+

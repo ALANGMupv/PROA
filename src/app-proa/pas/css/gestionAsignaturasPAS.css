@@ -124,6 +124,11 @@
     font-weight: 400;
 }
 
+#dropdown-asignaturas:focus {
+    border-color: var(--color-primario);
+}
+
+
 /* region --- MENÚ 3 RAYITAS ASIGNAR --- */
 .menu-opciones-wrapper {
     position: relative;

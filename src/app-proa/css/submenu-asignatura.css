@@ -98,7 +98,7 @@ html, body {
     width: auto;
     max-width: 100%;
     padding: 2em;
-    margin: 3em 2em;
+    margin: 1em 2em;
 }
 
 /* BOTÓN COLAPSABLE EN MÓVIL */
@@ -155,7 +155,7 @@ html, body {
 }
 
 /* Clon del botón submenu en cabecera responsive */
-@media (max-width: 799px) {
+@media (max-width: 850px) {
     .submenu-toggle-btn-cabecera {
         display: block;
         flex: 1 1 48%;
@@ -191,10 +191,32 @@ html, body {
         font-size: 1em;
     }
 }
+
+/* Enlace de volver */
+.volver-enlace {
+    display: inline-block;
+    margin-left: 2em;
+    font-size: 1.125em;
+    color: var(--color-primario);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    cursor: pointer;
+}
+
+.volver-enlace:hover {
+    text-decoration: underline;
+    color: var(--color-secundario);
+}
 /* endregion */
 
 /* ESTILOS RESPONSIVE */
-@media (max-width: 799px) {
+@media (max-width: 850px) {
+
+    .volver-enlace {
+        margin-left: 0;
+    }
+
     #submenu {
         min-width: unset;
         width: 100%;
@@ -279,7 +301,6 @@ html, body {
     }
 
     .fondoPanel {
-        padding: 1.5em;
         margin: 1.5em 0;
         border-radius: 8px;
     }

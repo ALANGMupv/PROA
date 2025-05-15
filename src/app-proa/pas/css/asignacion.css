@@ -15,23 +15,6 @@
     flex-direction: column;
 }
 
-/* Enlace de volver */
-.volver-enlace {
-    display: inline-block;
-    margin-left: 2em;
-    font-size: 1.125em;
-    color: var(--color-primario);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-    cursor: pointer;
-}
-
-.volver-enlace:hover {
-    text-decoration: underline;
-    color: var(--color-secundario);
-}
-
 /* Panel general */
 .fondoPanel {
     background-color: var(--color-panelesBlancoPuro);
