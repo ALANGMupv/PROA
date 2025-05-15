@@ -1,3 +1,4 @@
+/* Estructura general */
 .contenido-principal {
     display: flex;
 }
@@ -14,6 +15,7 @@
     flex-direction: column;
 }
 
+/* Enlace de volver */
 .volver-enlace {
     display: inline-block;
     margin-left: 2em;
@@ -30,106 +32,56 @@
     color: var(--color-secundario);
 }
 
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    padding: 0.5em 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--color-bordes);
-}
-
-.icono-eliminar {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
-
-.bloque-info {
-    background-color: var(--color-fondoPROAGris);
+/* Panel general */
+.fondoPanel {
+    background-color: var(--color-panelesBlancoPuro);
     padding: 2em;
     border: 2px solid var(--color-bordes);
     border-radius: 6px;
-    margin-top: 1em;
 }
 
-.bloque-info p {
-    margin: 0.5em 0;
+/* Título */
+#titulo-asignacion {
+    margin-bottom: 1.5em;
 }
 
-.bloque-datos-asignatura {
-    margin-top: 1em;
-    margin-bottom: 2em;
-    line-height: 1.8;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    border-radius: 6px;
-    border: 1px solid var(--color-bordes);
-    padding: 1em;
-    gap: 1em;
-}
-
-.informacion {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.5em;
-}
-
+/* Contenedor de columnas */
 .bloque-listas-asignacion {
     display: flex;
     gap: 2em;
     flex-wrap: wrap;
 }
 
+/* Cada columna */
 .columna {
     flex: 1 1 300px;
     padding: 1em;
     border-radius: 6px;
     border: 1px solid var(--color-bordes);
+    display: flex;
+    flex-direction: column;
 }
 
+/* Título de sección */
 .columna h3 {
     margin-bottom: 1em;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
 }
 
+/* Lista de usuarios */
 .columna ul {
     list-style: none;
-    padding-left: 0;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
 }
 
-.titulo-columna {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    flex-direction: column;
-    margin-bottom: 1em;
-}
-
-.icono-agregar {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.icono-agregar:hover {
-    transform: scale(1.15);
-}
-
+/* Buscador */
 .buscador {
     margin-bottom: 1em;
     border-top: 1px solid var(--color-bordes);
@@ -148,7 +100,7 @@ li {
 }
 
 .input-con-icono input {
-    padding-left: 2.5em; /* deja espacio para el icono */
+    padding-left: 2.5em;
     width: 100%;
 }
 
@@ -175,17 +127,50 @@ li {
     background-color: var(--color-terciario);
 }
 
-#resultados-alumnos {
-    margin: unset;
-    gap: unset;
+.input-base {
+    background-color: var(--color-panelesBlancoPuro);
+    width: 100%;
+    padding: 0.5em 1em;
+    border: 1px solid var(--color-bordes);
+    border-radius: 6px;
+    font-size: 1em;
 }
 
-.icono-agregar {
+/* Fila de alumno */
+.item-usuario {
+    padding: 0.75em 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-bordes);
+    background-color: var(--color-panelesBlancoPuro);
+    font-size: 0.95em;
+}
+
+/* Botón de icono */
+.btn-icono {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.25em;
+    color: var(--color-primario);
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.btn-icono:hover {
+    transform: scale(1.15);
+}
+
+.btn-icono img {
     width: 20px;
     height: 20px;
-    margin-left: 0.5em;
-    cursor: pointer;
-    vertical-align: middle;
+}
+
+.btn {
+    display: block;
+    margin: 2em auto 0 auto;
 }
 
 .notificacion {

@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const opciones = [
         { texto: "Creación de Asignaturas", href: "asignaturas.html" },
-        { texto: "Asignaciones Profesores", href: "#" },
-        { texto: "Asignaciones Alumnos", href: "#" }
+        { texto: "Asignaciones Profesores", href: "asignacion-profesor-pas.html" },
+        { texto: "Asignaciones Alumnos", href: "asignacion-alumnos-pas.html" }
     ];
 
     const htmlSubmenu = `

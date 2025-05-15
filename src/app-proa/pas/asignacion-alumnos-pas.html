@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignación de Alumnos</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/submenu-asignatura.css">
+    <link rel="stylesheet" href="css/asignacion.css">
+    <script src="../js/header-proa.js" defer></script>
+    <script src="js/panel-pas.js" defer></script>
+    <script src="js/asignar-alumnos.js" defer></script>
+</head>
+<body>
+<main class="contenido-wrapper">
+    <div class="contenido-principal">
+        <aside id="submenu" class="submenu"></aside>
+
+        <div class="container">
+            <a href="#" id="btn-volver" class="volver-enlace">← Volver</a>
+
+            <section class="contenido-asignatura fondoPanel">
+                <h2>Asignación Alumnos Álgebra Matricial</h2>
+
+                <div class="bloque-listas-asignacion">
+                    <div class="columna">
+                        <div class="titulo-columna">
+                            <h3>Alumnos asignados</h3>
+                            <div class="buscador">
+                                <div class="input-con-icono">
+                                    <input type="text" class="input-base" id="input-buscar-alumno" placeholder="Buscar alumnos...">
+                                    <img src="../icons/search.svg" class="icono-buscador" alt="Buscar">
+                                </div>
+                            </div>
+                            <ul id="lista-alumnos-disponibles"></ul>
+                        </div>
+                    </div>
+
+                    <div class="columna">
+                        <div class="titulo-columna">
+                            <h3>Nuevos alumnos a asignar</h3>
+                            <ul id="lista-alumnos-nuevos"></ul>
+                            <button id="btn-confirmar" class="btn">Confirmar asignación</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+<div id="notificacion" class="notificacion" style="display:none;"></div>
+</body>
+</html>
