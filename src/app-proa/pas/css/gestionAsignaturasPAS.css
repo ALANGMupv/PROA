@@ -161,6 +161,12 @@
 .menu-opciones-wrapper.abierto .menu-desplegable {
     display: block;
 }
+
+a.ver-detalles {
+    text-decoration: none;
+    display: inline-block;
+}
+
 /* endregion */
 
 /* Cuando no cabe bien la tabla, pasa a modo responsive -> 1140px */

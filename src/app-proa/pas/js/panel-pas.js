@@ -9,9 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submenu = document.getElementById("submenu");
 
     const opciones = [
-        { texto: "Creación de Asignaturas", href: "asignaturas.html" },
-        { texto: "Asignaciones Profesores", href: "asignacion-profesor-pas.html" },
-        { texto: "Asignaciones Alumnos", href: "asignacion-alumnos-pas.html" }
+        { texto: "Creación de Asignaturas", href: "asignaturas.html" }
     ];
 
     const htmlSubmenu = `
@@ -33,6 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     submenu.innerHTML = htmlSubmenu;
+    const toggleBtn = submenu.querySelector(".submenu-toggle-btn");
+    const items = submenu.querySelector(".submenu-items");
+
+    toggleBtn?.addEventListener("click", () => {
+        items.classList.toggle("visible");
+    });
 
     // Marcar como activa la opción actual según la URL
     const rutaActual = window.location.pathname.split('/').pop();
@@ -44,12 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const toggleBtn = document.querySelector(".submenu-toggle-btn");
-    const items = document.querySelector(".submenu-items");
-
-    toggleBtn?.addEventListener("click", () => {
-        items.classList.toggle("visible");
-    });
 });
 
 function redireccionarPagina() {

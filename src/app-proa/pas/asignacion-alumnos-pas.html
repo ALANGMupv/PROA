@@ -11,7 +11,7 @@
     <script src="js/panel-pas.js" defer></script>
     <script src="js/asignar-alumnos.js" defer></script>
 </head>
-<body>
+<body class="vista-pas">
 <main class="contenido-wrapper">
     <div class="contenido-principal">
         <aside id="submenu" class="submenu"></aside>
@@ -20,28 +20,19 @@
             <a href="#" id="btn-volver" class="volver-enlace">← Volver</a>
 
             <section class="contenido-asignatura fondoPanel">
-                <h2>Asignación Alumnos Álgebra Matricial</h2>
+                <h2 id="titulo-asignacion">Asignación Alumnos</h2>
 
                 <div class="bloque-listas-asignacion">
                     <div class="columna">
-                        <div class="titulo-columna">
-                            <h3>Alumnos asignados</h3>
-                            <div class="buscador">
-                                <div class="input-con-icono">
-                                    <input type="text" class="input-base" id="input-buscar-alumno" placeholder="Buscar alumnos...">
-                                    <img src="../icons/search.svg" class="icono-buscador" alt="Buscar">
-                                </div>
-                            </div>
-                            <ul id="lista-alumnos-disponibles"></ul>
-                        </div>
+                        <h3>Alumnos disponibles</h3>
+                        <input type="text" id="input-buscar-disponibles" class="input-base" placeholder="Buscar alumno...">
+                        <ul id="lista-disponibles"></ul>
+                        <p id="mensaje-sin-resultados" class="mensaje-auxiliar" style="display: none;">No se encontraron alumnos con ese nombre.</p>
                     </div>
-
                     <div class="columna">
-                        <div class="titulo-columna">
-                            <h3>Nuevos alumnos a asignar</h3>
-                            <ul id="lista-alumnos-nuevos"></ul>
-                            <button id="btn-confirmar" class="btn">Confirmar asignación</button>
-                        </div>
+                        <h3>Alumnos asignados</h3>
+                        <ul id="lista-asignados"></ul>
+                        <button id="btn-confirmar" class="btn">Confirmar cambios</button>
                     </div>
                 </div>
             </section>
@@ -49,5 +40,12 @@
     </div>
 </main>
 <div id="notificacion" class="notificacion" style="display:none;"></div>
+<dialog id="dialog-cambios" class="dialog-confirmacion">
+    <p>Tienes cambios sin guardar. ¿Deseas salir sin guardar?</p>
+    <div class="dialog-acciones">
+        <button id="cancelar-dialogo" class="btn-oscuros-secundario">Cancelar</button>
+        <button id="confirmar-salida" class="btn-oscuros">Salir sin guardar</button>
+    </div>
+</dialog>
 </body>
 </html>

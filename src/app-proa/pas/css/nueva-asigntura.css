@@ -19,7 +19,7 @@
 }
 
 .linea{
-    border: solid 1px var(--color-bordes);
+    border: solid 0.5px var(--color-bordes);
     width: 100%;
     align-self: center;
 }
