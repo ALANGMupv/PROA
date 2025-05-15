@@ -1,76 +1,77 @@
 // Función para mostrar o cerrar el menú desplegable de opciones de una fila
 function toggleOpciones(icono) {
     const wrapper = icono.parentElement;
-    wrapper.classList.toggle('abierto'); // Alterna la clase 'abierto' para mostrar u ocultar el menú
+    wrapper.classList.toggle('abierto');
 
-    // Cierra los otros menús abiertos que no sean este
+    // Cierra los otros menús abiertos
     document.querySelectorAll('.menu-opciones-wrapper').forEach(el => {
         if (el !== wrapper) el.classList.remove('abierto');
     });
 }
 
+// Funciones para asignar alumno o profesor
+function asignarAlumno(asignatura) {
+    localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asignatura));
+    window.location.href = "asignacion-alumnos-pas.html";
+}
+
+function asignarProfesor(asignatura) {
+    localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asignatura));
+    window.location.href = "asignacion-profesor-pas.html";
+}
+
 // Ejecutar cuando el DOM se ha cargado completamente
 document.addEventListener("DOMContentLoaded", () => {
-    const tabla = document.querySelector('.tabla-asignaturas'); // Contenedor donde se inserta la tabla
-    const inputBusqueda = document.querySelector('.input-textoBusqueda'); // Input de búsqueda
-    const dropdown = document.getElementById('dropdown-asignaturas'); // Dropdown de departamentos
+    const tabla = document.querySelector('.tabla-asignaturas');
+    const inputBusqueda = document.querySelector('.input-textoBusqueda');
+    const dropdown = document.getElementById('dropdown-asignaturas');
 
-    let asignaturasOriginal = []; // Lista original de asignaturas
+    let asignaturasOriginal = [];
 
-    // Cargar las asignaturas desde un archivo JSON externo
     fetch('/src/api/data/asignaturas.json')
         .then(response => response.json())
         .then(asignaturas => {
-            asignaturasOriginal = asignaturas; // Guardar las asignaturas cargadas
+            asignaturasOriginal = asignaturas;
 
-            // Crear una lista de departamentos únicos ordenados alfabéticamente
+            // Crear lista de departamentos únicos
             const departamentos = [...new Set(asignaturas.map(a => a.departamento))].sort();
-
-            // Rellenar el dropdown con los departamentos
             dropdown.innerHTML = `<option value="todos">Todos los departamentos</option>`;
             departamentos.forEach(dep => {
                 const option = document.createElement("option");
-                option.value = normalizarTexto(dep); // Usar texto normalizado como valor
-                option.textContent = dep; // Mostrar el nombre original en la opción
-                dropdown.appendChild(option); // Añadir la opción al dropdown
+                option.value = normalizarTexto(dep);
+                option.textContent = dep;
+                dropdown.appendChild(option);
             });
 
-            renderTabla(); // Mostrar la tabla inicial sin filtros
+            renderTabla(); // Mostrar la tabla al cargar
         })
         .catch(error => {
-            console.error('Error al cargar las asignaturas:', error); // Mostrar error si ocurre
+            console.error('Error al cargar las asignaturas:', error);
         });
 
-    // Función para normalizar texto (quita acentos y pasa a minúsculas)
     function normalizarTexto(texto) {
         return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     }
 
-    // Función para renderizar la tabla de asignaturas aplicando los filtros
     function renderTabla() {
-        const filtroTexto = normalizarTexto(inputBusqueda.value); // Texto buscado (normalizado)
-        const filtroDepartamento = dropdown.value; // Departamento seleccionado en el dropdown
+        const filtroTexto = normalizarTexto(inputBusqueda.value);
+        const filtroDepartamento = dropdown.value;
 
-        // Limpiar todas las filas anteriores excepto el encabezado
         tabla.querySelectorAll('.fila:not(.encabezado)').forEach(e => e.remove());
 
-        // Filtrar las asignaturas según los criterios de búsqueda y departamento
         const asignaturasFiltradas = asignaturasOriginal.filter(asig => {
             const texto = normalizarTexto(`${asig.nombre} ${asig.codigo} ${asig.departamento}`);
-            const coincideTexto = texto.includes(filtroTexto); // Coincide con el texto buscado
-            const coincideDepartamento =
-                filtroDepartamento === "todos" || // Si está seleccionado "todos"
-                normalizarTexto(asig.departamento) === filtroDepartamento; // Coincide con el departamento
+            const coincideTexto = texto.includes(filtroTexto);
+            const coincideDepartamento = filtroDepartamento === "todos" ||
+                normalizarTexto(asig.departamento) === filtroDepartamento;
 
-            return coincideTexto && coincideDepartamento; // Incluir solo si cumple ambos criterios
+            return coincideTexto && coincideDepartamento;
         });
 
-        // Crear dinámicamente una fila por cada asignatura filtrada
         asignaturasFiltradas.forEach(asig => {
             const fila = document.createElement('div');
-            fila.classList.add('fila'); // Añadir clase para estilos
+            fila.classList.add('fila');
 
-            // Contenido HTML de la fila con datos de la asignatura y botones de acción
             fila.innerHTML = `
                 <span data-label="Código">${asig.codigo}</span>
                 <span data-label="Nombre">${asig.nombre}</span>
@@ -80,29 +81,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="menu-opciones-wrapper" data-label="Asignar">
                     <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" onclick="toggleOpciones(this)" />
                     <div class="menu-desplegable">
-                        <button onclick="window.location.href='asignacion-alumnos-pas.html?codigo=${asig.codigo}'">Asignar alumno</button>
-                        <button onclick="window.location.href='asignacion-profesor-pas.html?codigo=${asig.codigo}'">Asignar profesor</button>
+                        <button onclick='asignarAlumno(${JSON.stringify(asig)})'>Asignar alumno</button>
+                        <button onclick='asignarProfesor(${JSON.stringify(asig)})'>Asignar profesor</button>
                     </div>
                 </div>
             `;
 
-            // Guardar la asignatura seleccionada en localStorage al hacer clic en "Ver detalles"
             fila.querySelector('.ver-detalles').addEventListener('click', () => {
                 localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asig));
             });
 
-            // Insertar la fila en la tabla
             tabla.appendChild(fila);
         });
     }
 
-    // Actualizar tabla cuando se escribe en el buscador
     inputBusqueda.addEventListener("input", renderTabla);
-
-    // Actualizar tabla cuando se cambia el departamento en el dropdown
     dropdown.addEventListener("change", renderTabla);
 
-    // Cerrar todos los menús desplegables si se hace clic fuera de ellos
+    // Cerrar todos los menús desplegables si se hace clic fuera
     document.addEventListener('click', function (e) {
         if (!e.target.closest('.menu-opciones-wrapper')) {
             document.querySelectorAll('.menu-opciones-wrapper').forEach(el => el.classList.remove('abierto'));
