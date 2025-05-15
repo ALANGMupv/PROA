@@ -197,3 +197,10 @@ li {
     from { opacity: 0.95; transform: translateX(-50%) translateY(0); }
     to   { opacity: 0; transform: translateX(-50%) translateY(20px); }
 }
+
+.rol-profesor {
+    font-size: 0.9em;
+    font-style: italic;
+    color: var(--color-bordes);
+    margin-left: 0.5em;
+}

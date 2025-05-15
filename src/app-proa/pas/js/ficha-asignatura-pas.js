@@ -21,13 +21,20 @@ document.addEventListener("DOMContentLoaded", () => {
         listaAlumnos.appendChild(li);
     });
 
-    // Render profesores
-    const profes = [datos.titular, ...datos.colaboradores];
+    // Render profesores (titular y colaboradores)
+    const profes = [datos.titular, ...(datos.colaboradores || [])];
+
     profes.forEach(nombre => {
         const li = document.createElement("li");
-        li.textContent = nombre;
+        li.innerHTML = `
+        ${nombre} 
+        <span class="rol-profesor">
+            ${nombre === datos.titular ? " (Responsable)" : " (Colaborador)"}
+        </span>
+    `;
         listaProfesores.appendChild(li);
     });
+
 
     // Botón volver
     document.getElementById("btn-volver").addEventListener("click", (e) => {
