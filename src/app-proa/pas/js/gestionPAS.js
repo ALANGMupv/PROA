@@ -80,8 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="menu-opciones-wrapper" data-label="Asignar">
                     <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" onclick="toggleOpciones(this)" />
                     <div class="menu-desplegable">
-                        <button onclick="alert('Asignar alumno a ${asig.nombre}')">Asignar alumno</button>
-                        <button onclick="alert('Asignar profesor a ${asig.nombre}')">Asignar profesor</button>
+                        <button onclick="window.location.href='asignacion-alumnos-pas.html?codigo=${asig.codigo}'">Asignar alumno</button>
+                        <button onclick="window.location.href='asignacion-profesor-pas.html?codigo=${asig.codigo}'">Asignar profesor</button>
                     </div>
                 </div>
             `;

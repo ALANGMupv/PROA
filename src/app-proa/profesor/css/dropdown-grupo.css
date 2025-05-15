@@ -36,7 +36,7 @@
 
 #dropdown-asignaturas{
     margin-left: 0.8em;
-
+    font-size: 1em;
 }
 
 @media (max-width: 850px) {
