@@ -27,8 +27,8 @@ fetch('/src/api/data/asignaturas.json')
         <div class="menu-opciones-wrapper" data-label="Asignar">
           <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" onclick="toggleOpciones(this)" />
           <div class="menu-desplegable">
-            <button onclick="alert('Asignar alumno a ${asig.nombre}')">Asignar alumno</button>
-            <button onclick="alert('Asignar profesor a ${asig.nombre}')">Asignar profesor</button>
+            <button onclick='asignarAlumno(${JSON.stringify(asig)})'>Asignar alumno</button>
+            <button onclick='asignarProfesor(${JSON.stringify(asig)})'>Asignar profesor</button>
           </div>
         </div>
     `;
@@ -52,3 +52,13 @@ document.addEventListener('click', function (e) {
         document.querySelectorAll('.menu-opciones-wrapper').forEach(el => el.classList.remove('abierto'));
     }
 });
+
+function asignarAlumno(asignatura) {
+    localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asignatura));
+    window.location.href = "asignacion-alumnos-pas.html";
+}
+
+function asignarProfesor(asignatura) {
+    localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asignatura));
+    window.location.href = "asignacion-profesor-pas.html";
+}
