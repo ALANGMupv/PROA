@@ -196,6 +196,11 @@ textarea{
     resize: none;
 }
 
+#recordatorio{
+    padding: 0.5em;
+    color: var(--color-primario);
+}
+
 #botones{
     display: flex;
     justify-content: flex-end;
