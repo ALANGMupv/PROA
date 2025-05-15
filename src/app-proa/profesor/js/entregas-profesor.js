@@ -45,20 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Ocultar detalles al volver
-    document.getElementById("btn-volver").addEventListener("click", () => {
-        container.innerHTML = `<p>Selecciona un alumno para ver su entrega.</p>`;
-        // También podrías quitar el "activo"
-        document.querySelectorAll(".alumno-item").forEach(item => item.classList.remove("activo"));
-    });
-
     function renderDetalle(entrega) {
         const container = document.getElementById("detalle-entrega");
 
         container.innerHTML = `
         <section class="encabezado">
             <h2>${entrega.nombre}</h2>
-            <button id="btn-volver" class="btn-oscuros btn-atras">Atrás</button>
+            <button id="btn-volver2" class="btn-oscuros btn-atras">Atrás</button>
         </section>
         <p>Fecha de entrega: ${new Date(entrega.fechaEntrega).toLocaleString()}</p>
         <p>Calificación: ${entrega.nota}/10</p>
@@ -66,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ${renderPreguntas(entrega.respuestas)}
     `;
 
-        document.getElementById("btn-volver").addEventListener("click", () => {
+        document.getElementById("btn-volver2").addEventListener("click", () => {
             container.innerHTML = `<p>Selecciona un alumno para ver su entrega.</p>`;
             document.querySelectorAll(".alumno-item").forEach(item => item.classList.remove("activo"));
         });

@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <label>Fecha:
                     <input type="date" class="input-base" id="nueva-fecha" value="${fechaISO}">
                 </label>
-                <label>Hora:
+                <label id="hora">Hora:
                     <input type="time" class="input-base" id="nueva-hora" value="${hora}">
                 </label>
             </div>

@@ -174,7 +174,7 @@
 }
 
 /* ===== MEDIA QUERY ===== */
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .contenedor-entregas {
         flex-direction: column;
     }

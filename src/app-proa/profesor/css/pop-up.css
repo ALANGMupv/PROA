@@ -14,7 +14,7 @@
 .contenido-popup {
     display: flex;
     background: white;
-    padding: 20px;
+    padding: 1.5em;
     border-radius: 8px;
     text-align: center;
     gap: 1em;
@@ -30,3 +30,4 @@
 .btn-popup button{
     width: 45%;
 }
+

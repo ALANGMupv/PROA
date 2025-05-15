@@ -54,7 +54,9 @@
     margin: 0;
 }
 
-
+#hora{
+    margin-left:1em;
+}
 
 /* ----------- Secciones de contenido ----------- */
 .titulo,
