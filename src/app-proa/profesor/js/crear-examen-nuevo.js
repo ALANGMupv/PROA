@@ -62,6 +62,7 @@ function agregarPregunta() {
     </div>
 
     <div class="respuestas-contenedor">
+    <span class="recordatorio">NOTA: Recuerda seleccionar la respuesta correcta</span>
       ${generarRespuestaHTML(idPregunta, "a")}
       ${generarRespuestaHTML(idPregunta, "b")}
     </div>
