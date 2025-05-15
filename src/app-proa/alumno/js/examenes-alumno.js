@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         seccion.querySelectorAll(".bloque-examenes").forEach(b => b.remove());
 
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Éxamenes a realizar", data.realizar, 'realizar'));
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Éxamenes por revisar", data.porRevisar, 'porRevisar'));
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Éxamenes calificados", data.calificados, 'calificados'));
+        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes a realizar", data.realizar, 'realizar'));
+        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes por revisar", data.porRevisar, 'porRevisar'));
+        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes calificados", data.calificados, 'calificados'));
     }
 
     function crearBloque(titulo, examenes, tipo) {

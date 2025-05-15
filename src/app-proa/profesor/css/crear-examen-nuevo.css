@@ -122,7 +122,13 @@
 
 .parametros label input{
     max-height: 2.25em;
-    padding: 0.5em 0.75em;
+    padding: 0.5em 0.5em;
+}
+
+.parametros label input[type="number"]{
+    min-width: 2.3em;
+    padding: 0.5em 5px;
+    text-align: center;
 }
 
 .titulo-texto-pregunta{
@@ -188,10 +194,14 @@
     padding: 0;
 }
 
-@media(min-width:800px)and (max-width: 1100px){
+@media (max-width: 1100px) {
     .parametros{
         flex-direction: column;
     }
+}
+
+@media(min-width:800px)and (max-width: 1100px){
+
 
     #fecha-examen{
 
@@ -278,7 +288,6 @@
     }
 
     .parametros{
-        flex-direction: column;
         max-width: unset;
         width: 100%;
     }
