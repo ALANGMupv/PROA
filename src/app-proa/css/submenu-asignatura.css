@@ -195,7 +195,6 @@ html, body {
 /* Enlace de volver */
 .volver-enlace {
     display: inline-block;
-    margin-left: 2em;
     font-size: 1.125em;
     color: var(--color-primario);
     text-decoration: none;
