@@ -39,7 +39,7 @@
 
 }
 
-@media (max-width: 799px) {
+@media (max-width: 850px) {
     .cabecera-dropdown-fija-profesor {
         flex-direction: column;
         align-items: stretch;

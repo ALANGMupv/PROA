@@ -290,6 +290,7 @@
 
 .notificacion-item {
     background-color: var(--color-panelesBlancoPuro);
+    border-radius: 4px;
     border-bottom: 1px solid var(--color-bordes);
     padding: 1em;
 }
