@@ -143,7 +143,7 @@ label {
     font-size: 1em;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
     h1 {
         font-size: 2.125em;
     }
@@ -197,7 +197,7 @@ label {
     line-height: 1.5;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
     .parrafo-principal {
         font-size: 1.125em;
     }
@@ -407,7 +407,7 @@ label {
 /* endregion */
 
 /* region --- BOTONES RESPONSIVES --- */
-@media (max-width: 480px) {
+@media (max-width: 576px) {
     .btn,
     .btnCTA,
     .btnCTA-PROA,

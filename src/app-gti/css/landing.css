@@ -1,7 +1,7 @@
 /* region --- Primera sección --- */
 .contenedor {
     position: relative;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100dvh - 80px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,9 +64,20 @@
     text-decoration: none;
     display: inline-block;
 }
+
+.parrafo-principal {
+    font-size: 1.5em;
+}
+
+@media (max-width: 576px) {
+    .contenedor h1 {
+        font-size: 2.125em;
+    }
+    .parrafo-principal{
+        font-size: 1.125em;
+    }
+}
 /*endregion*/
-
-
 
 /* region --- Segunda sección --- */
 .seccion-diferenciadora {
@@ -88,6 +99,7 @@
 
 .texto-diferenciador p {
     margin-top: 1.6em;
+    font-size: 1.15em;
 }
 
 .imagen-diferenciador {
@@ -132,10 +144,15 @@
     }
 }
 
+@media (max-width: 576px) {
+    .texto-diferenciador p {
+        font-size: 1em;
+    }
+}
+
 @media (max-width: 480px) {
     .seccion-diferenciadora {
         padding: 4em 2em;
     }
 }
 /*endregion*/
-

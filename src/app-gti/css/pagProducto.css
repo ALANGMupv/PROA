@@ -1,7 +1,7 @@
 /* region --- Primera sección --- */
 .contenedor {
     position: relative;
-    min-height: calc(100vh - 80px); /* Ajusta la altura restando la del header */
+    min-height: calc(100dvh - 80px); /* Ajusta la altura restando la del header */
     background: url('../img/imagenPagProducto.png') no-repeat center center;
     background-size: cover;
     display: flex;
@@ -59,7 +59,7 @@
 /* Flecha scroll */
 .scroll-flecha {
     position: absolute;
-    bottom: 30px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     animation: saltar 1.8s infinite;
@@ -69,8 +69,8 @@
 }
 
 .scroll-flecha img {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     opacity: 0.85;
     transition: opacity 0.3s ease;
 }
@@ -91,12 +91,25 @@
         transform: translateX(-50%) translateY(-4px);
     }
 }
+
+@media (max-width: 576px) {
+    .parrafo-principal{
+        font-size: 1.125em;
+    }
+}
+
+@media (max-width: 779px) {
+    .scroll-flecha img{
+        height: 50px;
+        width: 50px;
+    }
+}
 /*endregion*/
 
 /* region --- Segunda sección --- */
 .caracteristicas-principales {
     text-align: center;
-    padding: 4em 2em;
+    padding: 3.5em 2em;
     background-color: var(--color-blancoPuro);
     color: var(--color-textos);
 }
@@ -143,10 +156,6 @@
         flex-direction: column;
         align-items: center;
     }
-
-    .caracteristica {
-        margin-bottom: 2.5em;
-    }
 }
 /*endregion*/
 
@@ -171,6 +180,7 @@
 
 .texto-diferenciador p {
     margin-top: 1.6em;
+    font-size: 1.15em;
 }
 
 .imagen-diferenciador {
@@ -195,11 +205,6 @@
 }
 
 @media (max-width: 1100px) {
-
-    .texto-diferenciador{
-        flex: unset;
-    }
-
     .contenedor-diferenciador {
         flex-direction: column;
         text-align: center;
@@ -212,6 +217,12 @@
         align-items: center;
         justify-content: center;
         margin-top: 2.5em;
+    }
+}
+
+@media (max-width: 576px) {
+    .texto-diferenciador p {
+        font-size: 1em;
     }
 }
 
@@ -250,6 +261,7 @@
 }
 
 .cta-final-texto p {
+    font-size: 1.15em;
     line-height: 1.5;
 }
 
@@ -262,6 +274,12 @@
 
 .btnPROA {
     text-decoration: none;
+}
+
+@media(max-width: 567px){
+    .cta-final-texto p {
+        font-size: 1em;
+    }
 }
 /* endregion */
 
