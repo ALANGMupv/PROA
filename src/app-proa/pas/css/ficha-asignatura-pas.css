@@ -73,9 +73,8 @@ li {
 .informacion {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 0.5em;
+    gap: 1em;
 }
 
 .bloque-listas-asignacion {
