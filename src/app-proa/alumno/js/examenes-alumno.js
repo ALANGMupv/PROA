@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         examenes.forEach(ex => {
             if (tipo === 'realizar') {
                 html += `
-                <div class="item-examen">
+                <div class="item-examen item-examen-realizar">
                     <div class="info">
                         <h4>${ex.titulo}</h4>
                         <p class="fecha-limite">Fecha límite: ${ex.fechaLimite}</p>

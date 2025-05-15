@@ -9,11 +9,14 @@ function activarPopPup(btn){
     if (btn.id === 'publicar'){
         popup = document.getElementById('popup-confirmacion');
         popup.style.display = 'flex'; // Muestra el pop-up
-    } else if ( btn.id === 'cancelar'){
+    } else if ( btn.id === 'cancelar' || btn.id === 'volver'){
         popup = document.getElementById('popup-salir');
         popup.style.display = 'flex'; // Muestra el pop-up
+    } else if(btn.id === 'guardar' ){
+        popup = document.getElementById('popup-guardado');
+        popup.style.display = 'flex'; // Muestra el pop-up
+        /*funcion guardar*/
     }
-
 }
 
 function btnAceptar(id){
@@ -21,6 +24,8 @@ function btnAceptar(id){
         window.location.replace("examenes-profesor.html");
     } else if ( id.id === 'aceptar-publicado'){
         window.location.replace("examenes-profesor.html");
+    } else if (id.id === 'aceptar-borrador'){
+
     }
     popup.style.display = 'none'; // Oculta el pop-up
 }

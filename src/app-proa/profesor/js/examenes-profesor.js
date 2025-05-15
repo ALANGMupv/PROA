@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         seccion.querySelectorAll(".bloque-examenes").forEach(b => b.remove());
 
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Éxamenes abiertos", data.realizar, 'abiertos'));
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Éxamenes cerrados", data.porRevisar, 'cerrados'));
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Éxamenes cerrados y calificados", data.calificados, 'cerrYCal'));
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Éxamenes borradores", data.borradores, 'borradores'));
+        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes abiertos", data.realizar, 'abiertos'));
+        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes cerrados", data.calificados, 'cerrados'));
+        seccion.insertAdjacentHTML("beforeend", crearBloque("Peticiones de revision", data.porRevisar, 'revision'));
+        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes borradores", data.borradores, 'borradores'));
 
     }
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let html;
         if (tipo === 'abiertos'){
             html = `<div class="bloque-examenes"><h3>${titulo}</h3>
-            <button class="btn-oscuros" onclick="redireccionarPagina()">Crear exámen</button>`;
+            <button class="btn-oscuros" id="btn-crear" onclick="redireccionarPagina()">Crear examen</button>`;
         } else {
             html = `<div class="bloque-examenes"><h3>${titulo}</h3>`;
         }
@@ -45,26 +45,57 @@ document.addEventListener("DOMContentLoaded", () => {
         examenes.forEach(ex => {
             if (tipo === 'abiertos') {
                 html += `
-                <div class="item-examen" data-titulo="${ex.titulo}">
+                <div class="item-examen item-examen-realizar" data-titulo="${ex.titulo}">
                     <div class="info">
-                        <h4>${ex.titulo}</h4>
-                        <p class="fecha-envio">Fecha límite: ${ex.fechaLimite}</p>
+                        <div class="titulo-fecha-envio">
+                            <h4>${ex.titulo}</h4>
+                            <div class="icono-item">
+                                <img src="../icons/advertencia.svg" alt="advertencia">
+                                <p class="fecha-envio">Fecha límite: ${ex.fechaLimite}</p>
+                            </div>
+                            <div class="icono-item">
+                                <img src="../icons/pesoExamen.svg" alt="advertencia">
+                                <p class="fecha-envio">Peso: ${ex.peso}</p>
+                            </div>  
+                        </div>  
+                                              
                         <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
                     </div>
                 </div>`;
-            }else if (tipo === 'cerrados') {
+            }else if (tipo === 'revision') {
                 html += `
-                <div class="item-examen solo-info" data-titulo="${ex.titulo}">
-                    <h4>${ex.titulo}</h4>
-                    <p class="fecha-envio">Enviado: ${ex.fechaEnvio}</p>
-                    <button class="btn-oscuros-secundario btn-visualizar-entregas">Calificar entregas</button>
+                <div class="item-examen" data-titulo="${ex.titulo}">
+                    <div class="info">
+                        <div class="titulo-fecha-envio">
+                            <h4>${ex.titulo}</h4>
+                            <div class="icono-item">
+                                <img src="../icons/advertencia.svg" alt="advertencia">
+                                <p class="fecha-envio">Fecha límite: ${ex.fechaLimite}</p>
+                            </div>
+                            <div class="icono-item">
+                                <img src="../icons/pesoExamen.svg" alt="balanza"><p class="fecha-envio">Peso: ${ex.peso}</p>
+                            </div>  
+                        </div>  
+                                              
+                        <button class="btn-oscuros-secundario btn-visualizar-entregas">Calificar entregas</button>
+                    </div>
                 </div>`;
-            } else if (tipo == 'cerrYCal'){
+            } else if (tipo == 'cerrados'){
                 html += `
-                <div class="item-examen solo-info" data-titulo="${ex.titulo}">
-                    <h4>${ex.titulo}</h4>
-                    <p class="fecha-envio">Enviado: ${ex.fechaEnvio}</p>
-                    <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
+                <div class="item-examen" data-titulo="${ex.titulo}">
+                    <div class="info">
+                        <div class="titulo-fecha-envio">
+                            <h4>${ex.titulo}</h4>
+                            <div class="icono-item">
+                                <img src="../icons/advertencia.svg" alt="advertencia"><p class="fecha-envio">Fecha límite: ${ex.fechaLimite}</p>
+                            </div>
+                            <div class="icono-item">
+                                <img src="../icons/pesoExamen.svg" alt="advertencia"><p class="fecha-envio">Peso: ${ex.peso}</p>
+                            </div>  
+                        </div>  
+                                              
+                        <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
+                    </div>
                 </div>`;
             }else if (tipo === 'borradores') {
                 html += `

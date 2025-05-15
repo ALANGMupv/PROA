@@ -1,13 +1,38 @@
+.fondoPanel{
+    overflow: auto;
+    max-height: calc(100vh - 80px - 6em);
+}
+
+h4{
+    margin-bottom: 0.75em;
+}
+
 .bloque-examenes{
     display: flex;
     flex-direction: column;
 }
 
-.bloque-examenes button{
-    margin-top: 16px;
-    align-self: flex-end;
+#btn-crear{
     padding: 0.5em 0.75em;
 }
+
+.bloque-examenes button{
+    align-self: flex-end;
+}
+
+.icono-item{
+    flex-direction: row;
+    width: unset;
+    font-size: unset;
+    gap: 0.5em;
+}
+
+.icono-item img{
+    margin: 0;
+    width: 1em;
+    height: 1em;
+}
+
 
 .item-examen {
     background-color: var(--color-fondoPROAGris);
@@ -22,10 +47,16 @@
     gap: 1em;
 }
 
+.titulo-fecha-envio{
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+
+}
+
 .btn-visualizar-entregas{
     font-size: 0.85em;
     border: solid 1px;
-    padding: 0.5em 1.25em;
 }
 
 .item-examen-realizar {
@@ -48,7 +79,8 @@
 
 .item-examen .info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 0.25em;
     width: 100%;
 }

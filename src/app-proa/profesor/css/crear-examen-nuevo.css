@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+#formulario-examen{
+    margin: 0;
+}
+
 .contenido-asignatura{
     width: 10vh;
 }
@@ -10,6 +14,13 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    height: calc(100vh - 80px - 8em);
+    overflow: auto;
+    margin: 3em 2em 0em 2em;
+}
+
+.input-base{
+    width: 100%
 }
 
 .btn-atras {
@@ -21,6 +32,7 @@
     display: flex;
     flex-direction: column;
     gap: 2em;
+    height: 100%;
 }
 
 .titulo-texto{
@@ -31,7 +43,7 @@
 
 .parametros{
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
     justify-content: space-around;
     gap: 1em;
 }
@@ -41,6 +53,10 @@
     flex-direction: column;
     gap: 1em;
     width: 100%;
+}
+
+.parametros label span{
+    white-space: nowrap;
 }
 
 .puntos{
@@ -57,6 +73,13 @@
 }
 
 .contenedor-valor-peso{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    width: 100%;
+}
+
+.contenedor-puntos{
     display: flex;
     flex-direction: row;
     gap: 1em;
@@ -90,6 +113,11 @@
     display: flex;
     flex-direction: row;
     gap: 1em;
+    width: 100%;
+}
+
+#dropdown-valor{
+     min-width: 180px;
 }
 
 .parametros label input{
@@ -112,6 +140,8 @@
 .titulo-pregunta{
     display: flex;
     justify-content: space-between;
+    gap: 0.5em;
+    align-items: center;
 }
 
 .titulo-pregunta img{
@@ -159,16 +189,33 @@
 }
 
 @media(min-width:800px)and (max-width: 1100px){
-    .contenedor-valor-peso{
+    .parametros{
+        flex-direction: column;
+    }
+
+    #fecha-examen{
+
+    }
+
+    .titulo-valor{
+       gap: 0.5em
+    }
+
+    .respuesta-opcion{
+        gap: 0.5em;
+    }
+
+    #botones{
+        gap:0.5em
+    }
+    /*.contenedor-valor-peso{
         flex-direction: column;
     }
 
     .contenedor-fecha-hora{
         flex-direction: column;
-    }
+    }*/
 }
-
-
 
 @media  (min-width: 800px) and (max-width: 900px){
     .cabecera-dropdown-fija-profesor{
@@ -192,6 +239,8 @@
     #dropdown-asignaturas {
         margin-left: 0;
     }
+
+
 }
 
 @media(max-width: 796px){
@@ -222,7 +271,11 @@
 
 }
 
-@media (max-width: 680px){
+@media (max-width: 750px){
+
+    .panel-asignaturas{
+        margin: 2em 1em 0em 1em;
+    }
 
     .parametros{
         flex-direction: column;
@@ -230,7 +283,7 @@
         width: 100%;
     }
     .contenedor-valor-peso, .contenedor-fecha-hora{
-        flex-direction: column;
+        flex-direction: row;
         gap:0.5em;
     }
 
@@ -239,6 +292,9 @@
         width: 100%;
     }
 
+    #botones{
+        gap:0.5em
+    }
 }
 
 
