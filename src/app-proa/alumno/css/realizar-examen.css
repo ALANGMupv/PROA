@@ -1,4 +1,14 @@
 /* Estructura general del cuestionario */
+
+html, body {
+    overflow: hidden;
+}
+
+#panelRealizarExamen{
+    max-height: calc(100dvh - 80px);
+    overflow-y: auto;
+}
+
 #formulario-examen{
     margin: 0;
 }
@@ -7,7 +17,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding: 2rem;
+    padding: 2em;
     max-width: 800px;
     margin: auto;
 }
@@ -49,8 +59,6 @@
     height: 2.5em;
     padding: 0;
 }
-
-
 
 .btn-atras{
     display: none;
@@ -133,6 +141,7 @@
     font-weight: 700;
     color: #459CFF;
 }
+
 
 @media (max-width: 770px){
     .botones{
