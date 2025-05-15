@@ -107,6 +107,7 @@
 
 .boton-favoritas:hover {
     background-color: var(--color-terciario);
+    border-color: var(--color-terciario);
 }
 
 .boton-favoritas.activo {
