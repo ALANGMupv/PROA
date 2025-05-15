@@ -152,7 +152,7 @@
 /* region --- Tercera sección: ¿Qué hace a PROA diferente? --- */
 .seccion-diferenciadora {
     background-color: rgba(159, 204, 255, 0.15); /* #9FCCFF al 15% */
-    padding: 6em 3em;
+    padding: 4.5em 3em;
     color: var(--color-textos);
 }
 
@@ -177,7 +177,7 @@
     max-width: 500px;
     display: flex;
     align-items: flex-start;
-    margin-top: 5.5em;
+    margin-top: 3.5em;
 }
 
 .imagen-diferenciador img {

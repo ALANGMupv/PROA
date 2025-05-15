@@ -1,5 +1,5 @@
 .faq {
-    padding: 3em 1.5em;
+    padding: 3.6em 1.5em;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -92,5 +92,29 @@
 
     .parrafo-principal{
         font-size: 0.9em;
+    }
+}
+
+/* Adaptado para pantallas grandes - para que no quede mucho espacio en blanco alrededor */
+@media screen and (min-width: 2000px) {
+    .faq {
+        padding: 5em 3em;
+    }
+
+    .faq-titulo {
+        font-size: 2.5em;
+    }
+
+    .faq-pregunta {
+        font-size: 1.5em;
+        padding: 1.5em 1.5em;
+    }
+
+    .faq-respuesta p {
+        font-size: 1.3em;
+    }
+
+    .parrafo-principal {
+        font-size: 1.4em;
     }
 }

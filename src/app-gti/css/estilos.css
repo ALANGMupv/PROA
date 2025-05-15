@@ -23,15 +23,17 @@ img, video, svg { height: auto; max-width: 100%; }
 
 a { color: inherit; }
 
-html {
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
-html, body {
+body {
+    display: flex;
+    flex-direction: column;
     min-height: 100dvh;
-    width: 100%;
-    display: block;
-    overflow-x: hidden;
 }
 
 main {
