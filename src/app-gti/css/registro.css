@@ -165,49 +165,7 @@
 }
 /* endregion */
 
-/* Adaptado para pantallas grandes - para que no quede mucho espacio en blanco alrededor */
-@media screen and (min-width: 2000px) {
-    .registro {
-        padding: 10em 5em;
-    }
 
-    .registro-texto h2 {
-        font-size: 2.3em;
-    }
 
-    .registro-texto p {
-        font-size: 1.4em;
-    }
-
-    .registro-formulario {
-        gap: 2em;
-    }
-
-    .registro-formulario label {
-        font-size: 1.2em;
-    }
-
-    .registro-formulario input,
-    .registro-formulario select,
-    .input-base,
-    .seleccionador-dropdown {
-        font-size: 1.15em;
-        padding: 1em;
-    }
-
-    .registro-formulario .btn {
-        font-size: 1.3em;
-
-    }
-
-    .texto-secundario,
-    .enlace-secundario {
-        font-size: 1.3em;
-    }
-
-    .indicacion-contrasena {
-        font-size: 1.05em;
-    }
-}
 
 
