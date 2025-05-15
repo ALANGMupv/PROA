@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const datos = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
     if (!datos) return;
 
-    // Actualiza el título con el nombre de la asignatura (si existe el ID)
+    // Título dinámico
     const titulo = document.getElementById("titulo-asignacion");
     if (titulo) {
         titulo.textContent = `Asignación Profesores - ${datos.nombre}`;
@@ -12,28 +12,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const listaSeleccionados = document.getElementById("lista-profesor-nuevos");
     const inputBusqueda = document.getElementById("input-buscar-profesor");
 
-    let alumnosDisponibles = [];
+    let profesoresDisponibles = [];
     let seleccionados = [];
 
-    // Cargar usuarios
+    // Cargar todos los profesores del JSON
     fetch("/src/api/data/usuarios.json")
         .then(res => res.json())
         .then(data => {
-            alumnosDisponibles = data.filter(u => u.rol === "profesor");
+            profesoresDisponibles = data.filter(u => u.rol === "profesor");
             renderDisponibles();
         });
 
-    // Render alumnos disponibles con filtro
+    // Render disponibles (solo los asignados actualmente)
     function renderDisponibles(filtro = "") {
         listaDisponibles.innerHTML = "";
 
-        alumnosDisponibles.forEach(alumno => {
-            const nombreCompleto = `${alumno.nombre} ${alumno.apellidos}`;
+        profesoresDisponibles.forEach(prof => {
+            const nombreCompleto = `${prof.nombre} ${prof.apellidos}`;
+
+            // Mostrar solo si está en los actuales (colaboradores o titular)
+            const yaAsignado = datos.colaboradores.includes(nombreCompleto) || datos.titular === nombreCompleto;
+            if (!yaAsignado) return;
+
             if (filtro && !nombreCompleto.toLowerCase().includes(filtro)) return;
 
             const li = document.createElement("li");
             li.classList.add("item-usuario");
-
             li.innerHTML = `
                 <span>${nombreCompleto}</span>
                 <button class="btn-icono">
@@ -55,14 +59,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Render alumnos seleccionados
+    // Render seleccionados
     function renderSeleccionados() {
         listaSeleccionados.innerHTML = "";
 
         seleccionados.forEach(nombre => {
             const li = document.createElement("li");
             li.classList.add("item-usuario");
-
             li.innerHTML = `
                 <span>${nombre}</span>
                 <button class="btn-icono eliminar">
@@ -80,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Búsqueda dinámica
+    // Buscar profesores
     inputBusqueda.addEventListener("input", () => {
         const texto = inputBusqueda.value.toLowerCase();
         renderDisponibles(texto);
@@ -93,13 +96,13 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        console.log("Alumnos asignados a", datos.nombre, seleccionados);
-        mostrarNotificacion(`Asignados ${seleccionados.length} profesor(s) a ${datos.nombre}`);
+        console.log("Profesores asignados a", datos.nombre, seleccionados);
+        mostrarNotificacion(`Asignados ${seleccionados.length} profesor(es) a ${datos.nombre}`);
         seleccionados = [];
         renderSeleccionados();
     });
 
-    // Botón volver
+    // Volver atrás
     document.getElementById("btn-volver").addEventListener("click", (e) => {
         e.preventDefault();
         history.back();

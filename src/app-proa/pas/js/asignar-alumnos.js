@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const titulo = document.getElementById("titulo-asignacion");
     // Actualiza el título con el nombre de la asignatura (si existe el ID)
-    document.getElementById("nombre-asignatura").textContent = `– ${datos.nombre}`;
+    document.getElementById("titulo-asignacion").textContent = `Asignación Alumnos – ${datos.nombre}`;
     if (titulo) {
         titulo.textContent = `Asignación Alumnos - ${datos.nombre}`;
     }
