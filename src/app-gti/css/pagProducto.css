@@ -2,7 +2,7 @@
 .contenedor {
     position: relative;
     min-height: calc(100vh - 80px); /* Ajusta la altura restando la del header */
-    background: url('../img/imagenPagProducto.svg') no-repeat center center;
+    background: url('../img/imagenPagProducto.png') no-repeat center center;
     background-size: cover;
     display: flex;
     flex-direction: column;

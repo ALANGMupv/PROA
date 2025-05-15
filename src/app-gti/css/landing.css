@@ -14,7 +14,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: url('../img/fondoLanding.svg') no-repeat center center;
+    background: url('../img/fondoLanding.png') no-repeat center center;
     background-size: cover;
     filter: blur(4px);
     z-index: -2;
