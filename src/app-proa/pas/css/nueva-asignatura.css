@@ -1,0 +1,171 @@
+.datos{
+    margin: 0 auto;
+    width: 100%;
+}
+
+.contenedor-info-asignatura{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+.contenedor-info-asignatura label{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+}
+
+.linea{
+    border: solid 0.5px var(--color-bordes);
+    width: 100%;
+    align-self: center;
+}
+
+.contendor-codigo-nombre-creditos{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 1em;
+    width: 100%;
+    margin-bottom: 2em;
+}
+
+.contenedor-organizacion-academica {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1em;
+}
+
+.contendor-datos-organizacion {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5em;
+    width: 100%;
+}
+
+.contenedor-departameto-grupo,
+.contenedor-caracter-curso-semestre {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.contenedor-curso-semestre {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+.contenedor-curso-semestre label {
+    flex: 1;
+}
+
+
+.contenedor-caracter-curso-semestre{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+}
+
+.contenedor-curso-semestre{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 0.5em;
+    width: 100%;
+}
+
+#botones{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    gap: 2em;
+}
+
+#botones button{
+    width: 9em;
+    height: 2.5em;
+    padding: 0;
+}
+
+.error-texto {
+    font-size: 0.875em;
+    color: var(--color-mensajeError);
+    margin-top: 0.25em;
+}
+.input-error {
+    border-color: var(--color-mensajeError);
+}
+
+.fila-triple {
+    display: flex;
+    gap: 1em;
+}
+
+.fila-doble {
+    display: flex;
+    gap: 2em;
+    width: 100%;
+}
+
+.columna, .columna-segunda {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    flex: 1;
+}
+
+.fila {
+    display: flex;
+    gap: 1em;
+}
+
+.fila label {
+    flex: 1;
+    min-width: 0;
+}
+
+.input-base {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.input-con-icono {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+}
+
+.input-con-icono select {
+    appearance: none;
+    padding-right: 2.5em;
+    width: 100%;
+    min-width: 0;
+}
+
+.icono-dropdown {
+    position: absolute;
+    right: 1em;
+    pointer-events: none;
+    width: 1em;
+    height: auto;
+}
+label span {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+}
+
+
+
+
+
