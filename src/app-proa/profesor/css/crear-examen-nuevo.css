@@ -6,9 +6,10 @@
     margin: 0;
 }
 
-.contenido-asignatura{
-    width: 10vh;
-}
+/*cosa rara para que funcione pero arruina todo en 797-800px*/
+/*.contenido-asignatura{
+    width: 10vw;
+}*/
 
 .panel-asignaturas{
     display: flex;
@@ -53,11 +54,14 @@
     flex-direction: column;
     gap: 1em;
     width: 100%;
+    align-items: center;
 }
 
 .parametros label span{
     white-space: nowrap;
 }
+
+
 
 .puntos{
     display: flex;
@@ -72,7 +76,7 @@
     font-weight: 700;
 }
 
-.contenedor-valor-peso{
+.contenedor-valor-peso, .contenedor-fecha-hora{
     display: flex;
     flex-direction: row;
     gap: 1em;
@@ -101,6 +105,7 @@
 .peso{
     display: flex;
     align-items: baseline;
+    justify-content: center;
     gap: 0.33em;
     width: 100%;
 }
@@ -109,26 +114,32 @@
     width: 100%;
 }
 
-.contenedor-fecha-hora{
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-    width: 100%;
-}
-
-#dropdown-valor{
-     min-width: 180px;
-}
-
 .parametros label input{
     max-height: 2.25em;
     padding: 0.5em 0.5em;
 }
 
 .parametros label input[type="number"]{
+    max-width: 4em;
     min-width: 2.3em;
     padding: 0.5em 5px;
     text-align: center;
+}
+
+#dropdown-valor{
+    min-width: 180px;
+}
+
+.input-con-icono{
+    max-width: 10em;
+}
+
+.parametros label input[type="time"]{
+    max-width: 6em;
+}
+
+.parametros label input[type="date"]{
+    max-width: 10em;
 }
 
 .titulo-texto-pregunta{
@@ -202,6 +213,10 @@
     .parametros{
         flex-direction: column;
     }
+
+    .parametros label{
+        align-items: flex-start;
+    }
 }
 
 @media(min-width:800px)and (max-width: 1100px){
@@ -246,7 +261,6 @@
     }
 
     .input-con-icono{
-        max-width: unset;
         width: 100% ;
     }
 
