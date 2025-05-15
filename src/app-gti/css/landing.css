@@ -64,19 +64,6 @@
     text-decoration: none;
     display: inline-block;
 }
-
-.parrafo-principal {
-    font-size: 1.5em;
-}
-
-@media (max-width: 576px) {
-    .contenedor h1 {
-        font-size: 2.125em;
-    }
-    .parrafo-principal{
-        font-size: 1.125em;
-    }
-}
 /*endregion*/
 
 /* region --- Segunda sección --- */
@@ -91,6 +78,7 @@
     max-width: 1300px;
     margin: 0 auto;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .texto-diferenciador {
@@ -99,7 +87,6 @@
 
 .texto-diferenciador p {
     margin-top: 1.6em;
-    font-size: 1.15em;
 }
 
 .imagen-diferenciador {
@@ -141,12 +128,6 @@
         align-items: center;
         justify-content: center;
         margin-top: 0;
-    }
-}
-
-@media (max-width: 576px) {
-    .texto-diferenciador p {
-        font-size: 1em;
     }
 }
 
