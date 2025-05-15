@@ -1,6 +1,7 @@
 /* region --- CSS REGISTRO--- */
 .registro {
     padding: 6em 3em;
+    height: calc(100dvh - 80px);
 }
 
 .contenedor-registro {
