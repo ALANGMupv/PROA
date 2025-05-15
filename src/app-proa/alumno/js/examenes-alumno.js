@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         seccion.querySelectorAll(".bloque-examenes").forEach(b => b.remove());
 
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Éxamenes a realizar", data.realizar, 'realizar'));
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Éxamenes por revisar", data.porRevisar, 'porRevisar'));
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Éxamenes calificados", data.calificados, 'calificados'));
+        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes a realizar", data.realizar, 'realizar'));
+        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes por revisar", data.porRevisar, 'porRevisar'));
+        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes calificados", data.calificados, 'calificados'));
     }
 
     function crearBloque(titulo, examenes, tipo) {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         examenes.forEach(ex => {
             if (tipo === 'realizar') {
                 html += `
-                <div class="item-examen">
+                <div class="item-examen item-examen-realizar">
                     <div class="info">
                         <h4>${ex.titulo}</h4>
                         <p class="fecha-limite">Fecha límite: ${ex.fechaLimite}</p>

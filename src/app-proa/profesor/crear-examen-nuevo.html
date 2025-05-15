@@ -5,7 +5,7 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Realizar Examen</title>
+  <title>Crear Examen Nuevo</title>
   <link rel="stylesheet" href="../css/estilos.css">
   <link rel="stylesheet" href="../css/submenu-asignatura.css">
   <link rel="stylesheet" href="css/dropdown-grupo.css">
@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <button class="btn-oscuros-secundario btn-atras" onclick="volverAtras()">← Volver</button>
+      <button class="btn-oscuros-secundario btn-atras" id="volver" onclick="activarPopPup(this)">← Volver</button>
 
       <!-- SECCIÓN CREAR EXÁMENES PROFESOR -->
     <section class="panel-asignaturas fondoPanel">
@@ -78,7 +78,7 @@
               <label>
                 <span>Peso: *</span>
                 <div class="peso">
-                  <input type="number" class="input-base" id="peso-examen" required>
+                  <input type="number" class="input-base" id="peso-examen" max="40" required>
                   <span>%</span>
                 </div>
               </label>
@@ -92,13 +92,15 @@
                   <img src="../icons/dropdown.svg" alt="Flecha" class="icono-dropdown">
                 </div>
               </label>
-              <label>
-                <div class="puntos">
-                  <span>Puntos Totales:</span> <span id="puntos"></span>
-                </div>
-              </label>
             </div>
 
+          </div>
+          <div class="contenedor-puntos">
+            <label>
+              <div class="puntos">
+                <span>Puntos Totales:</span> <span id="puntos"></span>
+              </div>
+            </label>
           </div>
 
           <div class="pregunta-contenedor" data-id="pregunta1">
@@ -122,6 +124,7 @@
             </div>
 
             <div class="respuestas-contenedor">
+              <span>Selecciona la respuesta correcta</span>
               <div class="respuesta-opcion">
                 <div class="radio-grupo">
                   <input type="radio" id="pregunta1-a" name="pregunta1" required>
@@ -149,12 +152,12 @@
 
           <button class="btn-agregar"  onclick="agregarPregunta(this)" id="btn-agregar-pregunta">
             <span class="icono-mas">+</span>
-            Añadir respuesta
+            Añadir pregunta
           </button>
 
           <div id="botones">
             <button class="btn-oscuros-secundario btn-inicial" type="button" id="cancelar" onclick="activarPopPup(this)">Cancelar</button>
-            <button class="btn-oscuros-secundario btn-inicial" type="button">Guardar Borrador</button>
+            <button class="btn-oscuros-secundario btn-inicial" type="button" id="guardar" onclick="activarPopPup(this)">Guardar Borrador</button>
             <button class="btn-oscuros" type="button" id="publicar" onclick="activarPopPup(this)">Publicar</button>
           </div>
 
@@ -179,13 +182,23 @@
             </div>
           </div>
 
+          <!-- Pop-up guradado -->
+          <div id="popup-guardado" class="popup">
+            <div class="contenido-popup">
+              <p class="parrafo-principal">Se ha guardado exitosamente el borrador</p>
+              <div class="btn-popup">
+                <button class="btn-oscuros" id="aceptar-borrador" onclick="btnAceptar(this)">Aceptar</button>
+              </div>
+            </div>
+          </div>
+
           <!-- Pop-up de salir -->
           <div id="popup-salir" class="popup">
             <div class="contenido-popup">
               <p class="parrafo-principal">¿Estás seguro de que quieres salir y no guardar el borrador?</p>
               <div class="btn-popup">
-                <button class="btn-oscuros" id="aceptar-salir" onclick="btnAceptar(this)">Aceptar</button>
                 <button class="btn-oscuros-secundario" onclick="btnCancelar()">Cancelar</button>
+                <button class="btn-oscuros" id="aceptar-salir" onclick="btnAceptar(this)">Aceptar</button>
               </div>
             </div>
           </div>

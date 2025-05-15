@@ -1,6 +1,13 @@
 let contadorPreguntas = 1; // Ya existe Pregunta 1 en el HTML
 const dropdownValor = document.getElementById("dropdown-valor");
 let suma;
+
+document.getElementById("peso-examen").addEventListener("input", function () {
+    if (this.value > 40) {
+        this.value = 40;
+    }
+});
+
 function actualizarEstadoValorPreguntas() {
     const esAutomatico = dropdownValor.value === "automatico";
     const inputsValor = document.querySelectorAll(".input-pregunta-valor");
