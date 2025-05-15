@@ -192,6 +192,10 @@
     border: 1px solid #ccc;
 }
 
+textarea{
+    resize: none;
+}
+
 #botones{
     display: flex;
     justify-content: flex-end;
