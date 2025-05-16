@@ -110,9 +110,11 @@
     color: var(--color-textos);
 }
 
+
 @media (max-width: 1056px) {
 
     .registro {
+        height: unset;
         padding: 2.5em 3em;
     }
 

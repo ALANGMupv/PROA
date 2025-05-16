@@ -58,7 +58,21 @@
     padding: 0.8em 3em;
 }
 
+
+@media (max-width: 900px) {
+
+    .contacto {
+        height: unset;
+    }
+
+}
 @media (max-width: 768px) {
+
+    .contacto{
+        height: unset;
+    }
+
+
     .formulario-contacto {
         padding: 3em 2em;
     }
