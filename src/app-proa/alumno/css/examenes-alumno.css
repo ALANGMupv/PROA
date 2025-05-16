@@ -51,6 +51,13 @@
     font-weight: bold;
     font-size: 1.1em;
 }
+.icono-fecha {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 0.4em;
+}
+
 
 @media (max-width: 768px) {
     .item-examen {

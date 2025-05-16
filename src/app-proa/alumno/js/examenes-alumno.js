@@ -40,7 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="item-examen item-examen-realizar">
                     <div class="info">
                         <h4>${ex.titulo}</h4>
-                        <p class="fecha-limite">Fecha límite: ${ex.fechaLimite}</p>
+                        <p class="fecha-limite">
+                        <img src="/src/app-proa/icons/advertenciaFecha.svg" class="icono-fecha" alt="Icono advertencia">
+                        Fecha límite: ${ex.fechaLimite}</p>
                     </div>
                     <button class="btn" onclick="redireccionarPagina()">Comenzar</button>
                 </div>`;
