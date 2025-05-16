@@ -1,0 +1,83 @@
+{
+  "MAT101": {
+    "realizar": [
+      {
+        "titulo": "Parcial Álgebra",
+        "fechaLimite": "2025-05-03, 10:00",
+        "peso": 25
+      }
+    ],
+    "porRevisar": [],
+    "calificados": [
+      {
+        "titulo": "Álgebra 1",
+        "fechaEnvio": "2025-03-01, 12:00",
+        "fechaLimite": "2025-02-28, 23:59",
+        "nota": "8/10",
+        "peso": 20
+      }
+    ]
+  },
+  "ECO201": {
+    "realizar": [
+      {
+        "titulo": "Parcial Economía",
+        "fechaLimite": "2025-05-06, 11:00",
+        "peso": 25
+      }
+    ],
+    "porRevisar": [],
+    "calificados": [
+      {
+        "titulo": "Caso Empresa",
+        "fechaEnvio": "2025-03-15, 11:20",
+        "fechaLimite": "2025-03-14, 23:59",
+        "nota": "6.5/10",
+        "peso": 15
+      }
+    ]
+  },
+  "PRO303": {
+    "realizar": [
+      {
+        "titulo": "Examen Parcial",
+        "fechaLimite": "2025-05-02, 09:00",
+        "peso": 25
+      },
+      {
+        "titulo": "Cuestionario 1",
+        "fechaLimite": "2025-05-05, 23:59",
+        "peso": 10
+      }
+    ],
+    "porRevisar": [
+      {
+        "titulo": "Test unidad 3",
+        "fechaEnvio": "2025-03-02, 09:10",
+        "fechaLimite": "2025-03-01, 23:59",
+        "peso": 10
+      }
+    ],
+    "calificados": [
+      {
+        "titulo": "Test unidad 1",
+        "fechaEnvio": "2025-03-02, 09:10",
+        "fechaLimite": "2025-03-01, 23:59",
+        "nota": "6.5/10",
+        "peso": 10
+      },
+      {
+        "titulo": "Test unidad 2",
+        "fechaEnvio": "2025-03-24, 17:15",
+        "fechaLimite": "2025-03-23, 23:59",
+        "nota": "7.5/10",
+        "peso": 15
+      }
+    ],
+    "borradores": [
+      {
+        "titulo": "Cuestionario"
+      }
+    ]
+  }
+}

@@ -6,71 +6,119 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Catálogo de módulos</title>
+
+    <!-- Estilos globales y específicos -->
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/catalogo.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <!-- Scripts para insertar el header dinámicamente y gestionar el formulario de sugerencias -->
     <script src="js/header.js" defer></script>
     <script src="js/catalogo.js" defer></script>
 </head>
 <body>
 
-<!-- Header - En el archivo js está el html en sí, según esté logueado se muestra uno y si no lo está otro. -->
+<!-- HEADER (generado dinámicamente según login) -->
 <div id="contenedor-header"></div>
-<!-- Cerramos sección header -->
 
+<!-- MAIN CONTENIDO CATÁLOGO -->
 <main class="catalogo">
+
+    <!-- TÍTULO DE CATÁLOGO -->
     <section class="catalogo-titulo">
         <h2>Catálogo de módulos</h2>
         <p class="parrafo-principal">Navega nuestro catálogo de módulos educativos</p>
     </section>
 
+    <!-- MÓDULO PROA -->
     <section class="modulo">
         <div class="modulo-contenido">
+            <!-- Logo -->
             <div class="logo-proa-container">
-            <img src="/src/app-proa/icons/logoAzul.svg" alt="Logo PROA" class="logo-proa">
+                <img src="img/logoAzul.svg" alt="Logo PROA" class="logo-proa">
             </div>
+
+            <!-- DESCRIPCIÓN DE MÓDULO -->
             <div class="modulo-texto">
                 <h3>PROA</h3>
-                <p class="parrafo-secundario">
-                    Descripción:
-                </p>
+                <p class="parrafo-secundario">Descripción:</p>
                 <p class="parrafo-terciario">
-                    PROA es un campus virtual que fortalece la comunicación entre docentes y alumnos, integrando funcionalidades como exámenes, calificaciones y horarios en un entorno claro y accesible. Diseñado para adaptarse al ritmo académico, facilita una experiencia educativa conectada y sin complicaciones. 
+                    PROA es un campus virtual que fortalece la comunicación entre docentes y alumnos, integrando funcionalidades como exámenes, calificaciones y horarios en un entorno claro y accesible. Diseñado para adaptarse al ritmo académico, facilita una experiencia educativa conectada y sin complicaciones.
                 </p>
             </div>
+
+            <!-- BOTONES -->
             <div class="modulo-botones">
-                <button id="btnProbarDemo" class="btnPROA">Probar DEMO</button>
-                <button id="btnSolicitarInfo" class="btnPROA-secundario">Solicitar información</button>
+                <button id="btnProbarDemo" class="btn-oscuros">Probar DEMO</button>
+                <button id="btnVisualizarProd" class="btn-oscuros-secundario">Visualizar Producto</button>
             </div>
         </div>
     </section>
 
+    <!-- SECCIÓN DE SUGERENCIA -->
     <section class="sugerencia">
         <h3>¿Te gustaría ver otro módulo?</h3>
         <p class="parrafo-secundario">
             Ayúdanos a mejorar. Cuéntanos qué tipo de módulo te gustaría que ofrezcamos en el futuro.
         </p>
+
+        <!-- FORMULARIO DE SUGERENCIAS -->
         <form class="formulario-sugerencia">
             <div class="fila-doble">
                 <div class="campo">
                     <label for="nombre">Nombre: *</label>
-                    <input type="text" id="nombre" class="input-contacto" placeholder="Tu nombre">
+                    <input type="text" id="nombre" class="input-contacto" placeholder="Tu nombre" required>
                 </div>
                 <div class="campo">
                     <label for="email">Correo electrónico: *</label>
-                    <input type="email" id="email" class="input-contacto" placeholder="tu@correo.com">
+                    <input type="email" id="email" class="input-contacto" placeholder="tu@correo.com" required>
                 </div>
             </div>
+
             <div class="campo campo-largo">
                 <label for="sugerencia">Sugerencia de módulo: *</label>
-                <textarea id="sugerencia" rows="5" class="input-contacto" placeholder="Describe tu idea..."></textarea>
+                <textarea id="sugerencia" rows="5" class="input-contacto" placeholder="Describe tu idea..." required></textarea>
             </div>
+
             <div class="boton-sugerencia">
                 <button type="submit" class="btn">Enviar sugerencia</button>
             </div>
         </form>
     </section>
 </main>
+
+<!-- Footer-->
+<footer>
+    <div class="contenido-footer">
+
+        <!-- Primera columna-->
+        <div class="columna-footer columna-logo">
+            <img src="img/gtiBlanco.svg" alt="logo">
+            <p class="elementos-footer">Liderando la innovación en tecnología educativa</p>
+        </div>
+
+        <!-- Segunda columna-->
+        <div class="columna-footer">
+            <h4>Enlaces rápidos</h4>
+            <ul>
+                <li><a class="elementos-footer" href="catalogo.html">Catálogo</a></li>
+                <li><a class="elementos-footer" href="preguntasFrecuentes.html">Preguntas Frecuentes</a></li>
+                <li><a class="elementos-footer" href="contacto.html">Contacto</a></li>
+            </ul>
+        </div>
+
+        <!-- Tercera columna-->
+        <div class="columna-footer">
+            <h4>Contacto</h4>
+            <ul>
+                <li class="elementos-footer">Email: info@gti.edu</li>
+                <li class="elementos-footer">Tel: +34 900 123 456</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<!-- Fin del footer-->
 
 </body>
 </html>

@@ -1,14 +1,13 @@
+// Validación del formulario de sugerencias
 document.querySelector('.formulario-sugerencia')?.addEventListener('submit', function (e) {
     e.preventDefault();
-
     const formulario = this;
     let valido = true;
 
-    // Limpiar errores anteriores
+    // Eliminar mensajes de error previos
     formulario.querySelectorAll('label small').forEach(el => el.remove());
 
     const campos = formulario.querySelectorAll('input, textarea');
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     function mostrarError(campo, mensaje) {
@@ -22,9 +21,10 @@ document.querySelector('.formulario-sugerencia')?.addEventListener('submit', fun
         valido = false;
     }
 
+    // Validar campos
     campos.forEach(campo => {
         const valor = campo.value.trim();
-        if (valor === '') {
+        if (!valor) {
             mostrarError(campo, 'Campo obligatorio');
         } else if (campo.id === 'email' && !emailRegex.test(valor)) {
             mostrarError(campo, 'Correo inválido');
@@ -35,44 +35,60 @@ document.querySelector('.formulario-sugerencia')?.addEventListener('submit', fun
 
     if (!valido) return;
 
-    // Mostrar mensaje de éxito
+    // Crear fondo difuminado detrás del toast
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backdropFilter = 'blur(4px)';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+    overlay.style.zIndex = '999';
+
+    // Crear el toast encima del fondo
     const toast = document.createElement('div');
     toast.textContent = '¡Gracias por tu sugerencia!';
     toast.style.position = 'fixed';
-    toast.style.bottom = '20px';
-    toast.style.right = '20px';
+    toast.style.top = '50%';
+    toast.style.left = '50%';
+    toast.style.transform = 'translate(-50%, -50%)';
     toast.style.padding = '1em 2em';
+    toast.style.width = 'max-content';
+    toast.style.maxWidth = '80%';
+    toast.style.fontSize = '1.15rem';
     toast.style.backgroundColor = 'var(--color-principal)';
     toast.style.color = '#fff';
-    toast.style.borderRadius = '8px';
-    toast.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+    toast.style.borderRadius = '12px';
+    toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
     toast.style.fontFamily = 'var(--fuente-lato)';
+    toast.style.textAlign = 'center';
+    toast.style.zIndex = '1000';
 
+    // Añadir al DOM
+    document.body.appendChild(overlay);
     document.body.appendChild(toast);
 
+    // Esperar, quitar el toast y resetear el formulario
     setTimeout(() => {
         toast.remove();
+        overlay.remove();
         formulario.reset();
     }, 1500);
+
 });
 
-//botones redirigen dependiendo de si está logueado o no el usuario
+// Redirección condicional según login
 document.addEventListener('DOMContentLoaded', () => {
     const btnDemo = document.getElementById('btnProbarDemo');
-    const btnInfo = document.getElementById('btnSolicitarInfo');
-
-    // Simulación de login: revisa si hay un usuario guardado en localStorage/sessionStorage
+    const btnProd = document.getElementById('btnVisualizarProd');
     const usuarioGTI = JSON.parse(localStorage.getItem('usuario'));
 
     btnDemo?.addEventListener('click', () => {
-        if (usuarioGTI) {
-            window.location.href = '../app-proa/index.html'; // login de PROA
-        } else {
-            window.location.href = 'login.html'; // login de GTI
-        }
+        window.location.href = usuarioGTI ? '../app-proa/index.html' : 'login.html';
     });
 
-    btnInfo?.addEventListener('click', () => {
-        window.location.href = 'contacto.html';
+    btnProd?.addEventListener('click', () => {
+        window.location.href = 'pagProducto.html';
     });
 });

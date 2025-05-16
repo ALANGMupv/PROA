@@ -1,5 +1,7 @@
+/* region --- CSS REGISTRO--- */
 .registro {
-    padding: 4em 3em;
+    padding: 6em 3em;
+    height: calc(100dvh - 80px);
 }
 
 .contenedor-registro {
@@ -108,7 +110,14 @@
     color: var(--color-textos);
 }
 
+
 @media (max-width: 1056px) {
+
+    .registro {
+        height: unset;
+        padding: 2.5em 3em;
+    }
+
     .contenedor-registro {
         flex-direction: column;
         gap: 3.5em;
@@ -145,4 +154,21 @@
         margin-left: 0;
     }
 }
+/* endregion */
+
+/* region --- MENSAJES DE ERROR FORMULARIO REGISTRO (MÁS PEQUEÑO) --- */
+.error-texto {
+    font-size: 0.75em;
+}
+
+@media (max-width: 768px) {
+    .error-texto {
+        font-size: 0.6em;
+    }
+}
+/* endregion */
+
+
+
+
 

@@ -65,25 +65,44 @@ document.querySelector('.formulario-contacto')?.addEventListener('submit', funct
     // Si algún campo no es válido, detenemos el proceso
     if (!formularioValido) return;
 
-    // Si todo es válido, mostramos un toast de éxito
+    // Crear fondo difuminado detrás del toast
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backdropFilter = 'blur(4px)';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+    overlay.style.zIndex = '999';
+
+    // Crear el toast encima del fondo
     const toast = document.createElement('div');
     toast.textContent = 'Consulta enviada correctamente';
     toast.style.position = 'fixed';
-    toast.style.bottom = '20px';
-    toast.style.right = '20px';
+    toast.style.top = '50%';
+    toast.style.left = '50%';
+    toast.style.transform = 'translate(-50%, -50%)';
     toast.style.padding = '1em 2em';
+    toast.style.width = 'max-content';
+    toast.style.maxWidth = '80%';
+    toast.style.fontSize = '1.15rem';
     toast.style.backgroundColor = 'var(--color-principal)';
     toast.style.color = '#fff';
-    toast.style.borderRadius = '8px';
-    toast.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+    toast.style.borderRadius = '12px';
+    toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
     toast.style.fontFamily = 'var(--fuente-lato)';
+    toast.style.textAlign = 'center';
+    toast.style.zIndex = '1000';
 
-    // Añadimos el toast al cuerpo del documento
+    // Añadir al DOM
+    document.body.appendChild(overlay);
     document.body.appendChild(toast);
 
-    // Ocultamos el toast y limpiamos el formulario después de 2 segundos
+    // Ocultamos el toast y limpiamos el formulario después de 1.5 segundos
     setTimeout(() => {
         toast.remove();
-        formulario.reset(); // Limpiamos todos los campos del formulario
+        overlay.remove();
+        formulario.reset();
     }, 1500);
 });

@@ -11,11 +11,8 @@ body {
 
 .panel-login {
     background-color: var(--color-panelesBlancoPuro);
-    margin: 1em;
     padding-top: 0;
-    padding-bottom: 3.5em;
-    padding-right: 2.5em;
-    padding-left: 2.5em;
+    padding-bottom: 3em;
     border-radius: 10px;
     border: 2px solid var(--color-bordes);
     display: flex;
@@ -26,13 +23,26 @@ body {
     text-align: center;
 }
 
+.formulario-login {
+    width: 100%;
+    padding-left: 4em;
+    padding-right: 4em;
+}
+
+.formulario-login input,
+.formulario-login button {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
 .logo-login {
     width: 280px;
-    height: 230px;
+    height: 170px;
 }
 
 h2 {
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
 }
 
 label {
@@ -54,21 +64,48 @@ label {
     border-color: var(--color-primario);
 }
 
-.btn {
+.btn-oscuros {
+    display: inline-block;
     width: 100%;
     margin-top: 0.5em;
+}
+
+.btn-oscuros-secundario {
+    display: inline-block;
+    width: 100%;
+    margin-top: 1em;
+}
+
+
+.demo-indicador {
+    font-size: 1.1em;
+    color: var(--color-textos);
+    font-style: italic;
+    margin-bottom: 1.5em;
 }
 
 @media (max-width: 768px) {
     .panel-login {
         max-width: 550px;
-        padding-top: 0;
-        padding-bottom: 2em;
-        padding-right: 1.5em;
-        padding-left: 1.5em;
+        margin: 1.5em;
     }
 
     .logo-login {
         width: 200px;
+    }
+
+    .demo-indicador {
+        padding-left: 0.6em;
+        padding-right: 0.6em;
+    }
+
+    .formulario-login {
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
+    h2{
+        padding-left: 0.6em;
+        padding-right: 0.6em;
     }
 }

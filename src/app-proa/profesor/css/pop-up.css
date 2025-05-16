@@ -1,0 +1,33 @@
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.contenido-popup {
+    display: flex;
+    background: white;
+    padding: 1.5em;
+    border-radius: 8px;
+    text-align: center;
+    gap: 1em;
+    flex-direction: column;
+}
+
+.btn-popup {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1.2em;
+}
+
+.btn-popup button{
+    width: 45%;
+}
+

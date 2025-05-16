@@ -1,0 +1,217 @@
+.contenido-principal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2em;
+    background-color: var(--color-fondoPROAGris);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-atras {
+    margin-left: 2em;
+    align-self: flex-start;
+}
+
+/* Panel principal de entregas */
+.panel-contenido.fondoPanel {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    box-sizing: border-box;
+    margin-top: 2em;
+}
+
+/* Contenedor con lista y detalle */
+.contenedor-entregas {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+.input-base{
+    position: relative;
+    width: 100%;
+    border: none;
+}
+
+.input-textoBusqueda {
+    width: 100%;
+    padding-left: 2.5em;
+    border: 1px solid var(--color-bordes);
+}
+
+.icono-buscador {
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    width: 1em;
+    height: auto;
+    pointer-events: none;
+}
+
+
+/* Lista de alumnos */
+.lista-alumnos {
+    flex: 1 1 300px;
+    background-color: var(--color-fondoPROAGris);
+    padding: 1em;
+    border-radius: 5px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/* Alumnos */
+.lista-alumnos div {
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.alumno-item {
+    padding: 0.5em;
+    border-bottom: 1px solid var(--color-bordes);
+    border-radius: 5px 5px 0 0;
+}
+
+.alumno-item:hover {
+    background-color: var(--color-terciario);
+}
+
+.alumno-item.activo {
+    background-color: var(--color-terciario);
+    border: 1px solid #a7ceff;
+    border-radius: 5px;
+}
+
+/* Encabezado del detalle */
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Detalle de entrega */
+#detalle-entrega.entrega-estilo-alumno {
+    flex: 2 1 500px;
+    padding-right: 1em;
+    max-height: 500px;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 5px;
+    margin: unset;
+}
+
+#detalle-entrega .btn-atras {
+    padding: 0.5em 1.25em;
+    font-size: 1em;
+}
+
+/* Preguntas */
+.entrega-estilo-alumno .pregunta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.entrega-estilo-alumno .opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.entrega-estilo-alumno .calificacion-pregunta {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+    color: var(--color-primario);
+}
+
+/* Opciones */
+.boton-opcion {
+    background-color: rgba(204, 204, 204, 0.18);
+}
+.boton-opcion:hover {
+    background-color: rgba(204, 204, 204, 0.18);
+}
+
+.boton-opcion-correcta-deshabilitado {
+    background-color: var(--color-exito) !important;
+    cursor: not-allowed;
+}
+.boton-opcion-incorrecta-deshabilitado {
+    background-color: var(--color-inputError) !important;
+    cursor: not-allowed;
+}
+.boton-opcion-deshabilitado {
+    cursor: not-allowed;
+}
+
+.boton-opcion-correcta-deshabilitado,
+.boton-opcion-incorrecta-deshabilitado,
+.boton-opcion-deshabilitado {
+    font-size: 1em;
+    padding: 0.75em 1em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    border-radius: 8px;
+}
+
+/* Scroll personalizado */
+.entrega-estilo-alumno::-webkit-scrollbar {
+    width: 8px;
+}
+.entrega-estilo-alumno::-webkit-scrollbar-thumb {
+    background-color: var(--color-bordes);
+    border-radius: 4px;
+}
+.entrega-estilo-alumno::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primario);
+}
+
+/* ===== MEDIA QUERY ===== */
+@media (max-width: 850px) {
+    .contenedor-entregas {
+        flex-direction: column;
+    }
+
+    .lista-alumnos {
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .entrega-estilo-alumno {
+        width: 100%;
+        max-height: 60vh; /* o 70vh si prefieres */
+        overflow-y: auto;
+        padding: 1em;
+        box-sizing: border-box;
+        background-color: white; /* opcional para contraste */
+        border-radius: 8px;
+    }
+
+    .entrega-estilo-alumno .pregunta {
+        gap: 0.75rem;
+    }
+
+    .entrega-estilo-alumno .btn-atras {
+        font-size: 0.9em;
+        padding: 0.5em 1em;
+
+        #detalle-entrega.entrega-estilo-alumno {
+            width: 100%;
+            max-height: unset;
+            padding-right: 0;
+        }
+
+        #detalle-entrega .btn-atras {
+            font-size: 0.9em;
+            padding: 0.5em 1em;
+        }
+    }
+}

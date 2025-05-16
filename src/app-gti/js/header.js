@@ -84,8 +84,23 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;  // FIN DE LA SECCIÓN CÓDIGO HTML DEL HEADER
 
-    // Interacciones del menú
+    // Añadir clase activa al enlace correspondiente (queda marcado en el header la página donde se encuentra el usuario)
+    const enlacesMenu = document.querySelectorAll("header nav.activo a");
 
+    const rutaActual = location.pathname.split('/').pop() || 'index.html';
+
+    enlacesMenu.forEach(enlace => {
+        const href = enlace.getAttribute("href");
+
+        if (rutaActual === 'index.html') return; // No marcamos ninguno en el index
+
+        if (href.includes(rutaActual)) {
+            enlace.classList.add("activo-pagina");
+        }
+    });
+
+
+    // Interacciones del menú
     const btnHamburguesa = document.getElementById("hamburguesa");
     const menuMovil = document.querySelector("nav.menu-movil");
     const btnCerrar = document.getElementById("cerrar-menu");
@@ -103,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Lógica del popup
-
     const mostrarPopup = (mensajeTexto, onConfirmar, onCancelar) => {
         const popup = document.querySelector(".popup");
         if (!popup) return;
@@ -167,5 +181,3 @@ window.addEventListener('pageshow', (event) => {
         window.location.reload();
     }
 });
-
-

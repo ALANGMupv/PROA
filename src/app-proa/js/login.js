@@ -10,13 +10,14 @@ if (usuarioLogueado) {
                 (u.rol === "alumno" || u.rol === "profesor" || u.rol === "pas")
             );
 
-            if (usuarioValido) {
-                if (usuarioValido.rol === "pas") {
-                    window.location.replace('../app-proa/pas/index.html');
-                } else {
-                    window.location.replace('../app-proa/inicio-asignaturas.html');
-                }
+            if (usuarioValido.rol === "pas") {
+                window.location.replace('pas/index.html');
+            } else if (usuarioValido.rol === "alumno") {
+                window.location.replace('alumno/index.html');
+            } else if (usuarioValido.rol === "profesor") {
+                window.location.replace('profesor/index.html');
             }
+
         });
 }
 
@@ -75,46 +76,85 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
 
             if (usuario) {
                 localStorage.setItem('usuario', JSON.stringify(usuario));
+                const overlay = document.createElement('div');
+                overlay.style.position = 'fixed';
+                overlay.style.top = 0;
+                overlay.style.left = 0;
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backdropFilter = 'blur(4px)';
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+                overlay.style.zIndex = '999';
 
                 const toast = document.createElement('div');
                 toast.textContent = 'Inicio de sesión exitoso. Redirigiendo...';
                 toast.style.position = 'fixed';
-                toast.style.bottom = '20px';
-                toast.style.right = '20px';
+                toast.style.top = '50%';
+                toast.style.left = '50%';
+                toast.style.transform = 'translate(-50%, -50%)';
                 toast.style.padding = '1em 2em';
+                toast.style.width = 'max-content';
+                toast.style.maxWidth = '80%';
+                toast.style.fontSize = '1.15rem';
                 toast.style.backgroundColor = 'var(--color-primario)';
                 toast.style.color = '#fff';
-                toast.style.borderRadius = '8px';
-                toast.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-                toast.style.fontFamily = 'var(--fuente-principal)';
+                toast.style.borderRadius = '12px';
+                toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
+                toast.style.fontFamily = 'var(--fuente-lato)';
+                toast.style.textAlign = 'center';
+                toast.style.zIndex = '1000';
+
+                document.body.appendChild(overlay);
                 document.body.appendChild(toast);
 
                 setTimeout(() => {
                     toast.remove();
+                    overlay.remove();
                     if (usuario.rol === "pas") {
-                        window.location.href = '../app-proa/pas/index.html';
-                    } else {
-                        window.location.href = '../app-proa/inicio-asignaturas.html';
+                        window.location.replace('pas/index.html');
+                    } else if (usuario.rol === "alumno") {
+                        window.location.replace('alumno/index.html');
+                    } else if (usuario.rol === "profesor") {
+                        window.location.replace('profesor/index.html');
                     }
-                }, 2000);
+                }, 1500);
 
             } else {
+                const overlayError = document.createElement('div');
+                overlayError.style.position = 'fixed';
+                overlayError.style.top = 0;
+                overlayError.style.left = 0;
+                overlayError.style.width = '100%';
+                overlayError.style.height = '100%';
+                overlayError.style.backdropFilter = 'blur(4px)';
+                overlayError.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+                overlayError.style.zIndex = '999';
+
                 const toastError = document.createElement('div');
                 toastError.textContent = 'Usuario o contraseña incorrectos';
                 toastError.style.position = 'fixed';
-                toastError.style.bottom = '20px';
-                toastError.style.right = '20px';
+                toastError.style.top = '50%';
+                toastError.style.left = '50%';
+                toastError.style.transform = 'translate(-50%, -50%)';
                 toastError.style.padding = '1em 2em';
-                toastError.style.backgroundColor = '#FF6666';
+                toastError.style.width = 'max-content';
+                toastError.style.maxWidth = '80%';
+                toastError.style.fontSize = '1.15rem';
+                toastError.style.backgroundColor = '#c45f5f';
                 toastError.style.color = '#fff';
-                toastError.style.borderRadius = '8px';
-                toastError.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+                toastError.style.borderRadius = '12px';
+                toastError.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
                 toastError.style.fontFamily = 'var(--fuente-lato)';
+                toastError.style.textAlign = 'center';
+                toastError.style.zIndex = '1000';
+
+                document.body.appendChild(overlayError);
                 document.body.appendChild(toastError);
 
                 setTimeout(() => {
                     toastError.remove();
-                }, 2000);
+                    overlayError.remove();
+                }, 850);
             }
         })
         .catch(error => {

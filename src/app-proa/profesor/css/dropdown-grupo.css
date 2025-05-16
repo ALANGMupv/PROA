@@ -1,0 +1,89 @@
+/* Estilos para el dropdown de grupo y sobreescritura pra visualización correcta en los dropdowns de profesor */
+.cabecera-dropdown-fija-profesor {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1.5em 3em 0 2em;
+}
+
+.cabecera-dropdown-fija-profesor .input-con-icono {
+    position: relative;
+    flex: 1 1 auto;
+    max-width: 250px;
+}
+
+.grupo-dropdown select,
+.asignatura-dropdown select {
+    width: 100%;
+    padding-right: 2.5em;
+    background-color: var(--color-panelesBlancoPuro);
+    color: var(--color-primario);
+    font-weight: 500;
+    font-size: 1em;
+    border-radius: 6px;
+    border: 2px solid var(--color-primario);
+    cursor: pointer;
+
+}
+
+.cabecera-dropdown-fija-profesor .icono-dropdown {
+    position: absolute;
+    top: 50%;
+    right: 1em;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+#dropdown-asignaturas{
+    margin-left: 0.8em;
+    font-size: 1em;
+}
+
+@media (max-width: 850px) {
+    .cabecera-dropdown-fija-profesor {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1em;
+        padding: 1em;
+    }
+
+    .grupo-dropdown,
+    .asignatura-dropdown {
+        display: flex;
+        flex: 1 1 48%;
+        max-width: 100%;
+    }
+
+    .cabecera-dropdown-fija-profesor .input-con-icono {
+        width: 100%;
+    }
+
+    .grupo-dropdown select,
+    .asignatura-dropdown select {
+        font-size: 1em;
+    }
+
+    .contenedor-dropdowns {
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
+        justify-content: space-between;
+    }
+
+    .contenedor-dropdowns .grupo-dropdown,
+    .contenedor-dropdowns .asignatura-dropdown {
+        flex: 1 1 50%;
+        max-width: 50%;
+    }
+
+    .submenu-toggle-btn-cabecera {
+        max-width: 100%;
+    }
+
+    #dropdown-asignaturas{
+        margin-left: 0;
+
+    }
+}
+
+

@@ -1,0 +1,132 @@
+.fondoPanel{
+    overflow: auto;
+    max-height: calc(100vh - 80px - 6em);
+}
+
+h4{
+    margin-bottom: 0.75em;
+}
+
+.bloque-examenes{
+    display: flex;
+    flex-direction: column;
+}
+
+#btn-crear{
+    padding: 0.5em 0.75em;
+}
+
+.bloque-examenes button{
+    align-self: flex-end;
+}
+
+.icono-item{
+    flex-direction: row;
+    width: unset;
+    font-size: unset;
+    gap: 0.5em;
+}
+
+.icono-item img{
+    margin: 0;
+    width: 1em;
+    height: 1em;
+}
+
+
+.item-examen {
+    background-color: var(--color-fondoPROAGris);
+    padding: 1.5em;
+    border: 1px solid var(--color-bordes);
+    border-radius: 5px;
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.item-examen:hover {
+    box-shadow: 0 0 4px #CCCCCC;
+    border: 1px solid var(--color-bordes);
+    cursor: pointer;
+}
+
+.titulo-fecha-envio{
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+
+}
+
+.btn-visualizar-entregas{
+    font-size: 1em;
+    border: solid 1px;
+}
+
+.item-examen-realizar {
+    background-color: var(--color-panelesBlancoPuro);
+    padding: 1.5em;
+    border: 1px solid var(--color-bordes);
+    border-radius: 5px;
+    margin-top: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.item-examen.solo-info {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.item-examen .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.25em;
+    width: 100%;
+}
+
+.fecha-limite {
+    color: var(--color-mensajeError);
+    font-size: 0.9em;
+}
+
+.fecha-envio {
+    font-size: 0.9em;
+    color: #777;
+}
+
+.nota {
+    color: var(--color-primario);
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+@media (max-width: 500px) {
+    .item-examen {
+        flex-wrap: nowrap;
+    }
+
+    .item-examen .info{
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75em;
+    }
+
+    .bloque-examenes button{
+        align-self: unset;
+    }
+
+    #btn-crear{
+        margin-top: 1em;
+
+    }
+
+
+}
+

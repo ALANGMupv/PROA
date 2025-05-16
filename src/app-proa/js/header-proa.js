@@ -1,3 +1,6 @@
+// ======================
+// CARGA DEL HEADER PROA
+// ======================
 document.addEventListener('DOMContentLoaded', () => {
     const usuario = JSON.parse(localStorage.getItem('usuario'));
 
@@ -8,98 +11,124 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.classList.add(`rol-${usuario.rol}`);
 
+    // Crear y cargar CSS del header
     const linkHeaderCSS = document.createElement('link');
     linkHeaderCSS.rel = 'stylesheet';
     linkHeaderCSS.href = '/src/app-proa/css/header-proa.css';
-    document.head.appendChild(linkHeaderCSS);
 
-    const rutaBase = location.pathname.includes('/pas/') ? '../' : './';
+    // Esperar a que el CSS esté completamente cargado
+    linkHeaderCSS.onload = () => {
+        const rutaBase = location.pathname.includes('/app-proa/pas/') ||
+        location.pathname.includes('/app-proa/alumno/') ||
+        location.pathname.includes('/app-proa/profesor/')
+            ? '../'
+            : './';
 
-    fetch(`${rutaBase}header-proa.html`)
-        .then(res => res.text())
-        .then(html => {
-            document.body.insertAdjacentHTML('afterbegin', html);
+        fetch(`${rutaBase}header-proa.html`)
+            .then(res => res.text())
+            .then(html => {
+                document.body.insertAdjacentHTML('afterbegin', html);
 
-            requestAnimationFrame(() => {
-                const nombreCompleto = `${usuario.nombre} ${usuario.apellidos}`;
-                const etiquetaRol =
-                    usuario.rol === 'alumno' ? ' (Alumno)' :
+                requestAnimationFrame(() => {
+                    const nombreCompleto = `${usuario.nombre} ${usuario.apellidos}`;
+                    const etiquetaRol = usuario.rol === 'alumno' ? ' (Alumno)' :
                         usuario.rol === 'profesor' ? ' (Profesor)' :
                             usuario.rol === 'pas' ? ' (PAS)' : '';
 
-                document.getElementById('nombre-usuario-header').textContent = etiquetaRol + " " + nombreCompleto;
-                document.getElementById('nombre-usuario-popover').textContent = etiquetaRol + " " + nombreCompleto;
+                    const nombreHeader = document.getElementById('nombre-usuario-header');
+                    const nombrePopover = document.getElementById('nombre-usuario-popover');
 
-                // Cargar notificaciones
-                fetch("../api/data/notificaciones.json")
-                    .then(res => res.json())
-                    .then(data => {
-                        const notificaciones = data[usuario.correo] || [];
-                        const contenedorPopover = document.getElementById("menu-avisos");
-                        contenedorPopover.innerHTML = "";
+                    if (nombreHeader) nombreHeader.textContent = `${etiquetaRol} ${nombreCompleto}`;
+                    if (nombrePopover) nombrePopover.textContent = `${etiquetaRol} ${nombreCompleto}`;
 
-                        if (notificaciones.length === 0) {
-                            const sinAvisos = document.createElement("div");
-                            sinAvisos.classList.add("aviso-item");
-                            sinAvisos.innerHTML = `<strong>No tienes notificaciones nuevas</strong>`;
-                            contenedorPopover.appendChild(sinAvisos);
-                        } else {
-                            notificaciones
-                                .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
-                                .forEach(n => {
+                    const logoLink = document.getElementById('logo-proa-link');
+                    if (logoLink) {
+                        if (usuario.rol === 'alumno') {
+                            logoLink.href = '../alumno/index.html';
+                        } else if (usuario.rol === 'profesor') {
+                            logoLink.href = '../profesor/index.html';
+                        } else if (usuario.rol === 'pas') {
+                            logoLink.href = '../pas/index.html';
+                        }
+                    }
+
+                    // Notificaciones
+                    fetch(`${rutaBase}../api/data/notificaciones.json`)
+                        .then(res => res.json())
+                        .then(data => {
+                            const notificaciones = data[usuario.correo] || [];
+                            const contenedorPopover = document.getElementById("menu-avisos");
+                            contenedorPopover.innerHTML = "";
+
+                            if (notificaciones.length === 0) {
+                                const sinAvisos = document.createElement("div");
+                                sinAvisos.classList.add("aviso-item");
+                                sinAvisos.innerHTML = `<strong>No tienes notificaciones nuevas</strong>`;
+                                contenedorPopover.appendChild(sinAvisos);
+                            } else {
+                                const yaVistas = localStorage.getItem(`notificacionesVistas_${usuario.correo}`) === 'true';
+                                const botonNotificacion = document.querySelector(".boton-notificacion");
+                                if (botonNotificacion && !yaVistas) {
+                                    const burbuja = document.createElement("span");
+                                    burbuja.classList.add("burbuja-notificacion");
+                                    botonNotificacion.appendChild(burbuja);
+                                }
+
+                                notificaciones.sort((a, b) => new Date(b.fecha) - new Date(a.fecha)).forEach(n => {
                                     const aviso = document.createElement("div");
                                     aviso.classList.add("aviso-item");
                                     aviso.innerHTML = `<strong>${n.texto}</strong><div class="fecha-aviso">${n.fecha}</div>`;
                                     contenedorPopover.appendChild(aviso);
                                 });
-                        }
+                            }
+                        });
 
+                    // Mostrar popover
+                    const botonNotificacion = document.querySelector(".boton-notificacion");
+                    const menuAvisos = document.getElementById("menu-avisos");
+                    botonNotificacion?.addEventListener("click", e => {
+                        e.preventDefault();
+                        if (menuAvisos.matches(":popover-open")) {
+                            menuAvisos.hidePopover();
+                        } else {
+                            menuAvisos.showPopover();
+                        }
+                        localStorage.setItem(`notificacionesVistas_${usuario.correo}`, 'true');
+                        botonNotificacion.querySelector(".burbuja-notificacion")?.remove();
                     });
 
-                // Manejar popover notificaciones
-                const botonNotificacion = document.querySelector(".boton-notificacion");
-                const menuAvisos = document.getElementById("menu-avisos");
-                const burbujaNotificacion = document.querySelector(".burbuja-notificacion");
+                    // Cierre de sesión
+                    const cerrarSesion = document.getElementById("cerrar-sesion");
+                    const popup = document.querySelector(".popup");
+                    const confirmar = popup?.querySelector(".popup-confirmar");
+                    const cancelar = popup?.querySelector(".popup-cancelar");
 
-                botonNotificacion?.addEventListener("click", e => {
-                    e.preventDefault();
-                    if (menuAvisos.matches(":popover-open")) {
-                        menuAvisos.hidePopover();
-                    } else {
-                        menuAvisos.showPopover();
-                    }
-                    burbujaNotificacion?.remove();
-                });
+                    cerrarSesion?.addEventListener("click", e => {
+                        e.preventDefault();
+                        document.getElementById("menu-usuario")?.hidePopover();
+                        popup?.classList.add("activo");
+                        document.body.classList.add("menu-abierto");
+                    });
 
-                // Cierre de sesión con popup
-                const cerrarSesion = document.getElementById("cerrar-sesion");
-                const popup = document.querySelector(".popup");
-                const confirmar = popup.querySelector(".popup-confirmar");
-                const cancelar = popup.querySelector(".popup-cancelar");
+                    confirmar?.addEventListener("click", () => {
+                        localStorage.removeItem("usuario");
+                        localStorage.removeItem("notificacionesVistas_" + usuario.correo);
+                        let rutaLogout = '../index.html';
+                        window.location.replace(rutaLogout);
+                    });
 
-                cerrarSesion.addEventListener("click", e => {
-                    e.preventDefault();
-                    popup.classList.add("activo");
-                    document.body.classList.add("menu-abierto");
-                });
-
-                confirmar.addEventListener("click", () => {
-                    localStorage.removeItem("usuario");
-                    const esPas = location.pathname.includes('/pas/');
-                    const rutaLogout = esPas ? '../index.html' : './index.html';
-                    window.location.replace(rutaLogout);
-
-                });
-
-                cancelar.addEventListener("click", () => {
-                    popup.classList.remove("activo");
-                    document.body.classList.remove("menu-abierto");
+                    cancelar?.addEventListener("click", () => {
+                        popup?.classList.remove("activo");
+                        document.body.classList.remove("menu-abierto");
+                    });
                 });
             });
-        });
+    };
+
+    document.head.appendChild(linkHeaderCSS);
 });
 
-// Recarga si vienes del historial tras cerrar sesión
+// Refrescar si se vuelve a la página después de cerrar sesión
 window.addEventListener("pageshow", event => {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     if (event.persisted && !usuario) {

@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-document.querySelector('.formulario-login')?.addEventListener('submit', function (e) {
+document.querySelector('.formulario-login-pagLogin')?.addEventListener('submit', function (e) {
     e.preventDefault(); // Prevenimos el envío del formulario (recarga de la página)
 
     // Obtenemos los campos del formulario
@@ -74,43 +74,86 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
                 localStorage.setItem('usuario', JSON.stringify(usuario));
 
                 // Mostramos mensaje de éxito tipo "toast"
+                // Crear fondo difuminado detrás del toast
+                const overlay = document.createElement('div');
+                overlay.style.position = 'fixed';
+                overlay.style.top = 0;
+                overlay.style.left = 0;
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backdropFilter = 'blur(4px)';
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+                overlay.style.zIndex = '999';
+
+                // Crear el toast encima del fondo
                 const toast = document.createElement('div');
                 toast.textContent = 'Inicio de sesión exitoso. Redirigiendo...';
                 toast.style.position = 'fixed';
-                toast.style.bottom = '20px';
-                toast.style.right = '20px';
+                toast.style.top = '50%';
+                toast.style.left = '50%';
+                toast.style.transform = 'translate(-50%, -50%)';
                 toast.style.padding = '1em 2em';
+                toast.style.width = 'max-content';
+                toast.style.maxWidth = '80%';
+                toast.style.fontSize = '1.15rem';
                 toast.style.backgroundColor = 'var(--color-principal)';
                 toast.style.color = '#fff';
-                toast.style.borderRadius = '8px';
-                toast.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+                toast.style.borderRadius = '12px';
+                toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
                 toast.style.fontFamily = 'var(--fuente-lato)';
+                toast.style.textAlign = 'center';
+                toast.style.zIndex = '1000'; // encima del overlay
+
+                // Añadir al DOM
+                document.body.appendChild(overlay);
                 document.body.appendChild(toast);
 
-                // Esperamos 2 segundos, quitamos el toast y redirigimos al inicio
+                // Esperar y redirigir
                 setTimeout(() => {
                     toast.remove();
+                    overlay.remove();
                     window.location.href = '../index.html';
                 }, 1500);
 
+
             } else {
-                // Si no se encuentra el usuario, mostramos error tipo toast
+                // Si no se encuentra el usuario, mostramos error tipo toast con fondo difuminado
+                const overlayError = document.createElement('div');
+                overlayError.style.position = 'fixed';
+                overlayError.style.top = 0;
+                overlayError.style.left = 0;
+                overlayError.style.width = '100%';
+                overlayError.style.height = '100%';
+                overlayError.style.backdropFilter = 'blur(4px)';
+                overlayError.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+                overlayError.style.zIndex = '999';
+
                 const toastError = document.createElement('div');
                 toastError.textContent = 'Usuario o contraseña incorrectos';
                 toastError.style.position = 'fixed';
-                toastError.style.bottom = '20px';
-                toastError.style.right = '20px';
+                toastError.style.top = '50%';
+                toastError.style.left = '50%';
+                toastError.style.transform = 'translate(-50%, -50%)';
                 toastError.style.padding = '1em 2em';
-                toastError.style.backgroundColor = '#FF6666';
+                toastError.style.width = 'max-content';
+                toastError.style.maxWidth = '80%';
+                toastError.style.fontSize = '1.15rem';
+                toastError.style.backgroundColor = '#c45f5f';
                 toastError.style.color = '#fff';
-                toastError.style.borderRadius = '8px';
-                toastError.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+                toastError.style.borderRadius = '12px';
+                toastError.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
                 toastError.style.fontFamily = 'var(--fuente-lato)';
+                toastError.style.textAlign = 'center';
+                toastError.style.zIndex = '1000';
+
+                document.body.appendChild(overlayError);
                 document.body.appendChild(toastError);
 
                 setTimeout(() => {
                     toastError.remove();
-                }, 1500);
+                    overlayError.remove();
+                }, 850);
+
             }
         })
         .catch(error => {

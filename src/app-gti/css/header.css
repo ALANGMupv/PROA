@@ -54,6 +54,15 @@ header nav a:focus {
     margin-left: 3em;
 }
 
+/* region --- CLASE ACTIVA AL ENLACE CORRESPONDIENTE --- */
+@media (min-width: 861px) {
+    header nav a.activo-pagina {
+        color: var(--color-principal);
+        font-weight: 550;
+    }
+}
+/*endregion*/
+
 /* region --- MENÚ HAMBURGUESA --- */
 #hamburguesa {
     background-color: transparent;

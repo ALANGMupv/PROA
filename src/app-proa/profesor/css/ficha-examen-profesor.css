@@ -1,0 +1,166 @@
+/* ----------- Estructura principal ----------- */
+#contenedor-preguntas {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: auto;
+    padding: 2rem;
+}
+
+.panel-contenido.fondoPanel {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+.panel-contenido.fondoPanel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.panel-contenido.fondoPanel::-webkit-scrollbar-thumb {
+    background-color: var(--color-bordes);
+    border-radius: 4px;
+}
+
+.panel-contenido.fondoPanel::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primario);
+}
+
+.btn-atras {
+    margin-left: 2em;
+    align-self: flex-start;
+}
+
+
+.botones-edicion {
+    display: flex;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+.input-base {
+    font-size: 1.125em;
+    padding: 0.5em;
+}
+
+.titulo-con-boton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
+.titulo-con-boton h1 {
+    margin: 0;
+}
+
+#hora{
+    margin-left:1em;
+}
+
+/* ----------- Secciones de contenido ----------- */
+.titulo,
+.descripcion,
+.pregunta,
+.preguntas {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.descripcion {
+    margin-top: 15px;
+}
+
+.pregunta {
+    margin-top: 10px;
+}
+
+.texto {
+    font-size: 1em;
+}
+
+/* ----------- Opciones tipo test ----------- */
+.opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.boton-opcion {
+    background-color: rgba(204, 204, 204, 0.18);
+    border-radius: 8px;
+    padding: 0.75em 1em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 1em;
+}
+
+.boton-opcion:hover{
+    background-color: rgba(204, 204, 204, 0.18);
+}
+
+/* ----------- Colores de corrección ----------- */
+.boton-opcion-correcta-deshabilitado {
+    background-color: var(--color-exito) !important;
+}
+
+.boton-opcion-incorrecta-deshabilitado {
+    background-color: var(--color-inputError) !important;
+}
+
+.boton-opcion-deshabilitado {
+    cursor: not-allowed;
+}
+
+/* ----------- Puntuación por pregunta ----------- */
+.calificacion-pregunta {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+    color: var(--color-primario);
+}
+
+/* ----------- Separador ----------- */
+.separador {
+    border: none;
+    height: 2px;
+    background-color: #ccc;
+    margin: 2rem 0;
+}
+
+/* ----------- Nota final ----------- */
+.mensaje-exito {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+    align-items: baseline;
+}
+
+.mensaje-exito p {
+    margin-left: 10px;
+    font-size: 1.5em;
+    color: var(--color-primario);
+}
+
+.mensaje-exito span {
+    font-size: 1.25em;
+    font-weight: 600;
+}
+
+/* ----------- Responsive ----------- */
+@media (max-width: 768px) {
+    .ficha-examen-wrapper {
+        padding: 1.5rem;
+    }
+
+    .boton-opcion {
+        font-size: 0.875em;
+        padding: 0.5em 0.75em;
+    }
+
+    .mensaje-exito p {
+        font-size: 1.25em;
+    }
+}

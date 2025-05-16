@@ -1,0 +1,351 @@
+*{
+    box-sizing: border-box;
+}
+
+#formulario-examen{
+    margin: 0;
+}
+
+/*cosa rara para que funcione pero arruina todo en 797-800px*/
+.contenido-asignatura{
+    width: 10vw;
+}
+
+.panel-asignaturas{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: calc(100vh - 80px - 8em);
+    overflow: auto;
+    margin: 1em 2em 0 2em;
+}
+
+.input-base{
+    width: 100%
+}
+
+.btn-atras {
+    margin-left: 2em;
+    align-self: flex-start;
+}
+
+.datos{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    height: 100%;
+}
+
+.titulo-texto{
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+}
+
+.parametros{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    gap: 1em;
+}
+
+.parametros label{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+    align-items: center;
+}
+
+.parametros label span{
+    white-space: nowrap;
+}
+
+
+
+.puntos{
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+    font-size: 1.25em;
+}
+
+#puntos{
+    color: var(--color-primario);
+    font-size: 1.25em;
+    font-weight: 700;
+}
+
+.contenedor-valor-peso, .contenedor-fecha-hora{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    width: 100%;
+}
+
+.contenedor-puntos{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: stretch;
+}
+
+#dropdown-valor{
+    border: solid 1px var(--color-bordes);
+    font-size: 1em;
+    color: black;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.input-respuesta{
+    width: 100%;
+}
+
+.peso{
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.33em;
+    width: 100%;
+}
+
+.peso input{
+    width: 100%;
+}
+
+.parametros label input{
+    max-height: 2.25em;
+    padding: 0.5em 0.5em;
+}
+
+.parametros label input[type="number"]{
+    max-width: 4em;
+    min-width: 2.3em;
+    padding: 0.5em 5px;
+    text-align: center;
+}
+
+#dropdown-valor{
+    min-width: 180px;
+}
+
+.input-con-icono{
+    max-width: 10em;
+}
+
+.parametros label input[type="time"]{
+    max-width: 6em;
+}
+
+.parametros label input[type="date"]{
+    max-width: 10em;
+}
+
+.titulo-texto-pregunta{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.pregunta-contenedor{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.titulo-pregunta{
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5em;
+    align-items: center;
+}
+
+.titulo-pregunta img{
+    width: 35px;
+    height: 35px;
+}
+
+.titulo-valor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em
+}
+
+.titulo-valor div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em
+}
+
+.input-pregunta-valor{
+    padding: 0.33em;
+    max-width: 4em;
+}
+
+.input-pregunta-valor:disabled {
+    background-color: #f0f0f0;
+    color: #888;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+}
+
+textarea{
+    resize: none;
+}
+
+.recordatorio{
+    padding: 0.5em;
+    color: var(--color-primario);
+}
+
+#botones{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    gap: 2em;
+}
+
+#botones button{
+    width: 9em;
+    height: 2.5em;
+    padding: 0;
+}
+
+.volver-enlace {
+    margin-left: 2em;
+}
+
+@media (max-width: 1100px) {
+    .parametros{
+        flex-direction: column;
+    }
+}
+
+@media(min-width:800px)and (max-width: 1100px){
+
+
+    #fecha-examen{
+
+    }
+
+    .titulo-valor{
+       gap: 0.5em
+    }
+
+    .respuesta-opcion{
+        gap: 0.5em;
+    }
+
+    #botones{
+        gap:0.5em
+    }
+    .contenedor-valor-peso,
+    .contenedor-fecha-hora{
+        flex-direction: row;
+    }
+}
+
+@media  (min-width: 800px) and (max-width: 900px){
+    .cabecera-dropdown-fija-profesor{
+        justify-content: center;
+    }
+
+    .contenedor-dropdowns{
+        display: flex;
+        align-items: center;
+        justify-self: center;
+        gap: 0.75em;
+        width: 100%;
+    }
+
+    .input-con-icono{
+        width: 100% ;
+    }
+
+    #dropdown-asignaturas {
+        margin-left: 0;
+    }
+}
+
+@media(max-width: 850px){
+    .contenido-asignatura{
+        width: auto;
+    }
+}
+
+@media (max-width:770px ){
+
+    label{
+        font-size: 1em;
+    }
+
+    .pregunta-contenedor{
+        padding: 0.75em;
+    }
+
+    .respuesta-opcion{
+        gap: 0.33em;
+    }
+
+    .radio-grupo{
+        gap: 0.33em;
+        min-width: unset;
+    }
+
+    .parametros{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px){
+
+    .panel-asignaturas{
+        margin: 2em 1em 0em 1em;
+    }
+
+    .parametros{
+        max-width: unset;
+        width: 100%;
+    }
+    .contenedor-valor-peso,
+    .contenedor-fecha-hora{
+        flex-direction: row;
+        gap:0.5em;
+    }
+
+    .contenedor-valor-peso div, contenedor-fecha-hora div{
+        max-width: 100%;
+        width: 100%;
+    }
+
+    #botones{
+        gap:0.5em
+    }
+}
+
+@media (max-width: 430px){
+    .contenedor-valor-peso,
+    .contenedor-fecha-hora{
+        flex-direction: column;
+        gap:0.5em;
+    }
+
+    .parametros{
+        gap: 0.5em;
+    }
+
+    .parametros label{
+        gap: 0.5em;
+    }
+
+    .parametros label input[type="time"],
+    .parametros label input[type="date"],
+    .parametros label input[type="number"]{
+        max-width: unset;
+    }
+    .input-base{
+    }
+}
