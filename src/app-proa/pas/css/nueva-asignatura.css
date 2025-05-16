@@ -147,11 +147,14 @@
 .fila {
     display: flex;
     gap: 1em;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    width: 100%;
 }
 
 .fila label {
     min-width: 0;
+    width: 100%;
 }
 
 .input-base {
@@ -222,7 +225,11 @@ dialog {
     font-size: unset;
     padding: 0.5em;
 }
-
+@media (max-width: 1020px){
+    .fila{
+        flex-direction: column;
+    }
+}
 
 @media (max-width: 768px) {
     body {
