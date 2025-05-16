@@ -5,9 +5,10 @@ html, body {
 }
 
 #panelRealizarExamen{
-    max-height: calc(100dvh - 80px);
+    max-height: calc(100dvh - 200px);
     overflow-y: auto;
 }
+
 
 #formulario-examen{
     margin: 0;
