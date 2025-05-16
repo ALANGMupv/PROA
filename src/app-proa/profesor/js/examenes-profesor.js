@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="item-examen" data-titulo="${ex.titulo}">
                     <div class="info">
                         <h4>${ex.titulo}</h4>
-                        <button class="btn-oscuros-secundario btn-visualizar-entregas">Terminar</button>
+                        <button class="btn-oscuros-secundario btn-visualizar-entregas btn-terminar">Terminar</button>
                     </div>
                 </div>`;
 
@@ -124,7 +124,10 @@ function redireccionarPagina(){
 }
 
 document.addEventListener("click", (e) => {
-    if (e.target.closest(".btn-visualizar-entregas")) {
+    if (e.target.closest(".btn-terminar")) {
+        window.location.href = "crear-examen-borrador.html";
+        return;
+    } else if(e.target.closest(".btn-visualizar-entregas")){
         window.location.href = "entregas-examen-profesor.html";
         return;
     }
@@ -139,4 +142,3 @@ document.addEventListener("click", (e) => {
         window.location.href = "ficha-examen-profesor.html";
     }
 });
-
