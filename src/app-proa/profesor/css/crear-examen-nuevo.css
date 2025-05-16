@@ -196,7 +196,7 @@ textarea{
     resize: none;
 }
 
-#recordatorio{
+.recordatorio{
     padding: 0.5em;
     color: var(--color-primario);
 }
