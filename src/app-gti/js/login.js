@@ -70,53 +70,10 @@ document.querySelector('.formulario-login-pagLogin')?.addEventListener('submit',
             );
 
             if (usuario) {
-                // Si se encuentra el usuario, lo guardamos en localStorage
                 localStorage.setItem('usuario', JSON.stringify(usuario));
+                window.location.href = '../index.html';
 
-                // Mostramos mensaje de éxito tipo "toast"
-                // Crear fondo difuminado detrás del toast
-                const overlay = document.createElement('div');
-                overlay.style.position = 'fixed';
-                overlay.style.top = 0;
-                overlay.style.left = 0;
-                overlay.style.width = '100%';
-                overlay.style.height = '100%';
-                overlay.style.backdropFilter = 'blur(4px)';
-                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
-                overlay.style.zIndex = '999';
-
-                // Crear el toast encima del fondo
-                const toast = document.createElement('div');
-                toast.textContent = 'Inicio de sesión exitoso. Redirigiendo...';
-                toast.style.position = 'fixed';
-                toast.style.top = '50%';
-                toast.style.left = '50%';
-                toast.style.transform = 'translate(-50%, -50%)';
-                toast.style.padding = '1em 2em';
-                toast.style.width = 'max-content';
-                toast.style.maxWidth = '80%';
-                toast.style.fontSize = '1.15rem';
-                toast.style.backgroundColor = 'var(--color-principal)';
-                toast.style.color = '#fff';
-                toast.style.borderRadius = '12px';
-                toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
-                toast.style.fontFamily = 'var(--fuente-lato)';
-                toast.style.textAlign = 'center';
-                toast.style.zIndex = '1000'; // encima del overlay
-
-                // Añadir al DOM
-                document.body.appendChild(overlay);
-                document.body.appendChild(toast);
-
-                // Esperar y redirigir
-                setTimeout(() => {
-                    toast.remove();
-                    overlay.remove();
-                    window.location.href = '../index.html';
-                }, 1500);
-
-
-            } else {
+        } else {
                 // Si no se encuentra el usuario, mostramos error tipo toast con fondo difuminado
                 const overlayError = document.createElement('div');
                 overlayError.style.position = 'fixed';
