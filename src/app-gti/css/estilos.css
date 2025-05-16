@@ -3,7 +3,6 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 body { min-height: 100dvh; }
-
 input, button, textarea, select { font: inherit; }
 
 p { text-wrap: pretty; }
@@ -22,23 +21,6 @@ img, video, svg { height: auto; max-width: 100%; }
 }
 
 a { color: inherit; }
-
-html, body {
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100dvh;
-}
-
-main {
-    flex: 1;
-}
 /* endregion */
 
 /* region --- FUENTES --- */
@@ -81,7 +63,7 @@ main {
 /* endregion */
 
 :root {
-    --color-principal: rgb(160, 58, 111);
+    --color-principal: #A03A6F;
     --color-PROA: #459CFF;
     --color-sombra-imagen: #C7B2C4;
     --color-fondo-diferenciador: #F9F9F9;
@@ -91,6 +73,7 @@ main {
     --color-textos: #000000;
     --color-panelesBordesGris: #CCCCCC;
 
+    --color-inputsSeleccionados: #6b6b6b;
     --color-rojoError: #fda7a7;
 
     --fuente-lato: 'Lato', sans-serif;
@@ -101,42 +84,40 @@ body {
     font-family: var(--fuente-lato);
 }
 
-/* region --- HEADLINES RESPONSIVOS --- */
-
-/* Escritorio grande (≥ 992px) */
+/* region --- HEADLINES PC Y MÓVIL --- */
 h1 {
     font-family: var(--fuente-lora);
-    font-size: 4.5em;
+    font-size: 5.625em;
     font-weight: 700;
 }
 
 h2 {
     font-family: var(--fuente-lora);
-    font-size: 1.875em;
+    font-size: 2.1875em;
     font-weight: 700;
 }
 
 h3 {
     font-family: var(--fuente-lato);
-    font-size: 1.25em;
+    font-size: 1.5em;
     font-weight: 700;
 }
 
 h4 {
     font-family: var(--fuente-lato);
-    font-size: 1.25em;
+    font-size: 1.5em;
     font-weight: 400;
 }
 
 h5 {
     font-family: var(--fuente-lato);
-    font-size: 1.125em;
+    font-size: 1.375em;
     font-weight: 400;
 }
 
 h6 {
     font-family: var(--fuente-lato);
-    font-size: 1em;
+    font-size: 1.125em;
     font-weight: 400;
     line-height: 1.2;
 }
@@ -144,98 +125,76 @@ h6 {
 label {
     font-family: 'Lato', sans-serif;
     font-weight: 600;
-    font-size: 1em;
+    font-size: 1.125em;
 }
 
-/* Tablets (768px - 991px) */
-@media (min-width: 768px) and (max-width: 991px) {
-    h1 { font-size: 3em; }
-    h2 { font-size: 1.625em; }
-    h3 { font-size: 1.2em; }
-    h4 { font-size: 1.1em; }
-    h5 { font-size: 1em; }
-    h6 { font-size: 0.95em; }
-    label { font-size: 0.95em; }
-}
 
-/* Móviles grandes (479px - 767px) */
-@media (min-width: 479px) and (max-width: 767px) {
-    h1 { font-size: 2.5em; }
-    h2 { font-size: 1.5em; }
-    h3 { font-size: 1.125em; }
-    h4 { font-size: 1em; }
-    h5 { font-size: 0.95em; }
-    h6 { font-size: 0.9em; }
-    label { font-size: 0.9em; }
-}
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.125em;
+    }
 
-/* Móviles pequeños (hasta 478px) */
-@media (max-width: 478px) {
-    h1 { font-size: 2.125em; }
-    h2 { font-size: 1.375em; }
-    h3 { font-size: 1.125em; }
-    h4 { font-size: 1em; }
-    h5 { font-size: 0.875em; }
-    h6 { font-size: 0.85em; }
-    label { font-size: 0.85em; }
+    h2 {
+        font-size: 1.375em;
+    }
+
+    h3 {
+        font-size: 1.125em;
+    }
+
+    h4 {
+        font-size: 1em;
+    }
+
+    h5 {
+        font-size: 0.875em;
+    }
 }
 /* endregion */
 
-/* region --- PÁRRAFOS RESPONSIVOS --- */
-
-/* Escritorio grande (≥ 992px) */
+/* region --- PÁRRAFOS --- */
 .parrafo-principal {
     font-family: var(--fuente-lato);
     font-weight: 400;
-    font-size: 1.25em;
+    font-size: 1.5em;
     line-height: 1.5;
 }
 
 .parrafo-secundario {
     font-family: var(--fuente-lato);
     font-weight: 400;
-    font-size: 1.125em;
+    font-size: 1.375em;
     line-height: 1.5;
 }
 
 .parrafo-terciario {
     font-family: var(--fuente-lato);
-    font-weight: 400;
-    font-size: 1em;
+    font-weight: 300;
+    font-size: 1.125em;
     line-height: 1.5;
 }
 
-/* Tablets (768px - 991px) */
-@media (min-width: 768px) and (max-width: 991px) {
-    .parrafo-principal { font-size: 1.2em; }
-    .parrafo-secundario { font-size: 1.1em; }
-    .parrafo-terciario { font-size: 1em; }
-}
+@media (max-width: 480px) {
+    .parrafo-principal {
+        font-size: 1.125em;
+    }
 
-/* Móviles grandes (479px - 767px) */
-@media (min-width: 479px) and (max-width: 767px) {
-    .parrafo-principal { font-size: 1.15em; }
     .parrafo-secundario,
-    .parrafo-terciario { font-size: 1em; }
-}
-
-/* Móviles pequeños (hasta 478px) */
-@media (max-width: 478px) {
-    .parrafo-principal { font-size: 1.125em; }
-    .parrafo-secundario,
-    .parrafo-terciario { font-size: 1em; }
+    .parrafo-terciario {
+        font-size: 1em;
+        font-weight: 400;
+    }
 }
 /* endregion */
-
 
 /* region --- BOTONES GTI --- */
 .btnCTA {
     font-family: var(--fuente-lato);
     background-color: var(--color-principal);
-    font-size: 1.4em;
+    font-size: 1.5em;
     font-weight: 400;
     color: var(--color-blancoPuro);
-    padding: 1em 1em;
+    padding: 1.25em 1.25em;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -255,7 +214,7 @@ label {
 .btn {
     font-family: var(--fuente-lato);
     background-color: var(--color-principal);
-    font-size: 1.2em;
+    font-size: 1.25em;
     font-weight: 400;
     color: var(--color-blancoPuro);
     padding: 0.65em 0.75em;
@@ -296,7 +255,7 @@ label {
 .btnCTA-PROA {
     font-family: var(--fuente-lato);
     background-color: var(--color-PROA);
-    font-size: 1.4em;
+    font-size: 1.5em;
     font-weight: 400;
     color: var(--color-blancoPuro);
     padding: 0.75em 1.75em;
@@ -320,7 +279,7 @@ label {
 .btnPROA {
     font-family: var(--fuente-lato);
     background-color: var(--color-PROA);
-    font-size: 1.2em;
+    font-size: 1.25em;
     font-weight: 400;
     color: var(--color-blancoPuro);
     padding: 0.75em 2em;
@@ -334,6 +293,7 @@ label {
     transform: scale(0.98);
 }
 
+
 .btnPROA:hover {
     background-color: var(--color-blancoPuro);
     color: var(--color-PROA);
@@ -343,7 +303,7 @@ label {
 .btnPROA-secundario {
     font-family: var(--fuente-lato);
     background-color: var(--color-blancoPuro);
-    font-size: 1.2em;
+    font-size: 1.25em;
     font-weight: 400;
     color: var(--color-PROA);
     padding: 0.75em 0.75em;
@@ -364,67 +324,8 @@ label {
 }
 /* endregion */
 
-/* Botones oscuros (sin invertir colores) */
-.btn-oscuros {
-    font-family: var(--fuente-lato);
-    background-color: var(--color-PROA);
-    font-size: 1.125em;
-    font-weight: 400;
-    color: white;
-    padding: 0.75em 1.5em;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: filter 0.2s ease-in-out;
-}
-
-.btn-oscuros:hover,
-.btn-oscuros:focus {
-    filter: brightness(0.9);
-}
-
-.btn-oscuros-secundario {
-    font-family: var(--fuente-principal);
-    background-color: var(--color-blancoPuro);
-    font-size: 1.125em;
-    font-weight: 400;
-    color: var(--color-PROA);
-    padding: 0.75em 1.5em;
-    border: 2px solid var(--color-PROA);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: filter 0.2s ease-in-out;
-}
-
-.btn-oscuros-secundario:hover,
-.btn-oscuros-secundario:focus {
-    filter: brightness(0.95);
-}
-
-@media (max-width: 768px) {
-    .btn,
-    .btn-secundario,
-    .btn-oscuros,
-    .btn-oscuros-secundario {
-        font-size: 1em;
-        padding: 0.5em 1em;
-        border-radius: 8px;
-    }
-
-    .btn-agregar {
-        font-size: 0.875em;
-        padding: 0.5em;
-    }
-
-    .boton-opcion {
-        font-size: 0.875em;
-        padding: 0.5em 0.75em;
-    }
-}
-/* endregion */
-
 /* region --- BOTONES RESPONSIVES --- */
-@media (max-width: 576px) {
+@media (max-width: 480px) {
     .btn,
     .btnCTA,
     .btnCTA-PROA,
@@ -491,7 +392,7 @@ label {
 .popup-botones .btn {
     width: 100%;
     padding: 0.7em;
-    font-size: 1.2em;
+    font-size: 1.25em;
     border-radius: 12px;
 }
 
@@ -519,7 +420,7 @@ label {
 }
 
 .input-contacto:focus {
-    border-color: var(--color-principal);
+    border-color: var(--color-inputsSeleccionados);
     outline: none;
 }
 
@@ -540,7 +441,7 @@ label {
 
 .input-base:focus {
     outline: none;
-    border-bottom: 1px solid var(--color-principal);
+    border-bottom: 1px solid var(--color-inputsSeleccionados);
 }
 
 
@@ -576,7 +477,7 @@ textarea {
 }
 
 .seleccionador-dropdown:focus {
-    border-color: var(--color-principal);
+    border-color: var(--color-inputsSeleccionados);
     outline: none;
 }
 
@@ -675,7 +576,7 @@ textarea {
 /* region --- MENSAJES DE ERROR FORMULARIOS --- */
 .error-texto {
     display: inline-block;
-    font-size: 0.95em;
+    font-size: 0.85em;
     color: var(--color-rojoError);
     margin-left: 0.5em;
     vertical-align: middle;
@@ -683,9 +584,7 @@ textarea {
 
 @media (max-width: 768px) {
     .error-texto {
-        font-size: 0.75em;
+        font-size: 0.7em;
     }
 }
 /* endregion */
-
-

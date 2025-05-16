@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/registro.css">
+    <script src="js/menu.js" defer></script>
+    <script src="js/registro.js" defer></script>
+</head>
+<body>
+<?php // PROVISIONAL SIN EL LOGIN
+$usuario = json_decode(file_get_contents("../api/data/usuarioActivo.json"));
+$logueado = $usuario && $usuario->logeado;
+$rutaBase = "./";
+include $logueado ? 'includes/headerLogueado.inc' : 'includes/headerNoLogueado.inc';
+?>
+
+<section class="registro">
+    <div class="contenedor-registro">
+        <div class="registro-texto">
+            <h2>Regístrate y empieza a probar la demo de nuestros módulos educativos</h2>
+            <p class="parrafo-principal">
+                Si representas a una institución educativa, completa el registro y recibirás por correo las credenciales de acceso a las demos disponibles. Prueba nuestros módulos educativos desde dentro y evalúa cómo pueden adaptarse a tu centro.
+            </p>
+        </div>
+
+        <form class="registro-formulario">
+            <div class="campo">
+                <label for="nombre">Nombres & Apellidos *</label>
+                <input type="text" id="nombre" class="input-base" />
+            </div>
+
+            <div class="campo">
+                <label for="institucion">Nombre de la institución *</label>
+                <input type="text" id="institucion" class="input-base" />
+            </div>
+
+            <div class="campo">
+                <label for="tipo">Tipo de institución *</label>
+                <div class="input-dropdown">
+                    <select id="tipo" class="seleccionador-dropdown">
+                        <option selected disabled hidden>Selecciona tu institución</option>
+                        <option>Universidad</option>
+                        <option>Instituto</option>
+                        <option>Colegio</option>
+                        <option>Academia Particular</option>
+                        <option>Otros</option>
+                    </select>
+                    <img src="icons/dropdown.svg" alt="Flecha" class="icono-dropdown" />
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="telefono">Teléfono *</label>
+                <input type="tel" id="telefono" class="input-base" />
+            </div>
+
+            <div class="campo">
+                <label for="correo">Correo de la institución *</label>
+                <input type="email" id="correo" class="input-base" />
+            </div>
+
+            <div class="campo">
+                <label for="contrasena">Contraseña *</label>
+                <input type="password" id="contrasena" class="input-base" />
+            </div>
+
+            <div class="campo">
+                <label for="repetir">Repetir contraseña *</label>
+                <input type="password" id="repetir" class="input-base" />
+            </div>
+
+            <button type="submit" class="btn">Registrarse</button>
+            <p class="texto-secundario">¿Ya tienes cuenta? <a href="login.php" class="enlace-secundario">Iniciar sesión</a></p>
+        </form>
+    </div>
+</section>
+
+</body>
+</html>

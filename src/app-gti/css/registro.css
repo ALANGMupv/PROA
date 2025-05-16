@@ -1,7 +1,5 @@
-/* region --- CSS REGISTRO--- */
 .registro {
-    padding: 6em 3em;
-    height: calc(100dvh - 80px);
+    padding: 4em 3em;
 }
 
 .contenedor-registro {
@@ -61,6 +59,7 @@
 }
 
 .registro-formulario .btn {
+    margin-top: 1em;
     width: 100%;
 }
 
@@ -68,7 +67,7 @@
     text-align: center;
     font-family: var(--fuente-lato);
     font-weight: 400;
-    font-size: 1.1em;
+    font-size: 1.125em;
     margin-top: -0.5em;
 }
 
@@ -78,46 +77,14 @@
     margin-left: 0.5em;
     font-family: var(--fuente-lato);
     font-weight: 500;
-    font-size: 1em;
+    font-size: 1.125em;
 }
 
 .enlace-secundario:hover {
     text-decoration: underline;
 }
 
-.campo-doble {
-    display: flex;
-    gap: 1em;
-    width: 100%;
-}
-
-.campo-doble .mitad {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-}
-
-.fila-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.indicacion-contrasena {
-    font-size: 0.9rem;
-    color: var(--color-textos);
-}
-
-
 @media (max-width: 1056px) {
-
-    .registro {
-        height: unset;
-        padding: 2.5em 3em;
-    }
-
     .contenedor-registro {
         flex-direction: column;
         gap: 3.5em;
@@ -144,31 +111,5 @@
     .enlace-secundario {
         font-size: 1em; /
     }
-
-    .campo-doble {
-        flex-direction: column;
-    }
-
-    .indicacion-contrasena {
-        font-size: 0.75rem;
-        margin-left: 0;
-    }
 }
-/* endregion */
-
-/* region --- MENSAJES DE ERROR FORMULARIO REGISTRO (MÁS PEQUEÑO) --- */
-.error-texto {
-    font-size: 0.75em;
-}
-
-@media (max-width: 768px) {
-    .error-texto {
-        font-size: 0.6em;
-    }
-}
-/* endregion */
-
-
-
-
 

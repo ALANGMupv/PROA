@@ -12,7 +12,7 @@ header {
     display: flex;
     justify-content: space-between;
     font-family: var(--fuente-lato);
-    font-size: 1.275em;
+    font-size: 1.375em;
     font-weight: 400;
     border-bottom: 1px solid var(--color-panelesBordesGris);
     z-index: 10; /* Se pondrá por encima de cualquier elemento con z-index menor */
@@ -40,7 +40,7 @@ header nav a {
     text-decoration: none;
     color: inherit;
     transition: color 0.2s ease-in-out;
-    margin-left: 3em;
+    margin-left: 3.125em;
 }
 
 header nav a:hover,
@@ -49,19 +49,10 @@ header nav a:focus {
 }
 
 .icono-perfil {
-    width: 38px;
-    height: 38px;
-    margin-left: 3em;
+    width: 42px;
+    height: 42px;
+    margin-left: 3.125em;
 }
-
-/* region --- CLASE ACTIVA AL ENLACE CORRESPONDIENTE --- */
-@media (min-width: 861px) {
-    header nav a.activo-pagina {
-        color: var(--color-principal);
-        font-weight: 550;
-    }
-}
-/*endregion*/
 
 /* region --- MENÚ HAMBURGUESA --- */
 #hamburguesa {
@@ -85,7 +76,7 @@ nav.menu-movil {
 }
 /*endregion*/
 
-@media (max-width: 860px) {
+@media (max-width: 911px) {
     body.menu-abierto {
         overflow: hidden;
     }
@@ -113,7 +104,7 @@ nav.menu-movil {
         z-index: 9999; /* Se superpone por encima de todo */
         padding: 1em;
         gap: 1.5em;
-        font-size: 1.15em;
+        font-size: 1.25em;
         animation: fadeIn 0.3s ease-out;
     }
 
@@ -124,7 +115,7 @@ nav.menu-movil {
         background: none;
         border: none;
         color: var(--color-textos);
-        font-size: 1.65em;
+        font-size: 1.75em;
         cursor: pointer;
         display: none;
     }
@@ -168,7 +159,7 @@ nav.menu-movil {
         color: var(--color-textos);
         font-family: var(--fuente-lato);
         text-decoration: none;
-        font-size: 1.15em;
+        font-size: 1.25em;
         padding-left: 1em;
     }
 
