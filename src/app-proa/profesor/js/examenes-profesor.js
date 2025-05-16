@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="item-examen" data-titulo="${ex.titulo}">
                     <div class="info">
                         <h4>${ex.titulo}</h4>
-                        <button class="btn-oscuros-secundario btn-visualizar-entregas btn-terminar">Terminar</button>
+                        <button class="btn-oscuros-secundario btn-visualizar-entregas btn-terminar">Continuar</button>
                     </div>
                 </div>`;
 

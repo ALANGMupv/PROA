@@ -201,6 +201,7 @@ html, body {
     font-weight: 500;
     transition: color 0.2s ease;
     cursor: pointer;
+    margin-left: 0.5em;
 }
 
 .volver-enlace:hover {
