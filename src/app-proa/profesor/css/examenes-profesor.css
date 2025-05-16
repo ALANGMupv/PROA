@@ -47,6 +47,12 @@ h4{
     gap: 1em;
 }
 
+.item-examen:hover {
+    box-shadow: 0 0 4px #CCCCCC;
+    border: 1px solid var(--color-bordes);
+    cursor: pointer;
+}
+
 .titulo-fecha-envio{
     display: flex;
     flex-direction: column;

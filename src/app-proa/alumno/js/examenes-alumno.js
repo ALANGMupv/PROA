@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
     const asignaturaSeleccionada = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
 
     fetch("/src/api/data/examenes-alumno.json")
@@ -22,11 +23,22 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderExamenes(data) {
         const seccion = document.querySelector(".fondoPanel");
 
+        // Limpiar anteriores bloques
         seccion.querySelectorAll(".bloque-examenes").forEach(b => b.remove());
 
+        // Insertar bloques
         seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes a realizar", data.realizar, 'realizar'));
         seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes por revisar", data.porRevisar, 'porRevisar'));
         seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes calificados", data.calificados, 'calificados'));
+
+        // Activar clic en exámenes calificados (después de insertarlos)
+        document.querySelectorAll(".item-examen-calificado").forEach(el => {
+            el.addEventListener("click", () => {
+                const cuestionario = el.dataset.cuestionario; // ej: "cuestionario1"
+                localStorage.setItem("cuestionarioSeleccionado", cuestionario);
+                window.location.href = "examenes-realizados.html";
+            });
+        });
     }
 
     function crearBloque(titulo, examenes, tipo) {
@@ -41,8 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="info">
                         <h4>${ex.titulo}</h4>
                         <p class="fecha-limite">
-                        <img src="/src/app-proa/icons/advertenciaFecha.svg" class="icono-fecha" alt="Icono advertencia">
-                        Fecha límite: ${ex.fechaLimite}</p>
+                            <img src="/src/app-proa/icons/advertenciaFecha.svg" class="icono-fecha" alt="Icono advertencia">
+                            Fecha límite: ${ex.fechaLimite}
+                        </p>
                     </div>
                     <button class="btn" onclick="redireccionarPagina()">Comenzar</button>
                 </div>`;
@@ -54,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>`;
             } else if (tipo === 'calificados') {
                 html += `
-                <div class="item-examen">
+                <div class="item-examen item-examen-calificado" data-cuestionario="${ex.titulo}">
                     <div class="info">
                         <h4>${ex.titulo}</h4>
                         <p class="fecha-envio">Enviado: ${ex.fechaEnvio}</p>
@@ -74,6 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-function redireccionarPagina(){
+function redireccionarPagina() {
     window.location.replace("realizar-examen.html");
 }

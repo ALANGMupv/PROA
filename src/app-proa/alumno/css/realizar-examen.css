@@ -1,8 +1,5 @@
 /* Estructura general del cuestionario */
 
-html, body {
-    overflow: hidden;
-}
 
 #panelRealizarExamen{
     max-height: calc(100dvh - 80px);
@@ -141,6 +138,16 @@ html, body {
     font-weight: 700;
     color: #459CFF;
 }
+
+.color-box {
+    background-color: var(--color);
+}
+
+.volver-enlace {
+    margin-top: 1em;
+    margin-left: 1.5em;
+}
+
 
 
 @media (max-width: 770px){
