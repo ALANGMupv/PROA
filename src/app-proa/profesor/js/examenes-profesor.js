@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes abiertos", data.realizar, 'abiertos'));
         seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes cerrados", data.calificados, 'cerrados'));
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Peticiones de revision", data.porRevisar, 'revision'));
         seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes borradores", data.borradores, 'borradores'));
 
     }
@@ -60,24 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>  
                                               
                         <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
-                    </div>
-                </div>`;
-            }else if (tipo === 'revision') {
-                html += `
-                <div class="item-examen" data-titulo="${ex.titulo}">
-                    <div class="info">
-                        <div class="titulo-fecha-envio">
-                            <h4>${ex.titulo}</h4>
-                            <div class="icono-item">
-                                <img src="../icons/advertencia.svg" alt="advertencia">
-                                <p class="fecha-envio">Fecha límite: ${ex.fechaLimite}</p>
-                            </div>
-                            <div class="icono-item">
-                                <img src="../icons/pesoExamen.svg" alt="balanza"><p class="fecha-envio">Peso: ${ex.peso}</p>
-                            </div>  
-                        </div>  
-                                              
-                        <button class="btn-oscuros-secundario btn-visualizar-entregas">Calificar entregas</button>
                     </div>
                 </div>`;
             } else if (tipo == 'cerrados'){

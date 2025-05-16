@@ -5,7 +5,7 @@ html, body {
 }
 
 #panelRealizarExamen{
-    max-height: calc(100dvh - 80px);
+    max-height: calc(100dvh - 80px - 8em);
     overflow-y: auto;
 }
 
@@ -144,6 +144,11 @@ html, body {
 
 
 @media (max-width: 770px){
+
+    #panelRealizarExamen{
+        max-height: calc(100dvh - 80px - 12em);
+    }
+
     .botones{
         justify-content: center;
     }
