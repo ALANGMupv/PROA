@@ -220,7 +220,7 @@ textarea{
 
 @media (max-width: 1100px) {
     .parametros{
-        flex-direction: row;
+        flex-direction: column;
     }
 }
 
@@ -242,12 +242,9 @@ textarea{
     #botones{
         gap:0.5em
     }
-    .contenedor-valor-peso{
-        flex-direction: column;
-    }
-
+    .contenedor-valor-peso,
     .contenedor-fecha-hora{
-        flex-direction: column;
+        flex-direction: row;
     }
 }
 

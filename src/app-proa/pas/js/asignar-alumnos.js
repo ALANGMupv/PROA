@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (hayCambios) {
             dialog.showModal();
         } else {
-            history.back();
+            window.location.replace("asignaturas.html");
         }
     });
 
