@@ -15,8 +15,11 @@
 </head>
 <body>
 
-<!-- Include header no logueado -> solo acceden a registro los no logueados -->
-<?php include 'includes/headerNoLogueado.inc'; ?>
+<!-- Include header no logueado -> solo acceden los no logueados -->
+<?php
+$rutaBase = '';
+include 'includes/headerNoLogueado.inc';
+?>
 <!-- Cerramos sección header -->
 
 <!-- Sección principal de registro -->
@@ -104,7 +107,7 @@
 
             <!-- Enlace para usuarios que ya tienen cuenta -->
             <p class="texto-secundario">
-                ¿Ya tienes cuenta? <a href="login.html" class="enlace-secundario">Iniciar sesión</a>
+                ¿Ya tienes cuenta? <a href="login.php" class="enlace-secundario">Iniciar sesión</a>
             </p>
         </form>
     </div>
@@ -112,35 +115,7 @@
 </main>
 
 <!-- Footer-->
-<footer>
-    <div class="contenido-footer">
-
-        <!-- Primera columna-->
-        <div class="columna-footer columna-logo">
-            <img src="img/gtiBlanco.svg" alt="logo">
-            <p class="elementos-footer">Liderando la innovación en tecnología educativa</p>
-        </div>
-
-        <!-- Segunda columna-->
-        <div class="columna-footer">
-            <h4>Enlaces rápidos</h4>
-            <ul>
-                <li><a class="elementos-footer" href="catalogo.php">Catálogo</a></li>
-                <li><a class="elementos-footer" href="preguntasFrecuentes.html">Preguntas Frecuentes</a></li>
-                <li><a class="elementos-footer" href="contacto.html">Contacto</a></li>
-            </ul>
-        </div>
-
-        <!-- Tercera columna-->
-        <div class="columna-footer">
-            <h4>Contacto</h4>
-            <ul>
-                <li class="elementos-footer">Email: info@gti.edu</li>
-                <li class="elementos-footer">Tel: +34 900 123 456</li>
-            </ul>
-        </div>
-    </div>
-</footer>
+<?php include $rutaBase . 'includes/footer.inc'; ?>
 <!-- Fin del footer-->
 
 </body>

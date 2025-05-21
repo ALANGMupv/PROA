@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Ruta de redirección del botón CTA
-    const ctaLink = 'app-gti/pagProducto.html';
+    const ctaLink = 'app-gti/pagProducto.php';
 
     // Obtener usuario desde localStorage
     const usuario = JSON.parse(localStorage.getItem('usuario'));
