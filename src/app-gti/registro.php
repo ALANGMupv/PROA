@@ -15,8 +15,8 @@
 </head>
 <body>
 
-<!-- Header - En el archivo js está el html en sí, según esté logueado se muestra uno y si no lo está otro. -->
-<div id="contenedor-header"></div>
+<!-- Include header no logueado -> solo acceden a registro los no logueados -->
+<?php include 'includes/headerNoLogueado.inc'; ?>
 <!-- Cerramos sección header -->
 
 <!-- Sección principal de registro -->
@@ -125,7 +125,7 @@
         <div class="columna-footer">
             <h4>Enlaces rápidos</h4>
             <ul>
-                <li><a class="elementos-footer" href="catalogo.html">Catálogo</a></li>
+                <li><a class="elementos-footer" href="catalogo.php">Catálogo</a></li>
                 <li><a class="elementos-footer" href="preguntasFrecuentes.html">Preguntas Frecuentes</a></li>
                 <li><a class="elementos-footer" href="contacto.html">Contacto</a></li>
             </ul>

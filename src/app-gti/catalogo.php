@@ -19,8 +19,9 @@
 </head>
 <body>
 
-<!-- HEADER (generado dinámicamente según login) -->
-<div id="contenedor-header"></div>
+<!-- Include header no logueado -> cambiar lógica según esté logueado cuando se implemente el login.php -->
+<?php include 'includes/headerNoLogueado.inc'; ?>
+<!-- Cerramos sección header -->
 
 <!-- MAIN CONTENIDO CATÁLOGO -->
 <main class="catalogo">
