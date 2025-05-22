@@ -6,8 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GTI</title>
+    <!-- Icono pestaña del navegador -->
+    <link rel="icon" href="app-gti/icons/iconGTI.png" type="image/svg+xml">
 
-    <!-- Estilos globales y específicos -->
     <link rel="stylesheet" href="app-gti/css/estilos.css">
     <link rel="stylesheet" href="app-gti/css/header.css">
     <link rel="stylesheet" href="app-gti/css/footer.css">
@@ -39,7 +40,7 @@ include $rutaBase . 'includes/headerNoLogueado.inc';
 
     <!-- Flecha scroll -->
     <a href="#quienes-somos" class="scroll-flecha" aria-label="Ir a la siguiente sección">
-        <img src="app-gti/icons/flecha-abajoPROA.svg" alt="Desplazar hacia abajo">
+        <img src="app-gti/icons/flechaLanding.svg" alt="Desplazar hacia abajo">
     </a>
 </section>
 
