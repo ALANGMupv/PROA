@@ -28,7 +28,7 @@ const asignatura = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
 if (!usuario || !asignatura) {
     document.getElementById("panelRealizarExamen").innerHTML = "<p>Error: falta usuario o asignatura</p>";
 } else {
-    fetch("/src/api/data/entregas-examenes.json")
+    fetch("../../api/data/entregas-examenes.json")
         .then(res => res.json())
         .then(data => {
             const examen = data[asignatura.codigo]?.cuestionario1?.find(e => e.correo === usuario.correo);

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const asignaturaSeleccionada = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
 
-    fetch("/src/api/data/examenes-alumno.json")
+    fetch("../../api/data/examenes-alumno.json")
         .then(res => res.json())
         .then(data => {
             const codigo = asignaturaSeleccionada?.codigo; // ejemplo: "PRO303"

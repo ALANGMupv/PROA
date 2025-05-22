@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Cargar todos los alumnos del JSON
-    fetch("/src/api/data/usuarios.json")
+    fetch("../../api/data/usuarios.json")
         .then(res => res.json())
         .then(data => {
             todosAlumnos = data.filter(u => u.rol === "alumno");

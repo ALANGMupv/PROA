@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Crear y cargar CSS del header
     const linkHeaderCSS = document.createElement('link');
     linkHeaderCSS.rel = 'stylesheet';
-    linkHeaderCSS.href = '/src/app-proa/css/header-proa.css';
+    linkHeaderCSS.href = '../css/header-proa.css';
+
 
     // Esperar a que el CSS esté completamente cargado
     linkHeaderCSS.onload = () => {
@@ -41,16 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (nombreHeader) nombreHeader.textContent = `${etiquetaRol} ${nombreCompleto}`;
                     if (nombrePopover) nombrePopover.textContent = `${etiquetaRol} ${nombreCompleto}`;
 
-                    const logoLink = document.getElementById('logo-proa-link');
-                    if (logoLink) {
-                        if (usuario.rol === 'alumno') {
-                            logoLink.href = '../alumno/index.php';
-                        } else if (usuario.rol === 'profesor') {
-                            logoLink.href = '../profesor/index.php';
-                        } else if (usuario.rol === 'pas') {
-                            logoLink.href = '../pas/index.php';
-                        }
-                    }
 
                     // Notificaciones
                     fetch(`${rutaBase}../api/data/notificaciones.json`)
@@ -113,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     confirmar?.addEventListener("click", () => {
                         localStorage.removeItem("usuario");
                         localStorage.removeItem("notificacionesVistas_" + usuario.correo);
-                        let rutaLogout = '../index.php';
+                        let rutaLogout = '../index.html';
                         window.location.replace(rutaLogout);
                     });
 

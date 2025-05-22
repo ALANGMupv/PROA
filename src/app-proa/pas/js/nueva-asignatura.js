@@ -3,7 +3,7 @@
 // ==============================
 document.addEventListener("DOMContentLoaded", () => {
     // Cargar departamentos desde JSON
-    fetch("/src/api/data/asignaturas.json") // ajusta la ruta si hace falta
+    fetch("../../api/data/asignaturas.json") // ajusta la ruta si hace falta
         .then(res => res.json())
         .then(asignaturas => {
             const departamentosUnicos = [...new Set(asignaturas.map(a => a.departamento))];

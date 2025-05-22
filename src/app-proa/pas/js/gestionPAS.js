@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let asignaturasOriginal = [];
 
-    fetch('/src/api/data/asignaturas.json')
+    fetch('../../api/data/asignaturas.json')
         .then(response => response.json())
         .then(asignaturas => {
             asignaturasOriginal = asignaturas;
