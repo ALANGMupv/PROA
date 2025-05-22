@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="../css/header-proa.css">
   <link rel="stylesheet" href="../css/submenu-asignatura.css">
   <script src="../js/header-proa.js" defer></script>
-  <script src="js/dropdown-asignaturas.js" defer></script>
-  <script src="js/asignatura-alumno.js" defer></script>
+    <script src="../js/asignaturas.js" defer></script>
 </head>
 <body>
 

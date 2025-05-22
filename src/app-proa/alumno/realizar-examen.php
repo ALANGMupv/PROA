@@ -12,8 +12,7 @@
   <link rel="stylesheet" href="css/pop-up.css">
   <link rel="stylesheet" href="css/realizar-examen.css">
   <script src="../js/header-proa.js" defer></script>
-  <script src="js/dropdown-asignaturas.js" defer></script>
-  <script src="js/asignatura-alumno.js" defer></script>
+    <script src="../js/asignaturas.js" defer></script>
   <script src="js/realizar-examen.js" defer></script>
   <script src="js/pop-up.js " defer></script>
 </head>
