@@ -34,7 +34,7 @@ include 'includes/headerNoLogueado.inc';
         </div>
     </div>
 
-    <!-- Parte derecha login -->
+    <!-- Parte derecha login - FORMULARIO-->
     <div class="login-formulario">
         <form class="formulario-login-pagLogin">
             <h2>Iniciar sesión</h2>
