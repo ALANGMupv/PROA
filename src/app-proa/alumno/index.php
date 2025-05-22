@@ -5,25 +5,41 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Inicio Profesor</title>
+    <title>Inicio Alumno</title>
     <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/inicio-asignaturas.css">
     <script src="../js/header-proa.js" defer></script>
-    <script src="js/inicio-profesor.js" defer></script>
+    <script src="js/inicio-alumno.js" defer></script>
 </head>
 <body>
+
+<?php
+$rutaBase = '../';
+include $rutaBase . 'includes/header-proa.inc';;
+?>
 
 <main class="contenido-principal">
 
     <!-- Panel de asignaturas -->
     <section class="panel-asignaturas">
-
         <div class="bloque-cabecera-asignaturas">
-            <div class="cabecera-titulo">
-                <h3 class="subtitulo-panel titulo-azul asignaturas">Tus asignaturas</h3>
+
+            <!-- TÍTULO PRINCIPAL -->
+            <div class="cabecera-superior">
+                <div class="cabecera-titulo">
+                    <h3 class="subtitulo-panel titulo-azul asignaturas">Tus asignaturas</h3>
+                </div>
+
+                <p class="texto-explicativo">
+                    Buscar con filtros, nombre o seleccionando favoritas:
+                </p>
+
             </div>
 
-            <!-- Filtros -->
+
+            <!-- FILTROS -->
+            <!-- Filtros agrupados en dos filas -->
             <div class="filtros-asignaturas">
 
                 <!-- Fila 1 -->
@@ -64,14 +80,8 @@
                             <option value="2">2º semestre</option>
                         </select>
                     </div>
-                    <div class="contenedor-select">
-                        <select id="filtroRol" class="input-base seleccionador-dropdown">
-                            <option value="todos">Todas las responsabilidades</option>
-                            <option value="responsable">Responsable</option>
-                            <option value="colaborador">Colaborador</option>
-                        </select>
-                    </div>
                 </div>
+
             </div>
 
         </div>
@@ -83,7 +93,6 @@
 
     </section>
 
-    <!-- Panel de notificaciones -->
     <aside class="panel-notificaciones">
         <!-- Toggle siempre visible -->
         <div class="toggle-notificaciones">
@@ -99,7 +108,6 @@
             <ul id="lista-notificaciones" class="lista-notificaciones"></ul>
         </div>
     </aside>
-
 
 </main>
 

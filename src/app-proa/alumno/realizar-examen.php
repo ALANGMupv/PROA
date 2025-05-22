@@ -7,38 +7,37 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Realizar Examen</title>
   <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/header-proa.css">
   <link rel="stylesheet" href="../css/submenu-asignatura.css">
   <link rel="stylesheet" href="css/pop-up.css">
   <link rel="stylesheet" href="css/realizar-examen.css">
   <script src="../js/header-proa.js" defer></script>
-  <script src="js/dropdown-asignaturas.js" defer></script>
-  <script src="js/asignatura-alumno.js" defer></script>
+    <script src="../js/asignaturas.js" defer></script>
   <script src="js/realizar-examen.js" defer></script>
   <script src="js/pop-up.js " defer></script>
 </head>
 <body>
+
+<?php
+$rutaBase = '../';
+include $rutaBase . 'includes/header-proa.inc';;
+?>
 
 <main class="contenido-wrapper">
 
   <!-- Contenido general en horizontal: submenú a la izquierda + contenido a la derecha -->
   <div class="contenido-principal">
 
-    <!-- Área lateral para el submenú (se rellena dinámicamente por JS) -->
-    <aside id="submenu" class="submenu"></aside>
+      <!-- Área lateral para el submenú (se rellena dinámicamente por JS) -->
+      <aside id="submenu" class="submenu">
+          <?php include $rutaBase . 'includes/submenu-asignaturas.inc'; ?>
+      </aside>
 
-    <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->
-    <div class="contenido-asignatura">
-
-      <!-- Cabecera superior del contenido (zona fija arriba del panel derecho) -->
-      <!-- Aquí va el dropdown para cambiar de asignatura -->
-      <div class="cabecera-dropdown-fija">
-        <div class="input-con-icono">
-
-          <!-- Dropdown con las asignaturas disponibles (relleno dinámicamente con JS) -->
-          <select id="dropdown-asignaturas" class="input-base seleccionador-dropdown"></select>
-          <img src="../icons/dropdownAsignaturas.svg" alt="Flecha" class="icono-dropdown">
-        </div>
-      </div>
+      <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->
+      <div class="contenido-asignatura">
+          <!-- Cabecera superior del contenido (zona fija arriba del panel derecho) -->
+          <!-- Aquí va el dropdown para cambiar de asignatura -->
+          <?php include $rutaBase . 'includes/dropdown-asignaturas.inc'; ?>
 
       <a href="#" id="volver" class="volver-enlace">← Volver</a>
 
@@ -231,7 +230,7 @@
         <div id="botones">
           <button class="btn-oscuros-secundario btn-inicial" type="reset">Cancelar</button>
           <button class="btn-oscuros btn-inicial" onclick="activarPopPup()" type="button">Enviar</button>
-          <a href="examenes-alumno.html" class="btn-oscuros btn-atras">Atrás</a>
+          <a href="examenes-alumno.php" class="btn-oscuros btn-atras">Atrás</a>
         </div>
 
         <!-- Pop-up de confirmación -->

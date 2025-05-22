@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     const asignaturaSeleccionada = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
 
-    fetch("/src/api/data/examenes-alumno.json")
+    fetch("../../api/data/examenes-alumno.json")
         .then(res => res.json())
         .then(data => {
             const codigo = asignaturaSeleccionada?.codigo; // ejemplo: "PRO303"
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
             el.addEventListener("click", () => {
                 const cuestionario = el.dataset.cuestionario; // ej: "cuestionario1"
                 localStorage.setItem("cuestionarioSeleccionado", cuestionario);
-                window.location.href = "examenes-realizados.html";
+                window.location.href = "examenes-realizados.php";
             });
         });
     }
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="info">
                         <h4>${ex.titulo}</h4>
                         <p class="fecha-limite">
-                            <img src="/src/app-proa/icons/advertenciaFecha.svg" class="icono-fecha" alt="Icono advertencia">
+                            <img src="../icons/advertenciaFecha.svg" class="icono-fecha" alt="Icono advertencia">
                             Fecha límite: ${ex.fechaLimite}
                         </p>
                     </div>
@@ -88,5 +88,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function redireccionarPagina() {
-    window.location.replace("realizar-examen.html");
+    window.location.replace("realizar-examen.php");
 }

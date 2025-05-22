@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let profesoresDisponibles = [];
     let hayCambios = false;
 
-    fetch("/src/api/data/usuarios.json")
+    fetch("../../api/data/usuarios.json")
         .then(res => res.json())
         .then(data => {
             todosProfesores = data.filter(u => u.rol === "profesor");
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         hayCambios = false; // los cambios ya fueron guardados
         mostrarNotificacion("Profesores asignados correctamente", () => {
-            window.location.href = "ficha-asignatura-pas.html";
+            window.location.href = "ficha-asignatura-pas.php";
         });
     });
 

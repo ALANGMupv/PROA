@@ -64,13 +64,13 @@ document.addEventListener("DOMContentLoaded", () => {
 const btnAsignarAlumnos = document.getElementById("btn-ir-asignacion-alumnos");
 if (btnAsignarAlumnos) {
     btnAsignarAlumnos.addEventListener("click", () => {
-        window.location.href = "asignacion-alumnos-pas.html";
+        window.location.href = "asignacion-alumnos-pas.php";
     });
 }
 
 const btnAsignarProfesores = document.getElementById("btn-ir-asignacion-profesores");
 if (btnAsignarProfesores) {
     btnAsignarProfesores.addEventListener("click", () => {
-        window.location.href = "asignacion-profesor-pas.html";
+        window.location.href = "asignacion-profesor-pas.php";
     });
 }

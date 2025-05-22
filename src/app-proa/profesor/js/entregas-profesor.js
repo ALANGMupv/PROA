@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let entregasOriginales = []; // Global
 
-    fetch("/src/api/data/entregas-examenes.json")
+    fetch("../../api/data/entregas-examenes.json")
         .then(res => res.json())
         .then(data => {
             entregasOriginales = data[codigo]?.cuestionario1 || [];

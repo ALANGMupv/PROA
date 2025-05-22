@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     if (!usuario || usuario.rol !== "alumno") {
-        window.location.href = "../../index.html";
+        window.location.href = "../../index.php";
         return;
     }
 
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     nombre: asig.nombre,
                     codigo: asig.codigo
                 }));
-                window.location.href = "asignatura-alumno.html";
+                window.location.href = "asignatura-alumno.php";
             });
 
             lista.appendChild(div);

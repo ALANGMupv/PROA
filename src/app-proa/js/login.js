@@ -11,11 +11,11 @@ if (usuarioLogueado) {
             );
 
             if (usuarioValido.rol === "pas") {
-                window.location.replace('pas/index.html');
+                window.location.replace('pas/index.php');
             } else if (usuarioValido.rol === "alumno") {
-                window.location.replace('alumno/index.html');
+                window.location.replace('alumno/index.php');
             } else if (usuarioValido.rol === "profesor") {
-                window.location.replace('profesor/index.html');
+                window.location.replace('profesor/index.php');
             }
 
         });
@@ -78,11 +78,11 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
                 localStorage.setItem('usuario', JSON.stringify(usuario));
 
                     if (usuario.rol === "pas") {
-                        window.location.replace('pas/index.html');
+                        window.location.replace('pas/index.php');
                     } else if (usuario.rol === "alumno") {
-                        window.location.replace('alumno/index.html');
+                        window.location.replace('alumno/index.php');
                     } else if (usuario.rol === "profesor") {
-                        window.location.replace('profesor/index.html');
+                        window.location.replace('profesor/index.php');
                     }
 
             } else {

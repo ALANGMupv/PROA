@@ -7,17 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HomePage PAS</title>
     <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/submenu-asignatura.css">
     <script src="../js/header-proa.js" defer></script>
     <script src="js/panel-pas.js" defer></script>
-
 </head>
 <body class="vista-pas">
+
+<?php
+$rutaBase = '../';
+include $rutaBase . 'includes/header-proa.inc';;
+?>
+
 <div class="contenido-wrapper">
     <div class="contenido-principal">
 
-        <!-- SUBMENÚ PAS (se inyecta dinámicamente aquí) -->
-        <aside id="submenu"></aside>
+        <!-- Submenú lateral izquierdo para el PAS (se carga dinámicamente vía JS) -->
+        <aside id="submenu" class="submenu">
+            <?php include $rutaBase . 'includes/submenu-asignaturasPASTemporal.inc'; ?>
+        </aside>
 
         <!-- CONTENIDO DERECHO -->
         <section class="panel-contenido fondoPanel">

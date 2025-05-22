@@ -179,8 +179,8 @@ async function popupPublicar() {
 }
 
 function volverAtras() {
-    if (window.location.pathname.includes("crear-examen-nuevo.html")) {
-        window.location.href = "examenes-profesor.html";
+    if (window.location.pathname.includes("crear-examen-nuevo.php")) {
+        window.location.href = "examenes-profesor.php";
     } else {
         window.history.back();
     }
