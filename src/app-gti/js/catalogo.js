@@ -85,10 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const usuarioGTI = JSON.parse(localStorage.getItem('usuario'));
 
     btnDemo?.addEventListener('click', () => {
-        window.location.href = usuarioGTI ? '../app-proa/index.html' : 'login.html';
+        window.location.href = usuarioGTI ? '../app-proa/index.php' : 'login.php';
     });
 
     btnProd?.addEventListener('click', () => {
-        window.location.href = 'pagProducto.html';
+        window.location.href = 'pagProducto.php';
     });
 });

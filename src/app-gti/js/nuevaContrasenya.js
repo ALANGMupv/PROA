@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     toast.remove();
                     overlay.remove();
-                    window.location.href = 'login.html';
+                    window.location.href = 'login.php';
                 }, 1500);
             });
         })

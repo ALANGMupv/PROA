@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const usuario = JSON.parse(localStorage.getItem('usuario'));
 
     if (usuario) {
-        window.location.href = '../index.html';
+        window.location.href = '../index.php';
     }
 });
 
@@ -71,7 +71,7 @@ document.querySelector('.formulario-login-pagLogin')?.addEventListener('submit',
 
             if (usuario) {
                 localStorage.setItem('usuario', JSON.stringify(usuario));
-                window.location.href = '../index.html';
+                window.location.href = '../index.php';
 
         } else {
                 // Si no se encuentra el usuario, mostramos error tipo toast con fondo difuminado

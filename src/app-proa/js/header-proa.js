@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     const logoLink = document.getElementById('logo-proa-link');
                     if (logoLink) {
                         if (usuario.rol === 'alumno') {
-                            logoLink.href = '../alumno/index.html';
+                            logoLink.href = '../alumno/index.php';
                         } else if (usuario.rol === 'profesor') {
-                            logoLink.href = '../profesor/index.html';
+                            logoLink.href = '../profesor/index.php';
                         } else if (usuario.rol === 'pas') {
-                            logoLink.href = '../pas/index.html';
+                            logoLink.href = '../pas/index.php';
                         }
                     }
 
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     confirmar?.addEventListener("click", () => {
                         localStorage.removeItem("usuario");
                         localStorage.removeItem("notificacionesVistas_" + usuario.correo);
-                        let rutaLogout = '../index.html';
+                        let rutaLogout = '../index.php';
                         window.location.replace(rutaLogout);
                     });
 
