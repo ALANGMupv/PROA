@@ -6,6 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Catálogo</title>
+    <!-- Icono pestaña del navegador -->
+    <link rel="icon" href="icons/iconGTI.png" type="image/svg+xml">
 
     <!-- Estilos globales y específicos -->
     <link rel="stylesheet" href="css/estilos.css">
