@@ -25,7 +25,9 @@ include $rutaBase . 'includes/header-proa.inc';;
     <div class="contenido-principal">
 
         <!-- Submenú lateral izquierdo para el PAS (se carga dinámicamente vía JS) -->
-        <aside id="submenu"></aside>
+        <aside id="submenu" class="submenu">
+            <?php include $rutaBase . 'includes/submenu-asignaturasPASTemporal.inc'; ?>
+        </aside>
 
         <!-- Contenido principal derecho del panel -->
         <section class="contenido-asignatura fondoPanel">

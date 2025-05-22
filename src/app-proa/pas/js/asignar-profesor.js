@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let profesoresDisponibles = [];
     let hayCambios = false;
 
-    fetch("/../../api/data/usuarios.json")
+    fetch("../../api/data/usuarios.json")
         .then(res => res.json())
         .then(data => {
             todosProfesores = data.filter(u => u.rol === "profesor");
