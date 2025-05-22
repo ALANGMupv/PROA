@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asignación de Alumnos</title>
     <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/submenu-asignatura.css">
     <link rel="stylesheet" href="css/asignacion.css">
     <script src="../js/header-proa.js" defer></script>
@@ -12,6 +13,12 @@
     <script src="js/asignar-alumnos.js" defer></script>
 </head>
 <body class="vista-pas">
+
+<?php
+$rutaBase = '../';
+include $rutaBase . 'includes/header-proa.inc';;
+?>
+
 <main class="contenido-wrapper">
     <div class="contenido-principal">
         <aside id="submenu" class="submenu"></aside>

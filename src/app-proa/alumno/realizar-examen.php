@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Realizar Examen</title>
   <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/header-proa.css">
   <link rel="stylesheet" href="../css/submenu-asignatura.css">
   <link rel="stylesheet" href="css/pop-up.css">
   <link rel="stylesheet" href="css/realizar-examen.css">
@@ -17,6 +18,11 @@
   <script src="js/pop-up.js " defer></script>
 </head>
 <body>
+
+<?php
+$rutaBase = '../';
+include $rutaBase . 'includes/header-proa.inc';;
+?>
 
 <main class="contenido-wrapper">
 

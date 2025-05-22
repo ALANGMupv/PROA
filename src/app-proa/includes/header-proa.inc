@@ -1,36 +1,29 @@
-<!-- Solo el contenido del header, sin html/head/body -->
 <header>
     <div class="header-izquierda">
         <a id="logo-proa-link" href="#">
-            <img src="../icons/logoBlanco.svg" alt="Logo PROA" class="logo" />
+            <img src="<?= $rutaBase ?>icons/logoBlanco.svg" alt="Logo PROA" class="logo" />
         </a>
-
     </div>
 
     <div class="header-derecha">
         <button class="boton-notificacion" popovertarget="menu-avisos">
-            <img src="../icons/avisos.svg" alt="Notificaciones" class="icono-notificacion">
+            <img src="<?= $rutaBase ?>icons/avisos.svg" alt="Notificaciones" class="icono-notificacion">
         </button>
 
         <button class="usuario-caja" popovertarget="menu-usuario">
-            <span id="nombre-usuario-header">Nombre</span>
-            <img src="../icons/perfil.svg" alt="Icono usuario" class="icono-usuario">
+            <span id="nombre-usuario-header"></span>
+            <img src="<?= $rutaBase ?>icons/perfil.svg" alt="Icono usuario" class="icono-usuario">
         </button>
     </div>
 </header>
 
-<!-- Popover usuario -->
 <div id="menu-usuario" popover>
-    <div>Bienvenido<br><strong id="nombre-usuario-popover">Nombre</strong></div>
+    <div>Bienvenido<br><strong id="nombre-usuario-popover"></strong></div>
     <div><a href="#" id="cerrar-sesion">Cerrar sesión</a></div>
 </div>
 
-<!-- Popover avisos -->
-<div id="menu-avisos" popover>
+<div id="menu-avisos" popover></div>
 
-</div>
-
-<!-- Popup confirmación -->
 <div class="popup" role="dialog" aria-modal="true">
     <div class="popup-contenido">
         <p>¿Estás seguro de que deseas cerrar sesión?</p>

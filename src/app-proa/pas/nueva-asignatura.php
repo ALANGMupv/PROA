@@ -6,8 +6,8 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Nueva Asignatura</title>
-
   <link rel="stylesheet" href="../css/estilos.css" />
+    <link rel="stylesheet" href="../css/header-proa.css">
   <link rel="stylesheet" href="../css/submenu-asignatura.css" />
   <link rel="stylesheet" href="css/nueva-asignatura.css" />
   <link rel="stylesheet" href="css/pop-up.css" />
@@ -16,6 +16,12 @@
   <script src="js/nueva-asignatura.js" defer></script>
 </head>
 <body class="vista-pas">
+
+<?php
+$rutaBase = '../';
+include $rutaBase . 'includes/header-proa.inc';;
+?>
+
 <div class="contenido-wrapper">
   <div class="contenido-principal">
     <aside id="submenu"></aside>

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Entregas Examen Profesor</title>
     <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/submenu-asignatura.css">
     <link rel="stylesheet" href="css/dropdown-grupo.css">
     <link rel="stylesheet" href="css/entregas-profesor.css">
@@ -16,6 +17,11 @@
 
 </head>
 <body>
+
+<?php
+$rutaBase = '../';
+include $rutaBase . 'includes/header-proa.inc';;
+?>
 
 <main class="contenido-wrapper"> <!-- Contenedor principal del contenido -->
 

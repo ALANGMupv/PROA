@@ -7,11 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Inicio Profesor</title>
     <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/inicio-asignaturas.css">
     <script src="../js/header-proa.js" defer></script>
     <script src="js/inicio-profesor.js" defer></script>
 </head>
 <body>
+
+<?php
+$rutaBase = '../';
+include $rutaBase . 'includes/header-proa.inc';;
+?>
 
 <main class="contenido-principal">
 

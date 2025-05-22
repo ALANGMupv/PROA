@@ -7,15 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gestión de Asignaturas</title>
     <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/submenu-asignatura.css">
     <link rel="stylesheet" href="css/gestionAsignaturasPAS.css">
     <script src="../js/header-proa.js" defer></script>
     <script src="js/panel-pas.js" defer></script>
     <script src="js/gestionPAS.js" defer></script>
-
 </head>
-
 <body class="vista-pas">
+
+<?php
+$rutaBase = '../';
+include $rutaBase . 'includes/header-proa.inc';;
+?>
 
 <div class="contenido-wrapper">
     <div class="contenido-principal">

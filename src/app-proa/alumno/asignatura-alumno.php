@@ -7,13 +7,18 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Inicio Alumno</title>
   <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/header-proa.css">
   <link rel="stylesheet" href="../css/submenu-asignatura.css">
   <script src="../js/header-proa.js" defer></script>
   <script src="js/dropdown-asignaturas.js" defer></script>
   <script src="js/asignatura-alumno.js" defer></script>
 </head>
-
 <body>
+
+<?php
+$rutaBase = '../';
+include $rutaBase . 'includes/header-proa.inc';;
+?>
 
 <!-- Contenedor principal de toda la página (estructura vertical) -->
 <main class="contenido-wrapper">
