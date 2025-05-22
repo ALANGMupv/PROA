@@ -20,41 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Define las opciones del submenú (textos y enlaces)
-    const opciones = [
-        { texto: "Horario", href: "#" },
-        { texto: "Guía Docente", href: "#" },
-        { texto: "Recursos", href: "#" },
-        { texto: "Tareas", href: "#" },
-        { texto: "Exámenes", href: "examenes-alumno.php" },
-        { texto: "Calificaciones", href: "#" },
-        { texto: "Ranking", href: "#" },
-        { texto: "Foros", href: "#" },
-        { texto: "Clases en vivo", href: "#" }
-    ];
-
-    // Genera el HTML del submenú con título y opciones
-    const htmlSubmenu = `
-        <div class="titulo-submenu">
-            <h2>${asignatura.nombre}</h2>
-        </div>
-        <nav class="menu colapsable" id="submenu-toggle">
-            <button class="submenu-toggle-btn">
-                Asignatura <span class="flecha">&#9662;</span>
-            </button>
-            <div class="submenu-items">
-                ${opciones.map(op => `
-                    <a href="${op.href}" class="submenu-item">
-                        <span>${op.texto}</span>
-                    </a>
-                `).join('')}
-            </div>
-        </nav>
-    `;
-
-    // Inserta ese HTML dentro del contenedor submenu (en el aside)
-    submenu.innerHTML = htmlSubmenu;
-
+    // Cambia el título dinámicamente
+    const tituloAsignatura = document.querySelector("#submenu .titulo-submenu h2");
+    if (tituloAsignatura) {
+        tituloAsignatura.textContent = asignatura.nombre;
+    }
 
     // ============================
     // MENÚ ASIGNATURAS (Responsive)

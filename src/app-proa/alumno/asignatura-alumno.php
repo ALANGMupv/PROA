@@ -26,22 +26,16 @@ include $rutaBase . 'includes/header-proa.inc';;
   <!-- Contenido general en horizontal: submenú a la izquierda + contenido a la derecha -->
   <div class="contenido-principal">
 
-    <!-- Área lateral para el submenú (se rellena dinámicamente por JS) -->
-    <aside id="submenu" class="submenu"></aside>
+      <!-- Área lateral para el submenú (se rellena dinámicamente por JS) -->
+      <aside id="submenu" class="submenu">
+          <?php include $rutaBase . 'includes/submenu-asignaturas.inc'; ?>
+      </aside>
 
-    <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->
-    <div class="contenido-asignatura">
-
-      <!-- Cabecera superior del contenido (zona fija arriba del panel derecho) -->
-      <!-- Aquí va el dropdown para cambiar de asignatura -->
-      <div class="cabecera-dropdown-fija">
-        <div class="input-con-icono">
-
-          <!-- Dropdown con las asignaturas disponibles (relleno dinámicamente con JS) -->
-          <select id="dropdown-asignaturas" class="input-base seleccionador-dropdown"></select>
-          <img src="../icons/dropdownAsignaturas.svg" alt="Flecha" class="icono-dropdown">
-        </div>
-      </div>
+      <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->
+      <div class="contenido-asignatura">
+          <!-- Cabecera superior del contenido (zona fija arriba del panel derecho) -->
+          <!-- Aquí va el dropdown para cambiar de asignatura -->
+          <?php include $rutaBase . 'includes/dropdown-asignaturas.inc'; ?>
 
       <!-- Contenedor del contenido que se muestra según la opción seleccionada en el submenú -->
       <section class="panel-contenido fondoPanel">
