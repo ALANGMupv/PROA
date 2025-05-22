@@ -231,7 +231,7 @@
         <div id="botones">
           <button class="btn-oscuros-secundario btn-inicial" type="reset">Cancelar</button>
           <button class="btn-oscuros btn-inicial" onclick="activarPopPup()" type="button">Enviar</button>
-          <a href="examenes-alumno.html" class="btn-oscuros btn-atras">Atrás</a>
+          <a href="examenes-alumno.php" class="btn-oscuros btn-atras">Atrás</a>
         </div>
 
         <!-- Pop-up de confirmación -->

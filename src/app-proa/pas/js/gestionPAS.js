@@ -12,12 +12,12 @@ function toggleOpciones(icono) {
 // Funciones para asignar alumno o profesor
 function asignarAlumno(asignatura) {
     localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asignatura));
-    window.location.href = "asignacion-alumnos-pas.html";
+    window.location.href = "asignacion-alumnos-pas.php";
 }
 
 function asignarProfesor(asignatura) {
     localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asignatura));
-    window.location.href = "asignacion-profesor-pas.html";
+    window.location.href = "asignacion-profesor-pas.php";
 }
 
 // Ejecutar cuando el DOM se ha cargado completamente
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span data-label="Nombre">${asig.nombre}</span>
                 <span data-label="Departamento">${asig.departamento}</span>
                 <span data-label="Créditos">${asig.creditos}</span>
-                <a href="ficha-asignatura-pas.html" class="btn ver-detalles" data-codigo="${asig.codigo}">Ver detalles</a>
+                <a href="ficha-asignatura-pas.php" class="btn ver-detalles" data-codigo="${asig.codigo}">Ver detalles</a>
                 <div class="menu-opciones-wrapper" data-label="Asignar">
                     <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" onclick="toggleOpciones(this)" />
                     <div class="menu-desplegable">

@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         codigo: nueva.codigo
                     }));
                     // Vuelve al index de la correspondiente asignatura del profesor
-                    window.location.href = "asignatura-profesor.html";
+                    window.location.href = "asignatura-profesor.php";
                 }
             });
         });

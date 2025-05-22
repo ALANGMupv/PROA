@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         codigo: nueva.codigo
                     }));
                     // Vuelve al index de la correspondiente asignatura
-                    window.location.href = "asignatura-alumno.html";
+                    window.location.href = "asignatura-alumno.php";
                 }
             });
         });

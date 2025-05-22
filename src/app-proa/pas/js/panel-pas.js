@@ -2,14 +2,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     if (!usuario || usuario.rol !== "pas") {
-        window.location.replace("../../index.html");
+        window.location.replace("../../index.php");
         return;
     }
 
     const submenu = document.getElementById("submenu");
 
     const opciones = [
-        { texto: "Creación de Asignaturas", href: "asignaturas.html" }
+        { texto: "Creación de Asignaturas", href: "asignaturas.php" }
     ];
 
     const htmlSubmenu = `
@@ -51,5 +51,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function redireccionarPagina() {
-    window.location.replace('nueva-asignatura.html');
+    window.location.replace('nueva-asignatura.php');
 }

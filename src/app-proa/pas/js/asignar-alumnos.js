@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (hayCambios) {
             dialog.showModal();
         } else {
-            window.location.replace("asignaturas.html");
+            window.location.replace("asignaturas.php");
         }
     });
 
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btn-confirmar").addEventListener("click", () => {
         console.log("Alumnos asignados a", datos.nombre, alumnosAsignados);
         mostrarNotificacion("Alumnos asignados correctamente", () => {
-            window.location.href = "ficha-asignatura-pas.html";
+            window.location.href = "ficha-asignatura-pas.php";
         });
     });
 

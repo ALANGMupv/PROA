@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const submenu = document.getElementById("submenu");
 
     if (!usuario || usuario.rol !== "profesor") {
-        window.location.replace("../../index.html");
+        window.location.replace("../../index.php");
         return;
     }
 
     const asignatura = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
 
     if (!asignatura) {
-        window.location.href = "../index.html";
+        window.location.href = "../index.php";
         return;
     }
 
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { texto: "Guía Docente", href: "#" },
         { texto: "Recursos", href: "#" },
         { texto: "Tareas", href: "#" },
-        { texto: "Exámenes", href: "examenes-profesor.html" },
+        { texto: "Exámenes", href: "examenes-profesor.php" },
         { texto: "Calificaciones", href: "#" },
         { texto: "Ranking", href: "#" },
         { texto: "Foros", href: "#" },

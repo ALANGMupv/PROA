@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const usuario = JSON.parse(localStorage.getItem('usuario'));
 
     if (!usuario) {
-        window.location.replace('index.html');
+        window.location.replace('index.php');
         return;
     }
 
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ? '../'
             : './';
 
-        fetch(`${rutaBase}header-proa.html`)
+        fetch(`${rutaBase}header-proa.php`)
             .then(res => res.text())
             .then(html => {
                 document.body.insertAdjacentHTML('afterbegin', html);
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     confirmar?.addEventListener("click", () => {
                         localStorage.removeItem("usuario");
                         localStorage.removeItem("notificacionesVistas_" + usuario.correo);
-                        let rutaLogout = '../index.html';
+                        let rutaLogout = '../index.php';
                         window.location.replace(rutaLogout);
                     });
 

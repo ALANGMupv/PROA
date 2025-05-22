@@ -38,7 +38,7 @@
       </div>
 
       <!-- Enlace de volver -->
-      <a href="examenes-alumno.html" id="volver" class="volver-enlace">← Volver</a>
+      <a href="examenes-alumno.php" id="volver" class="volver-enlace">← Volver</a>
 
       <!-- Contenido del examen corregido -->
       <section id="panelRealizarExamen" class="fondoPanel">

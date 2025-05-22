@@ -168,7 +168,7 @@ document.getElementById("guardar").addEventListener("click", () => {
 // ==========================
 document.getElementById("confirmar-guardar").addEventListener("click", () => {
     popupGuardar.close();
-    window.location.href = "asignaturas.html";
+    window.location.href = "asignaturas.php";
 });
 
 // ==========================
@@ -191,7 +191,7 @@ document.getElementById("cancelar").addEventListener("click", () => {
 // ==========================
 document.getElementById("confirmar-cancelar").addEventListener("click", () => {
     popupCancelar.close();
-    window.location.href = "asignaturas.html";
+    window.location.href = "asignaturas.php";
 });
 
 // ==========================
@@ -211,7 +211,7 @@ if (btnVolver) {
         const dialogsAbiertos = document.querySelectorAll("dialog[open]");
         dialogsAbiertos.forEach(dialog => dialog.close());
 
-        // Redirige a la página anterior si existe, si no a asignaturas.html
+        // Redirige a la página anterior si existe, si no a asignaturas.php
         if (document.referrer && !document.referrer.includes(location.href)) {
             window.location.href = document.referrer;
         } else {

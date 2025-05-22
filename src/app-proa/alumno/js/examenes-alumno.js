@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
             el.addEventListener("click", () => {
                 const cuestionario = el.dataset.cuestionario; // ej: "cuestionario1"
                 localStorage.setItem("cuestionarioSeleccionado", cuestionario);
-                window.location.href = "examenes-realizados.html";
+                window.location.href = "examenes-realizados.php";
             });
         });
     }
@@ -88,5 +88,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function redireccionarPagina() {
-    window.location.replace("realizar-examen.html");
+    window.location.replace("realizar-examen.php");
 }

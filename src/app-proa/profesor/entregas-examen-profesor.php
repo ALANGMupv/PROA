@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <a href="examenes-profesor.html" id="btn-volver" class="volver-enlace">← Volver</a>
+            <a href="examenes-profesor.php" id="btn-volver" class="volver-enlace">← Volver</a>
 
 
 

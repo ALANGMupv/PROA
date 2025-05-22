@@ -101,15 +101,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function redireccionarPagina(){
-    window.location.replace("crear-examen-nuevo.html");
+    window.location.replace("crear-examen-nuevo.php");
 }
 
 document.addEventListener("click", (e) => {
     if (e.target.closest(".btn-terminar")) {
-        window.location.href = "crear-examen-borrador.html";
+        window.location.href = "crear-examen-borrador.php";
         return;
     } else if(e.target.closest(".btn-visualizar-entregas")){
-        window.location.href = "entregas-examen-profesor.html";
+        window.location.href = "entregas-examen-profesor.php";
         return;
     }
 
@@ -120,6 +120,6 @@ document.addEventListener("click", (e) => {
         }));
 
         // Redirige a la ficha del examen
-        window.location.href = "ficha-examen-profesor.html";
+        window.location.href = "ficha-examen-profesor.php";
     }
 });

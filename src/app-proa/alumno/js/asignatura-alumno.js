@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Si no hay usuario o su rol no es "alumno", redirige a la página de inicio
     if (!usuario || usuario.rol !== "alumno") {
-        window.location.replace("../../index.html");
+        window.location.replace("../../index.php");
         return;
     }
 
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Si no hay asignatura seleccionada, redirige a la página anterior
     if (!asignatura) {
-        window.location.href = "../index.html";
+        window.location.href = "../index.php";
         return;
     }
 
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { texto: "Guía Docente", href: "#" },
         { texto: "Recursos", href: "#" },
         { texto: "Tareas", href: "#" },
-        { texto: "Exámenes", href: "examenes-alumno.html" },
+        { texto: "Exámenes", href: "examenes-alumno.php" },
         { texto: "Calificaciones", href: "#" },
         { texto: "Ranking", href: "#" },
         { texto: "Foros", href: "#" },
@@ -110,8 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
             enlace.classList.add("activo");
         }
 
-        // Excepción: si estamos en realizar-examen.html, activamos también "Exámenes"
-        if (rutaActual === "realizar-examen.html" && href === "examenes-alumno.html") {
+        // Excepción: si estamos en realizar-examen.php, activamos también "Exámenes"
+        if (rutaActual === "realizar-examen.php" && href === "examenes-alumno.php") {
             enlace.classList.add("activo");
         }
     });

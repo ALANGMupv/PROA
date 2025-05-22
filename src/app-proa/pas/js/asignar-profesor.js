@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         hayCambios = false; // los cambios ya fueron guardados
         mostrarNotificacion("Profesores asignados correctamente", () => {
-            window.location.href = "ficha-asignatura-pas.html";
+            window.location.href = "ficha-asignatura-pas.php";
         });
     });
 

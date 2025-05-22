@@ -21,11 +21,11 @@ function activarPopPup(btn){
 
 function btnAceptar(id){
     if (id.id === 'aceptar-salir'){
-        window.location.replace("examenes-profesor.html");
+        window.location.replace("examenes-profesor.php");
     } else if ( id.id === 'aceptar-publicado'){
-        window.location.replace("examenes-profesor.html");
+        window.location.replace("examenes-profesor.php");
     } else if (id.id === 'aceptar-borrador'){
-        window.location.replace("examenes-profesor.html");
+        window.location.replace("examenes-profesor.php");
     }
     popup.style.display = 'none'; // Oculta el pop-up
 }
