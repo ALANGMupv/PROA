@@ -1,7 +1,7 @@
 /* region --- Primera sección --- */
 .contenedor {
     position: relative;
-    min-height: calc(100dvh - 80px); /* Ajusta la altura restando la del header */
+    min-height: calc(100dvh - var(--header-height)); /* Ajusta la altura restando la del header */
     background: url('../img/imagenPagProducto.png') no-repeat center center;
     background-size: cover;
     display: flex;

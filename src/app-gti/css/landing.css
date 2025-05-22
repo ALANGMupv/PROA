@@ -1,7 +1,7 @@
 /* region --- Primera sección --- */
 .contenedor {
     position: relative;
-    min-height: calc(100dvh - 80px);
+    min-height: calc(100dvh - var(--header-height));
     display: flex;
     justify-content: center;
     align-items: center;
