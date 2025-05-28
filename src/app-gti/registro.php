@@ -39,9 +39,9 @@ include 'includes/headerNoLogueado.inc';
         </div>
 
         <!-- Formulario para el registro de usuarios -->
-        <form class="registro-formulario">
+        <form class="registro-formulario" action="registrarUsuario.php" method="post">
 
-            <!-- Campos para el nombre y apellidos del usuario -->
+        <!-- Campos para el nombre y apellidos del usuario -->
             <div class="campo-doble">
                 <div class="campo mitad">
                     <label for="nombre">Nombre *</label>
