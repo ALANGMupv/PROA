@@ -45,11 +45,11 @@ include 'includes/headerNoLogueado.inc';
             <div class="campo-doble">
                 <div class="campo mitad">
                     <label for="nombre">Nombre *</label>
-                    <input type="text" id="nombre" class="input-base" />
+                    <input type="text" id="nombre" name="nombre" class="input-base" />
                 </div>
                 <div class="campo mitad">
                     <label for="apellidos">Apellidos *</label>
-                    <input type="text" id="apellidos" class="input-base" />
+                    <input type="text" id="apellidos" name = "apellidos" class="input-base" />
                 </div>
             </div>
 
@@ -57,18 +57,18 @@ include 'includes/headerNoLogueado.inc';
             <div class="campo-doble">
                 <div class="campo mitad">
                     <label for="institucion">Nombre de la institución *</label>
-                    <input type="text" id="institucion" class="input-base" />
+                    <input type="text" id="institucion" name="institucion" class="input-base" />
                 </div>
                 <div class="campo mitad">
                     <label for="tipo">Tipo de institución *</label>
                     <div class="input-dropdown">
-                        <select id="tipo" class="seleccionador-dropdown">
-                            <option selected disabled hidden>Selecciona tu institución</option>
-                            <option>Universidad</option>
-                            <option>Instituto</option>
-                            <option>Colegio</option>
-                            <option>Academia Particular</option>
-                            <option>Otros</option>
+                        <select id="tipo" name="tipo" class="seleccionador-dropdown">
+                            <option value="" disabled selected hidden>Selecciona tu institución</option>
+                            <option value="A1">Universidad</option>
+                            <option value="A2">Instituto</option>
+                            <option value="A3">Colegio</option>
+                            <option value="A4">Academia Particular</option>
+                            <option value="A5">Otros</option>
                         </select>
                         <img src="icons/dropdown.svg" alt="Flecha" class="icono-dropdown" />
                     </div>
@@ -79,11 +79,11 @@ include 'includes/headerNoLogueado.inc';
             <div class="campo-doble">
                 <div class="campo mitad">
                     <label for="telefono">Teléfono *</label>
-                    <input type="tel" id="telefono" class="input-base" />
+                    <input type="tel" id="telefono"  name="telefono" class="input-base" />
                 </div>
                 <div class="campo mitad">
                     <label for="correo">Correo de la institución *</label>
-                    <input type="email" id="correo" class="input-base" />
+                    <input type="email" id="correo" name="correo" class="input-base" />
                 </div>
             </div>
 
@@ -93,11 +93,11 @@ include 'includes/headerNoLogueado.inc';
                     <div class="fila-label">
                         <label for="contrasena">Contraseña *</label>
                     </div>
-                    <input type="password" id="contrasena" class="input-base" />
+                    <input type="password" id="contrasena" name="contrasena" class="input-base" />
                 </div>
                 <div class="campo mitad">
                     <label for="repetir">Repetir contraseña *</label>
-                    <input type="password" id="repetir" class="input-base" />
+                    <input type="password" id="repetir" name="repetir" class="input-base" />
                 </div>
             </div>
             <span class="indicacion-contrasena">
