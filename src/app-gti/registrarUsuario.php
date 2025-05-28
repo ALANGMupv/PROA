@@ -22,6 +22,17 @@ $telefono = $_POST['telefono'] ?? null;
 $nombreInstitucion = trim($_POST['institucion']);
 $codigoTipo = $_POST['tipo'];
 
+// Verificar si ya existe un usuario con ese email
+$stmt = $conn->prepare("SELECT email FROM usuariosgti WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$stmt->store_result();
+
+if ($stmt->num_rows > 0) {
+    die(" Correo ya registrado");
+}
+$stmt->close();
+
 // Buscar si la institución ya existe
 $stmt = $conn->prepare("SELECT codigoInstitucion FROM institucion WHERE nombreInstitucion = ?");
 $stmt->bind_param("s", $nombreInstitucion);

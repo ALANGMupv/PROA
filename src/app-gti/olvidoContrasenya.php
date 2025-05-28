@@ -27,27 +27,27 @@ include 'includes/headerNoLogueado.inc';
 
 <!-- Formulario de recuperar contraseña -->
 <main>
-<section class="login">
-    <form class="formulario-login">
-        <h2>Recuperar contraseña</h2>
+    <section class="login">
+        <form class="formulario-login">
+            <h2>Recuperar contraseña</h2>
 
-        <p class="parrafo-terciario">
-            Ingresa tu correo institucional y te guiaremos para cambiar tu contraseña.
-        </p>
+            <p class="parrafo-terciario">
+                Ingresa tu correo institucional y te guiaremos para cambiar tu contraseña.
+            </p>
 
-        <div class="campo">
-            <label for="correo">Correo de la institución *</label>
-            <input type="email" id="correo" class="input-base" required>
-        </div>
+            <div class="campo">
+                <label for="correo">Correo de la institución *</label>
+                <input type="email" id="correo" class="input-base" required>
+            </div>
 
-        <button type="submit" class="btn">Enviar enlace de recuperación</button>
+            <button type="submit" class="btn">Enviar enlace de recuperación</button>
 
-        <p class="texto-secundario">
-            ¿Ya recuerdas tu contraseña?
-            <a href="login.php" class="enlace-secundario">Iniciar sesión</a>
-        </p>
-    </form>
-</section>
+            <p class="texto-secundario">
+                ¿Ya recuerdas tu contraseña?
+                <a href="login.php" class="enlace-secundario">Iniciar sesión</a>
+            </p>
+        </form>
+    </section>
 </main>
 
 <!-- Footer-->

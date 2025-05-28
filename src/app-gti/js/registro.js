@@ -98,7 +98,7 @@ document.querySelector('.registro-formulario')?.addEventListener('submit', funct
             overlay.style.zIndex = '999';
 
             const toast = document.createElement('div');
-            toast.textContent = respuesta.includes('Usuario insertado') ? 'Registro exitoso. Redirigiendo...' : 'Error: ' + respuesta;
+            toast.textContent = respuesta.includes('Usuario insertado') ? 'Registro exitoso. Credenciales asignadas. Redirigiendo...' : 'Error: ' + respuesta;
             toast.style.position = 'fixed';
             toast.style.top = '50%';
             toast.style.left = '50%';
