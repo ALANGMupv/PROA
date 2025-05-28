@@ -72,5 +72,74 @@ if ($stmt->affected_rows === 0) {
 }
 
 $stmt->close();
+
+// Asignación de creedenciales de PROA para los nuevos usuarios de GTI
+
+// Obtener el ID del nuevo usuario GTI
+$idGTI = $conn->insert_id;
+$conn->close(); // Cerramos la conexión con GTI
+
+// Conectamos con la BBDD PROA
+require_once '../../env/proa.inc';
+if (!isset($conn)) die("Conexión a PROA no disponible");
+
+// Listas de nombres y apellidos para generar combinaciones
+$nombres = ['Lucía', 'Mateo', 'Sofía', 'Hugo', 'Martina', 'Pablo', 'Valeria', 'Leo', 'Daniela', 'Javier'];
+$apellidos = ['García', 'Martínez', 'López', 'Sánchez', 'Pérez', 'Gómez', 'Rodríguez', 'Fernández', 'Ruiz', 'Moreno'];
+
+
+// Roles a crear
+$roles = ['alumno', 'profesor', 'pas'];
+
+foreach ($roles as $rol) {
+    // Elegir nombre y dos apellidos aleatorios
+    $nombre = $nombres[array_rand($nombres)];
+    $apellido1 = $apellidos[array_rand($apellidos)];
+    $apellido2 = $apellidos[array_rand($apellidos)];
+    while ($apellido2 === $apellido1) {
+        $apellido2 = $apellidos[array_rand($apellidos)];
+    }
+    $apellidosConcat = "$apellido1 $apellido2";
+
+    // Generar DNI tipo NN-NNNNNNN
+    $dni = sprintf('%02d-%07d', rand(1, 99), rand(1000000, 9999999));
+
+    // Contraseña de 6 dígitos aleatorios
+    $contrasenaPlana = strval(rand(100000, 999999));
+    $contrasenaHash = hash('sha256', $contrasenaPlana);
+
+    // Generar email tipo i.apepel@institucion.es
+    $inicial = strtolower(substr($nombre, 0, 1));
+    $email = strtolower($inicial . '.' . substr($apellido1, 0, 3) . substr($apellido2, 0, 3)) . '@institucion.es';
+
+    // Insertar en personas
+    $stmt = $conn->prepare("INSERT INTO personas (idUsuariosGTI, email, nombre, apellidos, contraseña, dni) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("isssss", $idGTI, $email, $nombre, $apellidosConcat, $contrasenaHash, $dni);
+    if (!$stmt->execute()) {
+        die("Error al insertar persona ($rol): " . $stmt->error);
+    }
+    $idProa = $stmt->insert_id;
+    $stmt->close();
+
+    // Obtener idRol
+    $stmt = $conn->prepare("SELECT idRol FROM roles WHERE nombreRol = ?");
+    $stmt->bind_param("s", $rol);
+    $stmt->execute();
+    $stmt->bind_result($idRol);
+    if (!$stmt->fetch()) {
+        $stmt->close();
+        die("No se encontró el rol '$rol'");
+    }
+    $stmt->close();
+
+    // Insertar en personarol
+    $stmt = $conn->prepare("INSERT INTO personarol (idUsuariosPROA, idRol) VALUES (?, ?)");
+    $stmt->bind_param("ii", $idProa, $idRol);
+    if (!$stmt->execute()) {
+        die("Error al insertar rol ($rol): " . $stmt->error);
+    }
+    $stmt->close();
+}
+
 $conn->close();
 ?>
