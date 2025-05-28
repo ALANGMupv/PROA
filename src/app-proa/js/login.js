@@ -2,24 +2,17 @@
 const usuarioLogueado = JSON.parse(localStorage.getItem('usuario'));
 
 if (usuarioLogueado) {
-    fetch('api/data/usuarios.json')
-        .then(res => res.json())
-        .then(usuarios => {
-            const usuarioValido = usuarios.find(u =>
-                u.correo === usuarioLogueado.correo &&
-                (u.rol === "alumno" || u.rol === "profesor" || u.rol === "pas")
-            );
+    const rol = usuarioLogueado.rol;
 
-            if (usuarioValido.rol === "pas") {
-                window.location.replace('pas/index.php');
-            } else if (usuarioValido.rol === "alumno") {
-                window.location.replace('alumno/index.php');
-            } else if (usuarioValido.rol === "profesor") {
-                window.location.replace('profesor/index.php');
-            }
-
-        });
+    if (rol === "pas") {
+        window.location.replace('pas/index.php');
+    } else if (rol === "alumno") {
+        window.location.replace('alumno/index.php');
+    } else if (rol === "profesor") {
+        window.location.replace('profesor/index.php');
+    }
 }
+
 
 // Lógica de login
 document.querySelector('.formulario-login')?.addEventListener('submit', function (e) {
@@ -62,28 +55,28 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
 
     if (!valido) return;
 
-    // Login simulado
-    fetch('../api/data/usuarios.json')
+    // Login con bbdd
+    fetch('app/login-proa.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ correo, contrasena })
+    })
         .then(res => res.json())
-        .then(usuarios => {
-            const usuariosPermitidos = usuarios.filter(u =>
-                u.rol === "alumno" || u.rol === "profesor" || u.rol === "pas"
-            );
+        .then(respuesta => {
+            if (respuesta.exito) {
+                localStorage.setItem('usuario', JSON.stringify(respuesta.usuario));
 
-            const usuario = usuariosPermitidos.find(u =>
-                u.correo === correo && u.clave === contrasena
-            );
+                const rol = respuesta.usuario.rol;
 
-            if (usuario) {
-                localStorage.setItem('usuario', JSON.stringify(usuario));
-
-                    if (usuario.rol === "pas") {
-                        window.location.replace('pas/index.php');
-                    } else if (usuario.rol === "alumno") {
-                        window.location.replace('alumno/index.php');
-                    } else if (usuario.rol === "profesor") {
-                        window.location.replace('profesor/index.php');
-                    }
+                if (rol === "pas") {
+                    window.location.replace('pas/index.php');
+                } else if (rol === "alumno") {
+                    window.location.replace('alumno/index.php');
+                } else if (rol === "profesor") {
+                    window.location.replace('profesor/index.php');
+                }
 
             } else {
                 const overlayError = document.createElement('div');

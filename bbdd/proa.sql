@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2025 a las 21:57:08
+-- Tiempo de generación: 28-05-2025 a las 22:45:20
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -220,7 +220,10 @@ INSERT INTO `personarol` (`idUsuariosPROA`, `idRol`) VALUES
                                                          (3, 2),
                                                          (4, 2),
                                                          (5, 3),
-                                                         (6, 3);
+                                                         (6, 3),
+                                                         (7, 1),
+                                                         (8, 2),
+                                                         (9, 3);
 
 -- --------------------------------------------------------
 
@@ -248,7 +251,10 @@ INSERT INTO `personas` (`idUsuariosPROA`, `idUsuariosGTI`, `email`, `nombre`, `a
                                                                                                                     (3, 1, 'k.poumai@upv.es', 'Kevan', 'Pounds Mainston', 'f64fa63b2e00256c04262c7d08df6071b768719cd0ef86b38a8735a67472569d', '60-4525956'),
                                                                                                                     (4, 2, 'l.prista@upv.es', 'Luelle', 'Pridmore Starsmeare', '3c6dcef0938cfaceeb3ad106f0fa6f282369719f6be74f003067cb02a49e684d', '64-6055365'),
                                                                                                                     (5, 1, 'o.breshe@upv.es', 'Ondrea', 'Brezlaw Sherwill', 'bb851090dcc953ef26cae58f00c3c8aa50170e667ef57b076271a96851d7c598', '88-1316390'),
-                                                                                                                    (6, 2, 'b.maltho@upv.es', 'Brooke', 'Malimoe Thomerson', '8ef036a12431278a81500e463d247a9712e798be4870848f21703c847bf1f0a8', '91-1970980');
+                                                                                                                    (6, 2, 'b.maltho@upv.es', 'Brooke', 'Malimoe Thomerson', '8ef036a12431278a81500e463d247a9712e798be4870848f21703c847bf1f0a8', '91-1970980'),
+                                                                                                                    (7, 4, 'p.rodgar@institucion.es', 'Pablo', 'Rodríguez García', '21ea1873efc272bfa5903e33d67d2a6585fadc934987e13700b359ad3052384d', '68-1114028'),
+                                                                                                                    (8, 4, 's.morfer@institucion.es', 'Sofía', 'Moreno Fernández', 'b2233d8955bc461c1e58b77e63846a3a993b660369396ab3456a4750ab70576a', '31-1473681'),
+                                                                                                                    (9, 4, 'm.fermor@institucion.es', 'Martina', 'Fernández Moreno', '61c2a1e3a3690527c61b6d38ad514ff2175d115e1368fd5e421c4dd880e5451b', '32-9850488');
 
 -- --------------------------------------------------------
 
@@ -536,7 +542,7 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `personas`
 --
 ALTER TABLE `personas`
-    MODIFY `idUsuariosPROA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+    MODIFY `idUsuariosPROA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntasexamen`

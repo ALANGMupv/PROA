@@ -24,8 +24,8 @@
         <p class="demo-indicador">Inicia sesión en nuestra versión de demostración de PROA</p>
 
         <!-- Formulario login PROA -->
-        <form class="formulario-login">
-            <!-- Correo -->
+        <form class="formulario-login" action="app/login-proa.php" method="POST">
+        <!-- Correo -->
             <label for="correo">Correo</label>
             <input type="email" id="correo" class="input-base" placeholder="Correo">
 
