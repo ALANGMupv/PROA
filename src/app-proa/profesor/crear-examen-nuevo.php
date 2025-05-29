@@ -71,7 +71,7 @@ include $rutaBase . 'includes/header-proa.inc';;
 
       <h2>Panel de creación de examen</h2>
 
-      <form id="formulario-examen">
+      <form action="" id="formulario-examen">
 
         <div class="datos">
 
@@ -87,6 +87,7 @@ include $rutaBase . 'includes/header-proa.inc';;
                 <input type="date" class="input-base con-icono" id="fecha-examen" required>
               </label>
               <label>
+                <span>Hora: *</span>
                 <span>Hora: *</span>
                 <input type="time" class="input-base with-icon" id="hora-examen" required>
               </label>

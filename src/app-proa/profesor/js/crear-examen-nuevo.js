@@ -160,7 +160,28 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
 
-        console.log("Examen creado:", datos);
+        console.log(datos);
+
+        /*fetch("procesar-examen.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos),
+        })
+            .then(response => response.json())
+            .then(resultado => {
+                console.log("Respuesta del servidor:", resultado);
+                if (resultado.success) {
+                    popupPublicar();
+                } else {
+                    alert("Error al guardar el examen.");
+                }
+            })
+            .catch(error => {
+                console.error("Error en la solicitud:", error);
+            });*/
+
 
         popupPublicar();
 
