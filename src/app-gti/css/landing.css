@@ -82,6 +82,7 @@
     height: 60px;
     opacity: 0.85;
     transition: opacity 0.3s ease;
+    fill: var(--color-principal);
 }
 
 .scroll-flecha:hover img {

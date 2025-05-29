@@ -1,79 +1,104 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Ruta actual para marcar el enlace activo en el header
-    const rutaActual = location.pathname.split('/').pop() || 'index.php';
+console.log("Script cargado");
 
-    const enlacesMenu = document.querySelectorAll("header nav.activo a");
-    enlacesMenu.forEach(enlace => {
-        const href = enlace.getAttribute("href");
-        if (rutaActual === 'index.php') return;
-        if (href.includes(rutaActual)) {
-            enlace.classList.add("activo-pagina");
-        }
-    });
+const rutaActual = location.pathname.split('/').pop() || 'index.php';
 
-    // Interacciones del menú hamburguesa
-    const btnHamburguesa = document.getElementById("hamburguesa");
-    const menuMovil = document.querySelector("nav.menu-movil");
-    const btnCerrar = document.getElementById("cerrar-menu");
+const enlacesMenu = document.querySelectorAll("header nav.activo a");
+enlacesMenu.forEach(enlace => {
+    const href = enlace.getAttribute("href");
+    if (rutaActual === 'index.php') return;
+    if (href.includes(rutaActual)) {
+        enlace.classList.add("activo-pagina");
+    }
+});
 
-    btnHamburguesa?.addEventListener("click", () => {
-        menuMovil?.classList.remove("oculto");
-        document.body.classList.add("menu-abierto");
-    });
+const btnHamburguesa = document.getElementById("hamburguesa");
+const menuMovil = document.querySelector("nav.menu-movil");
+const btnCerrar = document.getElementById("cerrar-menu");
 
-    btnCerrar?.addEventListener("click", () => {
-        menuMovil?.classList.add("oculto");
+btnHamburguesa?.addEventListener("click", () => {
+    menuMovil?.classList.remove("oculto");
+    document.body.classList.add("menu-abierto");
+});
+
+btnCerrar?.addEventListener("click", () => {
+    menuMovil?.classList.add("oculto");
+    document.body.classList.remove("menu-abierto");
+});
+
+const mostrarPopup = (mensajeTexto, onConfirmar, onCancelar) => {
+    const popup = document.querySelector(".popup");
+    if (!popup) return;
+
+    const mensaje = popup.querySelector("p");
+    const btnConfirmar = popup.querySelector(".popup-confirmar");
+    const btnCancelar = popup.querySelector(".popup-cancelar");
+
+    mensaje.textContent = mensajeTexto;
+    popup.classList.add("activo");
+    document.body.classList.add("menu-abierto");
+
+    const cerrarPopup = () => {
+        popup.classList.remove("activo");
         document.body.classList.remove("menu-abierto");
-    });
-
-    // Popup de confirmación para cerrar sesión
-    const mostrarPopup = (mensajeTexto, onConfirmar, onCancelar) => {
-        const popup = document.querySelector(".popup");
-        if (!popup) return;
-
-        const mensaje = popup.querySelector("p");
-        const btnConfirmar = popup.querySelector(".popup-confirmar");
-        const btnCancelar = popup.querySelector(".popup-cancelar");
-
-        mensaje.textContent = mensajeTexto;
-        popup.classList.add("activo");
-        document.body.classList.add("menu-abierto");
-
-        const cerrarPopup = () => {
-            popup.classList.remove("activo");
-            document.body.classList.remove("menu-abierto");
-            btnConfirmar.onclick = null;
-            btnCancelar.onclick = null;
-        };
-
-        btnConfirmar.onclick = () => {
-            cerrarPopup();
-            if (typeof onConfirmar === 'function') onConfirmar();
-        };
-
-        btnCancelar.onclick = () => {
-            cerrarPopup();
-            if (typeof onCancelar === 'function') onCancelar();
-        };
+        btnConfirmar.onclick = null;
+        btnCancelar.onclick = null;
     };
 
-    // Función de cierre de sesión con confirmación
-    const botonesCerrarSesion = document.querySelectorAll(".btn-cerrar-sesion");
-    botonesCerrarSesion.forEach(boton => {
-        boton.addEventListener("click", e => {
-            e.preventDefault();
-            mostrarPopup("¿Estás seguro de que deseas cerrar sesión?", () => {
-                localStorage.removeItem("usuario");
-                window.location.reload();
-            });
+    btnConfirmar.onclick = () => {
+        cerrarPopup();
+        if (typeof onConfirmar === 'function') onConfirmar();
+    };
+
+    btnCancelar.onclick = () => {
+        cerrarPopup();
+        if (typeof onCancelar === 'function') onCancelar();
+    };
+};
+
+const botonesCerrarSesion = document.querySelectorAll(".btn-cerrar-sesion");
+botonesCerrarSesion.forEach(boton => {
+    boton.addEventListener("click", e => {
+        e.preventDefault();
+        mostrarPopup("¿Estás seguro de que deseas cerrar sesión?", () => {
+            const rutaCierre = location.pathname;
+            const esIndex = rutaCierre.endsWith('/index.php') || rutaCierre === '/proa/src/' || rutaCierre === '/proa/src';
+            const destinoCierre = esIndex ? 'app-gti/cerrarSesion.php' : 'cerrarSesion.php';
+            window.location.href = destinoCierre;
         });
     });
 });
 
-// Forzar recarga si el usuario ha cerrado sesión y vuelve con el botón atrás
+const header = document.querySelector('header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 0) {
+        header?.classList.add('header-con-sombra');
+    } else {
+        header?.classList.remove('header-con-sombra');
+    }
+});
+
+inicializarEventosHeader(); // 💡 Llama a la función para manejar icono de perfil
+
 window.addEventListener('pageshow', (event) => {
     const usuario = JSON.parse(localStorage.getItem('usuario'));
     if (event.persisted && !usuario) {
         window.location.reload();
     }
 });
+
+// Función para redirección dinámica del icono de perfil
+function inicializarEventosHeader() {
+    const iconoPerfil = document.getElementById("icono-perfil");
+    if (iconoPerfil) {
+        iconoPerfil.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const ruta = location.pathname;
+            const esIndex = ruta.endsWith('/index.php') || ruta === '/proa/src/' || ruta === '/proa/src';
+
+            // Decide la ruta según la página actual
+            const destino = esIndex ? 'app-gti/login.php' : 'login.php';
+            window.location.href = destino;
+        });
+    }
+}

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Iniciar sesión</title>
     <!-- Icono pestaña del navegador -->
-    <link rel="icon" href="icons/iconGTI.png" type="image/svg+xml">
+    <link rel="icon" href="icons/gti_morado.png" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/header.css">
@@ -26,43 +26,42 @@ include 'includes/headerNoLogueado.inc';
 <!-- Cerramos sección header -->
 
 <!-- Formulario de inicio de sesión -->
-
 <!-- Parte izquierda imagen -->
 <main>
-<section class="login-container login-solo">
-    <div class="login-imagen">
-        <div class="contenido-imagen">
-            <img src="img/gtiBlanco.svg" alt="Logo GTI" class="logo-login">
-            <h2 class="texto-login-imagen">Solo un paso más… inicia sesión y empieza.</h2>
+    <section class="login-container login-solo">
+        <div class="login-imagen">
+            <div class="contenido-imagen">
+                <img src="img/gtiBlanco.svg" alt="Logo GTI" class="logo-login">
+                <h2 class="texto-login-imagen">Solo un paso más… inicia sesión y empieza.</h2>
+            </div>
         </div>
-    </div>
 
-    <!-- Parte derecha login - FORMULARIO-->
-    <div class="login-formulario">
-        <form class="formulario-login-pagLogin">
-            <h2>Iniciar sesión</h2>
+        <!-- Parte derecha login - FORMULARIO-->
+        <div class="login-formulario">
+            <form class="formulario-login-pagLogin">
+                <h2>Iniciar sesión</h2>
 
-            <div class="campo">
-                <label for="correo">Correo de la institución *</label>
-                <input type="email" id="correo" class="input-base">
-            </div>
+                <div class="campo">
+                    <label for="correo">Correo de la institución *</label>
+                    <input type="email" id="correo" class="input-base">
+                </div>
 
-            <div class="campo">
-                <label for="contrasena">Contraseña *</label>
-                <input type="password" id="contrasena" class="input-base">
-            </div>
+                <div class="campo">
+                    <label for="contrasena">Contraseña *</label>
+                    <input type="password" id="contrasena" class="input-base">
+                </div>
 
-            <div class="grupo-final">
-                <a href="olvidoContrasenya.php" class="enlace-secundario">¿Olvidaste tu contraseña?</a>
-                <button type="submit" class="btn">Iniciar sesión</button>
-                <p class="texto-secundario">
-                    ¿No tienes una cuenta?
-                    <a href="registro.php" class="enlace-secundario">Regístrate</a>
-                </p>
-            </div>
-        </form>
-    </div>
-</section>
+                <div class="grupo-final">
+                    <a href="olvidoContrasenya.php" class="enlace-secundario">¿Olvidaste tu contraseña?</a>
+                    <button type="submit" class="btn">Iniciar sesión</button>
+                    <p class="texto-secundario">
+                        ¿No tienes una cuenta?
+                        <a href="registro.php" class="enlace-secundario">Regístrate</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </section>
 </main>
 <!-- Fin de la sección del formulario de login -->
 

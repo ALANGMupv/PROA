@@ -12,9 +12,10 @@
             <a href="<?= $rutaBase ?>contacto.php">Contacto</a>
         </nav>
 
-        <a href="<?= $rutaBase ?>login.php">
+        <a id="icono-perfil" href="#">
             <img src="<?= $rutaBase ?>icons/perfilGTI.svg" alt="Perfil GTI" class="icono-perfil">
         </a>
+
     </div>
 
     <!-- MENÚ HAMBURGUESA -->
@@ -45,5 +46,4 @@
         <button class="btn btn-principal" onclick="location.href='<?= $rutaBase ?>registro.php'">Regístrate</button>
     </div>
 </nav>
-
 

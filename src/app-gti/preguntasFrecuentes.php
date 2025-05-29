@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Preguntas Frecuentes</title>
     <!-- Icono pestaña del navegador -->
-    <link rel="icon" href="icons/iconGTI.png" type="image/svg+xml">
+    <link rel="icon" href="icons/gti_morado.png" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/header.css">
@@ -18,87 +18,92 @@
 </head>
 <body>
 
-<!-- Include header no logueado -> cambiar lógica según esté logueado cuando se implemente el login.php -->
+<!-- Header -->
 <?php
+session_start();
 $rutaBase = '';
-include 'includes/headerNoLogueado.inc';
+if (isset($_SESSION['usuario'])) {
+    include $rutaBase . 'includes/headerLogueado.inc';
+} else {
+    include $rutaBase . 'includes/headerNoLogueado.inc';
+}
 ?>
 <!-- Cerramos sección header -->
 
 <!-- Sección FAQ -->
 <main>
-<section class="faq">
-    <h2 class="faq-titulo">Preguntas Frecuentes</h2>
-    <div class="faq-contenedor">
+    <section class="faq">
+        <h2 class="faq-titulo">Preguntas Frecuentes</h2>
+        <div class="faq-contenedor">
 
-        <!-- Pregunta y respuesta -->
-        <div class="faq-item">
-            <button class="faq-pregunta">
-                ¿Qué es GTI y qué productos ofrece?
-                <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" />
-            </button>
-            <div class="faq-respuesta">
-                <p class="parrafo-principal">GTI es una empresa que desarrolla soluciones tecnológicas para instituciones educativas, en su primer módulo PROA, una plataforma de gestión interna para optimizar la administración académica.</p>
+            <!-- Pregunta y respuesta -->
+            <div class="faq-item">
+                <button class="faq-pregunta">
+                    ¿Qué es GTI y qué productos ofrece?
+                    <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" />
+                </button>
+                <div class="faq-respuesta">
+                    <p class="parrafo-principal">GTI es una empresa que desarrolla soluciones tecnológicas para instituciones educativas, en su primer módulo PROA, una plataforma de gestión interna para optimizar la administración académica.</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Pregunta y respuesta -->
-        <div class="faq-item">
-            <button class="faq-pregunta activo">
-                ¿Qué diferencia a GTI de otras empresas del sector educativo?
-                <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" style="transform: rotate(180deg);" />
-            </button>
-            <div class="faq-respuesta activa">
-                <p class="parrafo-principal">Nos diferenciamos por ofrecer soluciones personalizadas, atención al cliente cercana y una plataforma fácil de usar, adaptada a las necesidades específicas de cada institución.</p>
+            <!-- Pregunta y respuesta -->
+            <div class="faq-item">
+                <button class="faq-pregunta activo">
+                    ¿Qué diferencia a GTI de otras empresas del sector educativo?
+                    <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" style="transform: rotate(180deg);" />
+                </button>
+                <div class="faq-respuesta activa">
+                    <p class="parrafo-principal">Nos diferenciamos por ofrecer soluciones personalizadas, atención al cliente cercana y una plataforma fácil de usar, adaptada a las necesidades específicas de cada institución.</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Pregunta y respuesta -->
-        <div class="faq-item">
-            <button class="faq-pregunta">
-                ¿Quién puede contratar PROA?
-                <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" />
-            </button>
-            <div class="faq-respuesta">
-                <p class="parrafo-principal">PROA está dirigido exclusivamente a instituciones educativas como universidades en su mayoría, institutos o centros de formación que buscan digitalizar su campus académico.</p>
+            <!-- Pregunta y respuesta -->
+            <div class="faq-item">
+                <button class="faq-pregunta">
+                    ¿Quién puede contratar PROA?
+                    <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" />
+                </button>
+                <div class="faq-respuesta">
+                    <p class="parrafo-principal">PROA está dirigido exclusivamente a instituciones educativas como universidades en su mayoría, institutos o centros de formación que buscan digitalizar su campus académico.</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Pregunta y respuesta -->
-        <div class="faq-item">
-            <button class="faq-pregunta">
-                ¿Qué necesito para acceder a PROA?
-                <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" />
-            </button>
-            <div class="faq-respuesta">
-                <p class="parrafo-principal">Solo necesitas ser parte de una institución educativa registrada y tener un usuario institucional habilitado para acceder a la plataforma.</p>
+            <!-- Pregunta y respuesta -->
+            <div class="faq-item">
+                <button class="faq-pregunta">
+                    ¿Qué necesito para acceder a PROA?
+                    <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" />
+                </button>
+                <div class="faq-respuesta">
+                    <p class="parrafo-principal">Solo necesitas ser parte de una institución educativa registrada y tener un usuario institucional habilitado para acceder a la plataforma.</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Pregunta y respuesta -->
-        <div class="faq-item">
-            <button class="faq-pregunta">
-                ¿Cuánto tiempo toma implementar PROA en una institución educativa?
-                <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" />
-            </button>
-            <div class="faq-respuesta">
-                <p class="parrafo-principal">La implementación suele tomar entre 2 y 4 semanas, dependiendo del tamaño de la institución y las configuraciones necesarias.</p>
+            <!-- Pregunta y respuesta -->
+            <div class="faq-item">
+                <button class="faq-pregunta">
+                    ¿Cuánto tiempo toma implementar PROA en una institución educativa?
+                    <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" />
+                </button>
+                <div class="faq-respuesta">
+                    <p class="parrafo-principal">La implementación suele tomar entre 2 y 4 semanas, dependiendo del tamaño de la institución y las configuraciones necesarias.</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Pregunta y respuesta -->
-        <div class="faq-item">
-            <button class="faq-pregunta">
-                ¿Habrá más módulos educativos en el futuro?
-                <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" />
-            </button>
-            <div class="faq-respuesta">
-                <p class="parrafo-principal">Sí, en el futuro planeamos agregar más módulos educativos, pero por ahora, PROA es el único disponible en nuestro catálogo.</p>
+            <!-- Pregunta y respuesta -->
+            <div class="faq-item">
+                <button class="faq-pregunta">
+                    ¿Habrá más módulos educativos en el futuro?
+                    <img src="icons/dropdown.svg" alt="Desplegar" class="faq-icono" />
+                </button>
+                <div class="faq-respuesta">
+                    <p class="parrafo-principal">Sí, en el futuro planeamos agregar más módulos educativos, pero por ahora, PROA es el único disponible en nuestro catálogo.</p>
+                </div>
             </div>
-        </div>
 
-    </div>
-</section>
+        </div>
+    </section>
 </main>
 
 <!-- Footer-->

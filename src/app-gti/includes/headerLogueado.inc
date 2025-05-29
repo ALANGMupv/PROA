@@ -43,6 +43,11 @@
     <div class="menu-acciones">
         <button class="btn btn-secundario btn-cerrar-sesion">Cerrar sesión</button>
     </div>
+
+    <!-- Icono en el header -->
+    <a href="#" class="btn-cerrar-sesion">
+        <img src="<?= $rutaBase ?>icons/cerrarSesion.svg" alt="Cerrar sesión" class="icono-perfil">
+    </a>
 </nav>
 
 <!-- Popup de confirmación de cierre de sesión -->
@@ -56,4 +61,3 @@
         </div>
     </div>
 </div>
-
