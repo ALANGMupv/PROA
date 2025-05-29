@@ -1,4 +1,12 @@
-<!-- Submenú de asignatura -->
+<!-- Submenú de asignatura (único para alumno y profesor) -->
+<?php
+session_start();
+$usuario = $_SESSION['usuario'] ?? null;
+$rol = $usuario['rol'] ?? '';
+$esAlumno = $rol === 'alumno';
+$esProfesor = $rol === 'profesor';
+?>
+
 <div class="titulo-submenu">
     <h2 id="titulo-asignatura">Asignatura</h2>
 </div>
@@ -11,7 +19,13 @@
         <a href="#" class="submenu-item"><span>Guía Docente</span></a>
         <a href="#" class="submenu-item"><span>Recursos</span></a>
         <a href="#" class="submenu-item"><span>Tareas</span></a>
-        <a href="examenes-alumno.php" class="submenu-item"><span>Exámenes</span></a>
+
+        <?php if ($esAlumno): ?>
+            <a href="examenes-alumno.php" class="submenu-item"><span>Exámenes</span></a>
+        <?php elseif ($esProfesor): ?>
+            <a href="examenes-profesor.php" class="submenu-item"><span>Exámenes</span></a>
+        <?php endif; ?>
+
         <a href="#" class="submenu-item"><span>Calificaciones</span></a>
         <a href="#" class="submenu-item"><span>Ranking</span></a>
         <a href="#" class="submenu-item"><span>Foros</span></a>

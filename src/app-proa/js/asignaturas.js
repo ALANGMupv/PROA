@@ -1,5 +1,10 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
+fetch('../app/chequear-sesion.php', { credentials: 'include' })
+        .then(res => res.json())
+        .then(usuario => {
+            if (!usuario.rol) {
+                window.location.replace("../../index.php");
+                return;
+            }
     const asignatura = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
     const submenu = document.getElementById("submenu");
     const dropdown = document.getElementById("dropdown-asignaturas");
