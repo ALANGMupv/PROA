@@ -3,60 +3,45 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
     .then(res => res.json())
     .then(usuario => {
         console.log('Usuario en sesión:', usuario);
-        // Redirige si el usuario no es profesor
         if (!usuario.rol) {
             window.location.href = '../index.php';
             return;
         }
 
-        const nombreNormalizado = normalizar(`${usuario.nombre} ${usuario.apellidos}`);
-
-        // Cargar asignaturas desde el JSON
-        fetch("../../api/data/asignaturas.json")
+        // Cargar asignaturas desde la base de datos
+        fetch("../app/obtener-asignaturas-profesor.php", { credentials: "include" })
             .then(res => res.json())
             .then(asignaturas => {
-                const asignaturasUsuario = asignaturas.filter(asig =>
-                    normalizar(asig.titular) === nombreNormalizado ||
-                    asig.colaboradores?.some(colab => normalizar(colab) === nombreNormalizado)
-                );
-
-                renderizarAsignaturas(asignaturasUsuario);
+                renderizarAsignaturas(asignaturas);
             });
-
-        function normalizar(str) {
-            return str.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
-        }
 
         function renderizarAsignaturas(asignaturas) {
             const lista = document.getElementById("lista-asignaturas");
             lista.innerHTML = "";
 
             asignaturas.forEach(asig => {
-                const esResponsable = normalizar(asig.titular) === nombreNormalizado;
-
                 const div = document.createElement("div");
                 div.classList.add("item-asignatura");
-                div.dataset.rol = esResponsable ? "responsable" : "colaborador";
+                div.dataset.rol = asig.rol || "responsable"; // por si acaso viene null
                 div.dataset.nombre = asig.nombre.toLowerCase();
                 div.dataset.codigo = asig.codigo.toLowerCase();
                 div.dataset.curso = asig.curso;
                 div.dataset.semestre = asig.semestre;
-                div.dataset.anyo = asig.anyo;
+                div.dataset.anyo = "2024";
                 if (asig.favorita) div.classList.add("favorita");
 
-                const semestreTexto = asig.semestre === "1" ? "1º semestre" : "2º semestre";
-                const anyoTexto = `${asig.anyo}/${(parseInt(asig.anyo) + 1).toString().slice(-2)}`;
+                const semestreTexto = asig.semestre == "1" ? "1º semestre" : "2º semestre";
 
                 div.innerHTML = `
                     <div class="asignatura-izquierda">
                         <img src="../icons/book.svg" alt="Libro" class="icono-azul" />
                         <div>
                             <h4>${asig.nombre}</h4>
-                            <p>${asig.codigo} — ${asig.curso}º curso, ${semestreTexto}, ${anyoTexto}</p>
+                            <p>${asig.codigo} — ${asig.curso}º curso, ${semestreTexto}, 2024/25</p>
                         </div>
                     </div>
                     <div class="asignatura-derecha">
-                        <span class="rol-profesor">${esResponsable ? "Profesor responsable" : "Profesor colaborador"}</span>
+                        <span class="rol-profesor">Profesor ${asig.rol === 'colaborador' ? 'colaborador' : 'responsable'}</span>
                         <img src="${asig.favorita ? "../icons/favoritos-relleno.svg" : "../icons/favoritos.svg"}"
                              alt="Favorito"
                              class="icono-azul icono-favorito"
@@ -79,41 +64,6 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
             aplicarFiltros();
         }
 
-        function aplicarFiltros() {
-            const mostrarSoloFavoritas = document.getElementById("btnFavoritas").classList.contains("activo");
-            const rolSeleccionado = document.getElementById("filtroRol").value;
-            const textoBusqueda = document.getElementById("filtroTexto").value.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
-            const filtroCurso = document.getElementById("filtroCurso")?.value;
-            const filtroSemestre = document.getElementById("filtroSemestre")?.value;
-            const filtroAnyo = document.getElementById("filtroAnyo")?.value;
-
-            let asignaturasVisibles = 0;
-
-            document.querySelectorAll(".item-asignatura").forEach(asignatura => {
-                const esFavorita = asignatura.classList.contains("favorita");
-                const rolAsignatura = asignatura.dataset.rol;
-                const nombre = asignatura.dataset.nombre.normalize("NFD").replace(/\p{Diacritic}/gu, "");
-                const codigo = asignatura.dataset.codigo.normalize("NFD").replace(/\p{Diacritic}/gu, "");
-                const curso = asignatura.dataset.curso;
-                const semestre = asignatura.dataset.semestre;
-                const anyo = asignatura.dataset.anyo;
-
-                const coincideTexto = nombre.includes(textoBusqueda) || codigo.includes(textoBusqueda);
-                const pasaFiltroFavorita = !mostrarSoloFavoritas || esFavorita;
-                const pasaFiltroRol = rolSeleccionado === "todos" || rolSeleccionado === rolAsignatura;
-                const pasaFiltroCurso = !filtroCurso || curso === filtroCurso;
-                const pasaFiltroSemestre = !filtroSemestre || semestre === filtroSemestre;
-                const pasaFiltroAnyo = !filtroAnyo || anyo === filtroAnyo;
-
-                const visible = coincideTexto && pasaFiltroFavorita && pasaFiltroRol && pasaFiltroCurso && pasaFiltroSemestre && pasaFiltroAnyo;
-                asignatura.style.display = visible ? "flex" : "none";
-                if (visible) asignaturasVisibles++;
-            });
-
-            const mensajeVacio = document.getElementById("mensaje-sin-favoritas");
-            mensajeVacio.style.display = (mostrarSoloFavoritas && asignaturasVisibles === 0) ? "block" : "none";
-        }
-
         function activarEventosAsignaturas() {
             document.querySelectorAll(".icono-favorito").forEach(icono => {
                 icono.addEventListener("click", event => {
@@ -125,9 +75,59 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
                     icono.dataset.favorita = esFavorita ? "false" : "true";
                     contenedor.classList.toggle("favorita", !esFavorita);
 
+                    fetch("../app/actualizar-favorita.php", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "include",
+                        body: JSON.stringify({
+                            codigo: contenedor.dataset.codigo.toUpperCase(),
+                            favorita: !esFavorita ? 1 : 0
+                        })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (!data.exito) console.error("Error al actualizar favorita:", data.mensaje);
+                        })
+                        .catch(err => console.error("Error en fetch:", err));
+
                     aplicarFiltros();
                 });
             });
+        }
+
+        function aplicarFiltros() {
+            const mostrarSoloFavoritas = document.getElementById("btnFavoritas").classList.contains("activo");
+            const rolSeleccionado = document.getElementById("filtroRol")?.value;
+            const textoBusqueda = document.getElementById("filtroTexto")?.value.trim().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+            const filtroCurso = document.getElementById("filtroCurso")?.value;
+            const filtroSemestre = document.getElementById("filtroSemestre")?.value;
+            const filtroAnyo = document.getElementById("filtroAnyo")?.value;
+
+            let asignaturasVisibles = 0;
+
+            document.querySelectorAll(".item-asignatura").forEach(asignatura => {
+                const esFavorita = asignatura.classList.contains("favorita");
+                const rolAsignatura = asignatura.dataset.rol;
+                const nombre = asignatura.dataset.nombre;
+                const codigo = asignatura.dataset.codigo;
+                const curso = asignatura.dataset.curso;
+                const semestre = asignatura.dataset.semestre;
+                const anyo = asignatura.dataset.anyo;
+
+                const coincideTexto = nombre.includes(textoBusqueda) || codigo.includes(textoBusqueda);
+                const pasaFiltroFavorita = !mostrarSoloFavoritas || esFavorita;
+                const pasaFiltroRol = !rolSeleccionado || rolSeleccionado === "todos" || rolSeleccionado === rolAsignatura;
+                const pasaFiltroCurso = !filtroCurso || curso === filtroCurso;
+                const pasaFiltroSemestre = !filtroSemestre || semestre === filtroSemestre;
+                const pasaFiltroAnyo = !filtroAnyo || anyo === filtroAnyo;
+
+                const visible = coincideTexto && pasaFiltroFavorita && pasaFiltroRol && pasaFiltroCurso && pasaFiltroSemestre && pasaFiltroAnyo;
+                asignatura.style.display = visible ? "flex" : "none";
+                if (visible) asignaturasVisibles++;
+            });
+
+            const mensajeVacio = document.getElementById("mensaje-sin-favoritas");
+            mensajeVacio.style.display = (mostrarSoloFavoritas && asignaturasVisibles === 0) ? "block" : "none";
         }
 
         // Eventos para filtros

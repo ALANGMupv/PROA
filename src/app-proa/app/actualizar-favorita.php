@@ -9,25 +9,27 @@ $datos = json_decode(file_get_contents("php://input"), true);
 $codigoAsignatura = $datos['codigo'] ?? '';
 $favorita = $datos['favorita'] ?? false;
 $idUsuario = $_SESSION['usuario']['idUsuariosPROA'] ?? null;
+$rol = $_SESSION['usuario']['rol'] ?? null;
 
-// Validaciones básicas
-if (!$codigoAsignatura || !$idUsuario) {
+if (!$codigoAsignatura || !$idUsuario || !$rol) {
     echo json_encode(['exito' => false, 'mensaje' => 'Datos incompletos']);
     exit;
 }
 
-// Verifica conexión
-if (!$conn) {
-    echo json_encode(['exito' => false, 'mensaje' => 'Error de conexión']);
+// Seleccionar tabla según el rol
+if ($rol === 'alumno') {
+    $query = "UPDATE asignacionalumno SET asignaturaFavorita = ? WHERE idUsuariosPROA = ? AND codigoAsignatura = ?";
+} elseif ($rol === 'profesor') {
+    $query = "UPDATE asignaciondocentes SET asignaturaFavorita = ? WHERE idUsuariosPROA = ? AND codigoAsignatura = ?";
+} else {
+    echo json_encode(['exito' => false, 'mensaje' => 'Rol no válido']);
     exit;
 }
 
-// Ejecuta la actualización
-$stmt = $conn->prepare("UPDATE asignacionalumno SET asignaturaFavorita = ? WHERE idUsuariosPROA = ? AND codigoAsignatura = ?");
+$stmt = $conn->prepare($query);
 $stmt->bind_param("iis", $favorita, $idUsuario, $codigoAsignatura);
 $exito = $stmt->execute();
 $stmt->close();
 
-// Devuelve JSON puro
 echo json_encode(['exito' => $exito]);
 exit;
