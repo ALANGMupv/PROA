@@ -29,7 +29,7 @@ include $rutaBase . 'includes/header-proa.inc';;
 
         <!-- Área lateral para el submenú (se rellena dinámicamente por JS) -->
         <aside id="submenu" class="submenu">
-            <?php include $rutaBase . 'includes/submenu-asignaturasProfesorTemporal.inc'; ?>
+            <?php include $rutaBase . 'includes/submenu-asignaturas.inc'; ?>
         </aside>
 
         <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->

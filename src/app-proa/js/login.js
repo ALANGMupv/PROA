@@ -1,19 +1,3 @@
-// Redirección inmediata si el usuario ya está logueado
-const usuarioLogueado = JSON.parse(localStorage.getItem('usuario'));
-
-if (usuarioLogueado) {
-    const rol = usuarioLogueado.rol;
-
-    if (rol === "pas") {
-        window.location.replace('pas/index.php');
-    } else if (rol === "alumno") {
-        window.location.replace('alumno/index.php');
-    } else if (rol === "profesor") {
-        window.location.replace('profesor/index.php');
-    }
-}
-
-
 // Lógica de login
 document.querySelector('.formulario-login')?.addEventListener('submit', function (e) {
     e.preventDefault(); // Prevenimos el envío del formulario
@@ -55,29 +39,37 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
 
     if (!valido) return;
 
-    // Login con bbdd
     fetch('app/login-proa.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({ correo, contrasena })
     })
         .then(res => res.json())
         .then(respuesta => {
             if (respuesta.exito) {
-                localStorage.setItem('usuario', JSON.stringify(respuesta.usuario));
+                fetch('app/chequear-sesion.php')
+                    .then(res => res.json())
+                    .then(usuario => {
+                        console.log("Usuario desde sesión:", usuario);
 
-                const rol = respuesta.usuario.rol;
-
-                if (rol === "pas") {
-                    window.location.replace('pas/index.php');
-                } else if (rol === "alumno") {
-                    window.location.replace('alumno/index.php');
-                } else if (rol === "profesor") {
-                    window.location.replace('profesor/index.php');
-                }
-
+                        if (!usuario.rol) {
+                            alert("Error al recuperar la sesión. Intenta de nuevo.");
+                            return;
+                        }
+                            const rol = usuario.rol;
+                            if (rol === "pas") {
+                                window.location.replace('./pas/index.php');
+                            } else if (rol === "alumno") {
+                                    window.location.href = './alumno/index.php';
+                            } else if (rol === "profesor") {
+                                window.location.replace('./profesor/index.php');
+                            } else {
+                                alert("Rol no reconocido");
+                            }
+                    });
             } else {
                 const overlayError = document.createElement('div');
                 overlayError.style.position = 'fixed';
@@ -124,10 +116,13 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
 
 // Forzar recarga si se accede desde caché después de cerrar sesión
 window.addEventListener('pageshow', (event) => {
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
-    if (event.persisted && !usuario) {
-        window.location.reload();
-    }
+    fetch('app/chequear-sesion.php', {
+        credentials: 'include'
+    })
+        .then(res => res.json())
+        .then(respuesta => {
+            if (event.persisted && !respuesta.rol) {
+                window.location.reload();
+            }
+        });
 });
-
-
