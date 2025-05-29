@@ -189,6 +189,7 @@ include $rutaBase . 'includes/header-proa.inc';;
               </div>
             </div>
           </div>
+            
 
           <!-- Pop-up publicado -->
           <div id="popup-publicado" class="popup">
