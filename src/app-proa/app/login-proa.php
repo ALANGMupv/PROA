@@ -49,6 +49,7 @@ if ($usuario['contraseña'] !== $hashEntrada) {
 
 // Éxito: guardamos los datos en $_SESSION
 $_SESSION['usuario'] = [
+    'idUsuariosPROA' => $usuario['idUsuariosPROA'],
     'nombre' => $usuario['nombre'],
     'apellidos' => $usuario['apellidos'],
     'correo' => $usuario['email'],

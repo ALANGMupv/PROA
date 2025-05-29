@@ -2,6 +2,7 @@
 fetch('../app/chequear-sesion.php', { credentials: 'include' })
     .then(res => res.json())
     .then(usuario => {
+        console.log('Usuario en sesión:', usuario);
         // Si no hay sesión iniciada, redirige a la página principal
         if (!usuario.rol) {
             window.location.href = '../index.php';
@@ -14,21 +15,17 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
             str.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
         const nombreNormalizado = normalizar(nombreCompleto);
 
-        // Carga las asignaturas desde el JSON y filtra las del usuario actual
-        fetch("../../api/data/asignaturas.json")
+        // Carga las asignaturas desde obtener-asignaturas-alumno.php filtra las del usuario actual
+        fetch("../app/obtener-asignaturas-alumno.php", { credentials: "include" })
             .then(res => res.json())
             .then(asignaturas => {
-                const asignaturasUsuario = asignaturas.filter(asig =>
-                    asig.alumnos?.some(alumno => normalizar(alumno) === nombreNormalizado)
-                );
-                renderizarAsignaturas(asignaturasUsuario);
+                console.log("Asignaturas obtenidas:", asignaturas); // para depurar
+                renderizarAsignaturas(asignaturas);
             });
 
         // Formatea el año académico (ej: 2024 → 2024/25)
-        function formatearAnyo(anyo) {
-            const inicio = parseInt(anyo);
-            const fin = inicio + 1;
-            return `${inicio}/${fin.toString().slice(-2)}`;
+        function formatearAnyo() {
+            return "2024/25";
         }
 
         // Renderiza las asignaturas en pantalla
@@ -52,7 +49,7 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
                         <img src="../icons/book.svg" alt="Libro" class="icono-azul" />
                         <div>
                             <h4>${asig.nombre}</h4>
-                            <p>${asig.codigo} — ${asig.curso}º curso, ${asig.semestre === "1" ? "1º semestre" : "2º semestre"}, ${formatearAnyo(asig.anyo)}</p>
+                            <p>${asig.codigo} — ${asig.curso}º curso, ${String(asig.semestre).trim() === "1" ? "1º semestre" : "2º semestre"},${formatearAnyo(asig.anyo)}</p>
                         </div>
                     </div>
                     <div class="asignatura-derecha">
@@ -87,11 +84,34 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
                     const contenedor = icono.closest(".item-asignatura");
                     const esFavorita = icono.dataset.favorita === "true";
 
-                    // Cambia visualmente el icono
-                    icono.src = esFavorita ? "../icons/favoritos.svg" : "../icons/favoritos-relleno.svg";
-                    icono.dataset.favorita = esFavorita ? "false" : "true";
-                    contenedor.classList.toggle("favorita", !esFavorita);
+                    // FETCH PARA CAMBIAR O DESASIGNAR UNA ASIGNATURA COMO FAVORITA
+                    const nuevaFavorita = !esFavorita;
 
+                    icono.src = nuevaFavorita ? "../icons/favoritos-relleno.svg" : "../icons/favoritos.svg";
+                    icono.dataset.favorita = nuevaFavorita ? "true" : "false";
+                    contenedor.classList.toggle("favorita", nuevaFavorita);
+
+                    fetch("../app/actualizar-favorita.php", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "include",
+                        body: JSON.stringify({
+                            codigo: contenedor.dataset.codigo.toUpperCase(),
+                            favorita: nuevaFavorita ? 1 : 0
+                        })
+                    })
+                        .then(res => {
+                            if (!res.ok) throw new Error("Respuesta no OK del servidor");
+                            return res.json();
+                        })
+                        .then(data => {
+                            if (!data.exito) {
+                                console.error("Error al actualizar favorita:", data.mensaje);
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error en fetch:", error);
+                        });
                     aplicarFiltros();
                 });
             });
