@@ -19,19 +19,26 @@ fetch("../app/obtener-alumnos-asignatura.php?codigo=" + datos.codigoAsignatura)
     .then(data => {
         if (data.error) return console.error(data.error);
 
-        todosAlumnos = data.todos;
+        todosAlumnos = data.todos.map(a => ({
+            id: a.id, // usamos solo .id, no idUsuariosPROA
+            nombreCompleto: a.nombreCompleto
+        }));
+
         alumnosAsignados = data.asignados.map(id => parseInt(id));
         alumnosDisponibles = todosAlumnos.filter(a => !alumnosAsignados.includes(a.id));
-        renderListas();
+
+        renderDisponibles();
+        renderAsignados();
     });
 
-function renderListas(filtro = "") {
+function renderDisponibles(filtro = "") {
     const filtroMin = filtro.toLowerCase();
     const mensaje = document.getElementById("mensaje-sin-resultados");
 
     listaDisponibles.innerHTML = "";
+
     const disponiblesFiltrados = alumnosDisponibles.filter(a =>
-        `${a.nombreCompleto}`.toLowerCase().includes(filtroMin)
+        a.nombreCompleto.toLowerCase().includes(filtroMin)
     );
 
     mensaje.style.display = disponiblesFiltrados.length === 0 ? "block" : "none";
@@ -40,22 +47,28 @@ function renderListas(filtro = "") {
         const li = document.createElement("li");
         li.className = "item-usuario";
         li.innerHTML = `
-            <span>${a.nombreCompleto}</span>
-            <button class="btn-icono"><img src="../icons/anyadir.svg" alt="Añadir"></button>
-        `;
+      <span>${a.nombreCompleto}</span>
+      <button class="btn-icono"><img src="../icons/anyadir.svg" alt="Añadir"></button>
+    `;
         li.querySelector("button").addEventListener("click", () => {
             alumnosAsignados.push(a.id);
             alumnosDisponibles = alumnosDisponibles.filter(b => b.id !== a.id);
-            renderListas(filtro);
             hayCambios = true;
             mostrarNotificacion(`Alumno ${a.nombreCompleto} asignado`);
+            renderDisponibles(inputBuscar.value);
+            renderAsignados();
         });
         listaDisponibles.appendChild(li);
     });
+}
 
+function renderAsignados() {
     listaAsignados.innerHTML = "";
+
     alumnosAsignados.forEach(id => {
         const alumno = todosAlumnos.find(a => a.id === id);
+        if (!alumno) return;
+
         const li = document.createElement("li");
         li.className = "item-usuario";
         li.innerHTML = `
@@ -65,16 +78,20 @@ function renderListas(filtro = "") {
         li.querySelector("button").addEventListener("click", () => {
             alumnosDisponibles.push(alumno);
             alumnosAsignados = alumnosAsignados.filter(i => i !== id);
-            renderListas(inputBuscar.value);
             hayCambios = true;
             mostrarNotificacion(`Alumno ${alumno.nombreCompleto} desasignado`);
+            renderDisponibles(inputBuscar.value);
+            renderAsignados();
         });
         listaAsignados.appendChild(li);
     });
+
+    alumnosDisponibles = todosAlumnos.filter(a => !alumnosAsignados.includes(a.id));
 }
 
+
 inputBuscar.addEventListener("input", () => {
-    renderListas(inputBuscar.value);
+    renderDisponibles(inputBuscar.value);
 });
 
 document.getElementById("btn-confirmar").addEventListener("click", () => {

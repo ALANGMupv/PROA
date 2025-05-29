@@ -12,8 +12,10 @@ if (!$codigo || !is_array($ids)) {
     exit;
 }
 
-// Eliminar asignaciones existentes
-$conn->query("DELETE FROM asignacionalumno WHERE codigoAsignatura = '$codigo'");
+$stmtDelete = $conn->prepare("DELETE FROM asignacionalumno WHERE codigoAsignatura = ?");
+$stmtDelete->bind_param("s", $codigo);
+$stmtDelete->execute();
+
 
 // Insertar nuevas asignaciones
 $stmt = $conn->prepare("INSERT INTO asignacionalumno (idUsuariosPROA, codigoAsignatura, idGrupo, asignaturaFavorita) VALUES (?, ?, NULL, 0)");
