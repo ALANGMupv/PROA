@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +9,19 @@
     <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/submenu-asignatura.css">
     <link rel="stylesheet" href="css/asignacion.css">
+
+    <?php
+    session_start();
+    if (!isset($_SESSION['asignaturaSeleccionada'])) {
+        echo "<script>window.location.href = 'asignaturas.php';</script>";
+        exit;
+    }
+    $datos = $_SESSION['asignaturaSeleccionada'];
+    ?>
+    <script>
+        const datos = <?php echo json_encode($datos); ?>;
+    </script>
+
     <script src="../js/header-proa.js" defer></script>
     <script src="js/panel-pas.js" defer></script>
     <script src="js/asignar-alumnos.js" defer></script>

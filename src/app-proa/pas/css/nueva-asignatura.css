@@ -225,6 +225,14 @@ dialog {
     font-size: unset;
     padding: 0.5em;
 }
+
+.fila-reorganizada {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1em;
+    width: 100%;
+}
+
 @media (max-width: 1020px){
     .fila{
         flex-direction: column;
