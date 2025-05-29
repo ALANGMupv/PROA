@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2025 a las 18:36:48
+-- Tiempo de generación: 29-05-2025 a las 19:33:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -28,10 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `institucion` (
-  `codigoInstitucion` char(3) NOT NULL,
-  `codigoTipoInstitucion` varchar(2) NOT NULL,
-  `nombreInstitucion` varchar(64) NOT NULL
+                               `codigoInstitucion` char(3) NOT NULL,
+                               `codigoTipoInstitucion` varchar(2) NOT NULL,
+                               `nombreInstitucion` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `institucion`
+--
+
+INSERT INTO `institucion` (`codigoInstitucion`, `codigoTipoInstitucion`, `nombreInstitucion`) VALUES
+    ('001', 'A1', 'UPV');
 
 -- --------------------------------------------------------
 
@@ -40,9 +47,20 @@ CREATE TABLE `institucion` (
 --
 
 CREATE TABLE `tipoinstitucion` (
-  `codigoTipoInstitucion` varchar(2) NOT NULL,
-  `nombreTipoInstitucion` varchar(64) NOT NULL
+                                   `codigoTipoInstitucion` varchar(2) NOT NULL,
+                                   `nombreTipoInstitucion` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipoinstitucion`
+--
+
+INSERT INTO `tipoinstitucion` (`codigoTipoInstitucion`, `nombreTipoInstitucion`) VALUES
+                                                                                     ('A1', 'Universidad'),
+                                                                                     ('A2', 'Instituto'),
+                                                                                     ('A3', 'Colegio'),
+                                                                                     ('A4', 'Academia Particular'),
+                                                                                     ('A5', 'Otros');
 
 -- --------------------------------------------------------
 
@@ -51,16 +69,16 @@ CREATE TABLE `tipoinstitucion` (
 --
 
 CREATE TABLE `usuariosgti` (
-  `idUsuariosGTI` int(11) NOT NULL,
-  `email` varchar(254) NOT NULL,
-  `nombre` varchar(64) NOT NULL,
-  `apellidos` varchar(64) NOT NULL,
-  `contraseña` varchar(64) NOT NULL,
-  `codigoInstitucion` char(3) DEFAULT NULL,
-  `telefono` varchar(15) DEFAULT NULL,
-  `estado` tinyint(1) NOT NULL DEFAULT 0,
-  `token` varchar(36) DEFAULT NULL,
-  `validez_token` datetime DEFAULT NULL
+                               `idUsuariosGTI` int(11) NOT NULL,
+                               `email` varchar(254) NOT NULL,
+                               `nombre` varchar(64) NOT NULL,
+                               `apellidos` varchar(64) NOT NULL,
+                               `contraseña` varchar(64) NOT NULL,
+                               `codigoInstitucion` char(3) DEFAULT NULL,
+                               `telefono` varchar(15) DEFAULT NULL,
+                               `estado` tinyint(1) NOT NULL DEFAULT 0,
+                               `token` varchar(36) DEFAULT NULL,
+                               `validez_token` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -68,8 +86,11 @@ CREATE TABLE `usuariosgti` (
 --
 
 INSERT INTO `usuariosgti` (`idUsuariosGTI`, `email`, `nombre`, `apellidos`, `contraseña`, `codigoInstitucion`, `telefono`, `estado`, `token`, `validez_token`) VALUES
-(1, 'dapasa@har.upv.es', 'Daniel', 'Palacio', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', NULL, NULL, 0, NULL, NULL),
-(2, 'jogilo@upvnet.upv.es', 'José Luis', 'Gimenez', 'db2e7f1bd5ab9968ae76199b7cc74795ca7404d5a08d78567715ce532f9d2669', NULL, NULL, 0, NULL, NULL);
+                                                                                                                                                                   (1, 'dapasa@har.upv.es', 'Daniel', 'Palacio', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', NULL, NULL, 0, NULL, NULL),
+                                                                                                                                                                   (2, 'jogilo@upvnet.upv.es', 'José Luis', 'Gimenez', 'db2e7f1bd5ab9968ae76199b7cc74795ca7404d5a08d78567715ce532f9d2669', NULL, NULL, 0, NULL, NULL),
+                                                                                                                                                                   (4, 'aguemar@teleco.upv.es', 'Alan', 'Guevara', '49e6d696bd587bc7ba9c705ca9b6b432b68a2d6da1e9f10ab7c943d8afb79ea8', '001', '722575818', 0, NULL, NULL),
+                                                                                                                                                                   (5, 'jvaldeo@upv.edu.es', 'Julia', 'Valén ', 'fa8fab9d741708503b5010d9adf3b1511ce97b753e70a8234439fb2882612f09', '001', '633744802', 0, '99e88efdcef111bbfdab2b92591d21e6', '2025-05-29 19:42:39'),
+                                                                                                                                                                   (6, 'sagucre@upv.edu.es', 'Santiago Alejandro', 'Aguirre Crespo', 'bdbf522d486159cb66770f7ce5756e533ab7502f9fb99af91e667d2a3d3b3573', '001', '696666696', 0, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -79,20 +100,20 @@ INSERT INTO `usuariosgti` (`idUsuariosGTI`, `email`, `nombre`, `apellidos`, `con
 -- Indices de la tabla `institucion`
 --
 ALTER TABLE `institucion`
-  ADD PRIMARY KEY (`codigoInstitucion`),
+    ADD PRIMARY KEY (`codigoInstitucion`),
   ADD KEY `codigoTipoInstitucion` (`codigoTipoInstitucion`);
 
 --
 -- Indices de la tabla `tipoinstitucion`
 --
 ALTER TABLE `tipoinstitucion`
-  ADD PRIMARY KEY (`codigoTipoInstitucion`);
+    ADD PRIMARY KEY (`codigoTipoInstitucion`);
 
 --
 -- Indices de la tabla `usuariosgti`
 --
 ALTER TABLE `usuariosgti`
-  ADD PRIMARY KEY (`idUsuariosGTI`),
+    ADD PRIMARY KEY (`idUsuariosGTI`),
   ADD KEY `codigoInstitucion` (`codigoInstitucion`);
 
 --
@@ -103,7 +124,7 @@ ALTER TABLE `usuariosgti`
 -- AUTO_INCREMENT de la tabla `usuariosgti`
 --
 ALTER TABLE `usuariosgti`
-  MODIFY `idUsuariosGTI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+    MODIFY `idUsuariosGTI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -113,13 +134,13 @@ ALTER TABLE `usuariosgti`
 -- Filtros para la tabla `institucion`
 --
 ALTER TABLE `institucion`
-  ADD CONSTRAINT `institucion_ibfk_1` FOREIGN KEY (`codigoTipoInstitucion`) REFERENCES `tipoinstitucion` (`codigoTipoInstitucion`);
+    ADD CONSTRAINT `institucion_ibfk_1` FOREIGN KEY (`codigoTipoInstitucion`) REFERENCES `tipoinstitucion` (`codigoTipoInstitucion`);
 
 --
 -- Filtros para la tabla `usuariosgti`
 --
 ALTER TABLE `usuariosgti`
-  ADD CONSTRAINT `usuariosgti_ibfk_1` FOREIGN KEY (`codigoInstitucion`) REFERENCES `institucion` (`codigoInstitucion`);
+    ADD CONSTRAINT `usuariosgti_ibfk_1` FOREIGN KEY (`codigoInstitucion`) REFERENCES `institucion` (`codigoInstitucion`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
