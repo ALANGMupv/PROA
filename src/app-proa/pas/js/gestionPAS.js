@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let asignaturasOriginal = [];
 
-    fetch('../../api/data/asignaturas.json')
+    fetch('../app/asignaturasPAS.php')
         .then(response => response.json())
         .then(asignaturas => {
             asignaturasOriginal = asignaturas;
