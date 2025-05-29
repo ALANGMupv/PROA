@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 29, 2025 at 02:37 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 29-05-2025 a las 11:36:31
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,6 +34,18 @@ CREATE TABLE `asignacionalumno` (
                                     `asignaturaFavorita` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `asignacionalumno`
+--
+
+INSERT INTO `asignacionalumno` (`idUsuariosPROA`, `codigoAsignatura`, `idGrupo`, `asignaturaFavorita`) VALUES
+                                                                                                           (1, 'PROG101', 1, 1),
+                                                                                                           (1, 'SOUND204', 1, 0),
+                                                                                                           (1, 'UIUX102', 1, 0),
+                                                                                                           (2, 'MULT203', 2, 1),
+                                                                                                           (2, 'PROG101', 2, 0),
+                                                                                                           (2, 'TFG401', 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +58,19 @@ CREATE TABLE `asignaciondocentes` (
                                       `responsable` tinyint(1) DEFAULT NULL,
                                       `asignaturaFavorita` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `asignaciondocentes`
+--
+
+INSERT INTO `asignaciondocentes` (`idUsuariosPROA`, `codigoAsignatura`, `responsable`, `asignaturaFavorita`) VALUES
+                                                                                                                 (3, 'COMM101', 1, 0),
+                                                                                                                 (3, 'MULT203', 1, 0),
+                                                                                                                 (3, 'PROG101', 1, 1),
+                                                                                                                 (3, 'TFG401', 1, 0),
+                                                                                                                 (4, 'SIGS301', 1, 1),
+                                                                                                                 (4, 'SOUND204', 0, 0),
+                                                                                                                 (4, 'UIUX102', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -63,6 +88,19 @@ CREATE TABLE `asignaturas` (
                                `idDepartamento` int(11) DEFAULT NULL,
                                `idCaracter` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `asignaturas`
+--
+
+INSERT INTO `asignaturas` (`codigoAsignatura`, `codigoTitulacion`, `nombre`, `creditos`, `idCurso`, `idSemestre`, `idDepartamento`, `idCaracter`) VALUES
+                                                                                                                                                      ('COMM101', 'TEL', 'Fundamentos de comunicaciones', 6, 1, 1, 4, 1),
+                                                                                                                                                      ('MULT203', 'GTI', 'Sistemas multimedia', 6, 2, 1, 1, 2),
+                                                                                                                                                      ('PROG101', 'GTI', 'Programación de videojuegos', 6, 1, 1, 1, 1),
+                                                                                                                                                      ('SIGS301', 'TEL', 'Procesado de señal', 6, 3, 1, 4, 2),
+                                                                                                                                                      ('SOUND204', 'GTI', 'Sonido interactivo', 6, 2, 2, 3, 2),
+                                                                                                                                                      ('TFG401', 'GTI', 'Trabajo Fin de Grado', 12, 4, 2, 1, 5),
+                                                                                                                                                      ('UIUX102', 'GTI', 'Diseño de interfaces', 6, 1, 2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -99,6 +137,17 @@ CREATE TABLE `caracteresasignatura` (
                                         `idCaracter` int(11) NOT NULL,
                                         `tipoCaracter` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `caracteresasignatura`
+--
+
+INSERT INTO `caracteresasignatura` (`idCaracter`, `tipoCaracter`) VALUES
+                                                                      (1, 'Obligatoria'),
+                                                                      (2, 'Optativa'),
+                                                                      (3, 'Troncal'),
+                                                                      (4, 'Básica'),
+                                                                      (5, 'TFG');
 
 -- --------------------------------------------------------
 
@@ -140,6 +189,16 @@ CREATE TABLE `cursos` (
                           `nombreCurso` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `cursos`
+--
+
+INSERT INTO `cursos` (`idCurso`, `nombreCurso`) VALUES
+                                                    (1, 'Primero'),
+                                                    (2, 'Segundo'),
+                                                    (3, 'Tercero'),
+                                                    (4, 'Cuarto');
+
 -- --------------------------------------------------------
 
 --
@@ -150,6 +209,16 @@ CREATE TABLE `departamentos` (
                                  `idDepartamento` int(11) NOT NULL,
                                  `nombreDepartamento` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `departamentos`
+--
+
+INSERT INTO `departamentos` (`idDepartamento`, `nombreDepartamento`) VALUES
+                                                                         (1, 'Informática'),
+                                                                         (2, 'Diseño'),
+                                                                         (3, 'Sonido'),
+                                                                         (4, 'Comunicaciones');
 
 -- --------------------------------------------------------
 
@@ -198,6 +267,14 @@ CREATE TABLE `grupos` (
                           `idGrupo` int(11) NOT NULL,
                           `nombreGrupo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `grupos`
+--
+
+INSERT INTO `grupos` (`idGrupo`, `nombreGrupo`) VALUES
+                                                    (1, 'PL1'),
+                                                    (2, 'PL2');
 
 -- --------------------------------------------------------
 
@@ -325,6 +402,14 @@ CREATE TABLE `semestres` (
                              `nombreSemestre` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `semestres`
+--
+
+INSERT INTO `semestres` (`idSemestre`, `nombreSemestre`) VALUES
+                                                             (1, 'A'),
+                                                             (2, 'B');
+
 -- --------------------------------------------------------
 
 --
@@ -337,7 +422,15 @@ CREATE TABLE `titulacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indexes for dumped tables
+-- Volcado de datos para la tabla `titulacion`
+--
+
+INSERT INTO `titulacion` (`codigoTitulacion`, `nombreTitulacion`) VALUES
+                                                                      ('GTI', 'Grado en Tecnologías Interactivas'),
+                                                                      ('TEL', 'Grado en Ingeniería de Telecomunicaciones');
+
+--
+-- Índices para tablas volcadas
 --
 
 --
@@ -506,7 +599,7 @@ ALTER TABLE `avisos`
 -- AUTO_INCREMENT for table `caracteresasignatura`
 --
 ALTER TABLE `caracteresasignatura`
-    MODIFY `idCaracter` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idCaracter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `contenidoavisos`
@@ -524,13 +617,13 @@ ALTER TABLE `contenidoexamen`
 -- AUTO_INCREMENT for table `cursos`
 --
 ALTER TABLE `cursos`
-    MODIFY `idCurso` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idCurso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `departamentos`
 --
 ALTER TABLE `departamentos`
-    MODIFY `idDepartamento` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idDepartamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `estadosavisos`
@@ -554,7 +647,7 @@ ALTER TABLE `examenes`
 -- AUTO_INCREMENT for table `grupos`
 --
 ALTER TABLE `grupos`
-    MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `opcionespregunta`
@@ -590,7 +683,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `semestres`
 --
 ALTER TABLE `semestres`
-    MODIFY `idSemestre` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idSemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
