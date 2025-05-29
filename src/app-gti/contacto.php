@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Contacto</title>
     <!-- Icono pestaña del navegador -->
-    <link rel="icon" href="icons/iconGTI.png" type="image/svg+xml">
+    <link rel="icon" href="icons/gti_morado.png" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/header.css">
@@ -18,10 +18,15 @@
 </head>
 <body>
 
-<!-- Include header no logueado -> cambiar lógica según esté logueado cuando se implemente el login.php -->
+<!-- Header -->
 <?php
+session_start();
 $rutaBase = '';
-include 'includes/headerNoLogueado.inc';
+if (isset($_SESSION['usuario'])) {
+    include $rutaBase . 'includes/headerLogueado.inc';
+} else {
+    include $rutaBase . 'includes/headerNoLogueado.inc';
+}
 ?>
 <!-- Cerramos sección header -->
 

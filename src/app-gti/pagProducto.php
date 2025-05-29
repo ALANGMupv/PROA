@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Descubre PROA</title>
     <!-- Icono pestaña del navegador -->
-    <link rel="icon" href="icons/iconGTI.png" type="image/svg+xml">
+    <link rel="icon" href="icons/gti_morado.png" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/header.css">
@@ -20,8 +20,13 @@
 
 <!-- Include header no logueado -> cambiar lógica según esté logueado cuando se implemente el login.php -->
 <?php
+session_start();
 $rutaBase = '';
-include 'includes/headerNoLogueado.inc';
+if (isset($_SESSION['usuario'])) {
+    include $rutaBase . 'includes/headerLogueado.inc';
+} else {
+    include $rutaBase . 'includes/headerNoLogueado.inc';
+}
 ?>
 <!-- Cerramos sección header -->
 
@@ -96,7 +101,12 @@ include 'includes/headerNoLogueado.inc';
     <div class="cta-final-contenedor">
         <div class="cta-final-texto">
             <h2>¿Listo para transformar la educación?</h2>
-            <p class="parrafo-principal">Contáctanos para obtener más información sobre PROA y sobre cómo GTI puede beneficiar a tu institución.</p>
+            <p class="parrafo-principal">
+                ¿Tienes dudas o quieres saber más sobre PROA? <br> Nuestro equipo estará encantado de atenderte personalmente y resolver cualquier pregunta que tengas.
+            </p>
+            <p class="parrafo-principal">
+                Rellena nuestro formulario de contacto y descubre cómo GTI puede ayudarte a transformar la experiencia educativa en tu centro. Sin compromiso, con transparencia y con la posibilidad de probar una demo funcional antes de decidir.
+            </p>
         </div>
         <div class="cta-final-boton">
             <a href="contacto.php" class="btnPROA">Solicitar información</a>

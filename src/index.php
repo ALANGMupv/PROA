@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GTI</title>
     <!-- Icono pestaña del navegador -->
-    <link rel="icon" href="app-gti/icons/iconGTI.png" type="image/svg+xml">
+    <link rel="icon" href="app-gti/icons/gti_morado.png" type="image/svg+xml">
 
     <link rel="stylesheet" href="app-gti/css/estilos.css">
     <link rel="stylesheet" href="app-gti/css/header.css">
@@ -20,10 +20,15 @@
 </head>
 <body>
 
-<!-- Include header no logueado -> cambiar lógica según esté logueado cuando se implemente el login.php -->
+<!-- Header -->
 <?php
+session_start();
 $rutaBase = 'app-gti/';
-include $rutaBase . 'includes/headerNoLogueado.inc';
+if (isset($_SESSION['usuario'])) {
+    include $rutaBase . 'includes/headerLogueado.inc';
+} else {
+    include $rutaBase . 'includes/headerNoLogueado.inc';
+}
 ?>
 <!-- Cerramos sección header -->
 

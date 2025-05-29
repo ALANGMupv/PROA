@@ -28,7 +28,7 @@ if ($email && $token) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cambiar Contraseña</title>
     <!-- Icono pestaña del navegador -->
-    <link rel="icon" href="icons/iconGTI.png" type="image/svg+xml">
+    <link rel="icon" href="icons/gti_morado.png" type="image/svg+xml">
 
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/header.css">

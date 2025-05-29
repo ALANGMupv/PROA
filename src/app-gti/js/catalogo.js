@@ -75,20 +75,17 @@ document.querySelector('.formulario-sugerencia')?.addEventListener('submit', fun
         overlay.remove();
         formulario.reset();
     }, 1500);
-
 });
 
 // Redirección condicional según login
-document.addEventListener('DOMContentLoaded', () => {
-    const btnDemo = document.getElementById('btnProbarDemo');
-    const btnProd = document.getElementById('btnVisualizarProd');
-    const usuarioGTI = JSON.parse(localStorage.getItem('usuario'));
+const btnDemo = document.getElementById('btnProbarDemo');
+const btnProd = document.getElementById('btnVisualizarProd');
+const usuarioGTI = JSON.parse(localStorage.getItem('usuario'));
 
-    btnDemo?.addEventListener('click', () => {
-        window.location.href = usuarioGTI ? '../app-proa/index.php' : 'login.php';
-    });
+btnDemo?.addEventListener('click', () => {
+    window.location.href = usuarioGTI ? '../app-proa/index.php' : 'login.php';
+});
 
-    btnProd?.addEventListener('click', () => {
-        window.location.href = 'pagProducto.php';
-    });
+btnProd?.addEventListener('click', () => {
+    window.location.href = 'pagProducto.php';
 });
