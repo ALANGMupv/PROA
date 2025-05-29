@@ -11,8 +11,22 @@ function toggleOpciones(icono) {
 
 // Funciones para asignar alumno o profesor
 function asignarAlumno(asignatura) {
-    localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asignatura));
-    window.location.href = "asignacion-alumnos-pas.php";
+    fetch("../app/guardar-asignatura-sesion.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            codigoAsignatura: asignatura.codigo,
+            nombre: asignatura.nombre
+        })
+    })
+        .then(res => res.json())
+        .then(resp => {
+            if (resp.success) {
+                window.location.href = "asignacion-alumnos-pas.php";
+            } else {
+                alert("Error al guardar la sesión: " + resp.error);
+            }
+        });
 }
 
 function asignarProfesor(asignatura) {

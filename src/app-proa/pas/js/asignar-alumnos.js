@@ -1,131 +1,120 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const datos = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
-    if (!datos) return;
+document.getElementById("titulo-asignacion").textContent = `Asignación Alumnos – ${datos.nombre}`;
 
-    // Título dinámico
-    document.getElementById("titulo-asignacion").textContent = `Asignación Alumnos – ${datos.nombre}`;
+const listaDisponibles = document.getElementById("lista-disponibles");
+const listaAsignados = document.getElementById("lista-asignados");
+const inputBuscar = document.getElementById("input-buscar-disponibles");
+const dialog = document.getElementById("dialog-cambios");
 
-    const listaDisponibles = document.getElementById("lista-disponibles");
-    const listaAsignados = document.getElementById("lista-asignados");
-    const inputBuscar = document.getElementById("input-buscar-disponibles");
+const btnCancelar = document.getElementById("cancelar-dialogo");
+const btnConfirmarSalida = document.getElementById("confirmar-salida");
 
-    let todosAlumnos = [];
-    let alumnosAsignados = [...datos.alumnos]; // ya asignados
-    let alumnosDisponibles = []; // se calcula después del fetch
-    let hayCambios = false;
+let todosAlumnos = [];
+let alumnosAsignados = [];
+let alumnosDisponibles = [];
+let hayCambios = false;
 
+// Obtener alumnos reales
+fetch("../app/obtener-alumnos-asignatura.php?codigo=" + datos.codigoAsignatura)
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) return console.error(data.error);
 
-    // Cargar todos los alumnos del JSON
-    fetch("../../api/data/usuarios.json")
-        .then(res => res.json())
-        .then(data => {
-            todosAlumnos = data.filter(u => u.rol === "alumno");
-            alumnosDisponibles = todosAlumnos
-                .map(a => `${a.nombre} ${a.apellidos}`)
-                .filter(n => !alumnosAsignados.includes(n));
-
-            renderListas();
-        });
-
-    const dialog = document.getElementById("dialog-cambios");
-    const btnCancelar = document.getElementById("cancelar-dialogo");
-    const btnConfirmarSalida = document.getElementById("confirmar-salida");
-
-    document.getElementById("btn-volver").addEventListener("click", (e) => {
-        e.preventDefault();
-        if (hayCambios) {
-            dialog.showModal();
-        } else {
-            window.location.replace("asignaturas.php");
-        }
+        todosAlumnos = data.todos;
+        alumnosAsignados = data.asignados.map(id => parseInt(id));
+        alumnosDisponibles = todosAlumnos.filter(a => !alumnosAsignados.includes(a.id));
+        renderListas();
     });
 
-    btnCancelar.addEventListener("click", () => {
-        dialog.close();
-    });
+function renderListas(filtro = "") {
+    const filtroMin = filtro.toLowerCase();
+    const mensaje = document.getElementById("mensaje-sin-resultados");
 
-    btnConfirmarSalida.addEventListener("click", () => {
-        dialog.close();
-        history.back();
-    });
+    listaDisponibles.innerHTML = "";
+    const disponiblesFiltrados = alumnosDisponibles.filter(a =>
+        `${a.nombreCompleto}`.toLowerCase().includes(filtroMin)
+    );
 
-    // Renderiza ambas listas
-    function renderListas(filtro = "") {
-        // Render disponibles
-        listaDisponibles.innerHTML = "";
+    mensaje.style.display = disponiblesFiltrados.length === 0 ? "block" : "none";
 
-        const encontrados = alumnosDisponibles.filter(nombre =>
-            nombre.toLowerCase().includes(filtro)
-        );
-
-        const mensaje = document.getElementById("mensaje-sin-resultados");
-        mensaje.style.display = encontrados.length === 0 ? "block" : "none";
-
-        encontrados.forEach(nombreCompleto => {
-            const li = document.createElement("li");
-            li.classList.add("item-usuario");
-            li.innerHTML = `
-            <span>${nombreCompleto}</span>
-            <button class="btn-icono">
-                <img src="../icons/anyadir.svg" alt="Añadir">
-            </button>
+    disponiblesFiltrados.forEach(a => {
+        const li = document.createElement("li");
+        li.className = "item-usuario";
+        li.innerHTML = `
+            <span>${a.nombreCompleto}</span>
+            <button class="btn-icono"><img src="../icons/anyadir.svg" alt="Añadir"></button>
         `;
-            li.querySelector("button").addEventListener("click", () => {
-                if (!alumnosAsignados.includes(nombreCompleto)) {
-                    alumnosAsignados.push(nombreCompleto);
-                    alumnosDisponibles = alumnosDisponibles.filter(n => n !== nombreCompleto);
-                    renderListas(filtro); // mantener filtro activo
-                    mostrarNotificacion(`Alumno ${nombreCompleto} asignado`);
-                }
-            });
-            listaDisponibles.appendChild(li);
+        li.querySelector("button").addEventListener("click", () => {
+            alumnosAsignados.push(a.id);
+            alumnosDisponibles = alumnosDisponibles.filter(b => b.id !== a.id);
+            renderListas(filtro);
+            hayCambios = true;
+            mostrarNotificacion(`Alumno ${a.nombreCompleto} asignado`);
         });
-
-        listaAsignados.innerHTML = "";
-        alumnosAsignados.forEach(nombre => {
-            const li = document.createElement("li");
-            li.classList.add("item-usuario");
-
-            li.innerHTML = `
-                <span>${nombre}</span>
-                 <button class="btn-icono eliminar">
-                    <img src="../icons/trash.svg" alt="Eliminar">
-                 </button>
-            `;
-
-            li.querySelector("button").addEventListener("click", () => {
-                // Quitar de asignados y volver a disponibles
-                alumnosAsignados = alumnosAsignados.filter(n => n !== nombre);
-                alumnosDisponibles.push(nombre);
-                renderListas(inputBuscar.value); // mantener filtro si hay
-                mostrarNotificacion(`Alumno ${nombre} desasignado`);
-            });
-
-            listaAsignados.appendChild(li);
-        });
-    }
-
-    // Filtro en tiempo real
-    inputBuscar.addEventListener("input", () => {
-        renderListas(inputBuscar.value);
+        listaDisponibles.appendChild(li);
     });
 
-    // Confirmar
-    document.getElementById("btn-confirmar").addEventListener("click", () => {
-        console.log("Alumnos asignados a", datos.nombre, alumnosAsignados);
-        mostrarNotificacion("Alumnos asignados correctamente", () => {
-            window.location.href = "ficha-asignatura-pas.php";
+    listaAsignados.innerHTML = "";
+    alumnosAsignados.forEach(id => {
+        const alumno = todosAlumnos.find(a => a.id === id);
+        const li = document.createElement("li");
+        li.className = "item-usuario";
+        li.innerHTML = `
+            <span>${alumno.nombreCompleto}</span>
+            <button class="btn-icono eliminar"><img src="../icons/trash.svg" alt="Eliminar"></button>
+        `;
+        li.querySelector("button").addEventListener("click", () => {
+            alumnosDisponibles.push(alumno);
+            alumnosAsignados = alumnosAsignados.filter(i => i !== id);
+            renderListas(inputBuscar.value);
+            hayCambios = true;
+            mostrarNotificacion(`Alumno ${alumno.nombreCompleto} desasignado`);
         });
+        listaAsignados.appendChild(li);
     });
+}
 
-    // Volver
-    document.getElementById("btn-volver").addEventListener("click", (e) => {
-        e.preventDefault();
-        history.back();
-    });
+inputBuscar.addEventListener("input", () => {
+    renderListas(inputBuscar.value);
 });
 
-// Notificación flotante
+document.getElementById("btn-confirmar").addEventListener("click", () => {
+    const payload = {
+        codigo: datos.codigoAsignatura,
+        ids: alumnosAsignados
+    };
+
+    fetch("../app/guardar-asignacion-alumnos.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    })
+        .then(res => res.json())
+        .then(resp => {
+            if (resp.success) {
+                mostrarNotificacion("Asignación guardada", () => {
+                    window.location.href = "ficha-asignatura-pas.php";
+                });
+            } else {
+                alert("Error al guardar: " + resp.error);
+            }
+        });
+});
+
+document.getElementById("btn-volver").addEventListener("click", (e) => {
+    e.preventDefault();
+    if (hayCambios) {
+        dialog.showModal();
+    } else {
+        history.back();
+    }
+});
+
+btnCancelar.addEventListener("click", () => dialog.close());
+btnConfirmarSalida.addEventListener("click", () => {
+    dialog.close();
+    history.back();
+});
+
 function mostrarNotificacion(mensaje, callback = null) {
     const notif = document.getElementById("notificacion");
     notif.textContent = mensaje;
