@@ -22,7 +22,6 @@
         const datos = <?php echo json_encode($datos); ?>;
     </script>
 
-
     <script src="../js/header-proa.js" defer></script>
     <script src="js/panel-pas.js" defer></script>
     <script src="js/asignar-alumnos.js" defer></script>

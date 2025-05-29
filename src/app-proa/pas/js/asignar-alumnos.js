@@ -85,7 +85,6 @@ function renderAsignados() {
         });
         listaAsignados.appendChild(li);
     });
-
     alumnosDisponibles = todosAlumnos.filter(a => !alumnosAsignados.includes(a.id));
 }
 

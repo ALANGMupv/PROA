@@ -30,8 +30,22 @@ function asignarAlumno(asignatura) {
 }
 
 function asignarProfesor(asignatura) {
-    localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asignatura));
-    window.location.href = "asignacion-profesor-pas.php";
+    fetch("../app/guardar-asignatura-sesion.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            codigoAsignatura: asignatura.codigo,
+            nombre: asignatura.nombre
+        })
+    })
+        .then(res => res.json())
+        .then(resp => {
+            if (resp.success) {
+                window.location.href = "asignacion-profesor-pas.php";
+            } else {
+                alert("Error al guardar la sesión: " + resp.error);
+            }
+        });
 }
 
 // Ejecutar cuando el DOM se ha cargado completamente
@@ -101,9 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
 
-            fila.querySelector('.ver-detalles').addEventListener('click', () => {
+            /*fila.querySelector('.ver-detalles').addEventListener('click', () => {
                 localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asig));
-            });
+            });*/
 
             tabla.appendChild(fila);
         });
