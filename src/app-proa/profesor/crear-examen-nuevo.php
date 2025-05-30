@@ -77,7 +77,7 @@ error_reporting(E_ALL);
 
       <h2>Panel de creación de examen</h2>
 
-      <form id="formulario-examen">
+      <form action="" id="formulario-examen">
 
         <div class="datos">
 
@@ -89,12 +89,12 @@ error_reporting(E_ALL);
           <div class="parametros">
             <div class="contenedor-fecha-hora">
               <label>
-                <span>Fecha de entrega: *</span>
-                <input type="date" class="input-base con-icono" id="fecha-examen" required>
+                <span>Fecha de apertura: *</span>
+                <input type="date" class="input-base con-icono" id="fecha-apertura-examen" required>
               </label>
               <label>
-                <span>Hora: *</span>
-                <input type="time" class="input-base with-icon" id="hora-examen" required>
+                <span>Fecha de cierre: *</span>
+                <input type="date" class="input-base with-icon" id="fecha-cierre-examen" required>
               </label>
             </div>
             <div class="contenedor-valor-peso">
@@ -105,6 +105,13 @@ error_reporting(E_ALL);
                   <span>%</span>
                 </div>
               </label>
+               <label>
+                   <span>Duracion: *</span>
+                   <div class="duracion">
+                       <input type="number" class="input-base" id="duracion-examen" max="500" required>
+                       <span>min</span>
+                   </div>
+               </label>
               <label>
                 <span>Distribucion: *</span>
                 <div class="input-con-icono grupo-dropdown">
@@ -194,6 +201,7 @@ error_reporting(E_ALL);
               </div>
             </div>
           </div>
+
 
           <!-- Pop-up publicado -->
           <div id="popup-publicado" class="popup">

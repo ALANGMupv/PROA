@@ -202,16 +202,16 @@
     .entrega-estilo-alumno .btn-atras {
         font-size: 0.9em;
         padding: 0.5em 1em;
+    }
 
-        #detalle-entrega.entrega-estilo-alumno {
-            width: 100%;
-            max-height: unset;
-            padding-right: 0;
-        }
+    #detalle-entrega.entrega-estilo-alumno {
+        width: 100%;
+        max-height: unset;
+        padding-right: 0;
+    }
 
-        #detalle-entrega .btn-atras {
-            font-size: 0.9em;
-            padding: 0.5em 1em;
-        }
+    #detalle-entrega .btn-atras {
+        font-size: 0.9em;
+        padding: 0.5em 1em;
     }
 }
