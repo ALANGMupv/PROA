@@ -2,9 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const asignaturaSeleccionada = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
     const codigo = asignaturaSeleccionada?.codigo;
 
-    console.log('hola')
-
-
     if (!codigo) {
         mostrarAviso("No hay asignatura seleccionada.");
         return;
@@ -61,12 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!examenes || examenes.length === 0) return '';
 
         let html;
-        if (tipo === 'abiertos'){
-            html = `<div class="bloque-examenes"><h3>${titulo}</h3>
-            <button class="btn-oscuros" id="btn-crear" onclick="redireccionarPagina()">Crear examen</button>`;
-        } else {
-            html = `<div class="bloque-examenes"><h3>${titulo}</h3>`;
-        }
 
         examenes.forEach(ex => {
             if (tipo === 'abiertos') {

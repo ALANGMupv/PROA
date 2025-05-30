@@ -120,18 +120,20 @@ document.addEventListener("DOMContentLoaded", function () {
     formulario.addEventListener("submit", function (e) {
         e.preventDefault(); // Evita que se recargue la página
 
-        const fechaTexto = formulario.querySelector('#fecha-examen').value; // formato: YYYY-MM-DD
-        const horaTexto = formulario.querySelector('#hora-examen').value;   // formato: HH:MM
+        /*const horaTexto = formulario.querySelector('#hora-examen').value;*/   // formato: HH:MM
 
         // Combinar fecha y hora en formato ISO 8601 (ej. 2025-05-09T19:40:00)
-        const fechaHora = fechaTexto && horaTexto ? `${fechaTexto}T${horaTexto}:00` : null;
-
+        const asignaturaSeleccionada = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
+        const codigo = asignaturaSeleccionada?.codigo;
 
         const datos = {
             titulo: formulario.querySelector('#titulo-examen').value, // string
             puntos: suma, // número
             peso: Number(formulario.querySelector('#peso-examen').value), // número
-            fecha: fechaHora, // string con formato ISO (fecha + hora)
+            fechaApertura: formulario.querySelector('#fecha-apertura-examen').value, // string con formato ISO (fecha + hora)
+            fechaCierre: formulario.querySelector('#fecha-cierre-examen').value,
+            duracion: formulario.querySelector('#duracion-examen').value,
+            codigo: codigo,
             preguntas: [],
         };
 
@@ -156,13 +158,13 @@ document.addEventListener("DOMContentLoaded", function () {
             datos.preguntas.push({
                 pregunta: preguntaTexto,
                 valor: valor,
-                respuestas
+                respuestas: respuestas,
             });
         });
 
         console.log(datos);
 
-        /*fetch("procesar-examen.php", {
+        fetch("procesar-examen.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -180,10 +182,10 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => {
                 console.error("Error en la solicitud:", error);
-            });*/
+            });
 
 
-        popupPublicar();
+        //popupPublicar();
 
     });
 

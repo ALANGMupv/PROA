@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/examenes-profesor.css">
   <script src="../js/header-proa.js" defer></script>
   <script src="../js/asignaturas.js" defer></script>
-  <script src="js/examenes-profesor.js"></script>
+  <script src="js/examenes-prfesor.js" defer></script>
 </head>
 <body>
 
@@ -62,6 +62,8 @@ include $rutaBase . 'includes/header-proa.inc';;
                 </div> -->
 
       <section class="panel-contenido fondoPanel"> <!-- Panel donde se mostrará el contenido según la opción elegida -->
+          <button class="btn-oscuros" id="btn-crear" onclick="redireccionarPagina()">Crear examen</button>
+
       </section>
 
     </div>
