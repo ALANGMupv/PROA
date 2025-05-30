@@ -59,7 +59,7 @@ error_reporting(E_ALL);
                     ['label' => 'Ficha asignatura', 'url' => 'ficha-asignatura-pas.php'],
                     ['label' => 'Asignar profesor']
                 ];
-                include 'migasdepan.php';
+                include '../includes/migas-de-pan.inc';
                 ?>
                 <h2 id="titulo-asignacion">Asignación Profesores</h2>
 
