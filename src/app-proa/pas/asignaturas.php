@@ -8,9 +8,11 @@
     <title>Gestión de Asignaturas</title>
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/header-proa.css">
+    <link rel="stylesheet" href="../css/mini-header.css">
     <link rel="stylesheet" href="../css/submenu-asignatura.css">
     <link rel="stylesheet" href="css/gestionAsignaturasPAS.css">
     <script src="../js/header-proa.js" defer></script>
+    <script src="../js/mini-header.js" defer></script>
     <script src="js/panel-pas.js" defer></script>
     <script src="js/gestionPAS.js" defer></script>
 </head>
@@ -19,6 +21,10 @@
 <?php
 $rutaBase = '../';
 include $rutaBase . 'includes/header-proa.inc';;
+include $rutaBase . 'includes/mini-header-proa.inc';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
 
 <div class="contenido-wrapper">

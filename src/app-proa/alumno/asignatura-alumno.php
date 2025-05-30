@@ -8,8 +8,10 @@
   <title>Inicio Alumno</title>
   <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/header-proa.css">
+    <link rel="stylesheet" href="../css/mini-header.css">
   <link rel="stylesheet" href="../css/submenu-asignatura.css">
   <script src="../js/header-proa.js" defer></script>
+    <script src="../js/mini-header.js" defer></script>
     <script src="../js/asignaturas.js" defer></script>
 </head>
 <body>
@@ -17,6 +19,10 @@
 <?php
 $rutaBase = '../';
 include $rutaBase . 'includes/header-proa.inc';;
+include $rutaBase . 'includes/mini-header-proa.inc';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
 
 <!-- Contenedor principal de toda la página (estructura vertical) -->

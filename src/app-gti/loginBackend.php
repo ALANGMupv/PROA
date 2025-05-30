@@ -18,7 +18,7 @@ $resultado = $stmt->get_result();
 $usuario = $resultado->fetch_assoc();
 
 if ($usuario) {
-    // Guardar los datos del usuario en la sesión PHP
+    // Guardar datos como 'usuario' para GTI
     $_SESSION['usuario'] = [
         'id' => $usuario['idUsuariosGTI'],
         'nombre' => $usuario['nombre'],
@@ -26,7 +26,10 @@ if ($usuario) {
         'correo' => $usuario['email']
     ];
 
+    // Guardar también como 'usuarioGTI' para que PROA lo pueda usar
+    $_SESSION['usuarioGTI'] = $_SESSION['usuario'];
+
     echo json_encode(['ok' => true]);
-} else {
+}else {
     echo json_encode(['ok' => false, 'mensaje' => 'Usuario o contraseña incorrectos']);
 }

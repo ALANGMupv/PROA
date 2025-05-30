@@ -2,13 +2,30 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Asignación de Profesores</title>
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/header-proa.css">
+    <link rel="stylesheet" href="../css/mini-header.css">
     <link rel="stylesheet" href="../css/submenu-asignatura.css">
     <link rel="stylesheet" href="css/asignacion.css">
+
+    <?php
+    session_start();
+    if (!isset($_SESSION['asignaturaSeleccionada'])) {
+        echo "<script>window.location.href = 'asignaturas.php';</script>";
+        exit;
+    }
+    $datos = $_SESSION['asignaturaSeleccionada'];
+    ?>
+    <script>
+        const datos = <?php echo json_encode($datos); ?>;
+    </script>
+
     <script src="../js/header-proa.js" defer></script>
+    <script src="../js/mini-header.js" defer></script>
     <script src="js/panel-pas.js" defer></script>
     <script src="js/asignar-profesor.js" defer></script>
 </head>
@@ -17,6 +34,10 @@
 <?php
 $rutaBase = '../';
 include $rutaBase . 'includes/header-proa.inc';;
+include $rutaBase . 'includes/mini-header-proa.inc';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
 
 <main class="contenido-wrapper">

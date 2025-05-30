@@ -40,14 +40,18 @@ if (!$usuario) {
     exit;
 }
 
-// Validación de contraseña
-$hashEntrada = hash('sha256', $contrasena);
-if ($usuario['contraseña'] !== $hashEntrada) {
+// Validación de contraseña en texto plano
+if ($usuario['contraseña'] !== $contrasena) {
     echo json_encode(['exito' => false, 'mensaje' => 'Contraseña incorrecta']);
     exit;
 }
 
-// Éxito: guardamos los datos en $_SESSION
+//Guardar sesión GTI original si aún no está almacenada
+if (!isset($_SESSION['usuarioGTI']) && isset($_SESSION['usuario'])) {
+    $_SESSION['usuarioGTI'] = $_SESSION['usuario'];
+}
+
+//Guardamos los datos del usuario actual de PROA
 $_SESSION['usuario'] = [
     'idUsuariosPROA' => $usuario['idUsuariosPROA'],
     'nombre' => $usuario['nombre'],

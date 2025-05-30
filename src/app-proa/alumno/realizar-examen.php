@@ -8,10 +8,12 @@
   <title>Realizar Examen</title>
   <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/header-proa.css">
+    <link rel="stylesheet" href="../css/mini-header.css">
   <link rel="stylesheet" href="../css/submenu-asignatura.css">
   <link rel="stylesheet" href="css/pop-up.css">
   <link rel="stylesheet" href="css/realizar-examen.css">
   <script src="../js/header-proa.js" defer></script>
+    <script src="../js/mini-header.js" defer></script>
     <script src="../js/asignaturas.js" defer></script>
   <script src="js/realizar-examen.js" defer></script>
   <script src="js/pop-up.js " defer></script>
@@ -21,6 +23,10 @@
 <?php
 $rutaBase = '../';
 include $rutaBase . 'includes/header-proa.inc';;
+include $rutaBase . 'includes/mini-header-proa.inc';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
 
 <main class="contenido-wrapper">
