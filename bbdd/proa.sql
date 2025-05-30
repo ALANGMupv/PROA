@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2025 at 02:19 AM
+-- Generation Time: May 30, 2025 at 04:02 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -170,7 +170,6 @@ CREATE TABLE `contenidoavisos` (
 CREATE TABLE `contenidoexamen` (
                                    `idContenido` int(11) NOT NULL,
                                    `titulo` varchar(255) NOT NULL,
-                                   `descripcion` text DEFAULT NULL,
                                    `pesoExamen` tinyint(3) NOT NULL,
                                    `puntosExamen` tinyint(3) NOT NULL,
                                    `fechaApertura` datetime NOT NULL,
@@ -182,8 +181,13 @@ CREATE TABLE `contenidoexamen` (
 -- Dumping data for table `contenidoexamen`
 --
 
-INSERT INTO `contenidoexamen` (`idContenido`, `titulo`, `descripcion`, `pesoExamen`, `puntosExamen`, `fechaApertura`, `fechaFin`, `duracion`) VALUES
-    (1, 'Examen Parcial 1', 'Evaluación del primer parcial del curso.', 30, 100, '2025-06-01 08:00:00', '2025-06-01 10:00:00', '00:01:20');
+INSERT INTO `contenidoexamen` (`idContenido`, `titulo`, `pesoExamen`, `puntosExamen`, `fechaApertura`, `fechaFin`, `duracion`) VALUES
+                                                                                                                                   (1, 'Examen Parcial 1', 30, 100, '2025-06-01 08:00:00', '2025-06-01 10:00:00', '00:01:20'),
+                                                                                                                                   (5, 'titulo', 12, 10, '2025-05-16 00:00:00', '2025-05-30 00:00:00', '00:00:12'),
+                                                                                                                                   (6, 'titulo', 12, 10, '2025-05-02 00:00:00', '2025-05-08 00:00:00', '00:00:12'),
+                                                                                                                                   (7, 'titulo', 12, 10, '2025-05-02 00:00:00', '2025-05-08 00:00:00', '00:00:12'),
+                                                                                                                                   (8, 'titulo', 12, 10, '2025-05-02 00:00:00', '2025-05-08 00:00:00', '00:00:12'),
+                                                                                                                                   (9, 'titulo', 12, 10, '2025-05-02 00:00:00', '2025-05-08 00:00:00', '00:00:12');
 
 -- --------------------------------------------------------
 
@@ -281,7 +285,12 @@ CREATE TABLE `examenes` (
 INSERT INTO `examenes` (`idExamen`, `codigoAsignatura`, `idGrupo`, `idContenido`, `idEstado`, `idUsuariosPROA`) VALUES
                                                                                                                     (1, 'COMM101', 1, 1, 1, 3),
                                                                                                                     (2, 'MULT203', 1, 1, 1, 3),
-                                                                                                                    (3, 'PROG101', 1, 1, 1, 3);
+                                                                                                                    (3, 'PROG101', 1, 1, 1, 3),
+                                                                                                                    (4, 'PROG101', NULL, 5, 1, 3),
+                                                                                                                    (5, 'PROG101', NULL, 6, 1, 3),
+                                                                                                                    (6, 'PROG101', NULL, 7, 1, 3),
+                                                                                                                    (7, 'PROG101', NULL, 8, 1, 3),
+                                                                                                                    (8, 'PROG101', NULL, 9, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -637,7 +646,7 @@ ALTER TABLE `contenidoavisos`
 -- AUTO_INCREMENT for table `contenidoexamen`
 --
 ALTER TABLE `contenidoexamen`
-    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `cursos`
@@ -667,7 +676,7 @@ ALTER TABLE `estadosexamen`
 -- AUTO_INCREMENT for table `examenes`
 --
 ALTER TABLE `examenes`
-    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `grupos`
