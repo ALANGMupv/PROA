@@ -117,7 +117,7 @@ function eliminarElemento(elemento) {
 document.addEventListener("DOMContentLoaded", function () {
     const formulario = document.getElementById("formulario-examen");
 
-    formulario.addEventListener("submit", function (e) {
+    formulario.addEventListener("submit", async function (e) {
         e.preventDefault(); // Evita que se recargue la página
 
         /*const horaTexto = formulario.querySelector('#hora-examen').value;*/   // formato: HH:MM
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
             peso: Number(formulario.querySelector('#peso-examen').value), // número
             fechaApertura: formulario.querySelector('#fecha-apertura-examen').value, // string con formato ISO (fecha + hora)
             fechaCierre: formulario.querySelector('#fecha-cierre-examen').value,
-            duracion: formulario.querySelector('#duracion-examen').value,
+            duracion: Number(formulario.querySelector('#duracion-examen').value),
             codigo: codigo,
             preguntas: [],
         };
@@ -164,25 +164,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
         console.log(datos);
 
-        fetch("procesar-examen.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(datos),
-        })
-            .then(response => response.json())
-            .then(resultado => {
-                console.log("Respuesta del servidor:", resultado);
+        const formData = new FormData();
+
+        // Asegúrate de poner los mismos `name` que espera el PHP:
+        formData.append('titulo', datos.titulo);
+        formData.append('fechaApertura', datos.fechaApertura);
+        formData.append('fechaCierre', datos.fechaCierre);
+        formData.append('duracion', datos.duracion);
+        formData.append('peso', datos.peso);
+        formData.append('puntos', datos.puntos);
+        formData.append('codigo', codigo);
+
+        // Para preguntas (como es un array de objetos, conviene pasarlo como JSON stringificado)
+        formData.append('preguntas', JSON.stringify(datos.preguntas));
+
+        try {
+            const respuesta = await fetch("../app/procesar-examen.php", {
+                method: "POST",
+                body: formData
+            });
+
+            const contentType = respuesta.headers.get("content-type") || "";
+            console.log("Tipo de respuesta:", contentType);
+
+            if (contentType.includes("application/json")) {
+                const resultado = await respuesta.json();
+                console.log("Respuesta del servidor (JSON):", resultado);
+
                 if (resultado.success) {
                     popupPublicar();
                 } else {
                     alert("Error al guardar el examen.");
                 }
-            })
-            .catch(error => {
-                console.error("Error en la solicitud:", error);
-            });
+            } else {
+                const texto = await respuesta.text();
+                console.warn("Respuesta NO JSON:", texto);
+                alert("Error inesperado. Mira la consola para más detalles.");
+            }
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+        }
+
 
 
         //popupPublicar();
