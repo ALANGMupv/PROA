@@ -6,6 +6,9 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Realizar Examen</title>
+    <!-- Icono pestaña del navegador -->
+    <link rel="icon" href="../icons/gorritoAzul.svg" type="image/svg+xml">
+
   <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/mini-header.css">
@@ -45,11 +48,17 @@ error_reporting(E_ALL);
           <!-- Aquí va el dropdown para cambiar de asignatura -->
           <?php include $rutaBase . 'includes/dropdown-asignaturas.inc'; ?>
 
-      <a href="#" id="volver" class="volver-enlace">← Volver</a>
-
     <section class="panel-contenido fondoPanel" id="panelRealizarExamen">
+        <?php
+        $migas = [
+            ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-alumno.php'],
+            ['label' => 'Realizar examen']
+        ];
+        include '../includes/migas-de-pan.inc';
+        ?>
 
-      <form id="formulario-examen">
+
+        <form id="formulario-examen">
         <section class="titulo">
           <h1>Cuestionario 1</h1>
         </section>

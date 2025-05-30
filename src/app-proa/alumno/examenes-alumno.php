@@ -14,6 +14,9 @@ $asignaturaSeleccionada = [
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Exámenes Alumno</title>
+    <!-- Icono pestaña del navegador -->
+    <link rel="icon" href="../icons/gorritoAzul.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/mini-header.css">
@@ -28,7 +31,7 @@ $asignaturaSeleccionada = [
 
 <?php
 $rutaBase = '../';
-include $rutaBase . 'includes/header-proa.inc';
+include $rutaBase . 'includes/header-proa.inc';;
 include $rutaBase . 'includes/mini-header-proa.inc';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -53,7 +56,13 @@ error_reporting(E_ALL);
 
             <!-- Contenedor del contenido que se muestra según la opción seleccionada en el submenú -->
             <section class="fondoPanel">
-                <!-- Aquí se carga dinámicamente los exámenes desde el JSON -->
+                <?php
+                $migas = [
+                    ['label' => 'Exámenes de la asignatura']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
+
             </section>
         </div>
     </div>

@@ -1,99 +1,97 @@
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('../app/chequear-sesion.php', { credentials: 'include' })
-        .then(res => res.json())
-        .then(usuario => {
-            if (!usuario.rol) {
-                window.location.replace('../../index.php');
-                return;
-            }
+fetch('../app/chequear-sesion.php', { credentials: 'include' })
+    .then(res => res.json())
+    .then(usuario => {
+        if (!usuario.rol) {
+            window.location.replace('../../index.php');
+            return;
+        }
 
-            document.body.classList.add(`rol-${usuario.rol}`);
+        document.body.classList.add(`rol-${usuario.rol}`);
 
-            const nombreCompleto = `${usuario.nombre} ${usuario.apellidos}`;
-            const etiquetaRol = usuario.rol === 'alumno' ? ' (Alumno)' :
-                usuario.rol === 'profesor' ? ' (Profesor)' :
-                    usuario.rol === 'pas' ? ' (PAS)' : '';
+        const nombreCompleto = `${usuario.nombre} ${usuario.apellidos}`;
+        const etiquetaRol = usuario.rol === 'alumno' ? ' (Alumno)' :
+            usuario.rol === 'profesor' ? ' (Profesor)' :
+                usuario.rol === 'pas' ? ' (PAS)' : '';
 
-            const nombreHeader = document.getElementById('nombre-usuario-header');
-            const nombrePopover = document.getElementById('nombre-usuario-popover');
+        const nombreHeader = document.getElementById('nombre-usuario-header');
+        const nombrePopover = document.getElementById('nombre-usuario-popover');
 
-            if (nombreHeader) nombreHeader.textContent = `${etiquetaRol} ${nombreCompleto}`;
-            if (nombrePopover) nombrePopover.textContent = `${etiquetaRol} ${nombreCompleto}`;
+        if (nombreHeader) nombreHeader.textContent = `${etiquetaRol} ${nombreCompleto}`;
+        if (nombrePopover) nombrePopover.textContent = `${etiquetaRol} ${nombreCompleto}`;
 
-            // =======================
-            // Notificaciones
-            // =======================
-            fetch('../../api/data/notificaciones.json')
-                .then(res => res.json())
-                .then(data => {
-                    const notificaciones = data[usuario.correo] || [];
-                    const contenedorPopover = document.getElementById("menu-avisos");
-                    contenedorPopover.innerHTML = "";
+        // =======================
+        // Notificaciones
+        // =======================
+        fetch('../../api/data/notificaciones.json')
+            .then(res => res.json())
+            .then(data => {
+                const notificaciones = data[usuario.correo] || [];
+                const contenedorPopover = document.getElementById("menu-avisos");
+                contenedorPopover.innerHTML = "";
 
-                    if (notificaciones.length === 0) {
-                        contenedorPopover.innerHTML = `<div class="aviso-item"><strong>No tienes notificaciones nuevas</strong></div>`;
-                    } else {
-                        const yaVistas = localStorage.getItem(`notificacionesVistas_${usuario.correo}`) === 'true';
-                        const botonNotificacion = document.querySelector(".boton-notificacion");
-                        if (botonNotificacion && !yaVistas) {
-                            const burbuja = document.createElement("span");
-                            burbuja.classList.add("burbuja-notificacion");
-                            botonNotificacion.appendChild(burbuja);
-                        }
-
-                        notificaciones.sort((a, b) => new Date(b.fecha) - new Date(a.fecha)).forEach(n => {
-                            const aviso = document.createElement("div");
-                            aviso.classList.add("aviso-item");
-                            aviso.innerHTML = `<strong>${n.texto}</strong><div class="fecha-aviso">${n.fecha}</div>`;
-                            contenedorPopover.appendChild(aviso);
-                        });
-                    }
-                });
-
-            // =======================
-            // Mostrar popover avisos
-            // =======================
-            const botonNotificacion = document.querySelector(".boton-notificacion");
-            const menuAvisos = document.getElementById("menu-avisos");
-            botonNotificacion?.addEventListener("click", e => {
-                e.preventDefault();
-                if (menuAvisos.matches(":popover-open")) {
-                    menuAvisos.hidePopover();
+                if (notificaciones.length === 0) {
+                    contenedorPopover.innerHTML = `<div class="aviso-item"><strong>No tienes notificaciones nuevas</strong></div>`;
                 } else {
-                    menuAvisos.showPopover();
+                    const yaVistas = localStorage.getItem(`notificacionesVistas_${usuario.correo}`) === 'true';
+                    const botonNotificacion = document.querySelector(".boton-notificacion");
+                    if (botonNotificacion && !yaVistas) {
+                        const burbuja = document.createElement("span");
+                        burbuja.classList.add("burbuja-notificacion");
+                        botonNotificacion.appendChild(burbuja);
+                    }
+
+                    notificaciones.sort((a, b) => new Date(b.fecha) - new Date(a.fecha)).forEach(n => {
+                        const aviso = document.createElement("div");
+                        aviso.classList.add("aviso-item");
+                        aviso.innerHTML = `<strong>${n.texto}</strong><div class="fecha-aviso">${n.fecha}</div>`;
+                        contenedorPopover.appendChild(aviso);
+                    });
                 }
-                localStorage.setItem(`notificacionesVistas_${usuario.correo}`, 'true');
-                botonNotificacion.querySelector(".burbuja-notificacion")?.remove();
             });
 
-            // =======================
-            // Cierre de sesión
-            // =======================
-            const cerrarSesion = document.getElementById("cerrar-sesion");
-            const popup = document.querySelector(".popup");
-            const confirmar = popup?.querySelector(".popup-confirmar");
-            const cancelar = popup?.querySelector(".popup-cancelar");
+        // =======================
+        // Mostrar popover avisos
+        // =======================
+        const botonNotificacion = document.querySelector(".boton-notificacion");
+        const menuAvisos = document.getElementById("menu-avisos");
+        botonNotificacion?.addEventListener("click", e => {
+            e.preventDefault();
+            if (menuAvisos.matches(":popover-open")) {
+                menuAvisos.hidePopover();
+            } else {
+                menuAvisos.showPopover();
+            }
+            localStorage.setItem(`notificacionesVistas_${usuario.correo}`, 'true');
+            botonNotificacion.querySelector(".burbuja-notificacion")?.remove();
+        });
 
-            cerrarSesion?.addEventListener("click", e => {
-                e.preventDefault();
-                document.getElementById("menu-usuario")?.hidePopover();
-                popup?.classList.add("activo");
-                document.body.classList.add("menu-abierto");
-            });
+        // =======================
+        // Cierre de sesión
+        // =======================
+        const cerrarSesion = document.getElementById("cerrar-sesion");
+        const popup = document.querySelector(".popup");
+        const confirmar = popup?.querySelector(".popup-confirmar");
+        const cancelar = popup?.querySelector(".popup-cancelar");
 
-            confirmar?.addEventListener("click", () => {
-                fetch('../app/logout.php', { credentials: 'include' }).then(() => {
-                    localStorage.removeItem(`notificacionesVistas_${usuario.correo}`);
-                    window.location.replace('../index.php');
-                });
-            });
+        cerrarSesion?.addEventListener("click", e => {
+            e.preventDefault();
+            document.getElementById("menu-usuario")?.hidePopover();
+            popup?.classList.add("activo");
+            document.body.classList.add("menu-abierto");
+        });
 
-            cancelar?.addEventListener("click", () => {
-                popup?.classList.remove("activo");
-                document.body.classList.remove("menu-abierto");
+        confirmar?.addEventListener("click", () => {
+            fetch('../app/logout.php', { credentials: 'include' }).then(() => {
+                localStorage.removeItem(`notificacionesVistas_${usuario.correo}`);
+                window.location.replace('../index.php');
             });
         });
-});
+
+        cancelar?.addEventListener("click", () => {
+            popup?.classList.remove("activo");
+            document.body.classList.remove("menu-abierto");
+        });
+    });
 
 // Refrescar si se vuelve a la página después de cerrar sesión
 window.addEventListener("pageshow", event => {

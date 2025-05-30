@@ -520,6 +520,43 @@ label {
 }
 /* endregion */
 
+.migas-de-pan {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.migas-de-pan ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.migas-de-pan li {
+    border-bottom: none;
+}
+
+.migas-de-pan li::after {
+    content: "›";
+    margin: 0 0.5rem;
+}
+
+.migas-de-pan li:last-child::after {
+    content: "";
+}
+
+.migas-de-pan a {
+    text-decoration: none;
+    color: #0077cc;
+}
+
+.migas-de-pan span {
+    font-weight: bold;
+    color: #444;
+}
+
+
 
 
 

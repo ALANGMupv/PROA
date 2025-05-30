@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Entregas Examen Profesor</title>
+    <!-- Icono pestaña del navegador -->
+    <link rel="icon" href="../icons/gorritoAzul.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/mini-header.css">
@@ -68,10 +71,16 @@ error_reporting(E_ALL);
                     </div>
                 </div> -->
 
-            <a href="examenes-profesor.php" id="btn-volver" class="volver-enlace">← Volver</a>
-
             <section class="panel-contenido fondoPanel">
-            <section class="titulo">
+                <?php
+                $migas = [
+                    ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-profesor.php'],
+                    ['label' => 'Entregas del examen']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
+
+                <section class="titulo">
                 <h1>Entregas del Cuestionario 1</h1>
             </section>
 

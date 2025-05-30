@@ -6,6 +6,9 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Crear Examen Nuevo</title>
+    <!-- Icono pestaña del navegador -->
+    <link rel="icon" href="../icons/gorritoAzul.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/mini-header.css">
@@ -70,10 +73,16 @@ error_reporting(E_ALL);
                     </div>
                 </div> -->
 
-            <a href="#" id="volver" class="volver-enlace" onclick="activarPopPup(this)">← Volver</a>
-
             <!-- SECCIÓN CREAR EXÁMENES PROFESOR -->
             <section class="panel-asignaturas fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-profesor.php'],
+                    ['label' => 'Continuar examen']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
+
 
                 <h2>Panel de creación de examen</h2>
 

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ficha Examen Profesor</title>
+    <!-- Icono pestaña del navegador -->
+    <link rel="icon" href="../icons/gorritoAzul.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/mini-header.css">
@@ -67,9 +70,15 @@ error_reporting(E_ALL);
                     </div>
                 </div> -->
 
-            <a href="#" id="volver" class="volver-enlace" onclick="volverAtras()">← Volver</a>
-
             <section class="panel-contenido fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-profesor.php'],
+                    ['label' => 'Ficha del examen']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
+
                 <div class="descripcion">
 
                     <div class="titulo-con-boton">
