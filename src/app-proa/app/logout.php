@@ -1,6 +1,12 @@
 <?php
-ini_set('session.cookie_path', '/'); // Asegura acceso global a la cookie
+ini_set('session.cookie_path', '/'); // Acceso global
 session_start();
-session_unset();
-session_destroy();
-http_response_code(200); // Respuesta correcta al frontend
+
+// Elimina solo la sesión del usuario PROA
+unset($_SESSION['usuario']);
+unset($_SESSION['rol']);
+
+// Mantenemos usuarioGTI intacto
+// $_SESSION['usuarioGTI'] sigue disponible
+
+http_response_code(200); // Todo OK

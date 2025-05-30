@@ -7,11 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login PROA</title>
     <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="stylesheet" href="./css/mini-header.css">
     <link rel="stylesheet" href="./css/login.css">
     <script src="./js/login.js" defer></script>
 
 </head>
 <body>
+
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+$rutaBase = '';
+include $rutaBase . 'includes/mini-header-proa.inc';
+?>
+
 
 <!-- Contenedor login PROA -->
 <div class="contenedor-login">
@@ -37,7 +47,7 @@
             <div class="grupo-botones">
                 <button type="submit" class="btn-oscuros">Entrar a la Demo</button>
                 <button type="button" class="btn-oscuros-secundario" onclick="window.location.href='../index.php'">
-                    ← Volver a GTI
+                    Volver a GTI
                 </button>
             </div>
 
