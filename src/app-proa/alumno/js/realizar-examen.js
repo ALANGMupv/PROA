@@ -33,12 +33,12 @@ document.getElementById('formulario-examen').addEventListener('submit', function
             if (!label) return;
 
             if (input.value === respuestasCorrectas[clave]) {
-                // ✅ Correcta
+                // Correcta
                 label.classList.add('color-box');
                 label.style.setProperty('--color', 'var(--color-exito)');
                 label.classList.add('boton-opcion-correcta-deshabilitado');
             } else if (input.checked) {
-                // ❌ Incorrecta seleccionada
+                // Incorrecta seleccionada
                 label.classList.add('color-box');
                 label.style.setProperty('--color', 'var(--color-inputError)');
                 label.classList.add('boton-opcion-incorrecta-deshabilitado');

@@ -73,7 +73,6 @@ function renderExamenCorregido(respuestas, notaFinal) {
             <span class="texto">${texto}</span>
           </label>
         `;
-
         }).join("");
 
         if (esCorrecta) puntajeTotal += 2;

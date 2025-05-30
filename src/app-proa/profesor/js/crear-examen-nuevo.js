@@ -21,10 +21,9 @@ function actualizarEstadoValorPreguntas() {
         spanPuntos.textContent = "10";
         suma = 10;
         inputsValor.forEach(input => {
-            input.value = ""
-        })
+            input.value = "";
+        });
     } else {
-        // Sumar todos los valores numéricos de los inputs
         suma = 0;
         inputsValor.forEach(input => {
             const valor = parseFloat(input.value);
@@ -35,6 +34,7 @@ function actualizarEstadoValorPreguntas() {
         spanPuntos.textContent = suma;
     }
 }
+
 function agregarPregunta() {
     contadorPreguntas++;
     const contenedorPreguntas = document.querySelector(".datos");
@@ -45,9 +45,7 @@ function agregarPregunta() {
 
     nuevaPregunta.innerHTML = `
     <div class="titulo-texto-pregunta">
-
       <div class="titulo-pregunta">
-
         <div class="titulo-valor">
           <h4>Pregunta ${contadorPreguntas}</h4>
             <div>
@@ -60,13 +58,11 @@ function agregarPregunta() {
       <textarea name="${idPregunta}" id="${idPregunta}" cols="30" rows="3" class="input-base input-pregunta"
                 placeholder="Escribe la pregunta aquí..." required></textarea>
     </div>
-
     <div class="respuestas-contenedor">
     <span class="recordatorio">NOTA: Recuerda seleccionar la respuesta correcta</span>
       ${generarRespuestaHTML(idPregunta, "a")}
       ${generarRespuestaHTML(idPregunta, "b")}
     </div>
-
     <button class="btn-agregar" onclick="añadirRespuesta(this)">
       <span class="icono-mas">+</span>
       Añadir respuesta
@@ -81,7 +77,7 @@ function generarRespuestaHTML(nombreGrupo, letra) {
     return `
     <div class="respuesta-opcion">
       <div class="radio-grupo">
-        <input type="radio" id="${nombreGrupo}-${letra}" name="${nombreGrupo} required" >
+        <input type="radio" id="${nombreGrupo}-${letra}" name="${nombreGrupo}" required>
         <label for="${nombreGrupo}-${letra}">${letra.toUpperCase()}.</label>
       </div>
       <input type="text" class="input-base input-respuesta" placeholder="Escribe la respuesta aquí..." required>
@@ -114,64 +110,53 @@ function eliminarElemento(elemento) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const formulario = document.getElementById("formulario-examen");
+const formulario = document.getElementById("formulario-examen");
 
-    formulario.addEventListener("submit", function (e) {
-        e.preventDefault(); // Evita que se recargue la página
+formulario.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-        const fechaTexto = formulario.querySelector('#fecha-examen').value; // formato: YYYY-MM-DD
-        const horaTexto = formulario.querySelector('#hora-examen').value;   // formato: HH:MM
+    const fechaTexto = formulario.querySelector('#fecha-examen').value;
+    const horaTexto = formulario.querySelector('#hora-examen').value;
+    const fechaHora = fechaTexto && horaTexto ? `${fechaTexto}T${horaTexto}:00` : null;
 
-        // Combinar fecha y hora en formato ISO 8601 (ej. 2025-05-09T19:40:00)
-        const fechaHora = fechaTexto && horaTexto ? `${fechaTexto}T${horaTexto}:00` : null;
+    const datos = {
+        titulo: formulario.querySelector('#titulo-examen').value,
+        puntos: suma,
+        peso: Number(formulario.querySelector('#peso-examen').value),
+        fecha: fechaHora,
+        preguntas: [],
+    };
 
+    const preguntasDOM = formulario.querySelectorAll(".pregunta-contenedor");
+    preguntasDOM.forEach(p => {
+        const preguntaTexto = p.querySelector("textarea").value;
+        const respuestas = [];
 
-        const datos = {
-            titulo: formulario.querySelector('#titulo-examen').value, // string
-            puntos: suma, // número
-            peso: Number(formulario.querySelector('#peso-examen').value), // número
-            fecha: fechaHora, // string con formato ISO (fecha + hora)
-            preguntas: [],
-        };
+        let valor = p.querySelector(".input-pregunta-valor").value;
+        if (valor === "") {
+            valor = 10 / contadorPreguntas;
+        }
 
-        const preguntasDOM = formulario.querySelectorAll(".pregunta-contenedor");
-        preguntasDOM.forEach(p => {
-            const preguntaTexto = p.querySelector("textarea").value;
-            const respuestas = [];
-
-            let valor = p.querySelector(".input-pregunta-valor").value;
-
-            if(valor === ""){
-                valor = 10/contadorPreguntas;
-            }
-
-
-            p.querySelectorAll(".respuesta-opcion").forEach(r => {
-                const texto = r.querySelector('input[type="text"]').value;
-                const seleccionada = r.querySelector('input[type="radio"]').checked;
-                respuestas.push({ texto, correcta: seleccionada });
-            });
-
-            datos.preguntas.push({
-                pregunta: preguntaTexto,
-                valor: valor,
-                respuestas
-            });
+        p.querySelectorAll(".respuesta-opcion").forEach(r => {
+            const texto = r.querySelector('input[type="text"]').value;
+            const seleccionada = r.querySelector('input[type="radio"]').checked;
+            respuestas.push({ texto, correcta: seleccionada });
         });
 
-        console.log("Examen creado:", datos);
-
-        popupPublicar();
-
+        datos.preguntas.push({
+            pregunta: preguntaTexto,
+            valor: valor,
+            respuestas
+        });
     });
 
-    // Escuchar cambios en el dropdown
-    dropdownValor.addEventListener("change", actualizarEstadoValorPreguntas);
+    console.log("Examen creado:", datos);
 
-    // Ejecutar al inicio para establecer el estado inicial correctamente
-    actualizarEstadoValorPreguntas();
+    popupPublicar();
 });
+
+dropdownValor.addEventListener("change", actualizarEstadoValorPreguntas);
+actualizarEstadoValorPreguntas();
 
 async function popupPublicar() {
     const popup = document.getElementById('popup-publicado');
@@ -185,4 +170,3 @@ function volverAtras() {
         window.history.back();
     }
 }
-

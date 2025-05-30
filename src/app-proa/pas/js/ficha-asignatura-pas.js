@@ -1,7 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const datos = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
-    if (!datos) return;
-
+const datos = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
+if (datos) {
     // Mostrar datos básicos
     document.getElementById("nombre-asignatura").textContent = datos.nombre;
     document.getElementById("codigo-asignatura").textContent = datos.codigo;
@@ -23,26 +21,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Render profesores (titular y colaboradores)
     const profes = [datos.titular, ...(datos.colaboradores || [])];
-
     profes.forEach(nombre => {
         const li = document.createElement("li");
         li.innerHTML = `
-        ${nombre} 
-        <span class="rol-profesor">
-            ${nombre === datos.titular ? " (Responsable)" : " (Colaborador)"}
-        </span>
-    `;
+            ${nombre} 
+            <span class="rol-profesor">
+                ${nombre === datos.titular ? " (Responsable)" : " (Colaborador)"}
+            </span>
+        `;
         listaProfesores.appendChild(li);
     });
 
-
-    // Botón volver
-    document.getElementById("btn-volver").addEventListener("click", (e) => {
-        e.preventDefault();
-        window.history.back();
-    });
-
-    // Buscador alumnos activo por defecto
+    // Buscador alumnos
     const inputBuscar = document.getElementById("input-buscar-alumno");
     inputBuscar.addEventListener("input", () => {
         const texto = inputBuscar.value.toLowerCase();
@@ -51,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Buscador profesores activo por defecto
+    // Buscador profesores
     const inputBuscarProfesor = document.getElementById("input-buscar-profesor");
     inputBuscarProfesor.addEventListener("input", () => {
         const texto = inputBuscarProfesor.value.toLowerCase();
@@ -59,8 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
             li.style.display = li.textContent.toLowerCase().includes(texto) ? "" : "none";
         });
     });
-});
 
+    // Botón volver
+    document.getElementById("btn-volver").addEventListener("click", (e) => {
+        e.preventDefault();
+        window.history.back();
+    });
+}
+
+// Botón asignar alumnos
 const btnAsignarAlumnos = document.getElementById("btn-ir-asignacion-alumnos");
 if (btnAsignarAlumnos) {
     btnAsignarAlumnos.addEventListener("click", () => {
@@ -68,6 +65,7 @@ if (btnAsignarAlumnos) {
     });
 }
 
+// Botón asignar profesores
 const btnAsignarProfesores = document.getElementById("btn-ir-asignacion-profesores");
 if (btnAsignarProfesores) {
     btnAsignarProfesores.addEventListener("click", () => {

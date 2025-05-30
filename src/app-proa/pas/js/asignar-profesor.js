@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
     if (typeof datos === "undefined" || !datos.codigoAsignatura) return;
 
     document.getElementById("titulo-asignacion").textContent = `Asignación Profesores – ${datos.nombre}`;
@@ -176,14 +176,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
     });
-});
 
-function mostrarNotificacion(mensaje, callback = null) {
-    const notif = document.getElementById("notificacion");
-    notif.textContent = mensaje;
-    notif.style.display = "block";
-    setTimeout(() => {
-        notif.style.display = "none";
-        if (callback) callback();
-    }, 2000);
-}
+    function mostrarNotificacion(mensaje, callback = null) {
+        const notif = document.getElementById("notificacion");
+        notif.textContent = mensaje;
+        notif.style.display = "block";
+        setTimeout(() => {
+            notif.style.display = "none";
+            if (callback) callback();
+        }, 2000);
+    }
+})();
