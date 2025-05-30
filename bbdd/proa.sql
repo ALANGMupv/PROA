@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 29-05-2025 a las 11:36:31
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: May 30, 2025 at 02:19 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,7 +35,7 @@ CREATE TABLE `asignacionalumno` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `asignacionalumno`
+-- Dumping data for table `asignacionalumno`
 --
 
 INSERT INTO `asignacionalumno` (`idUsuariosPROA`, `codigoAsignatura`, `idGrupo`, `asignaturaFavorita`) VALUES
@@ -60,7 +60,7 @@ CREATE TABLE `asignaciondocentes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `asignaciondocentes`
+-- Dumping data for table `asignaciondocentes`
 --
 
 INSERT INTO `asignaciondocentes` (`idUsuariosPROA`, `codigoAsignatura`, `responsable`, `asignaturaFavorita`) VALUES
@@ -90,7 +90,7 @@ CREATE TABLE `asignaturas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `asignaturas`
+-- Dumping data for table `asignaturas`
 --
 
 INSERT INTO `asignaturas` (`codigoAsignatura`, `codigoTitulacion`, `nombre`, `creditos`, `idCurso`, `idSemestre`, `idDepartamento`, `idCaracter`) VALUES
@@ -139,7 +139,7 @@ CREATE TABLE `caracteresasignatura` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `caracteresasignatura`
+-- Dumping data for table `caracteresasignatura`
 --
 
 INSERT INTO `caracteresasignatura` (`idCaracter`, `tipoCaracter`) VALUES
@@ -178,6 +178,13 @@ CREATE TABLE `contenidoexamen` (
                                    `duracion` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `contenidoexamen`
+--
+
+INSERT INTO `contenidoexamen` (`idContenido`, `titulo`, `descripcion`, `pesoExamen`, `puntosExamen`, `fechaApertura`, `fechaFin`, `duracion`) VALUES
+    (1, 'Examen Parcial 1', 'Evaluación del primer parcial del curso.', 30, 100, '2025-06-01 08:00:00', '2025-06-01 10:00:00', '00:01:20');
+
 -- --------------------------------------------------------
 
 --
@@ -190,7 +197,7 @@ CREATE TABLE `cursos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `cursos`
+-- Dumping data for table `cursos`
 --
 
 INSERT INTO `cursos` (`idCurso`, `nombreCurso`) VALUES
@@ -211,7 +218,7 @@ CREATE TABLE `departamentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `departamentos`
+-- Dumping data for table `departamentos`
 --
 
 INSERT INTO `departamentos` (`idDepartamento`, `nombreDepartamento`) VALUES
@@ -242,6 +249,16 @@ CREATE TABLE `estadosexamen` (
                                  `nombreEstado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `estadosexamen`
+--
+
+INSERT INTO `estadosexamen` (`idEstado`, `nombreEstado`) VALUES
+                                                             (0, 'abierto'),
+                                                             (1, 'cerrado'),
+                                                             (2, 'pendiente'),
+                                                             (3, 'borrador');
+
 -- --------------------------------------------------------
 
 --
@@ -257,6 +274,15 @@ CREATE TABLE `examenes` (
                             `idUsuariosPROA` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `examenes`
+--
+
+INSERT INTO `examenes` (`idExamen`, `codigoAsignatura`, `idGrupo`, `idContenido`, `idEstado`, `idUsuariosPROA`) VALUES
+                                                                                                                    (1, 'COMM101', 1, 1, 1, 3),
+                                                                                                                    (2, 'MULT203', 1, 1, 1, 3),
+                                                                                                                    (3, 'PROG101', 1, 1, 1, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -269,7 +295,7 @@ CREATE TABLE `grupos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `grupos`
+-- Dumping data for table `grupos`
 --
 
 INSERT INTO `grupos` (`idGrupo`, `nombreGrupo`) VALUES
@@ -403,7 +429,7 @@ CREATE TABLE `semestres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `semestres`
+-- Dumping data for table `semestres`
 --
 
 INSERT INTO `semestres` (`idSemestre`, `nombreSemestre`) VALUES
@@ -422,7 +448,7 @@ CREATE TABLE `titulacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `titulacion`
+-- Dumping data for table `titulacion`
 --
 
 INSERT INTO `titulacion` (`codigoTitulacion`, `nombreTitulacion`) VALUES
@@ -430,7 +456,7 @@ INSERT INTO `titulacion` (`codigoTitulacion`, `nombreTitulacion`) VALUES
                                                                       ('TEL', 'Grado en Ingeniería de Telecomunicaciones');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
@@ -611,7 +637,7 @@ ALTER TABLE `contenidoavisos`
 -- AUTO_INCREMENT for table `contenidoexamen`
 --
 ALTER TABLE `contenidoexamen`
-    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cursos`
@@ -635,13 +661,13 @@ ALTER TABLE `estadosavisos`
 -- AUTO_INCREMENT for table `estadosexamen`
 --
 ALTER TABLE `estadosexamen`
-    MODIFY `idEstado` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idEstado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `examenes`
 --
 ALTER TABLE `examenes`
-    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `grupos`
