@@ -29,11 +29,12 @@ function renderExamenes(data) {
 
     seccion.querySelectorAll(".bloque-examenes").forEach(b => b.remove());
 
-    seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes abiertos", data.realizar, 'abiertos'));
-    seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes cerrados", data.calificados, 'cerrados'));
+    seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes abiertos", data.abiertos, 'abiertos'));
+    seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes cerrados", data.cerrados, 'cerrados'));
     seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes borradores", data.borradores, 'borradores'));
 
 }
+
 
 function crearBloque(titulo, examenes, tipo) {
     if (!examenes || examenes.length === 0) return '';
@@ -43,10 +44,13 @@ function crearBloque(titulo, examenes, tipo) {
     html += `<div class="bloque-examenes">
                 <h3>${titulo}</h3>`;
 
+    console.log(examenes)
+
     examenes.forEach(ex => {
+
         if (tipo === 'abiertos') {
             html += `
-                <div class="item-examen item-examen-realizar" data-titulo="${ex.titulo}">
+                <div class="item-examen item-examen-realizar" data-titulo="${ex.titulo}" data-examen="${ex.id}">
                     <div class="info">
                         <div class="titulo-fecha-envio">
                             <h4>${ex.titulo}</h4>
@@ -65,7 +69,7 @@ function crearBloque(titulo, examenes, tipo) {
                 </div>`;
         } else if (tipo == 'cerrados'){
             html += `
-                <div class="item-examen" data-titulo="${ex.titulo}">
+                <div class="item-examen" data-titulo="${ex.titulo} " data-examen="${ex.id}>
                     <div class="info">
                         <div class="titulo-fecha-envio">
                             <h4>${ex.titulo}</h4>
@@ -82,7 +86,7 @@ function crearBloque(titulo, examenes, tipo) {
                 </div>`;
         }else if (tipo === 'borradores') {
             html += `
-                <div class="item-examen" data-titulo="${ex.titulo}">
+                <div class="item-examen" data-titulo="${ex.titulo}" data-examen="${ex.id}>
                     <div class="info">
                         <h4>${ex.titulo}</h4>
                         <button class="btn-oscuros-secundario btn-visualizar-entregas btn-terminar">Continuar</button>
@@ -116,10 +120,13 @@ document.addEventListener("click", (e) => {
     const item = e.target.closest(".item-examen");
     if (item && item.dataset.titulo) {
         localStorage.setItem("examenSeleccionado", JSON.stringify({
-            titulo: item.dataset.titulo
+            titulo: item.dataset.titulo,
+            examen: item.dataset.examen,
         }));
 
         // Redirige a la ficha del examen
         window.location.href = "ficha-examen-profesor.php";
     }
+
+
 });

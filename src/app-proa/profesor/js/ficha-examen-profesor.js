@@ -1,4 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    const examenSeleccionadoStr = localStorage.getItem('examenSeleccionado');
+    let examenId = null;  // DECLARAR FUERA del if
+
+    if (examenSeleccionadoStr) {
+        const examenSeleccionado = JSON.parse(examenSeleccionadoStr);
+        examenId = examenSeleccionado?.examen;  // ASIGNAR dentro
+    } else {
+        console.error("No se pudo obtener el examen seleccionado del localStorage");
+    }
+
+    console.log(examenId)
+
+    fetch(`../app/obtener-examen.php?examenId=${examenId}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log("Examen ID recibido:", data.examenId);
+            console.log("Examen:", data.examen);
+            console.log("Preguntas:", data.preguntas);
+        })
+        .catch(err => console.error(err));
+
     const correctas = {
         pregunta1: "B",
         pregunta2: "B",
@@ -57,14 +79,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const examenGuardado = JSON.parse(localStorage.getItem("examenModificado")) || {
         titulo: "Parcial Economía",
-        descripcion: "Este cuestionario evalúa los conocimientos adquiridos en los temas fundamentales de Álgebra Matricial...",
         fecha: "2025-05-05",
         hora: "23:59"
     };
 
     // Pintar valores iniciales
     document.getElementById("titulo-examen").textContent = examenGuardado.titulo;
-    document.getElementById("descripcion-examen").textContent = examenGuardado.descripcion;
     document.getElementById("fecha-limite-texto").textContent =
         `Fecha límite para completarlo: ${formatearFecha(examenGuardado.fecha)} a las ${examenGuardado.hora}.`;
 
@@ -99,12 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     btnModificar.addEventListener("click", () => {
         const titulo = document.getElementById("titulo-examen");
-        const descripcion = document.getElementById("descripcion-examen");
         const fechaTexto = document.getElementById("fecha-limite-texto");
 
         // Sustituir por inputs
         titulo.outerHTML = `<input id="titulo-examen" class="input-base" value="${titulo.textContent}" />`;
-        descripcion.outerHTML = `<textarea id="descripcion-examen" class="input-base" rows="4">${descripcion.textContent}</textarea>`;
 
         // Obtener valores actuales
         const fechaPartes = fechaTexto.textContent.match(/(\d{1,2}) de (\w+) de (\d{4}) a las (\d{2}):(\d{2})/);
@@ -130,13 +148,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Guardar
     btnGuardar.addEventListener("click", () => {
         const nuevoTitulo = document.getElementById("titulo-examen").value;
-        const nuevaDescripcion = document.getElementById("descripcion-examen").value;
         const nuevaFecha = document.getElementById("nueva-fecha").value;
         const nuevaHora = document.getElementById("nueva-hora").value;
 
         localStorage.setItem("examenModificado", JSON.stringify({
             titulo: nuevoTitulo,
-            descripcion: nuevaDescripcion,
             fecha: nuevaFecha,
             hora: nuevaHora
         }));
@@ -161,10 +177,6 @@ function convertirAFichaEditable(examen) {
         <input type="text" class="input-base" id="titulo-examen" value="${examen.titulo}" />
     `;
 
-    // Descripción
-    document.getElementById("descripcion-examen").outerHTML = `
-        <textarea id="descripcion-examen" class="input-base" rows="4">${examen.descripcion}</textarea>
-    `;
 
     // Fecha y hora
     const fechaObj = new Date(examen.fechaLimite);

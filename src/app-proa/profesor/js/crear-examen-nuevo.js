@@ -81,7 +81,7 @@ function generarRespuestaHTML(nombreGrupo, letra) {
     return `
     <div class="respuesta-opcion">
       <div class="radio-grupo">
-        <input type="radio" id="${nombreGrupo}-${letra}" name="${nombreGrupo} required" >
+        <input type="radio" id="${nombreGrupo}-${letra}" name="${nombreGrupo}" required >
         <label for="${nombreGrupo}-${letra}">${letra.toUpperCase()}.</label>
       </div>
       <input type="text" class="input-base input-respuesta" placeholder="Escribe la respuesta aquí..." required>
