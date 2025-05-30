@@ -1,6 +1,7 @@
 .fondoPanel{
     overflow: auto;
     max-height: calc(100vh - 80px - 6em);
+    margin-right: unset;
 }
 
 h4{

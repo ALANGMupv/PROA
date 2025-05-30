@@ -117,21 +117,23 @@ function eliminarElemento(elemento) {
 document.addEventListener("DOMContentLoaded", function () {
     const formulario = document.getElementById("formulario-examen");
 
-    formulario.addEventListener("submit", function (e) {
+    formulario.addEventListener("submit", async function (e) {
         e.preventDefault(); // Evita que se recargue la página
 
-        const fechaTexto = formulario.querySelector('#fecha-examen').value; // formato: YYYY-MM-DD
-        const horaTexto = formulario.querySelector('#hora-examen').value;   // formato: HH:MM
+        /*const horaTexto = formulario.querySelector('#hora-examen').value;*/   // formato: HH:MM
 
         // Combinar fecha y hora en formato ISO 8601 (ej. 2025-05-09T19:40:00)
-        const fechaHora = fechaTexto && horaTexto ? `${fechaTexto}T${horaTexto}:00` : null;
-
+        const asignaturaSeleccionada = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
+        const codigo = asignaturaSeleccionada?.codigo;
 
         const datos = {
             titulo: formulario.querySelector('#titulo-examen').value, // string
             puntos: suma, // número
             peso: Number(formulario.querySelector('#peso-examen').value), // número
-            fecha: fechaHora, // string con formato ISO (fecha + hora)
+            fechaApertura: formulario.querySelector('#fecha-apertura-examen').value, // string con formato ISO (fecha + hora)
+            fechaCierre: formulario.querySelector('#fecha-cierre-examen').value,
+            duracion: Number(formulario.querySelector('#duracion-examen').value),
+            codigo: codigo,
             preguntas: [],
         };
 
@@ -150,19 +152,62 @@ document.addEventListener("DOMContentLoaded", function () {
             p.querySelectorAll(".respuesta-opcion").forEach(r => {
                 const texto = r.querySelector('input[type="text"]').value;
                 const seleccionada = r.querySelector('input[type="radio"]').checked;
-                respuestas.push({ texto, correcta: seleccionada });
+                respuestas.push({ texto: texto, correcta: seleccionada });
             });
 
             datos.preguntas.push({
                 pregunta: preguntaTexto,
                 valor: valor,
-                respuestas
+                respuestas: respuestas,
             });
         });
 
-        console.log("Examen creado:", datos);
+        console.log(datos);
 
-        popupPublicar();
+        const formData = new FormData();
+
+        // Asegúrate de poner los mismos `name` que espera el PHP:
+        formData.append('titulo', datos.titulo);
+        formData.append('fechaApertura', datos.fechaApertura);
+        formData.append('fechaCierre', datos.fechaCierre);
+        formData.append('duracion', datos.duracion);
+        formData.append('peso', datos.peso);
+        formData.append('puntos', datos.puntos);
+        formData.append('codigo', codigo);
+
+        // Para preguntas (como es un array de objetos, conviene pasarlo como JSON stringificado)
+        formData.append('preguntas', JSON.stringify(datos.preguntas));
+
+        try {
+            const respuesta = await fetch("../app/procesar-examen.php", {
+                method: "POST",
+                body: formData
+            });
+
+            const contentType = respuesta.headers.get("content-type") || "";
+            console.log("Tipo de respuesta:", contentType);
+
+            if (contentType.includes("application/json")) {
+                const resultado = await respuesta.json();
+                console.log("Respuesta del servidor (JSON):", resultado);
+
+                if (resultado.success) {
+                    popupPublicar();
+                } else {
+                    alert("Error al guardar el examen.");
+                }
+            } else {
+                const texto = await respuesta.text();
+                console.warn("Respuesta NO JSON:", texto);
+                alert("Error inesperado. Mira la consola para más detalles.");
+            }
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+        }
+
+
+
+        //popupPublicar();
 
     });
 

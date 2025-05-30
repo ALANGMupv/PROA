@@ -14,7 +14,7 @@
   <script src="../js/header-proa.js" defer></script>
     <script src="../js/mini-header.js" defer></script>
   <script src="../js/asignaturas.js" defer></script>
-  <script src="js/examenes-profesor.js"></script>
+  <script src="js/examenes-profesor.js" defer></script>
 </head>
 <body>
 
@@ -68,6 +68,8 @@ error_reporting(E_ALL);
                 </div> -->
 
       <section class="panel-contenido fondoPanel"> <!-- Panel donde se mostrará el contenido según la opción elegida -->
+          <button class="btn-oscuros" id="btn-crear" onclick="redireccionarPagina()">Crear examen</button>
+
       </section>
 
     </div>

@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `proa`
+-- Database: `proa`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `asignacionalumno`
+-- Table structure for table `asignacionalumno`
 --
 
 CREATE TABLE `asignacionalumno` (
@@ -35,7 +35,7 @@ CREATE TABLE `asignacionalumno` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `asignacionalumno`
+-- Dumping data for table `asignacionalumno`
 --
 
 INSERT INTO `asignacionalumno` (`idUsuariosPROA`, `codigoAsignatura`, `idGrupo`, `asignaturaFavorita`) VALUES
@@ -58,7 +58,7 @@ INSERT INTO `asignacionalumno` (`idUsuariosPROA`, `codigoAsignatura`, `idGrupo`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `asignaciondocentes`
+-- Table structure for table `asignaciondocentes`
 --
 
 CREATE TABLE `asignaciondocentes` (
@@ -69,7 +69,7 @@ CREATE TABLE `asignaciondocentes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `asignaciondocentes`
+-- Dumping data for table `asignaciondocentes`
 --
 
 INSERT INTO `asignaciondocentes` (`idUsuariosPROA`, `codigoAsignatura`, `responsable`, `asignaturaFavorita`) VALUES
@@ -85,7 +85,7 @@ INSERT INTO `asignaciondocentes` (`idUsuariosPROA`, `codigoAsignatura`, `respons
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `asignaturas`
+-- Table structure for table `asignaturas`
 --
 
 CREATE TABLE `asignaturas` (
@@ -100,7 +100,7 @@ CREATE TABLE `asignaturas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `asignaturas`
+-- Dumping data for table `asignaturas`
 --
 
 INSERT INTO `asignaturas` (`codigoAsignatura`, `codigoTitulacion`, `nombre`, `creditos`, `idCurso`, `idSemestre`, `idDepartamento`, `idCaracter`) VALUES
@@ -116,7 +116,7 @@ INSERT INTO `asignaturas` (`codigoAsignatura`, `codigoTitulacion`, `nombre`, `cr
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `avisos`
+-- Table structure for table `avisos`
 --
 
 CREATE TABLE `avisos` (
@@ -129,7 +129,7 @@ CREATE TABLE `avisos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `calificaciones`
+-- Table structure for table `calificaciones`
 --
 
 CREATE TABLE `calificaciones` (
@@ -148,7 +148,7 @@ INSERT INTO `calificaciones` (`idExamen`, `idUsuariosPROA`, `notaExamenAlumno`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `caracteresasignatura`
+-- Table structure for table `caracteresasignatura`
 --
 
 CREATE TABLE `caracteresasignatura` (
@@ -157,7 +157,7 @@ CREATE TABLE `caracteresasignatura` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `caracteresasignatura`
+-- Dumping data for table `caracteresasignatura`
 --
 
 INSERT INTO `caracteresasignatura` (`idCaracter`, `tipoCaracter`) VALUES
@@ -170,7 +170,7 @@ INSERT INTO `caracteresasignatura` (`idCaracter`, `tipoCaracter`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `contenidoavisos`
+-- Table structure for table `contenidoavisos`
 --
 
 CREATE TABLE `contenidoavisos` (
@@ -182,13 +182,12 @@ CREATE TABLE `contenidoavisos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `contenidoexamen`
+-- Table structure for table `contenidoexamen`
 --
 
 CREATE TABLE `contenidoexamen` (
                                    `idContenido` int(11) NOT NULL,
                                    `titulo` varchar(255) NOT NULL,
-                                   `descripcion` text DEFAULT NULL,
                                    `pesoExamen` tinyint(3) NOT NULL,
                                    `puntosExamen` tinyint(3) NOT NULL,
                                    `fechaApertura` datetime NOT NULL,
@@ -206,7 +205,7 @@ INSERT INTO `contenidoexamen` (`idContenido`, `titulo`, `descripcion`, `pesoExam
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cursos`
+-- Table structure for table `cursos`
 --
 
 CREATE TABLE `cursos` (
@@ -215,7 +214,7 @@ CREATE TABLE `cursos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `cursos`
+-- Dumping data for table `cursos`
 --
 
 INSERT INTO `cursos` (`idCurso`, `nombreCurso`) VALUES
@@ -227,7 +226,7 @@ INSERT INTO `cursos` (`idCurso`, `nombreCurso`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `departamentos`
+-- Table structure for table `departamentos`
 --
 
 CREATE TABLE `departamentos` (
@@ -236,7 +235,7 @@ CREATE TABLE `departamentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `departamentos`
+-- Dumping data for table `departamentos`
 --
 
 INSERT INTO `departamentos` (`idDepartamento`, `nombreDepartamento`) VALUES
@@ -248,7 +247,7 @@ INSERT INTO `departamentos` (`idDepartamento`, `nombreDepartamento`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estadosavisos`
+-- Table structure for table `estadosavisos`
 --
 
 CREATE TABLE `estadosavisos` (
@@ -259,7 +258,7 @@ CREATE TABLE `estadosavisos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estadosexamen`
+-- Table structure for table `estadosexamen`
 --
 
 CREATE TABLE `estadosexamen` (
@@ -282,7 +281,7 @@ INSERT INTO `estadosexamen` (`idEstado`, `nombreEstado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `examenes`
+-- Table structure for table `examenes`
 --
 
 CREATE TABLE `examenes` (
@@ -304,7 +303,7 @@ INSERT INTO `examenes` (`idExamen`, `codigoAsignatura`, `idGrupo`, `idContenido`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `grupos`
+-- Table structure for table `grupos`
 --
 
 CREATE TABLE `grupos` (
@@ -313,7 +312,7 @@ CREATE TABLE `grupos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `grupos`
+-- Dumping data for table `grupos`
 --
 
 INSERT INTO `grupos` (`idGrupo`, `nombreGrupo`) VALUES
@@ -323,7 +322,20 @@ INSERT INTO `grupos` (`idGrupo`, `nombreGrupo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `personarol`
+-- Table structure for table `opcionespregunta`
+--
+
+CREATE TABLE `opcionespregunta` (
+                                    `idOpcion` int(11) NOT NULL,
+                                    `idPregunta` int(11) NOT NULL,
+                                    `textoOpcion` text NOT NULL,
+                                    `esCorrecta` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personarol`
 --
 
 CREATE TABLE `personarol` (
@@ -332,7 +344,7 @@ CREATE TABLE `personarol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `personarol`
+-- Dumping data for table `personarol`
 --
 
 INSERT INTO `personarol` (`idUsuariosPROA`, `idRol`) VALUES
@@ -355,7 +367,7 @@ INSERT INTO `personarol` (`idUsuariosPROA`, `idRol`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `personas`
+-- Table structure for table `personas`
 --
 
 CREATE TABLE `personas` (
@@ -369,7 +381,7 @@ CREATE TABLE `personas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `personas`
+-- Dumping data for table `personas`
 --
 
 INSERT INTO `personas` (`idUsuariosPROA`, `idUsuariosGTI`, `email`, `nombre`, `apellidos`, `contraseña`, `dni`) VALUES
@@ -392,12 +404,11 @@ INSERT INTO `personas` (`idUsuariosPROA`, `idUsuariosGTI`, `email`, `nombre`, `a
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `preguntasexamen`
+-- Table structure for table `preguntasexamen`
 --
 
 CREATE TABLE `preguntasexamen` (
                                    `idPregunta` int(11) NOT NULL,
-                                   `idRespuesta` int(11) DEFAULT NULL,
                                    `enunciado` text NOT NULL,
                                    `valorPregunta` tinyint(3) NOT NULL,
                                    `idContenido` int(11) DEFAULT NULL
@@ -414,7 +425,7 @@ INSERT INTO `preguntasexamen` (`idPregunta`, `idRespuesta`, `enunciado`, `valorP
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `respuestasexamen`
+-- Table structure for table `respuestasexamen`
 --
 
 CREATE TABLE `respuestasexamen` (
@@ -440,7 +451,7 @@ INSERT INTO `respuestasexamen` (`idRespuesta`, `respuesta`, `valorRespuesta`) VA
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -449,7 +460,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`idRol`, `nombreRol`) VALUES
@@ -460,7 +471,7 @@ INSERT INTO `roles` (`idRol`, `nombreRol`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `semestres`
+-- Table structure for table `semestres`
 --
 
 CREATE TABLE `semestres` (
@@ -469,7 +480,7 @@ CREATE TABLE `semestres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `semestres`
+-- Dumping data for table `semestres`
 --
 
 INSERT INTO `semestres` (`idSemestre`, `nombreSemestre`) VALUES
@@ -479,7 +490,7 @@ INSERT INTO `semestres` (`idSemestre`, `nombreSemestre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `titulacion`
+-- Table structure for table `titulacion`
 --
 
 CREATE TABLE `titulacion` (
@@ -488,7 +499,7 @@ CREATE TABLE `titulacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `titulacion`
+-- Dumping data for table `titulacion`
 --
 
 INSERT INTO `titulacion` (`codigoTitulacion`, `nombreTitulacion`) VALUES
@@ -496,11 +507,11 @@ INSERT INTO `titulacion` (`codigoTitulacion`, `nombreTitulacion`) VALUES
                                                                       ('TEL', 'Grado en Ingeniería de Telecomunicaciones');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `asignacionalumno`
+-- Indexes for table `asignacionalumno`
 --
 ALTER TABLE `asignacionalumno`
     ADD PRIMARY KEY (`idUsuariosPROA`,`codigoAsignatura`),
@@ -508,14 +519,14 @@ ALTER TABLE `asignacionalumno`
   ADD KEY `idGrupo` (`idGrupo`);
 
 --
--- Indices de la tabla `asignaciondocentes`
+-- Indexes for table `asignaciondocentes`
 --
 ALTER TABLE `asignaciondocentes`
     ADD PRIMARY KEY (`idUsuariosPROA`,`codigoAsignatura`),
   ADD KEY `codigoAsignatura` (`codigoAsignatura`);
 
 --
--- Indices de la tabla `asignaturas`
+-- Indexes for table `asignaturas`
 --
 ALTER TABLE `asignaturas`
     ADD PRIMARY KEY (`codigoAsignatura`),
@@ -526,7 +537,7 @@ ALTER TABLE `asignaturas`
   ADD KEY `idCaracter` (`idCaracter`);
 
 --
--- Indices de la tabla `avisos`
+-- Indexes for table `avisos`
 --
 ALTER TABLE `avisos`
     ADD PRIMARY KEY (`idAviso`),
@@ -535,56 +546,56 @@ ALTER TABLE `avisos`
   ADD KEY `idEstadoAvisos` (`idEstadoAvisos`);
 
 --
--- Indices de la tabla `calificaciones`
+-- Indexes for table `calificaciones`
 --
 ALTER TABLE `calificaciones`
     ADD PRIMARY KEY (`idExamen`,`idUsuariosPROA`),
   ADD KEY `idUsuariosPROA` (`idUsuariosPROA`);
 
 --
--- Indices de la tabla `caracteresasignatura`
+-- Indexes for table `caracteresasignatura`
 --
 ALTER TABLE `caracteresasignatura`
     ADD PRIMARY KEY (`idCaracter`);
 
 --
--- Indices de la tabla `contenidoavisos`
+-- Indexes for table `contenidoavisos`
 --
 ALTER TABLE `contenidoavisos`
     ADD PRIMARY KEY (`idContenidoAvisos`);
 
 --
--- Indices de la tabla `contenidoexamen`
+-- Indexes for table `contenidoexamen`
 --
 ALTER TABLE `contenidoexamen`
     ADD PRIMARY KEY (`idContenido`);
 
 --
--- Indices de la tabla `cursos`
+-- Indexes for table `cursos`
 --
 ALTER TABLE `cursos`
     ADD PRIMARY KEY (`idCurso`);
 
 --
--- Indices de la tabla `departamentos`
+-- Indexes for table `departamentos`
 --
 ALTER TABLE `departamentos`
     ADD PRIMARY KEY (`idDepartamento`);
 
 --
--- Indices de la tabla `estadosavisos`
+-- Indexes for table `estadosavisos`
 --
 ALTER TABLE `estadosavisos`
     ADD PRIMARY KEY (`idEstadoAvisos`);
 
 --
--- Indices de la tabla `estadosexamen`
+-- Indexes for table `estadosexamen`
 --
 ALTER TABLE `estadosexamen`
     ADD PRIMARY KEY (`idEstado`);
 
 --
--- Indices de la tabla `examenes`
+-- Indexes for table `examenes`
 --
 ALTER TABLE `examenes`
     ADD PRIMARY KEY (`idExamen`),
@@ -595,156 +606,168 @@ ALTER TABLE `examenes`
   ADD KEY `idUsuariosPROA` (`idUsuariosPROA`);
 
 --
--- Indices de la tabla `grupos`
+-- Indexes for table `grupos`
 --
 ALTER TABLE `grupos`
     ADD PRIMARY KEY (`idGrupo`);
 
 --
--- Indices de la tabla `personarol`
+-- Indexes for table `opcionespregunta`
+--
+ALTER TABLE `opcionespregunta`
+    ADD PRIMARY KEY (`idOpcion`),
+  ADD KEY `idPregunta` (`idPregunta`);
+
+--
+-- Indexes for table `personarol`
 --
 ALTER TABLE `personarol`
     ADD PRIMARY KEY (`idUsuariosPROA`,`idRol`),
   ADD KEY `idRol` (`idRol`);
 
 --
--- Indices de la tabla `personas`
+-- Indexes for table `personas`
 --
 ALTER TABLE `personas`
     ADD PRIMARY KEY (`idUsuariosPROA`);
 
 --
--- Indices de la tabla `preguntasexamen`
+-- Indexes for table `preguntasexamen`
 --
 ALTER TABLE `preguntasexamen`
     ADD PRIMARY KEY (`idPregunta`),
-  ADD KEY `idRespuesta` (`idRespuesta`),
   ADD KEY `idContenido` (`idContenido`);
 
 --
--- Indices de la tabla `respuestasexamen`
+-- Indexes for table `respuestasexamen`
 --
 ALTER TABLE `respuestasexamen`
     ADD PRIMARY KEY (`idRespuesta`);
 
 --
--- Indices de la tabla `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
     ADD PRIMARY KEY (`idRol`);
 
 --
--- Indices de la tabla `semestres`
+-- Indexes for table `semestres`
 --
 ALTER TABLE `semestres`
     ADD PRIMARY KEY (`idSemestre`);
 
 --
--- Indices de la tabla `titulacion`
+-- Indexes for table `titulacion`
 --
 ALTER TABLE `titulacion`
     ADD PRIMARY KEY (`codigoTitulacion`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `avisos`
+-- AUTO_INCREMENT for table `avisos`
 --
 ALTER TABLE `avisos`
     MODIFY `idAviso` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `caracteresasignatura`
+-- AUTO_INCREMENT for table `caracteresasignatura`
 --
 ALTER TABLE `caracteresasignatura`
     MODIFY `idCaracter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `contenidoavisos`
+-- AUTO_INCREMENT for table `contenidoavisos`
 --
 ALTER TABLE `contenidoavisos`
     MODIFY `idContenidoAvisos` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `contenidoexamen`
+-- AUTO_INCREMENT for table `contenidoexamen`
 --
 ALTER TABLE `contenidoexamen`
     MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `cursos`
+-- AUTO_INCREMENT for table `cursos`
 --
 ALTER TABLE `cursos`
     MODIFY `idCurso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `departamentos`
+-- AUTO_INCREMENT for table `departamentos`
 --
 ALTER TABLE `departamentos`
     MODIFY `idDepartamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `estadosavisos`
+-- AUTO_INCREMENT for table `estadosavisos`
 --
 ALTER TABLE `estadosavisos`
     MODIFY `idEstadoAvisos` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `estadosexamen`
+-- AUTO_INCREMENT for table `estadosexamen`
 --
 ALTER TABLE `estadosexamen`
     MODIFY `idEstado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
--- AUTO_INCREMENT de la tabla `examenes`
+-- AUTO_INCREMENT for table `examenes`
 --
 ALTER TABLE `examenes`
     MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `grupos`
+-- AUTO_INCREMENT for table `grupos`
 --
 ALTER TABLE `grupos`
     MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `personas`
+-- AUTO_INCREMENT for table `opcionespregunta`
+--
+ALTER TABLE `opcionespregunta`
+    MODIFY `idOpcion` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `personas`
 --
 ALTER TABLE `personas`
     MODIFY `idUsuariosPROA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT de la tabla `preguntasexamen`
+-- AUTO_INCREMENT for table `preguntasexamen`
 --
 ALTER TABLE `preguntasexamen`
     MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `respuestasexamen`
+-- AUTO_INCREMENT for table `respuestasexamen`
 --
 ALTER TABLE `respuestasexamen`
     MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
     MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `semestres`
+-- AUTO_INCREMENT for table `semestres`
 --
 ALTER TABLE `semestres`
     MODIFY `idSemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `asignacionalumno`
+-- Constraints for table `asignacionalumno`
 --
 ALTER TABLE `asignacionalumno`
     ADD CONSTRAINT `asignacionalumno_ibfk_1` FOREIGN KEY (`idUsuariosPROA`) REFERENCES `personas` (`idUsuariosPROA`),
@@ -752,14 +775,14 @@ ALTER TABLE `asignacionalumno`
   ADD CONSTRAINT `asignacionalumno_ibfk_3` FOREIGN KEY (`idGrupo`) REFERENCES `grupos` (`idGrupo`);
 
 --
--- Filtros para la tabla `asignaciondocentes`
+-- Constraints for table `asignaciondocentes`
 --
 ALTER TABLE `asignaciondocentes`
     ADD CONSTRAINT `asignaciondocentes_ibfk_1` FOREIGN KEY (`idUsuariosPROA`) REFERENCES `personas` (`idUsuariosPROA`),
   ADD CONSTRAINT `asignaciondocentes_ibfk_2` FOREIGN KEY (`codigoAsignatura`) REFERENCES `asignaturas` (`codigoAsignatura`);
 
 --
--- Filtros para la tabla `asignaturas`
+-- Constraints for table `asignaturas`
 --
 ALTER TABLE `asignaturas`
     ADD CONSTRAINT `asignaturas_ibfk_1` FOREIGN KEY (`codigoTitulacion`) REFERENCES `titulacion` (`codigoTitulacion`),
@@ -769,7 +792,7 @@ ALTER TABLE `asignaturas`
   ADD CONSTRAINT `asignaturas_ibfk_5` FOREIGN KEY (`idCaracter`) REFERENCES `caracteresasignatura` (`idCaracter`);
 
 --
--- Filtros para la tabla `avisos`
+-- Constraints for table `avisos`
 --
 ALTER TABLE `avisos`
     ADD CONSTRAINT `avisos_ibfk_1` FOREIGN KEY (`idContenidoAvisos`) REFERENCES `contenidoavisos` (`idContenidoAvisos`),
@@ -777,14 +800,14 @@ ALTER TABLE `avisos`
   ADD CONSTRAINT `avisos_ibfk_3` FOREIGN KEY (`idEstadoAvisos`) REFERENCES `estadosavisos` (`idEstadoAvisos`);
 
 --
--- Filtros para la tabla `calificaciones`
+-- Constraints for table `calificaciones`
 --
 ALTER TABLE `calificaciones`
     ADD CONSTRAINT `calificaciones_ibfk_1` FOREIGN KEY (`idExamen`) REFERENCES `examenes` (`idExamen`),
   ADD CONSTRAINT `calificaciones_ibfk_2` FOREIGN KEY (`idUsuariosPROA`) REFERENCES `personas` (`idUsuariosPROA`);
 
 --
--- Filtros para la tabla `examenes`
+-- Constraints for table `examenes`
 --
 ALTER TABLE `examenes`
     ADD CONSTRAINT `examenes_ibfk_1` FOREIGN KEY (`codigoAsignatura`) REFERENCES `asignaturas` (`codigoAsignatura`),
@@ -794,18 +817,23 @@ ALTER TABLE `examenes`
   ADD CONSTRAINT `examenes_ibfk_5` FOREIGN KEY (`idUsuariosPROA`) REFERENCES `personas` (`idUsuariosPROA`);
 
 --
--- Filtros para la tabla `personarol`
+-- Constraints for table `opcionespregunta`
+--
+ALTER TABLE `opcionespregunta`
+    ADD CONSTRAINT `opcionespregunta_ibfk_1` FOREIGN KEY (`idPregunta`) REFERENCES `preguntasexamen` (`idPregunta`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `personarol`
 --
 ALTER TABLE `personarol`
     ADD CONSTRAINT `personarol_ibfk_1` FOREIGN KEY (`idUsuariosPROA`) REFERENCES `personas` (`idUsuariosPROA`),
   ADD CONSTRAINT `personarol_ibfk_2` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`);
 
 --
--- Filtros para la tabla `preguntasexamen`
+-- Constraints for table `preguntasexamen`
 --
 ALTER TABLE `preguntasexamen`
-    ADD CONSTRAINT `preguntasexamen_ibfk_1` FOREIGN KEY (`idRespuesta`) REFERENCES `respuestasexamen` (`idRespuesta`),
-  ADD CONSTRAINT `preguntasexamen_ibfk_2` FOREIGN KEY (`idContenido`) REFERENCES `contenidoexamen` (`idContenido`);
+    ADD CONSTRAINT `preguntasexamen_ibfk_2` FOREIGN KEY (`idContenido`) REFERENCES `contenidoexamen` (`idContenido`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
