@@ -1,3 +1,13 @@
+<?php
+// Aquí obtienes la asignatura seleccionada para el alumno desde PHP
+// Supongamos que tienes un array $asignaturaSeleccionada que contiene los datos de la asignatura
+// Este array lo pasas al HTML usando json_encode para que JS pueda acceder a él
+$asignaturaSeleccionada = [
+    'codigo' => 'PROG101',
+    'nombre' => 'Programación de videojuegos'
+];
+?>
+
 <!doctype html>
 <html lang="es">
 <head>
@@ -20,7 +30,7 @@
 
 <?php
 $rutaBase = '../';
-include $rutaBase . 'includes/header-proa.inc';;
+include $rutaBase . 'includes/header-proa.inc';
 include $rutaBase . 'includes/mini-header-proa.inc';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -45,11 +55,14 @@ error_reporting(E_ALL);
 
             <!-- Contenedor del contenido que se muestra según la opción seleccionada en el submenú -->
             <section class="fondoPanel">
-                <!--aqui carga dinámicamente los exámenes desde el json-->
+                <!-- Aquí se carga dinámicamente los exámenes desde el JSON -->
             </section>
         </div>
     </div>
 </main>
+
+<!-- Este div se inserta aquí para que tu script JS lo pueda acceder -->
+<div id="asignaturaSeleccionada" data-asignatura='<?php echo json_encode($asignaturaSeleccionada); ?>'></div>
 
 </body>
 </html>
