@@ -7,6 +7,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Asignación de Alumnos</title>
+    <!-- Icono pestaña del navegador -->
+    <link rel="icon" href="../icons/gorritoAzul.svg" type="image/svg+xml">
+
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/header-proa.css">
     <link rel="stylesheet" href="../css/mini-header.css">
@@ -14,7 +17,6 @@
     <link rel="stylesheet" href="css/asignacion.css">
 
     <?php
-    session_start();
     if (!isset($_SESSION['asignaturaSeleccionada'])) {
         echo "<script>window.location.href = 'asignaturas.php';</script>";
         exit;
