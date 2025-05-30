@@ -1,7 +1,5 @@
 <?php
-// Aquí obtienes la asignatura seleccionada para el alumno desde PHP
-// Supongamos que tienes un array $asignaturaSeleccionada que contiene los datos de la asignatura
-// Este array lo pasas al HTML usando json_encode para que JS pueda acceder a él
+// TEMPORAL
 $asignaturaSeleccionada = [
     'codigo' => 'PROG101',
     'nombre' => 'Programación de videojuegos'
