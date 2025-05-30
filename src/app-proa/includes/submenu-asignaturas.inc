@@ -1,6 +1,5 @@
 <!-- Submenú de asignatura (único para alumno y profesor) -->
 <?php
-session_start();
 $usuario = $_SESSION['usuario'] ?? null;
 $rol = $usuario['rol'] ?? '';
 $esAlumno = $rol === 'alumno';

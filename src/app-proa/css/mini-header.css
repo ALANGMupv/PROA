@@ -1,0 +1,34 @@
+.mini-header-proa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background-color: #e6f0ff;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-family: var(--fuente-lato, sans-serif);
+    border-bottom: 1px solid #ccc;
+    flex-wrap: wrap; /* Por si se rompe en pantallas pequeñas */
+}
+
+.form-mini-header {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+}
+
+.btn-header-rol {
+    background-color: #ffffff;
+    border: 1px solid var(--color-primario);
+    color: var(--color-primario);
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-header-rol:hover {
+    background-color: var(--color-primario);
+    color: white;
+}
