@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-05-2025 a las 11:36:31
+-- Tiempo de generación: 30-05-2025 a las 03:11:52
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -39,12 +39,21 @@ CREATE TABLE `asignacionalumno` (
 --
 
 INSERT INTO `asignacionalumno` (`idUsuariosPROA`, `codigoAsignatura`, `idGrupo`, `asignaturaFavorita`) VALUES
+                                                                                                           (1, 'COMM101', NULL, 0),
+                                                                                                           (1, 'DIU666', NULL, 0),
                                                                                                            (1, 'PROG101', 1, 1),
-                                                                                                           (1, 'SOUND204', 1, 0),
+                                                                                                           (1, 'SOUND204', NULL, 0),
                                                                                                            (1, 'UIUX102', 1, 0),
-                                                                                                           (2, 'MULT203', 2, 1),
-                                                                                                           (2, 'PROG101', 2, 0),
-                                                                                                           (2, 'TFG401', 2, 1);
+                                                                                                           (2, 'COMM101', NULL, 0),
+                                                                                                           (2, 'MULT203', NULL, 0),
+                                                                                                           (2, 'PROG101', 2, 1),
+                                                                                                           (2, 'SIGS301', NULL, 0),
+                                                                                                           (2, 'SOUND204', NULL, 0),
+                                                                                                           (2, 'TFG401', 2, 1),
+                                                                                                           (7, 'COMM101', NULL, 0),
+                                                                                                           (7, 'SOUND204', NULL, 0),
+                                                                                                           (10, 'COMM101', NULL, 0),
+                                                                                                           (13, 'COMM101', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -64,11 +73,12 @@ CREATE TABLE `asignaciondocentes` (
 --
 
 INSERT INTO `asignaciondocentes` (`idUsuariosPROA`, `codigoAsignatura`, `responsable`, `asignaturaFavorita`) VALUES
-                                                                                                                 (3, 'COMM101', 1, 0),
-                                                                                                                 (3, 'MULT203', 1, 0),
+                                                                                                                 (3, 'COMM101', 1, 1),
+                                                                                                                 (3, 'MULT203', 1, NULL),
                                                                                                                  (3, 'PROG101', 1, 1),
-                                                                                                                 (3, 'TFG401', 1, 0),
-                                                                                                                 (4, 'SIGS301', 1, 1),
+                                                                                                                 (3, 'SIGS301', 0, NULL),
+                                                                                                                 (3, 'TFG401', 0, 0),
+                                                                                                                 (4, 'SIGS301', 1, NULL),
                                                                                                                  (4, 'SOUND204', 0, 0),
                                                                                                                  (4, 'UIUX102', 0, 0);
 
@@ -95,6 +105,7 @@ CREATE TABLE `asignaturas` (
 
 INSERT INTO `asignaturas` (`codigoAsignatura`, `codigoTitulacion`, `nombre`, `creditos`, `idCurso`, `idSemestre`, `idDepartamento`, `idCaracter`) VALUES
                                                                                                                                                       ('COMM101', 'TEL', 'Fundamentos de comunicaciones', 6, 1, 1, 4, 1),
+                                                                                                                                                      ('DIU666', 'GTI', 'Diseño de Interfaces', 6, NULL, 2, 2, 1),
                                                                                                                                                       ('MULT203', 'GTI', 'Sistemas multimedia', 6, 2, 1, 1, 2),
                                                                                                                                                       ('PROG101', 'GTI', 'Programación de videojuegos', 6, 1, 1, 1, 1),
                                                                                                                                                       ('SIGS301', 'TEL', 'Procesado de señal', 6, 3, 1, 4, 2),
@@ -126,6 +137,13 @@ CREATE TABLE `calificaciones` (
                                   `idUsuariosPROA` int(11) NOT NULL,
                                   `notaExamenAlumno` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `calificaciones`
+--
+
+INSERT INTO `calificaciones` (`idExamen`, `idUsuariosPROA`, `notaExamenAlumno`) VALUES
+    (1, 1, 8);
 
 -- --------------------------------------------------------
 
@@ -177,6 +195,13 @@ CREATE TABLE `contenidoexamen` (
                                    `fechaFin` datetime NOT NULL,
                                    `duracion` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `contenidoexamen`
+--
+
+INSERT INTO `contenidoexamen` (`idContenido`, `titulo`, `descripcion`, `pesoExamen`, `puntosExamen`, `fechaApertura`, `fechaFin`, `duracion`) VALUES
+    (1, 'Examen Final de Programación', 'Contenidos de programación avanzada en videojuegos', 30, 10, '2025-05-30 00:15:46', '2025-06-06 00:15:46', '01:30:00');
 
 -- --------------------------------------------------------
 
@@ -242,6 +267,18 @@ CREATE TABLE `estadosexamen` (
                                  `nombreEstado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `estadosexamen`
+--
+
+INSERT INTO `estadosexamen` (`idEstado`, `nombreEstado`) VALUES
+                                                             (1, 'Por realizar'),
+                                                             (2, 'En revisión'),
+                                                             (3, 'Calificado'),
+                                                             (4, 'Abierto'),
+                                                             (5, 'Cerrado'),
+                                                             (6, 'Borrador');
+
 -- --------------------------------------------------------
 
 --
@@ -256,6 +293,13 @@ CREATE TABLE `examenes` (
                             `idEstado` int(11) DEFAULT NULL,
                             `idUsuariosPROA` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `examenes`
+--
+
+INSERT INTO `examenes` (`idExamen`, `codigoAsignatura`, `idGrupo`, `idContenido`, `idEstado`, `idUsuariosPROA`) VALUES
+    (1, 'PROG101', 1, 1, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -300,7 +344,13 @@ INSERT INTO `personarol` (`idUsuariosPROA`, `idRol`) VALUES
                                                          (6, 3),
                                                          (7, 1),
                                                          (8, 2),
-                                                         (9, 3);
+                                                         (9, 3),
+                                                         (10, 1),
+                                                         (11, 2),
+                                                         (12, 3),
+                                                         (13, 1),
+                                                         (14, 2),
+                                                         (15, 3);
 
 -- --------------------------------------------------------
 
@@ -331,7 +381,13 @@ INSERT INTO `personas` (`idUsuariosPROA`, `idUsuariosGTI`, `email`, `nombre`, `a
                                                                                                                     (6, 2, 'b.maltho@upv.es', 'Brooke', 'Malimoe Thomerson', '8ef036a12431278a81500e463d247a9712e798be4870848f21703c847bf1f0a8', '91-1970980'),
                                                                                                                     (7, 4, 'p.rodgar@institucion.es', 'Pablo', 'Rodríguez García', '21ea1873efc272bfa5903e33d67d2a6585fadc934987e13700b359ad3052384d', '68-1114028'),
                                                                                                                     (8, 4, 's.morfer@institucion.es', 'Sofía', 'Moreno Fernández', 'b2233d8955bc461c1e58b77e63846a3a993b660369396ab3456a4750ab70576a', '31-1473681'),
-                                                                                                                    (9, 4, 'm.fermor@institucion.es', 'Martina', 'Fernández Moreno', '61c2a1e3a3690527c61b6d38ad514ff2175d115e1368fd5e421c4dd880e5451b', '32-9850488');
+                                                                                                                    (9, 4, 'm.fermor@institucion.es', 'Martina', 'Fernández Moreno', '61c2a1e3a3690527c61b6d38ad514ff2175d115e1368fd5e421c4dd880e5451b', '32-9850488'),
+                                                                                                                    (10, 5, 'j.mormar@institucion.es', 'Javier', 'Moreno Martínez', '1c638557e898fc2c7a6a2708f58ce3dd54d82f0e11e24ff36308e0ceb8cc2af0', '60-1796971'),
+                                                                                                                    (11, 5, 'm.péfer@institucion.es', 'Martina', 'Pérez Fernández', 'e1bab8c5fa191467c1b7f3b4b86bf44fc30c016a0bc097ef488b0e93bb55c904', '34-8165435'),
+                                                                                                                    (12, 5, 'd.sáló@institucion.es', 'Daniela', 'Sánchez López', 'd1454cee2ac4a26943c0725a79b62f7bfd0828c4acd82c4e0bd65ab0c06ea017', '36-8976724'),
+                                                                                                                    (13, 6, 'j.morsá@institucion.es', 'Javier', 'Moreno Sánchez', '0b4c9b1376c6e7cf9839fa56717cf5f20db951fd179c2ea411fdecfa044b1cf5', '63-6574454'),
+                                                                                                                    (14, 6, 'h.pégar@institucion.es', 'Hugo', 'Pérez García', '291c1d00a9cc162bc64168753fc6574a636a299b523e9cea468d7e5732d7a3b8', '18-6316673'),
+                                                                                                                    (15, 6, 'l.morpé@institucion.es', 'Lucía', 'Moreno Pérez', '525cb188c3f551a39b3f9f4022b00e0f42808721a7a1040e8ac2672b4e4dad93', '82-3789142');
 
 -- --------------------------------------------------------
 
@@ -347,6 +403,14 @@ CREATE TABLE `preguntasexamen` (
                                    `idContenido` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `preguntasexamen`
+--
+
+INSERT INTO `preguntasexamen` (`idPregunta`, `idRespuesta`, `enunciado`, `valorPregunta`, `idContenido`) VALUES
+                                                                                                             (1, 1, '¿Qué motor se utiliza principalmente para desarrollo de videojuegos?', 5, 1),
+                                                                                                             (2, 5, '¿Qué lenguaje se usa por defecto en Unity?', 5, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -358,6 +422,20 @@ CREATE TABLE `respuestasexamen` (
                                     `respuesta` text NOT NULL,
                                     `valorRespuesta` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `respuestasexamen`
+--
+
+INSERT INTO `respuestasexamen` (`idRespuesta`, `respuesta`, `valorRespuesta`) VALUES
+                                                                                  (1, 'Unity', 1),
+                                                                                  (2, 'Photoshop', 0),
+                                                                                  (3, '3ds Max', 0),
+                                                                                  (4, 'Blender', 0),
+                                                                                  (5, 'C#', 1),
+                                                                                  (6, 'JavaScript', 0),
+                                                                                  (7, 'Python', 0),
+                                                                                  (8, 'HTML', 0);
 
 -- --------------------------------------------------------
 
@@ -593,7 +671,7 @@ ALTER TABLE `contenidoavisos`
 -- AUTO_INCREMENT de la tabla `contenidoexamen`
 --
 ALTER TABLE `contenidoexamen`
-    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `cursos`
@@ -617,13 +695,13 @@ ALTER TABLE `estadosavisos`
 -- AUTO_INCREMENT de la tabla `estadosexamen`
 --
 ALTER TABLE `estadosexamen`
-    MODIFY `idEstado` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idEstado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT de la tabla `examenes`
 --
 ALTER TABLE `examenes`
-    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos`
@@ -635,19 +713,19 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `personas`
 --
 ALTER TABLE `personas`
-    MODIFY `idUsuariosPROA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+    MODIFY `idUsuariosPROA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntasexamen`
 --
 ALTER TABLE `preguntasexamen`
-    MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestasexamen`
 --
 ALTER TABLE `respuestasexamen`
-    MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
