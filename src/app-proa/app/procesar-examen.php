@@ -16,7 +16,7 @@ $puntos = $_POST['puntos'] ?? null;
 $codigoAsignatura = $_POST['codigo'] ?? null;
 $idGrupo = $_POST['idGrupo'] ?? null;
 $idDocente = $idUsuario ?? null;
-$estado = 1;
+$estado = 0;
 
 $preguntas = json_decode($_POST['preguntas'] ?? '[]', true);
 
@@ -33,9 +33,9 @@ if (empty($titulo) || empty($codigoAsignatura) || empty($idDocente) || empty($pr
 
 // Insertar contenidoExamen
 $sqlContenido = "INSERT INTO contenidoExamen (titulo, pesoExamen, puntosExamen, fechaApertura, fechaFin, duracion)
-VALUES (?, ?, ?, ?, ?, ?, ?)";
+VALUES (?, ?, ?, ?, ?, ?)";
 $stmtContenido = $conn->prepare($sqlContenido);
-$stmtContenido->bind_param("ssiissi", $titulo, $peso, $puntos, $fechaInicio, $fechaFin, $duracion);
+$stmtContenido->bind_param("siissi", $titulo, $peso, $puntos, $fechaInicio, $fechaFin, $duracion);
 $stmtContenido->execute();
 
 if ($stmtContenido->affected_rows == 0) {
@@ -57,13 +57,7 @@ if ($stmtExamen->affected_rows == 0) {
 $idExamen = $stmtExamen->insert_id;
 $stmtExamen->close();
 
-echo json_encode([
-    'success' => false,
-    'message' => 'Faltan datos obligatorios.',
-    'debug' => [
-        'preguntas' => $preguntas,
-    ]
-]);
+
 
 // Insertar preguntas y opciones
 $sqlPregunta = "INSERT INTO preguntasexamen (idContenido, enunciado, valorPregunta) VALUES (?, ?, ?)";
@@ -73,13 +67,15 @@ $sqlOpcion = "INSERT INTO opcionespregunta (idPregunta, textoOpcion, esCorrecta)
 $stmtOpcion = $conn->prepare($sqlOpcion);
 
 foreach ($preguntas as $pregunta) {
-    $enunciado = $pregunta['textoPregunta'] ?? '';
+    $enunciado = $pregunta['pregunta'] ?? '';
     $valor = $pregunta['valor'] ?? '';
     $opciones = $pregunta['respuestas'] ?? [];
 
     if (empty($enunciado) || empty($opciones)) {
+
         continue;
     }
+
 
     $stmtPregunta->bind_param("isi", $idContenido, $enunciado, $valor);
     $stmtPregunta->execute();

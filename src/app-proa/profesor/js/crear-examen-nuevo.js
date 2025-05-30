@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
             p.querySelectorAll(".respuesta-opcion").forEach(r => {
                 const texto = r.querySelector('input[type="text"]').value;
                 const seleccionada = r.querySelector('input[type="radio"]').checked;
-                respuestas.push({ texto, correcta: seleccionada });
+                respuestas.push({ texto: texto, correcta: seleccionada });
             });
 
             datos.preguntas.push({
