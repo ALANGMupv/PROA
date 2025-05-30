@@ -71,6 +71,13 @@ error_reporting(E_ALL);
                 </div> -->
 
       <section class="panel-contenido fondoPanel"> <!-- Panel donde se mostrará el contenido según la opción elegida -->
+          <?php
+          $migas = [
+              ['label' => 'Exámenes de la asignatura']
+          ];
+          include '../includes/migas-de-pan.inc';
+          ?>
+
       </section>
 
     </div>

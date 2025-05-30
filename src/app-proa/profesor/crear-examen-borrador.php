@@ -73,10 +73,16 @@ error_reporting(E_ALL);
                     </div>
                 </div> -->
 
-            <a href="#" id="volver" class="volver-enlace" onclick="activarPopPup(this)">← Volver</a>
-
             <!-- SECCIÓN CREAR EXÁMENES PROFESOR -->
             <section class="panel-asignaturas fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-profesor.php'],
+                    ['label' => 'Continuar examen']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
+
 
                 <h2>Panel de creación de examen</h2>
 

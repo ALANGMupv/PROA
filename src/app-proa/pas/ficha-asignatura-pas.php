@@ -39,10 +39,15 @@ error_reporting(E_ALL);
         </aside>
 
         <div class="container">
-            <a href="#" id="btn-volver" class="volver-enlace">← Volver</a>
-
 
             <section class="contenido-asignatura fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Asignaturas', 'url' => 'asignaturas.php'],
+                    ['label' => 'Ficha asignatura']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
 
                 <h2 id="nombre-asignatura">Nombre asignatura</h2>
 

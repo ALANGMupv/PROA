@@ -71,10 +71,16 @@ error_reporting(E_ALL);
                     </div>
                 </div> -->
 
-            <a href="examenes-profesor.php" id="btn-volver" class="volver-enlace">← Volver</a>
-
             <section class="panel-contenido fondoPanel">
-            <section class="titulo">
+                <?php
+                $migas = [
+                    ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-profesor.php'],
+                    ['label' => 'Entregas del examen']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
+
+                <section class="titulo">
                 <h1>Entregas del Cuestionario 1</h1>
             </section>
 

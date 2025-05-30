@@ -48,11 +48,17 @@ error_reporting(E_ALL);
           <!-- Aquí va el dropdown para cambiar de asignatura -->
           <?php include $rutaBase . 'includes/dropdown-asignaturas.inc'; ?>
 
-      <a href="#" id="volver" class="volver-enlace">← Volver</a>
-
     <section class="panel-contenido fondoPanel" id="panelRealizarExamen">
+        <?php
+        $migas = [
+            ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-alumno.php'],
+            ['label' => 'Realizar examen']
+        ];
+        include '../includes/migas-de-pan.inc';
+        ?>
 
-      <form id="formulario-examen">
+
+        <form id="formulario-examen">
         <section class="titulo">
           <h1>Cuestionario 1</h1>
         </section>

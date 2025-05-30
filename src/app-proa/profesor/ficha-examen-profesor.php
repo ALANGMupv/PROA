@@ -70,9 +70,15 @@ error_reporting(E_ALL);
                     </div>
                 </div> -->
 
-            <a href="#" id="volver" class="volver-enlace" onclick="volverAtras()">← Volver</a>
-
             <section class="panel-contenido fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-profesor.php'],
+                    ['label' => 'Ficha del examen']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
+
                 <div class="descripcion">
 
                     <div class="titulo-con-boton">

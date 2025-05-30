@@ -28,6 +28,7 @@ include $rutaBase . 'includes/mini-header-proa.inc';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 ?>
 
 <div class="contenido-wrapper">
@@ -40,6 +41,12 @@ error_reporting(E_ALL);
 
         <!-- Contenido principal derecho del panel -->
         <section class="contenido-asignatura fondoPanel">
+            <?php
+            $migas = [
+                ['label' => 'Asignaturas']
+            ];
+            include '../includes/migas-de-pan.inc';
+            ?>
             <div class="gestion-asignaturas">
                 <h2>Gestión de Asignaturas</h2>
 

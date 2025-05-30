@@ -52,9 +52,17 @@ error_reporting(E_ALL);
         </aside>
 
         <div class="container">
-            <a href="#" id="btn-volver" class="volver-enlace">← Volver</a>
 
             <section class="contenido-asignatura fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Asignaturas', 'url' => 'asignaturas.php'],
+                    ['label' => 'Ficha asignatura', 'url' => 'ficha-asignatura-pas.php'],
+                    ['label' => 'Asignar alumnos']
+                ];
+                include 'migasdepan.php';
+                ?>
+
                 <h2 id="titulo-asignacion">Asignación Alumnos</h2>
 
                 <div class="bloque-listas-asignacion">

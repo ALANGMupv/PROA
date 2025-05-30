@@ -30,6 +30,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
+
 <div class="contenido-wrapper">
     <div class="contenido-principal">
         <aside id="submenu" class="submenu">
@@ -37,9 +38,15 @@ error_reporting(E_ALL);
         </aside>
 
         <div class="container">
-            <a href="#" id="btn-volver" class="volver-enlace">← Volver</a>
 
             <section class="contenido-asignatura fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Asignaturas', 'url' => 'asignaturas.php'],
+                    ['label' => 'Nueva asignatura']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
                 <h2>Nueva Asignatura</h2>
 
                 <form class="datos" id="formulario">

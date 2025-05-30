@@ -48,7 +48,13 @@ error_reporting(E_ALL);
 
             <!-- Contenedor del contenido que se muestra según la opción seleccionada en el submenú -->
             <section class="fondoPanel">
-                <!--aqui carga dinámicamente los exámenes desde el json-->
+                <?php
+                $migas = [
+                    ['label' => 'Exámenes de la asignatura']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
+
             </section>
         </div>
     </div>
