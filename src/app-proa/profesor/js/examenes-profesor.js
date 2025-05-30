@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!res.ok) throw new Error("Error en la respuesta del servidor");
 
         const data = await res.json();
-
         if (data && (data.realizar || data.calificados || data.borradores)) {
             renderExamenes(data);
         } else {
@@ -39,7 +38,10 @@ function renderExamenes(data) {
 function crearBloque(titulo, examenes, tipo) {
     if (!examenes || examenes.length === 0) return '';
 
-    let html;
+    let html = ''; // Inicializamos correctamente para evitar undefined
+
+    html += `<div class="bloque-examenes">
+                <h3>${titulo}</h3>`;
 
     examenes.forEach(ex => {
         if (tipo === 'abiertos') {
