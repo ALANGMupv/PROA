@@ -33,24 +33,28 @@ if (isset($_SESSION['usuario'])) {
 <!-- Formulario Contacto -->
 <main>
 <section class="contacto">
+    <?php
+    session_start();
+    $usuario = $_SESSION['usuario'] ?? null;
+    ?>
     <form class="formulario-contacto">
         <h2>Contáctanos</h2>
         <p class="parrafo-principal">
             ¿Tienes alguna duda sobre nuestros productos o servicios? Escríbenos y te responderemos lo antes posible.
         </p>
 
-        <!-- Agrupación de todos los campos del formulario -->
         <div class="grupo-campos">
-
             <!-- Fila 1: Nombre y apellidos -->
             <div class="fila-doble">
                 <div class="campo">
                     <label for="nombre">Nombre *</label>
-                    <input type="text" id="nombre" class="input-base" placeholder="Tu nombre" />
+                    <input type="text" id="nombre" class="input-base" placeholder="Tu nombre"
+                           value="<?= $usuario['nombre'] ?? '' ?>" <?= $usuario ? 'readonly' : '' ?> />
                 </div>
                 <div class="campo">
                     <label for="apellidos">Apellidos *</label>
-                    <input type="text" id="apellidos" class="input-base" placeholder="Tus apellidos" />
+                    <input type="text" id="apellidos" class="input-base" placeholder="Tus apellidos"
+                           value="<?= $usuario['apellidos'] ?? '' ?>" <?= $usuario ? 'readonly' : '' ?> />
                 </div>
             </div>
 
@@ -58,11 +62,13 @@ if (isset($_SESSION['usuario'])) {
             <div class="fila-doble">
                 <div class="campo">
                     <label for="email">Correo institucional *</label>
-                    <input type="email" id="email" class="input-base" placeholder="correo@institucion.edu" />
+                    <input type="email" id="email" class="input-base" placeholder="correo@institucion.edu"
+                           value="<?= $usuario['email'] ?? '' ?>" <?= $usuario ? 'readonly' : '' ?> />
                 </div>
                 <div class="campo">
-                    <label for="institucion">Nombre de la institución *</label>
-                    <input type="text" id="institucion" class="input-base" placeholder="Nombre de tu institución" />
+                    <label for="codigoInstitucion">Nombre de la institución *</label>
+                    <input type="text" id="codigoInstitucion" class="input-base" placeholder="Nombre de tu institución"
+                           value="<?= $usuario['codigoInstitucion'] ?? '' ?>" <?= $usuario ? 'readonly' : '' ?> />
                 </div>
             </div>
 
@@ -71,13 +77,15 @@ if (isset($_SESSION['usuario'])) {
                 <div class="campo">
                     <label for="tipo">Tipo de institución *</label>
                     <div class="input-dropdown">
-                        <select id="tipo" class="seleccionador-dropdown">
-                            <option selected disabled hidden>Selecciona tu institución</option>
-                            <option>Universidad</option>
-                            <option>Instituto</option>
-                            <option>Colegio</option>
-                            <option>Academia Particular</option>
-                            <option>Otros (especificar en campo mensaje)</option>
+                        <select id="tipo" class="seleccionador-dropdown" <?= $usuario ? 'disabled' : '' ?>>
+                            <option disabled <?= !$usuario ? 'selected' : '' ?> hidden>Selecciona tu institución</option>
+                            <?php
+                            $tipos = ['Universidad', 'Instituto', 'Colegio', 'Academia Particular', 'Otros (especificar en campo mensaje)'];
+                            foreach ($tipos as $tipo) {
+                                $selected = (isset($usuario['tipo']) && $usuario['tipo'] === $tipo) ? 'selected' : '';
+                                echo "<option $selected>$tipo</option>";
+                            }
+                            ?>
                         </select>
                         <img src="icons/dropdown.svg" alt="Flecha" class="icono-dropdown">
                     </div>
@@ -101,11 +109,12 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </div>
 
-        <!-- Botón para enviar el formulario -->
+        <!-- Botón enviar -->
         <div class="boton-contacto">
             <button type="submit" class="btn">Enviar</button>
         </div>
     </form>
+
 </section>
 </main>
 

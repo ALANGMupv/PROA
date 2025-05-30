@@ -61,7 +61,7 @@ document.querySelector('.formulario-login-pagLogin')?.addEventListener('submit',
         .then(res => res.json())
         .then(data => {
             if (data.ok) {
-                window.location.href = '../index.php';
+                window.location.href = 'catalogo.php';
             } else {
                 mostrarToastError('Usuario o contraseña incorrectos');
             }

@@ -67,36 +67,39 @@ if (isset($_SESSION['usuario'])) {
         </div>
     </section>
 
-    <!-- SECCIÓN DE SUGERENCIA -->
-    <section class="sugerencia">
-        <h3>¿Te gustaría ver otro módulo?</h3>
-        <p class="parrafo-secundario">
-            Ayúdanos a mejorar. Cuéntanos qué tipo de módulo te gustaría que ofrezcamos en el futuro.
-        </p>
+    <?php if (isset($_SESSION['usuario'])): ?>
+        <!-- SECCIÓN DE SUGERENCIA -->
+        <section class="sugerencia">
+            <h3>¿Te gustaría ver otro módulo?</h3>
+            <p class="parrafo-secundario">
+                Ayúdanos a mejorar. Cuéntanos qué tipo de módulo te gustaría que ofrezcamos en el futuro.
+            </p>
 
-        <!-- FORMULARIO DE SUGERENCIAS -->
-        <form class="formulario-sugerencia">
-            <div class="fila-doble">
-                <div class="campo">
-                    <label for="nombre">Nombre: *</label>
-                    <input type="text" id="nombre" class="input-contacto" placeholder="Tu nombre" required>
+            <!-- FORMULARIO DE SUGERENCIAS -->
+            <form class="formulario-sugerencia">
+                <div class="fila-doble">
+                    <div class="campo">
+                        <label for="nombre">Nombre: *</label>
+                        <input type="text" id="nombre" class="input-contacto" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="campo">
+                        <label for="email">Correo electrónico: *</label>
+                        <input type="email" id="email" class="input-contacto" placeholder="tu@correo.com" required>
+                    </div>
                 </div>
-                <div class="campo">
-                    <label for="email">Correo electrónico: *</label>
-                    <input type="email" id="email" class="input-contacto" placeholder="tu@correo.com" required>
+
+                <div class="campo campo-largo">
+                    <label for="sugerencia">Sugerencia de módulo: *</label>
+                    <textarea id="sugerencia" rows="5" class="input-contacto" placeholder="Describe tu idea..." required></textarea>
                 </div>
-            </div>
 
-            <div class="campo campo-largo">
-                <label for="sugerencia">Sugerencia de módulo: *</label>
-                <textarea id="sugerencia" rows="5" class="input-contacto" placeholder="Describe tu idea..." required></textarea>
-            </div>
+                <div class="boton-sugerencia">
+                    <button type="submit" class="btn">Enviar sugerencia</button>
+                </div>
+            </form>
+        </section>
+    <?php endif; ?>
 
-            <div class="boton-sugerencia">
-                <button type="submit" class="btn">Enviar sugerencia</button>
-            </div>
-        </form>
-    </section>
 </main>
 
 <!-- Footer-->
