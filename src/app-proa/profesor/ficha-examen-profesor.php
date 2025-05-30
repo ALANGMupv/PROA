@@ -80,12 +80,6 @@ error_reporting(E_ALL);
                         </div>
                     </div>
 
-                    <h2>Descripción</h2>
-                    <p id="descripcion-examen" class="parrafo-principal">
-                        Este cuestionario evalúa los conocimientos adquiridos en los temas fundamentales de Álgebra Matricial,
-                        incluyendo operaciones con matrices, tipos de matrices, determinantes y sistemas de ecuaciones lineales.
-                        Consta de preguntas tipo test con una única respuesta correcta por cada ítem.
-                    </p>
                     <p class="parrafo-principal fecha-limite" id="fecha-limite-texto">
                         <strong>Fecha límite para completarlo:</strong> 5 de mayo de 2025 a las 23:59.
                     </p>

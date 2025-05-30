@@ -2,6 +2,9 @@
 header('Content-Type: application/json');
 
 require_once '../../../env/proa.inc';
+
+
+
 session_start();
 
 $idUsuario = $_SESSION['usuario']['idUsuariosPROA'] ?? null;
@@ -16,7 +19,7 @@ $puntos = $_POST['puntos'] ?? null;
 $codigoAsignatura = $_POST['codigo'] ?? null;
 $idGrupo = $_POST['idGrupo'] ?? null;
 $idDocente = $idUsuario ?? null;
-$estado = 0;
+$estado = 4;
 
 $preguntas = json_decode($_POST['preguntas'] ?? '[]', true);
 
@@ -38,10 +41,12 @@ $stmtContenido = $conn->prepare($sqlContenido);
 $stmtContenido->bind_param("siissi", $titulo, $peso, $puntos, $fechaInicio, $fechaFin, $duracion);
 $stmtContenido->execute();
 
+$stmtContenido->execute();
 if ($stmtContenido->affected_rows == 0) {
-    die(json_encode(['success' => false, 'message' => 'Error al insertar contenidoExamen.']));
+    die(json_encode(['success' => false, 'message' => 'Error al insertar contenidoExamen.', 'error' => $stmtContenido->error]));
 }
-$idContenido = $stmtContenido->insert_id;
+
+$idContenido = (int) $stmtContenido->insert_id;
 $stmtContenido->close();
 
 // Insertar examen
@@ -58,6 +63,7 @@ $idExamen = $stmtExamen->insert_id;
 $stmtExamen->close();
 
 
+$sqlObtenerExamen =
 
 // Insertar preguntas y opciones
 $sqlPregunta = "INSERT INTO preguntasexamen (idContenido, enunciado, valorPregunta) VALUES (?, ?, ?)";

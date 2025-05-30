@@ -2,7 +2,6 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-header('Content-Type: application/json');
 
 session_start();
 require_once '../../../env/proa.inc';
@@ -25,7 +24,8 @@ $sql = "
         ce.titulo,
         ce.fechaFin AS fechaLimite,
         ce.pesoExamen AS peso,
-        ee.nombreEstado
+        ee.nombreEstado,
+        e.idExamen
     FROM examenes e
     INNER JOIN contenidoexamen ce ON e.idContenido = ce.idContenido
     INNER JOIN estadosexamen ee ON e.idEstado = ee.idEstado
@@ -38,8 +38,8 @@ $stmt->execute();
 $resultado = $stmt->get_result();
 
 $examenes = [
-    'realizar'   => [],
-    'calificados' => [],
+    'abiertos'   => [],
+    'cerrados' => [],
     'borradores' => []
 ];
 
@@ -47,18 +47,19 @@ while ($row = $resultado->fetch_assoc()) {
     $examen = [
         'titulo'      => $row['titulo'],
         'fechaLimite' => $row['fechaLimite'],
-        'peso'        => $row['peso']
+        'peso'        => $row['peso'],
+        'id'          => $row['idExamen']
     ];
 
     // Clasifica según nombreEstado
     switch (strtolower($row['nombreEstado'])) {
         case 'abierto':
-            $examenes['realizar'][] = $examen;
+            $examenes['abiertos'][] = $examen;
             break;
-        case 'cerrado':
-            $examenes['calificados'][] = $examen;
+        case 'Cerrado':
+            $examenes['cerrados'][] = $examen;
             break;
-        case 'borrador':
+        case 'Borrador':
             $examenes['borradores'][] = $examen;
             break;
         default:
