@@ -1,7 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
     const asignaturaSeleccionada = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
+    const codigo = asignaturaSeleccionada?.codigo;
 
-    fetch("../../api/data/examenes-alumno.json")
+    console.log('hola')
+
+
+    if (!codigo) {
+        mostrarAviso("No hay asignatura seleccionada.");
+        return;
+    }
+
+    fetch(`../app/obtener-examenes.php?codigo=${encodeURIComponent(codigo)}`)
+        .then(res => {
+            if (!res.ok) throw new Error("Error en la respuesta del servidor");
+            return res.json();
+        })
+        .then(data => {
+            // data debe tener la misma estructura que antes: {realizar:[], calificados:[], borradores:[]}
+            if (data && (data.realizar || data.calificados || data.borradores)) {
+                renderExamenes(data);
+            } else {
+                mostrarAviso("No hay exámenes disponibles para esta asignatura.");
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            mostrarAviso("Error al cargar exámenes.");
+        });
+
+    /*fetch("../../api/data/examenes-alumno.json")
         .then(res => res.json())
         .then(data => {
             const codigo = asignaturaSeleccionada?.codigo; // ejemplo: "PRO303"
@@ -17,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => {
             console.error("Error al cargar exámenes:", err);
             mostrarAviso("Error al cargar exámenes.");
-        });
+        });*/
 
     function renderExamenes(data) {
         const seccion = document.querySelector(".fondoPanel");
