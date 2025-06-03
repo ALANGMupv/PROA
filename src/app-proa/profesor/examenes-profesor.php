@@ -73,7 +73,7 @@ error_reporting(E_ALL);
       </section>
 
     </div>
-  </div> <!-- Fin del contenedor contenido-principal -->
+  </div> <!-- Fin del contenedor contenido principal -->
 </main>
 
 </body>
