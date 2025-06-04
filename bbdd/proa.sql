@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2025 a las 03:11:52
+-- Tiempo de generación: 04-06-2025 a las 16:51:56
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `proa`
+-- Base de datos: `proa`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asignacionalumno`
+-- Estructura de tabla para la tabla `asignacionalumno`
 --
 
 CREATE TABLE `asignacionalumno` (
@@ -35,7 +35,7 @@ CREATE TABLE `asignacionalumno` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `asignacionalumno`
+-- Volcado de datos para la tabla `asignacionalumno`
 --
 
 INSERT INTO `asignacionalumno` (`idUsuariosPROA`, `codigoAsignatura`, `idGrupo`, `asignaturaFavorita`) VALUES
@@ -58,7 +58,7 @@ INSERT INTO `asignacionalumno` (`idUsuariosPROA`, `codigoAsignatura`, `idGrupo`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asignaciondocentes`
+-- Estructura de tabla para la tabla `asignaciondocentes`
 --
 
 CREATE TABLE `asignaciondocentes` (
@@ -69,7 +69,7 @@ CREATE TABLE `asignaciondocentes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `asignaciondocentes`
+-- Volcado de datos para la tabla `asignaciondocentes`
 --
 
 INSERT INTO `asignaciondocentes` (`idUsuariosPROA`, `codigoAsignatura`, `responsable`, `asignaturaFavorita`) VALUES
@@ -85,7 +85,7 @@ INSERT INTO `asignaciondocentes` (`idUsuariosPROA`, `codigoAsignatura`, `respons
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asignaturas`
+-- Estructura de tabla para la tabla `asignaturas`
 --
 
 CREATE TABLE `asignaturas` (
@@ -93,19 +93,19 @@ CREATE TABLE `asignaturas` (
                                `codigoTitulacion` varchar(10) DEFAULT NULL,
                                `nombre` varchar(64) NOT NULL,
                                `creditos` tinyint(2) NOT NULL,
-                               `idCurso` int(11) DEFAULT NULL,
+                               `idCurso` int(11) NOT NULL,
                                `idSemestre` int(11) DEFAULT NULL,
                                `idDepartamento` int(11) DEFAULT NULL,
                                `idCaracter` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `asignaturas`
+-- Volcado de datos para la tabla `asignaturas`
 --
 
 INSERT INTO `asignaturas` (`codigoAsignatura`, `codigoTitulacion`, `nombre`, `creditos`, `idCurso`, `idSemestre`, `idDepartamento`, `idCaracter`) VALUES
                                                                                                                                                       ('COMM101', 'TEL', 'Fundamentos de comunicaciones', 6, 1, 1, 4, 1),
-                                                                                                                                                      ('DIU666', 'GTI', 'Diseño de Interfaces', 6, NULL, 2, 2, 1),
+                                                                                                                                                      ('DIU666', 'GTI', 'Diseño de Interfaces', 6, 1, 2, 2, 1),
                                                                                                                                                       ('MULT203', 'GTI', 'Sistemas multimedia', 6, 2, 1, 1, 2),
                                                                                                                                                       ('PROG101', 'GTI', 'Programación de videojuegos', 6, 1, 1, 1, 1),
                                                                                                                                                       ('SIGS301', 'TEL', 'Procesado de señal', 6, 3, 1, 4, 2),
@@ -116,7 +116,7 @@ INSERT INTO `asignaturas` (`codigoAsignatura`, `codigoTitulacion`, `nombre`, `cr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `avisos`
+-- Estructura de tabla para la tabla `avisos`
 --
 
 CREATE TABLE `avisos` (
@@ -129,7 +129,7 @@ CREATE TABLE `avisos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `calificaciones`
+-- Estructura de tabla para la tabla `calificaciones`
 --
 
 CREATE TABLE `calificaciones` (
@@ -143,12 +143,14 @@ CREATE TABLE `calificaciones` (
 --
 
 INSERT INTO `calificaciones` (`idExamen`, `idUsuariosPROA`, `notaExamenAlumno`) VALUES
-    (1, 1, 8);
+                                                                                    (1, 1, 8),
+                                                                                    (4, 1, 6),
+                                                                                    (5, 1, 8);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `caracteresasignatura`
+-- Estructura de tabla para la tabla `caracteresasignatura`
 --
 
 CREATE TABLE `caracteresasignatura` (
@@ -157,7 +159,7 @@ CREATE TABLE `caracteresasignatura` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `caracteresasignatura`
+-- Volcado de datos para la tabla `caracteresasignatura`
 --
 
 INSERT INTO `caracteresasignatura` (`idCaracter`, `tipoCaracter`) VALUES
@@ -170,7 +172,7 @@ INSERT INTO `caracteresasignatura` (`idCaracter`, `tipoCaracter`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contenidoavisos`
+-- Estructura de tabla para la tabla `contenidoavisos`
 --
 
 CREATE TABLE `contenidoavisos` (
@@ -182,12 +184,13 @@ CREATE TABLE `contenidoavisos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contenidoexamen`
+-- Estructura de tabla para la tabla `contenidoexamen`
 --
 
 CREATE TABLE `contenidoexamen` (
                                    `idContenido` int(11) NOT NULL,
                                    `titulo` varchar(255) NOT NULL,
+                                   `descripcion` text DEFAULT NULL,
                                    `pesoExamen` tinyint(3) NOT NULL,
                                    `puntosExamen` tinyint(3) NOT NULL,
                                    `fechaApertura` datetime NOT NULL,
@@ -200,12 +203,31 @@ CREATE TABLE `contenidoexamen` (
 --
 
 INSERT INTO `contenidoexamen` (`idContenido`, `titulo`, `descripcion`, `pesoExamen`, `puntosExamen`, `fechaApertura`, `fechaFin`, `duracion`) VALUES
-    (1, 'Examen Final de Programación', 'Contenidos de programación avanzada en videojuegos', 30, 10, '2025-05-30 00:15:46', '2025-06-06 00:15:46', '01:30:00');
+                                                                                                                                                  (1, 'Examen Final de Programación', 'Contenidos de programación avanzada en videojuegos', 30, 10, '2025-05-30 00:15:46', '2025-06-06 00:15:46', '01:30:00'),
+                                                                                                                                                  (2, 'Examen Parcial', 'Parte intermedia del curso de programación', 25, 10, '2025-04-20 00:00:00', '2025-05-02 09:00:00', '01:00:00'),
+                                                                                                                                                  (3, 'Cuestionario 1', 'Preguntas básicas de teoría', 15, 10, '2025-04-25 00:00:00', '2025-05-05 23:59:00', '00:45:00'),
+                                                                                                                                                  (4, 'Test unidad 3', 'Evaluación del tema 3', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
+                                                                                                                                                  (5, 'Test unidad 1', 'Evaluación del tema 1', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
+                                                                                                                                                  (6, 'Test unidad 2', 'Evaluación del tema 2', 20, 10, '2025-03-24 00:00:00', '2025-03-24 17:15:00', '00:45:00'),
+                                                                                                                                                  (7, 'Examen Parcial', 'Parte intermedia del curso de programación', 25, 10, '2025-04-20 00:00:00', '2025-05-02 09:00:00', '01:00:00'),
+                                                                                                                                                  (8, 'Cuestionario 1', 'Preguntas básicas de teoría', 15, 10, '2025-04-25 00:00:00', '2025-05-05 23:59:00', '00:45:00'),
+                                                                                                                                                  (9, 'Test unidad 3', 'Evaluación del tema 3', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
+                                                                                                                                                  (10, 'Test unidad 1', 'Evaluación del tema 1', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
+                                                                                                                                                  (11, 'Test unidad 2', 'Evaluación del tema 2', 20, 10, '2025-03-24 00:00:00', '2025-03-24 17:15:00', '00:45:00'),
+                                                                                                                                                  (12, 'Examen Parcial', 'Parte intermedia del curso', 25, 10, '2025-04-20 00:00:00', '2025-05-02 09:00:00', '01:00:00'),
+                                                                                                                                                  (13, 'Cuestionario 1', 'Preguntas básicas', 15, 10, '2025-04-25 00:00:00', '2025-05-05 23:59:00', '00:45:00'),
+                                                                                                                                                  (14, 'Test unidad 3', 'Tema 3', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
+                                                                                                                                                  (15, 'Test unidad 1', 'Tema 1', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
+                                                                                                                                                  (16, 'Test unidad 2', 'Tema 2', 20, 10, '2025-03-24 00:00:00', '2025-03-24 17:15:00', '00:45:00'),
+                                                                                                                                                  (17, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59'),
+                                                                                                                                                  (18, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59'),
+                                                                                                                                                  (19, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59'),
+                                                                                                                                                  (20, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cursos`
+-- Estructura de tabla para la tabla `cursos`
 --
 
 CREATE TABLE `cursos` (
@@ -214,7 +236,7 @@ CREATE TABLE `cursos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `cursos`
+-- Volcado de datos para la tabla `cursos`
 --
 
 INSERT INTO `cursos` (`idCurso`, `nombreCurso`) VALUES
@@ -226,7 +248,7 @@ INSERT INTO `cursos` (`idCurso`, `nombreCurso`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departamentos`
+-- Estructura de tabla para la tabla `departamentos`
 --
 
 CREATE TABLE `departamentos` (
@@ -235,7 +257,7 @@ CREATE TABLE `departamentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `departamentos`
+-- Volcado de datos para la tabla `departamentos`
 --
 
 INSERT INTO `departamentos` (`idDepartamento`, `nombreDepartamento`) VALUES
@@ -247,7 +269,7 @@ INSERT INTO `departamentos` (`idDepartamento`, `nombreDepartamento`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estadosavisos`
+-- Estructura de tabla para la tabla `estadosavisos`
 --
 
 CREATE TABLE `estadosavisos` (
@@ -258,7 +280,7 @@ CREATE TABLE `estadosavisos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estadosexamen`
+-- Estructura de tabla para la tabla `estadosexamen`
 --
 
 CREATE TABLE `estadosexamen` (
@@ -281,7 +303,7 @@ INSERT INTO `estadosexamen` (`idEstado`, `nombreEstado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `examenes`
+-- Estructura de tabla para la tabla `examenes`
 --
 
 CREATE TABLE `examenes` (
@@ -298,12 +320,19 @@ CREATE TABLE `examenes` (
 --
 
 INSERT INTO `examenes` (`idExamen`, `codigoAsignatura`, `idGrupo`, `idContenido`, `idEstado`, `idUsuariosPROA`) VALUES
-    (1, 'PROG101', 1, 1, 4, 3);
+                                                                                                                    (1, 'PROG101', 1, 1, 4, 3),
+                                                                                                                    (4, 'PROG101', 1, 1, 1, 3),
+                                                                                                                    (5, 'PROG101', 1, 11, 2, 3),
+                                                                                                                    (6, 'PROG101', 1, 4, 3, 3),
+                                                                                                                    (8, 'PROG101', 1, 2, 1, 3),
+                                                                                                                    (13, 'PROG101', 1, 3, 2, 3),
+                                                                                                                    (16, 'SIGS301', NULL, 18, 4, 4),
+                                                                                                                    (17, 'SIGS301', NULL, 20, 4, 4);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `grupos`
+-- Estructura de tabla para la tabla `grupos`
 --
 
 CREATE TABLE `grupos` (
@@ -312,7 +341,7 @@ CREATE TABLE `grupos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `grupos`
+-- Volcado de datos para la tabla `grupos`
 --
 
 INSERT INTO `grupos` (`idGrupo`, `nombreGrupo`) VALUES
@@ -322,20 +351,7 @@ INSERT INTO `grupos` (`idGrupo`, `nombreGrupo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `opcionespregunta`
---
-
-CREATE TABLE `opcionespregunta` (
-                                    `idOpcion` int(11) NOT NULL,
-                                    `idPregunta` int(11) NOT NULL,
-                                    `textoOpcion` text NOT NULL,
-                                    `esCorrecta` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `personarol`
+-- Estructura de tabla para la tabla `personarol`
 --
 
 CREATE TABLE `personarol` (
@@ -344,7 +360,7 @@ CREATE TABLE `personarol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `personarol`
+-- Volcado de datos para la tabla `personarol`
 --
 
 INSERT INTO `personarol` (`idUsuariosPROA`, `idRol`) VALUES
@@ -367,7 +383,7 @@ INSERT INTO `personarol` (`idUsuariosPROA`, `idRol`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personas`
+-- Estructura de tabla para la tabla `personas`
 --
 
 CREATE TABLE `personas` (
@@ -381,77 +397,56 @@ CREATE TABLE `personas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `personas`
+-- Volcado de datos para la tabla `personas`
 --
 
 INSERT INTO `personas` (`idUsuariosPROA`, `idUsuariosGTI`, `email`, `nombre`, `apellidos`, `contraseña`, `dni`) VALUES
-                                                                                                                    (1, 1, 'l.simdre@epsg.upv.es', 'Lief', 'Simants Dredge', '8dfc2f2f0b4ba9ed2bcc2c0d3eacac63a8a7afde2cbf04e00c1ac5c9b0be7c1a', '01-9218611'),
-                                                                                                                    (2, 2, 'd.rawabc@epsg.upv.es', 'Debora', 'Rawstorne', 'ccfa9b051d91b247edaf003a3252c61ddd76b272cba6b8aed343f8425eae684f', '05-9971924'),
-                                                                                                                    (3, 1, 'k.poumai@upv.es', 'Kevan', 'Pounds Mainston', 'f64fa63b2e00256c04262c7d08df6071b768719cd0ef86b38a8735a67472569d', '60-4525956'),
-                                                                                                                    (4, 2, 'l.prista@upv.es', 'Luelle', 'Pridmore Starsmeare', '3c6dcef0938cfaceeb3ad106f0fa6f282369719f6be74f003067cb02a49e684d', '64-6055365'),
-                                                                                                                    (5, 1, 'o.breshe@upv.es', 'Ondrea', 'Brezlaw Sherwill', 'bb851090dcc953ef26cae58f00c3c8aa50170e667ef57b076271a96851d7c598', '88-1316390'),
-                                                                                                                    (6, 2, 'b.maltho@upv.es', 'Brooke', 'Malimoe Thomerson', '8ef036a12431278a81500e463d247a9712e798be4870848f21703c847bf1f0a8', '91-1970980'),
-                                                                                                                    (7, 4, 'p.rodgar@institucion.es', 'Pablo', 'Rodríguez García', '21ea1873efc272bfa5903e33d67d2a6585fadc934987e13700b359ad3052384d', '68-1114028'),
-                                                                                                                    (8, 4, 's.morfer@institucion.es', 'Sofía', 'Moreno Fernández', 'b2233d8955bc461c1e58b77e63846a3a993b660369396ab3456a4750ab70576a', '31-1473681'),
-                                                                                                                    (9, 4, 'm.fermor@institucion.es', 'Martina', 'Fernández Moreno', '61c2a1e3a3690527c61b6d38ad514ff2175d115e1368fd5e421c4dd880e5451b', '32-9850488'),
-                                                                                                                    (10, 5, 'j.mormar@institucion.es', 'Javier', 'Moreno Martínez', '1c638557e898fc2c7a6a2708f58ce3dd54d82f0e11e24ff36308e0ceb8cc2af0', '60-1796971'),
-                                                                                                                    (11, 5, 'm.péfer@institucion.es', 'Martina', 'Pérez Fernández', 'e1bab8c5fa191467c1b7f3b4b86bf44fc30c016a0bc097ef488b0e93bb55c904', '34-8165435'),
-                                                                                                                    (12, 5, 'd.sáló@institucion.es', 'Daniela', 'Sánchez López', 'd1454cee2ac4a26943c0725a79b62f7bfd0828c4acd82c4e0bd65ab0c06ea017', '36-8976724'),
-                                                                                                                    (13, 6, 'j.morsá@institucion.es', 'Javier', 'Moreno Sánchez', '0b4c9b1376c6e7cf9839fa56717cf5f20db951fd179c2ea411fdecfa044b1cf5', '63-6574454'),
-                                                                                                                    (14, 6, 'h.pégar@institucion.es', 'Hugo', 'Pérez García', '291c1d00a9cc162bc64168753fc6574a636a299b523e9cea468d7e5732d7a3b8', '18-6316673'),
-                                                                                                                    (15, 6, 'l.morpé@institucion.es', 'Lucía', 'Moreno Pérez', '525cb188c3f551a39b3f9f4022b00e0f42808721a7a1040e8ac2672b4e4dad93', '82-3789142');
+                                                                                                                    (1, 1, 'l.simdre@epsg.upv.es', 'Lief', 'Simants Dredge', '9218611', '01-9218611'),
+                                                                                                                    (2, 2, 'd.rawabc@epsg.upv.es', 'Debora', 'Rawstorne', '9971924', '05-9971924'),
+                                                                                                                    (3, 1, 'k.poumai@upv.es', 'Kevan', 'Pounds Mainston', '4525956', '60-4525956'),
+                                                                                                                    (4, 2, 'l.prista@upv.es', 'Luelle', 'Pridmore Starsmeare', '6055365', '64-6055365'),
+                                                                                                                    (5, 1, 'o.breshe@upv.es', 'Ondrea', 'Brezlaw Sherwill', '1316390', '88-1316390'),
+                                                                                                                    (6, 2, 'b.maltho@upv.es', 'Brooke', 'Malimoe Thomerson', '1970980', '91-1970980'),
+                                                                                                                    (7, 4, 'p.rodgar@institucion.es', 'Pablo', 'Rodríguez García', '1114028', '68-1114028'),
+                                                                                                                    (8, 4, 's.morfer@institucion.es', 'Sofía', 'Moreno Fernández', '1473681', '31-1473681'),
+                                                                                                                    (9, 4, 'm.fermor@institucion.es', 'Martina', 'Fernández Moreno', '9850488', '32-9850488'),
+                                                                                                                    (10, 5, 'j.mormar@institucion.es', 'Javier', 'Moreno Martínez', '1796971', '60-1796971'),
+                                                                                                                    (11, 5, 'm.péfer@institucion.es', 'Martina', 'Pérez Fernández', '8165435', '34-8165435'),
+                                                                                                                    (12, 5, 'd.sáló@institucion.es', 'Daniela', 'Sánchez López', '8976724', '36-8976724'),
+                                                                                                                    (13, 6, 'j.morsá@institucion.es', 'Javier', 'Moreno Sánchez', '6574454', '63-6574454'),
+                                                                                                                    (14, 6, 'h.pégar@institucion.es', 'Hugo', 'Pérez García', '6316673', '18-6316673'),
+                                                                                                                    (15, 6, 'l.morpé@institucion.es', 'Lucía', 'Moreno Pérez', '3789142', '82-3789142');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `preguntasexamen`
+-- Estructura de tabla para la tabla `preguntasexamen`
 --
 
 CREATE TABLE `preguntasexamen` (
                                    `idPregunta` int(11) NOT NULL,
                                    `enunciado` text NOT NULL,
                                    `valorPregunta` tinyint(3) NOT NULL,
-                                   `idContenido` int(11) DEFAULT NULL
+                                   `idContenido` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `preguntasexamen`
---
-
-INSERT INTO `preguntasexamen` (`idPregunta`, `idRespuesta`, `enunciado`, `valorPregunta`, `idContenido`) VALUES
-                                                                                                             (1, 1, '¿Qué motor se utiliza principalmente para desarrollo de videojuegos?', 5, 1),
-                                                                                                             (2, 5, '¿Qué lenguaje se usa por defecto en Unity?', 5, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `respuestasexamen`
+-- Estructura de tabla para la tabla `respuestasexamen`
 --
 
 CREATE TABLE `respuestasexamen` (
                                     `idRespuesta` int(11) NOT NULL,
                                     `respuesta` text NOT NULL,
-                                    `valorRespuesta` tinyint(1) NOT NULL
+                                    `valorRespuesta` tinyint(1) NOT NULL,
+                                    `idPregunta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `respuestasexamen`
---
-
-INSERT INTO `respuestasexamen` (`idRespuesta`, `respuesta`, `valorRespuesta`) VALUES
-                                                                                  (1, 'Unity', 1),
-                                                                                  (2, 'Photoshop', 0),
-                                                                                  (3, '3ds Max', 0),
-                                                                                  (4, 'Blender', 0),
-                                                                                  (5, 'C#', 1),
-                                                                                  (6, 'JavaScript', 0),
-                                                                                  (7, 'Python', 0),
-                                                                                  (8, 'HTML', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Estructura de tabla para la tabla `roles`
 --
 
 CREATE TABLE `roles` (
@@ -460,7 +455,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `roles`
+-- Volcado de datos para la tabla `roles`
 --
 
 INSERT INTO `roles` (`idRol`, `nombreRol`) VALUES
@@ -471,7 +466,7 @@ INSERT INTO `roles` (`idRol`, `nombreRol`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `semestres`
+-- Estructura de tabla para la tabla `semestres`
 --
 
 CREATE TABLE `semestres` (
@@ -480,7 +475,7 @@ CREATE TABLE `semestres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `semestres`
+-- Volcado de datos para la tabla `semestres`
 --
 
 INSERT INTO `semestres` (`idSemestre`, `nombreSemestre`) VALUES
@@ -490,7 +485,7 @@ INSERT INTO `semestres` (`idSemestre`, `nombreSemestre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `titulacion`
+-- Estructura de tabla para la tabla `titulacion`
 --
 
 CREATE TABLE `titulacion` (
@@ -499,7 +494,7 @@ CREATE TABLE `titulacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `titulacion`
+-- Volcado de datos para la tabla `titulacion`
 --
 
 INSERT INTO `titulacion` (`codigoTitulacion`, `nombreTitulacion`) VALUES
@@ -507,11 +502,11 @@ INSERT INTO `titulacion` (`codigoTitulacion`, `nombreTitulacion`) VALUES
                                                                       ('TEL', 'Grado en Ingeniería de Telecomunicaciones');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `asignacionalumno`
+-- Indices de la tabla `asignacionalumno`
 --
 ALTER TABLE `asignacionalumno`
     ADD PRIMARY KEY (`idUsuariosPROA`,`codigoAsignatura`),
@@ -519,14 +514,14 @@ ALTER TABLE `asignacionalumno`
   ADD KEY `idGrupo` (`idGrupo`);
 
 --
--- Indexes for table `asignaciondocentes`
+-- Indices de la tabla `asignaciondocentes`
 --
 ALTER TABLE `asignaciondocentes`
     ADD PRIMARY KEY (`idUsuariosPROA`,`codigoAsignatura`),
   ADD KEY `codigoAsignatura` (`codigoAsignatura`);
 
 --
--- Indexes for table `asignaturas`
+-- Indices de la tabla `asignaturas`
 --
 ALTER TABLE `asignaturas`
     ADD PRIMARY KEY (`codigoAsignatura`),
@@ -537,7 +532,7 @@ ALTER TABLE `asignaturas`
   ADD KEY `idCaracter` (`idCaracter`);
 
 --
--- Indexes for table `avisos`
+-- Indices de la tabla `avisos`
 --
 ALTER TABLE `avisos`
     ADD PRIMARY KEY (`idAviso`),
@@ -546,56 +541,56 @@ ALTER TABLE `avisos`
   ADD KEY `idEstadoAvisos` (`idEstadoAvisos`);
 
 --
--- Indexes for table `calificaciones`
+-- Indices de la tabla `calificaciones`
 --
 ALTER TABLE `calificaciones`
     ADD PRIMARY KEY (`idExamen`,`idUsuariosPROA`),
   ADD KEY `idUsuariosPROA` (`idUsuariosPROA`);
 
 --
--- Indexes for table `caracteresasignatura`
+-- Indices de la tabla `caracteresasignatura`
 --
 ALTER TABLE `caracteresasignatura`
     ADD PRIMARY KEY (`idCaracter`);
 
 --
--- Indexes for table `contenidoavisos`
+-- Indices de la tabla `contenidoavisos`
 --
 ALTER TABLE `contenidoavisos`
     ADD PRIMARY KEY (`idContenidoAvisos`);
 
 --
--- Indexes for table `contenidoexamen`
+-- Indices de la tabla `contenidoexamen`
 --
 ALTER TABLE `contenidoexamen`
     ADD PRIMARY KEY (`idContenido`);
 
 --
--- Indexes for table `cursos`
+-- Indices de la tabla `cursos`
 --
 ALTER TABLE `cursos`
     ADD PRIMARY KEY (`idCurso`);
 
 --
--- Indexes for table `departamentos`
+-- Indices de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
     ADD PRIMARY KEY (`idDepartamento`);
 
 --
--- Indexes for table `estadosavisos`
+-- Indices de la tabla `estadosavisos`
 --
 ALTER TABLE `estadosavisos`
     ADD PRIMARY KEY (`idEstadoAvisos`);
 
 --
--- Indexes for table `estadosexamen`
+-- Indices de la tabla `estadosexamen`
 --
 ALTER TABLE `estadosexamen`
     ADD PRIMARY KEY (`idEstado`);
 
 --
--- Indexes for table `examenes`
+-- Indices de la tabla `examenes`
 --
 ALTER TABLE `examenes`
     ADD PRIMARY KEY (`idExamen`),
@@ -606,168 +601,144 @@ ALTER TABLE `examenes`
   ADD KEY `idUsuariosPROA` (`idUsuariosPROA`);
 
 --
--- Indexes for table `grupos`
+-- Indices de la tabla `grupos`
 --
 ALTER TABLE `grupos`
     ADD PRIMARY KEY (`idGrupo`);
 
 --
--- Indexes for table `opcionespregunta`
---
-ALTER TABLE `opcionespregunta`
-    ADD PRIMARY KEY (`idOpcion`),
-  ADD KEY `idPregunta` (`idPregunta`);
-
---
--- Indexes for table `personarol`
+-- Indices de la tabla `personarol`
 --
 ALTER TABLE `personarol`
     ADD PRIMARY KEY (`idUsuariosPROA`,`idRol`),
   ADD KEY `idRol` (`idRol`);
 
 --
--- Indexes for table `personas`
+-- Indices de la tabla `personas`
 --
 ALTER TABLE `personas`
     ADD PRIMARY KEY (`idUsuariosPROA`);
 
 --
--- Indexes for table `preguntasexamen`
+-- Indices de la tabla `preguntasexamen`
 --
 ALTER TABLE `preguntasexamen`
     ADD PRIMARY KEY (`idPregunta`),
   ADD KEY `idContenido` (`idContenido`);
 
 --
--- Indexes for table `respuestasexamen`
+-- Indices de la tabla `respuestasexamen`
 --
 ALTER TABLE `respuestasexamen`
-    ADD PRIMARY KEY (`idRespuesta`);
+    ADD PRIMARY KEY (`idRespuesta`),
+  ADD KEY `idPregunta` (`idPregunta`);
 
 --
--- Indexes for table `roles`
+-- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
     ADD PRIMARY KEY (`idRol`);
 
 --
--- Indexes for table `semestres`
+-- Indices de la tabla `semestres`
 --
 ALTER TABLE `semestres`
     ADD PRIMARY KEY (`idSemestre`);
 
 --
--- Indexes for table `titulacion`
+-- Indices de la tabla `titulacion`
 --
 ALTER TABLE `titulacion`
     ADD PRIMARY KEY (`codigoTitulacion`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `avisos`
+-- AUTO_INCREMENT de la tabla `avisos`
 --
 ALTER TABLE `avisos`
     MODIFY `idAviso` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `caracteresasignatura`
+-- AUTO_INCREMENT de la tabla `caracteresasignatura`
 --
 ALTER TABLE `caracteresasignatura`
     MODIFY `idCaracter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `contenidoavisos`
+-- AUTO_INCREMENT de la tabla `contenidoavisos`
 --
 ALTER TABLE `contenidoavisos`
     MODIFY `idContenidoAvisos` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `contenidoexamen`
+-- AUTO_INCREMENT de la tabla `contenidoexamen`
 --
 ALTER TABLE `contenidoexamen`
-    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `cursos`
+-- AUTO_INCREMENT de la tabla `cursos`
 --
 ALTER TABLE `cursos`
     MODIFY `idCurso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `departamentos`
+-- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
     MODIFY `idDepartamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `estadosavisos`
+-- AUTO_INCREMENT de la tabla `estadosavisos`
 --
 ALTER TABLE `estadosavisos`
     MODIFY `idEstadoAvisos` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `estadosexamen`
+-- AUTO_INCREMENT de la tabla `estadosexamen`
 --
 ALTER TABLE `estadosexamen`
-    MODIFY `idEstado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+    MODIFY `idEstado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
--- AUTO_INCREMENT for table `examenes`
+-- AUTO_INCREMENT de la tabla `examenes`
 --
 ALTER TABLE `examenes`
-    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `grupos`
+-- AUTO_INCREMENT de la tabla `grupos`
 --
 ALTER TABLE `grupos`
     MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `opcionespregunta`
---
-ALTER TABLE `opcionespregunta`
-    MODIFY `idOpcion` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `personas`
+-- AUTO_INCREMENT de la tabla `personas`
 --
 ALTER TABLE `personas`
     MODIFY `idUsuariosPROA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `preguntasexamen`
---
-ALTER TABLE `preguntasexamen`
-    MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `respuestasexamen`
---
-ALTER TABLE `respuestasexamen`
-    MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `roles`
+-- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
     MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `semestres`
+-- AUTO_INCREMENT de la tabla `semestres`
 --
 ALTER TABLE `semestres`
     MODIFY `idSemestre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `asignacionalumno`
+-- Filtros para la tabla `asignacionalumno`
 --
 ALTER TABLE `asignacionalumno`
     ADD CONSTRAINT `asignacionalumno_ibfk_1` FOREIGN KEY (`idUsuariosPROA`) REFERENCES `personas` (`idUsuariosPROA`),
@@ -775,14 +746,14 @@ ALTER TABLE `asignacionalumno`
   ADD CONSTRAINT `asignacionalumno_ibfk_3` FOREIGN KEY (`idGrupo`) REFERENCES `grupos` (`idGrupo`);
 
 --
--- Constraints for table `asignaciondocentes`
+-- Filtros para la tabla `asignaciondocentes`
 --
 ALTER TABLE `asignaciondocentes`
     ADD CONSTRAINT `asignaciondocentes_ibfk_1` FOREIGN KEY (`idUsuariosPROA`) REFERENCES `personas` (`idUsuariosPROA`),
   ADD CONSTRAINT `asignaciondocentes_ibfk_2` FOREIGN KEY (`codigoAsignatura`) REFERENCES `asignaturas` (`codigoAsignatura`);
 
 --
--- Constraints for table `asignaturas`
+-- Filtros para la tabla `asignaturas`
 --
 ALTER TABLE `asignaturas`
     ADD CONSTRAINT `asignaturas_ibfk_1` FOREIGN KEY (`codigoTitulacion`) REFERENCES `titulacion` (`codigoTitulacion`),
@@ -792,7 +763,7 @@ ALTER TABLE `asignaturas`
   ADD CONSTRAINT `asignaturas_ibfk_5` FOREIGN KEY (`idCaracter`) REFERENCES `caracteresasignatura` (`idCaracter`);
 
 --
--- Constraints for table `avisos`
+-- Filtros para la tabla `avisos`
 --
 ALTER TABLE `avisos`
     ADD CONSTRAINT `avisos_ibfk_1` FOREIGN KEY (`idContenidoAvisos`) REFERENCES `contenidoavisos` (`idContenidoAvisos`),
@@ -800,14 +771,14 @@ ALTER TABLE `avisos`
   ADD CONSTRAINT `avisos_ibfk_3` FOREIGN KEY (`idEstadoAvisos`) REFERENCES `estadosavisos` (`idEstadoAvisos`);
 
 --
--- Constraints for table `calificaciones`
+-- Filtros para la tabla `calificaciones`
 --
 ALTER TABLE `calificaciones`
     ADD CONSTRAINT `calificaciones_ibfk_1` FOREIGN KEY (`idExamen`) REFERENCES `examenes` (`idExamen`),
   ADD CONSTRAINT `calificaciones_ibfk_2` FOREIGN KEY (`idUsuariosPROA`) REFERENCES `personas` (`idUsuariosPROA`);
 
 --
--- Constraints for table `examenes`
+-- Filtros para la tabla `examenes`
 --
 ALTER TABLE `examenes`
     ADD CONSTRAINT `examenes_ibfk_1` FOREIGN KEY (`codigoAsignatura`) REFERENCES `asignaturas` (`codigoAsignatura`),
@@ -817,23 +788,23 @@ ALTER TABLE `examenes`
   ADD CONSTRAINT `examenes_ibfk_5` FOREIGN KEY (`idUsuariosPROA`) REFERENCES `personas` (`idUsuariosPROA`);
 
 --
--- Constraints for table `opcionespregunta`
---
-ALTER TABLE `opcionespregunta`
-    ADD CONSTRAINT `opcionespregunta_ibfk_1` FOREIGN KEY (`idPregunta`) REFERENCES `preguntasexamen` (`idPregunta`) ON DELETE CASCADE;
-
---
--- Constraints for table `personarol`
+-- Filtros para la tabla `personarol`
 --
 ALTER TABLE `personarol`
     ADD CONSTRAINT `personarol_ibfk_1` FOREIGN KEY (`idUsuariosPROA`) REFERENCES `personas` (`idUsuariosPROA`),
   ADD CONSTRAINT `personarol_ibfk_2` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`);
 
 --
--- Constraints for table `preguntasexamen`
+-- Filtros para la tabla `preguntasexamen`
 --
 ALTER TABLE `preguntasexamen`
     ADD CONSTRAINT `preguntasexamen_ibfk_2` FOREIGN KEY (`idContenido`) REFERENCES `contenidoexamen` (`idContenido`);
+
+--
+-- Filtros para la tabla `respuestasexamen`
+--
+ALTER TABLE `respuestasexamen`
+    ADD CONSTRAINT `respuestasexamen_ibfk_1` FOREIGN KEY (`idPregunta`) REFERENCES `preguntasexamen` (`idPregunta`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
