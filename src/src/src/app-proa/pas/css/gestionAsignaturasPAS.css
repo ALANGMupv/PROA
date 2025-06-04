@@ -1,0 +1,227 @@
+.contenido-asignatura { /* Evita que el contenido principal desborde y empuje el margen */
+    min-width: 0;
+}
+
+.gestion-asignaturas {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+/* Contenedor de filtros para buscar y seleccionar asignaturas */
+.filtros-asignaturas {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Tres columnas de igual ancho */
+    gap: 1em;
+    align-items: center;
+    width: 100%;
+}
+
+/* Todos los inputs, selects y botones del filtro ocupan el ancho completo */
+.filtros-asignaturas .input-con-icono,
+.filtros-asignaturas .dropdown-wrapper,
+.filtros-asignaturas .btn,
+.filtros-asignaturas .input-base,
+.filtros-asignaturas .seleccionador-dropdown {
+    width: 100%;
+}
+
+/* Estilo del botón "Nueva asignatura" */
+.filtros-asignaturas .btn {
+    padding: 0.65em 1em;
+    border-radius: 6px;
+}
+
+.dropdown-wrapper {
+    position: relative;
+}
+
+.dropdown-wrapper .icono-dropdown {
+    position: absolute;
+    top: 50%;
+    right: 1em;
+    transform: translateY(-50%);
+}
+
+/* Contenedor de la tabla de asignaturas */
+.tabla-asignaturas {
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    width: 100%;
+}
+
+/* Cada fila de la tabla (incluyendo encabezado y datos) */
+.tabla-asignaturas .fila {
+    display: grid;
+    grid-template-columns: 1.2fr 2.5fr 2.5fr 1fr 1.5fr 1fr; /* Columnas proporcionales */
+    align-items: center;
+    padding: 1em 0;
+    border-bottom: 2px solid var(--color-bordes);
+}
+
+/* Estilos del encabezado de la tabla */
+.tabla-asignaturas .fila.encabezado {
+    font-weight: 900;
+    color: #616976;
+    background-color: var(--color-fondoPROAGris);
+}
+
+/* Centrado de columnas específicas del encabezado y filas */
+.tabla-asignaturas .fila.encabezado span:last-child, /* Columna 'ASIGNAR' */
+.tabla-asignaturas .fila.encabezado span:nth-child(5), /* Columna 'FICHA' */
+.tabla-asignaturas .fila span:nth-child(2), /* 'NOMBRE' */
+.tabla-asignaturas .fila span:nth-child(3), /* 'DEPARTAMENTO' */
+.tabla-asignaturas .fila span:nth-child(4) { /* 'CRÉDITOS' */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Padding para la primera fila */
+.tabla-asignaturas .fila span:first-child {
+    padding-left: 1em;
+}
+
+.tabla-asignaturas .fila span:last-child {
+    padding-right: 1em;
+}
+
+
+/* Estilo del botón "Ver detalles" */
+.tabla-asignaturas .btn {
+    font-size: 1em;
+    padding: 0.5em 1em;
+    width: fit-content;
+    justify-self: center;
+    align-self: center;
+}
+
+/* Icono del menú de opciones en cada fila */
+.icono-opciones {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+}
+
+/* Alternar fondo en filas pares (2, 4, 6, etc.) */
+.tabla-asignaturas .fila:nth-child(odd):not(.encabezado) {
+    background-color: var(--color-fondoPROAGris); 
+}
+
+#dropdown-asignaturas {
+    padding: 0.65em 1em;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--color-bordes);
+    background-color: transparent;
+    font-weight: 400;
+}
+
+#dropdown-asignaturas:focus {
+    border-color: var(--color-primario);
+}
+
+
+/* region --- MENÚ 3 RAYITAS ASIGNAR --- */
+.menu-opciones-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-desplegable {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background-color: white;
+    border: 1px solid var(--color-bordes);
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+    min-width: 180px;
+}
+
+.menu-desplegable button {
+    width: 100%;
+    padding: 0.75em 1em;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.menu-desplegable button:hover {
+    background-color: var(--color-terciario);
+}
+
+.menu-opciones-wrapper.abierto .menu-desplegable {
+    display: block;
+}
+
+a.ver-detalles {
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* endregion */
+
+/* Cuando no cabe bien la tabla, pasa a modo responsive -> 1140px */
+@media screen and (max-width: 1140px) {
+
+    #dropdown-asignaturas {
+        padding: 0.5em 1em;
+        font-size: 1em;
+    }
+
+    .filtros-asignaturas .btn {
+        font-size: 1em;
+    }
+
+    /* Filtros en columna */
+    .filtros-asignaturas {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        width: 100%;
+    }
+
+    /* Fila de asignaturas: todo apilado en columna */
+    .tabla-asignaturas .fila,
+    .tabla-asignaturas .fila.encabezado {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7em;
+        padding: 1em;
+        width: 100%;
+    }
+
+    /* Ocultar el encabezado en móvil */
+    .tabla-asignaturas .fila.encabezado {
+        display: none;
+    }
+
+    /* Estilos para span en modo columna */
+    .tabla-asignaturas .fila span,
+    .tabla-asignaturas .fila button,
+    .tabla-asignaturas .fila img {
+        width: 100%;
+    }
+
+    .menu-opciones-wrapper {
+        align-self: center;
+        width: fit-content;
+    }
+}
+
+
+

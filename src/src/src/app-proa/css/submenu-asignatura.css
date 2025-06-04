@@ -1,0 +1,315 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* WRAPPER GENERAL */
+.contenido-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+/* LAYOUT PRINCIPAL */
+.contenido-principal {
+    min-height: 100vh;
+    display: flex;
+    gap: 2.5em;
+    align-items: flex-start;
+    background-color: var(--color-fondoPROAGris);
+}
+
+/* CABECERA ASIGNATURA */
+.cabecera-submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 1em;
+}
+
+.codigo-asignatura {
+    font-size: 1em;
+    color: #666;
+}
+
+/* SUBMENÚ GENERAL */
+#submenu {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100%;
+    border-radius: 5px;
+}
+
+/* TÍTULO DEL SUBMENÚ */
+.titulo-submenu {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 2em;
+    color: var(--color-primario);
+}
+
+/* MENÚ DE OPCIONES */
+.menu .submenu-item,
+#submenu a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.75em;
+    text-decoration: none;
+    color: var(--color-resalteOscuro);
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: 500;
+    font-family: var(--fuente-principal);
+    font-size: 1.15em;
+    border-bottom: 1px solid var(--color-bordes);
+    padding: 1.1em;
+}
+
+.menu .submenu-item:hover,
+#submenu a:hover {
+    background-color: var(--color-terciario);
+    color: var(--color-primario);
+}
+
+.menu .submenu-item.activo,
+#submenu a.activo {
+    background-color: var(--color-fondoPROAGris);
+    font-weight: bold;
+    color: var(--color-primario);
+    border-left: none;
+    border-right: none;
+}
+
+/* PANEL DE CONTENIDO */
+.panel-contenido {
+    flex: 1;
+}
+.panel-contenido p {
+    text-align: justify;
+}
+
+.fondoPanel {
+    border: 1px solid var(--color-bordes);
+    width: auto;
+    max-width: 100%;
+    padding: 2em;
+    margin: 1em 2em;
+}
+
+/* BOTÓN COLAPSABLE EN MÓVIL */
+.submenu-toggle-btn {
+    display: none;
+}
+
+/* CONTENEDOR DE OPCIONES COLAPSABLE */
+.submenu-items {
+    display: flex;
+    flex-direction: column;
+}
+
+/* region --- MENÚ ASIGNATURAS --- */
+.cabecera-dropdown-fija {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1.5em 2em 0 2em;
+    gap: 1em;
+}
+
+.contenido-asignatura {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Icono fino dentro del select */
+.input-con-icono {
+    position: relative;
+
+}
+
+.input-con-icono select {
+    width: 100%;
+    padding-right: 2.5em;
+}
+
+.icono-dropdown {
+    position: absolute;
+    top: 50%;
+    right: 1em;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+#dropdown-asignaturas {
+    background-color: var(--color-primario);
+    color: var(--color-panelesBlancoPuro);
+    font-weight: 700;
+    font-size: 1.1em;
+    border-radius: 6px;
+}
+
+/* Clon del botón submenu en cabecera responsive */
+@media (max-width: 850px) {
+    .submenu-toggle-btn-cabecera {
+        display: block;
+        flex: 1 1 48%;
+        max-width: 48%;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.75em 1em;
+    }
+
+    /* Oculta el original dentro del aside en móviles */
+    body:not(.vista-pas) #submenu .submenu-toggle-btn:not(.submenu-toggle-btn-cabecera) {
+        display: none;
+    }
+
+    .cabecera-dropdown-fija {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1em;
+        gap: 1em;
+        flex-wrap: nowrap;
+    }
+
+    .cabecera-dropdown-fija .input-con-icono {
+        flex: 1 1 48%;
+        max-width: 48%;
+    }
+
+    #dropdown-asignaturas {
+        font-size: 1em;
+    }
+}
+
+/* Enlace de volver */
+.volver-enlace {
+    display: inline-block;
+    font-size: 1.125em;
+    color: var(--color-primario);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    cursor: pointer;
+    margin-left: 0.5em;
+}
+
+.volver-enlace:hover {
+    text-decoration: underline;
+    color: var(--color-secundario);
+}
+/* endregion */
+
+/* ESTILOS RESPONSIVE */
+@media (max-width: 850px) {
+
+    .volver-enlace {
+        margin-left: 0;
+        margin-top:0.5em;
+    }
+
+    #submenu {
+        min-width: unset;
+        width: 100%;
+        height: auto;
+        background-color: transparent;
+    }
+
+    .contenido-principal {
+        flex-direction: column;
+        align-items: stretch;
+        overflow-x: hidden;
+        gap: 1em;
+        padding: 1.5em;
+    }
+
+    .panel-contenido {
+        flex: unset;
+        width: 100%;
+        padding-inline: 1em;
+    }
+
+    .menu.colapsable {
+        position: relative;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .submenu-toggle-btn {
+        display: flex;
+        align-items: center;
+        background-color: var(--color-primario);
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.75em 1em;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .submenu-items {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        padding: 0 1em;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .submenu-items.visible {
+        max-height: 1000px;
+        padding-block: 1em;
+    }
+
+    .submenu-items .submenu-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        padding: 0.5em;
+        border-radius: 4px;
+        text-decoration: none;
+        color: var(--color-resalteOscuro);
+        transition: background-color 0.2s ease;
+    }
+
+    .submenu-items .submenu-item:hover {
+        background-color: var(--color-terciario);
+    }
+
+    .contenido-principal > * {
+        width: 100%;
+    }
+
+    .fondoPanel {
+        margin: 1.5em 0;
+        border-radius: 8px;
+    }
+
+    .titulo-submenu {
+        display: flex;
+        justify-content: center;
+        padding: 1em;
+        font-size: 1.3em;
+    }
+}
