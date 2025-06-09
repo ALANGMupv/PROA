@@ -89,7 +89,7 @@ $mail->setFrom('registro@gti.com', 'GTI');
 $mail->addAddress($email);
 $mail->isHTML(true);
 
-$href = 'http://localhost/proa/app-gti/login.php?token=' . $token;
+$href = 'http://localhost/proa/app-gti/login.php?activado=' . $token;
 $mail->Subject = 'Confirma tu registro';
 $mail->Body = "Hola <b>$nombre $apellidos</b>,<br>Por favor confirma tu registro: <a href='$href'>$href</a>";
 $mail->AltBody = "Hola $nombre $apellidos, confirma tu registro: $href";
@@ -99,8 +99,8 @@ $mail->send();
 require_once '../../env/proa.inc';
 if (!isset($conn)) die("Conexión PROA no disponible");
 
-$nombres = ['Lucía', 'Mateo', 'Sofía', 'Hugo', 'Martina', 'Pablo', 'Valeria', 'Leo', 'Daniela', 'Javier'];
-$apellidos = ['García', 'Martínez', 'López', 'Sánchez', 'Pérez', 'Gómez', 'Rodríguez', 'Fernández', 'Ruiz', 'Moreno'];
+$nombres = ['Lucia', 'Mateo', 'Sofia', 'Hugo', 'Martina', 'Pablo', 'Valeria', 'Leo', 'Daniela', 'Javier'];
+$apellidos = ['Garcia', 'Martinez', 'Lopez', 'Sanchez', 'Perez', 'Gómez', 'Rodríguez', 'Fernandez', 'Ruiz', 'Moreno'];
 
 $roles = ['alumno', 'profesor', 'pas'];
 foreach ($roles as $rol) {

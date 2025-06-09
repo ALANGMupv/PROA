@@ -154,5 +154,5 @@ function mostrarToastError(mensaje) {
     setTimeout(() => {
         toastError.remove();
         overlayError.remove();
-    }, 850);
+    }, 1000);
 }
