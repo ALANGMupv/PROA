@@ -168,6 +168,38 @@
 }
 /* endregion */
 
+/* region --- DIALOG TOKEN --- */
+.dialog-confirmacion {
+    background-color: var(--color-blancoPuro);
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    font-family: var(--fuente-lato);
+}
+
+.dialog-confirmacion h3 {
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+    font-family: var(--fuente-lato);
+}
+
+.dialog-confirmacion p {
+    font-size: 1.1em;
+    margin-bottom: 1em;
+    font-family: var(--fuente-lato);
+}
+
+.dialog-confirmacion .btn {
+    font-size: 1em;
+    padding: 0.6em 1.2em;
+}
+/* endregion */
+
+
 
 
 

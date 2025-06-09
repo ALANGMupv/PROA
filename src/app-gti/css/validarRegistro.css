@@ -1,0 +1,86 @@
+/* validarRegistro.css */
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4em 1em;
+    background-color: var(--color-fondo-diferenciador);
+}
+
+.mensaje {
+    max-width: 600px;
+    width: 100%;
+    padding: 2.5em;
+    border-radius: 12px;
+    font-family: var(--fuente-lato);
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    animation: aparecer 0.5s ease-in-out both;
+}
+
+/* Éxito */
+.mensaje.exito {
+    background-color: #e6ffed;
+    color: #1b5e20;
+    border: 2px solid #81c784;
+}
+
+/* Error */
+.mensaje.error {
+    background-color: #fff0f0;
+    color: #c62828;
+    border: 2px solid var(--color-rojoError);
+}
+
+.mensaje p {
+    font-size: 1.25em;
+    margin-bottom: 1.5em;
+}
+
+.mensaje a {
+    display: inline-block;
+    margin-top: 1em;
+    padding: 0.75em 1.5em;
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--color-blancoPuro);
+    background-color: var(--color-principal);
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.mensaje a:hover {
+    background-color: var(--color-blancoPuro);
+    color: var(--color-principal);
+    border: 2px solid var(--color-principal);
+}
+
+/* Animación */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .mensaje {
+        padding: 2em 1em;
+    }
+
+    .mensaje p {
+        font-size: 1.1em;
+    }
+
+    .mensaje a {
+        font-size: 1em;
+        padding: 0.65em 1em;
+    }
+}

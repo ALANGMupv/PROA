@@ -78,7 +78,6 @@ document.querySelector('.registro-formulario')?.addEventListener('submit', funct
     // Si el formulario no pasa las validaciones, no continuamos
     if (!formularioValido) return;
 
-    // Envío de datos al servidor PHP
     const formData = new FormData(formulario);
 
     fetch('registrarUsuario.php', {
@@ -87,46 +86,15 @@ document.querySelector('.registro-formulario')?.addEventListener('submit', funct
     })
         .then(res => res.text())
         .then(respuesta => {
-            const overlay = document.createElement('div');
-            overlay.style.position = 'fixed';
-            overlay.style.top = 0;
-            overlay.style.left = 0;
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.backdropFilter = 'blur(4px)';
-            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
-            overlay.style.zIndex = '999';
-
-            const toast = document.createElement('div');
-            toast.textContent = respuesta.includes('Usuario insertado') ? 'Registro exitoso. Credenciales asignadas. Redirigiendo...' : 'Error: ' + respuesta;
-            toast.style.position = 'fixed';
-            toast.style.top = '50%';
-            toast.style.left = '50%';
-            toast.style.transform = 'translate(-50%, -50%)';
-            toast.style.padding = '1em 2em';
-            toast.style.maxWidth = '80%';
-            toast.style.fontSize = '1.15rem';
-            toast.style.backgroundColor = respuesta.includes('Usuario insertado') ? 'var(--color-principal)' : '#c45f5f';
-            toast.style.color = '#fff';
-            toast.style.borderRadius = '12px';
-            toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
-            toast.style.fontFamily = 'var(--fuente-lato)';
-            toast.style.textAlign = 'center';
-            toast.style.zIndex = '1000';
-
-            document.body.appendChild(overlay);
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.remove();
-                overlay.remove();
-                if (respuesta.includes('Usuario insertado')) {
-                    window.location.href = 'login.php';
-                }
-            }, 2000);
+            if (respuesta.trim() === 'OK') {
+                document.getElementById('dialog-confirmacion')?.showModal();
+                formulario.reset();
+            } else {
+                alert('Error: ' + respuesta);
+            }
         })
         .catch(error => {
-            alert('Error de conexión con el servidor.');
+            alert('Error al conectar con el servidor.');
             console.error(error);
         });
 });
