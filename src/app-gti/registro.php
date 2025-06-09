@@ -117,6 +117,14 @@ include 'includes/headerNoLogueado.inc';
 </section>
 </main>
 
+<dialog id="dialog-confirmacion" class="dialog-confirmacion">
+    <div>
+        <h3>¡Registro exitoso!</h3>
+        <p>Te hemos enviado un correo con un enlace para activar tu cuenta.</p>
+        <button onclick="this.closest('dialog').close()" class="btn">Cerrar</button>
+    </div>
+</dialog>
+
 <!-- Footer-->
 <?php include $rutaBase . 'includes/footer.inc'; ?>
 <!-- Fin del footer-->

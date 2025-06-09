@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 require_once '../../env/gti.inc';
 if (!isset($conn)) die("Conexión no disponible");
 
-// Validación básica del lado servidor (por si alguien desactiva JS)
+// Validación básica del lado servidor
 $campos = ['nombre', 'apellidos', 'correo', 'contrasena', 'institucion', 'tipo'];
 foreach ($campos as $campo) {
     if (empty($_POST[$campo])) {
@@ -13,7 +13,7 @@ foreach ($campos as $campo) {
     }
 }
 
-// Recoger los datos directamente
+// Recoger datos
 $nombre = $_POST['nombre'];
 $apellidos = $_POST['apellidos'];
 $email = $_POST['correo'];
@@ -27,30 +27,26 @@ $stmt = $conn->prepare("SELECT email FROM usuariosgti WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $stmt->store_result();
-
 if ($stmt->num_rows > 0) {
-    die(" Correo ya registrado");
+    die("Correo ya registrado");
 }
 $stmt->close();
 
-// Buscar si la institución ya existe
+// Buscar o insertar institución
 $stmt = $conn->prepare("SELECT codigoInstitucion FROM institucion WHERE nombreInstitucion = ?");
 $stmt->bind_param("s", $nombreInstitucion);
 $stmt->execute();
 $stmt->store_result();
-
 if ($stmt->num_rows > 0) {
     $stmt->bind_result($codigoInstitucion);
     $stmt->fetch();
     $stmt->close();
 } else {
     $stmt->close();
-
     $query = "SELECT MAX(CAST(codigoInstitucion AS UNSIGNED)) FROM institucion";
     $result = $conn->query($query);
     $max = $result->fetch_row()[0] ?? 0;
     $nuevoCodigo = str_pad($max + 1, 3, '0', STR_PAD_LEFT);
-
     $stmt = $conn->prepare("INSERT INTO institucion (codigoInstitucion, codigoTipoInstitucion, nombreInstitucion) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $nuevoCodigo, $codigoTipo, $nombreInstitucion);
     if (!$stmt->execute()) {
@@ -60,39 +56,54 @@ if ($stmt->num_rows > 0) {
     $codigoInstitucion = $nuevoCodigo;
 }
 
-// Insertar nuevo usuario
-$stmt = $conn->prepare("INSERT INTO usuariosgti (email, nombre, apellidos, contraseña, codigoInstitucion, telefono) VALUES (?, ?, ?, SHA2(?, 256), ?, ?)");
-$stmt->bind_param("ssssss", $email, $nombre, $apellidos, $password, $codigoInstitucion, $telefono);
+// Generar token
+$token = uniqid();
+$validez = date('Y-m-d H:i:s', strtotime('+1 hour'));
+
+// Insertar usuario GTI
+$stmt = $conn->prepare("INSERT INTO usuariosgti (email, nombre, apellidos, contraseña, codigoInstitucion, telefono, token, validez_token) VALUES (?, ?, ?, SHA2(?, 256), ?, ?, ?, ?)");
+$stmt->bind_param("ssssssss", $email, $nombre, $apellidos, $password, $codigoInstitucion, $telefono, $token, $validez);
 $stmt->execute();
-
 if ($stmt->affected_rows === 0) {
-    die("No se insertó el usuario. Error: " . $stmt->error);
-} else {
-    echo "Usuario insertado correctamente";
+    die("Error al insertar usuario: " . $stmt->error);
 }
-
+$idGTI = $stmt->insert_id;
 $stmt->close();
+$conn->close(); // Cerrar GTI
 
-// Asignación de creedenciales de PROA para los nuevos usuarios de GTI
+// Enviar correo de activación con PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+require_once 'includes/PHPMailer.php';
+require_once 'includes/SMTP.php';
 
-// Obtener el ID del nuevo usuario GTI
-$idGTI = $conn->insert_id;
-$conn->close(); // Cerramos la conexión con GTI
+$mail = new PHPMailer(true);
+$mail->isSMTP();
+$mail->Host = 'smtp.ethereal.email';
+$mail->SMTPAuth = true;
+$mail->Username = 'bulah.kertzmann87@ethereal.email';
+$mail->Password = 'nfze9HdZxryNM5Cs1H';
+$mail->SMTPSecure = 'tls';
+$mail->Port = 587;
 
-// Conectamos con la BBDD PROA
+$mail->setFrom('registro@gti.com', 'GTI');
+$mail->addAddress($email);
+$mail->isHTML(true);
+
+$href = 'http://localhost/proa/app-gti/login.php?activado=' . $token;
+$mail->Subject = 'Confirma tu registro';
+$mail->Body = "Hola <b>$nombre $apellidos</b>,<br>Por favor confirma tu registro: <a href='$href'>$href</a>";
+$mail->AltBody = "Hola $nombre $apellidos, confirma tu registro: $href";
+$mail->send();
+
+// Conectar con PROA para crear usuarios simulados
 require_once '../../env/proa.inc';
-if (!isset($conn)) die("Conexión a PROA no disponible");
+if (!isset($conn)) die("Conexión PROA no disponible");
 
-// Listas de nombres y apellidos para generar combinaciones
-$nombres = ['Lucía', 'Mateo', 'Sofía', 'Hugo', 'Martina', 'Pablo', 'Valeria', 'Leo', 'Daniela', 'Javier'];
-$apellidos = ['García', 'Martínez', 'López', 'Sánchez', 'Pérez', 'Gómez', 'Rodríguez', 'Fernández', 'Ruiz', 'Moreno'];
+$nombres = ['Lucia', 'Mateo', 'Sofia', 'Hugo', 'Martina', 'Pablo', 'Valeria', 'Leo', 'Daniela', 'Javier'];
+$apellidos = ['Garcia', 'Martinez', 'Lopez', 'Sanchez', 'Perez', 'Gómez', 'Rodríguez', 'Fernandez', 'Ruiz', 'Moreno'];
 
-
-// Roles a crear
 $roles = ['alumno', 'profesor', 'pas'];
-
 foreach ($roles as $rol) {
-    // Elegir nombre y dos apellidos aleatorios
     $nombre = $nombres[array_rand($nombres)];
     $apellido1 = $apellidos[array_rand($apellidos)];
     $apellido2 = $apellidos[array_rand($apellidos)];
@@ -100,28 +111,21 @@ foreach ($roles as $rol) {
         $apellido2 = $apellidos[array_rand($apellidos)];
     }
     $apellidosConcat = "$apellido1 $apellido2";
-
-    // Generar DNI tipo NN-NNNNNNN
-    $dni = sprintf('%02d-%07d', rand(1, 99), rand(1000000, 9999999));
-
-    // Contraseña de 6 dígitos aleatorios
-    $contrasenaPlana = strval(rand(100000, 999999));
-    $contrasenaHash = hash('sha256', $contrasenaPlana);
-
-    // Generar email tipo i.apepel@institucion.es
+    $parte1 = sprintf('%02d', rand(1, 99));
+    $parte2 = sprintf('%07d', rand(1000000, 9999999));
+    $dni = "$parte1-$parte2";
+    $contrasenaPlana = $parte2;
     $inicial = strtolower(substr($nombre, 0, 1));
     $email = strtolower($inicial . '.' . substr($apellido1, 0, 3) . substr($apellido2, 0, 3)) . '@institucion.es';
 
-    // Insertar en personas
     $stmt = $conn->prepare("INSERT INTO personas (idUsuariosGTI, email, nombre, apellidos, contraseña, dni) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isssss", $idGTI, $email, $nombre, $apellidosConcat, $contrasenaHash, $dni);
+    $stmt->bind_param("isssss", $idGTI, $email, $nombre, $apellidosConcat, $contrasenaPlana, $dni);
     if (!$stmt->execute()) {
         die("Error al insertar persona ($rol): " . $stmt->error);
     }
     $idProa = $stmt->insert_id;
     $stmt->close();
 
-    // Obtener idRol
     $stmt = $conn->prepare("SELECT idRol FROM roles WHERE nombreRol = ?");
     $stmt->bind_param("s", $rol);
     $stmt->execute();
@@ -132,7 +136,6 @@ foreach ($roles as $rol) {
     }
     $stmt->close();
 
-    // Insertar en personarol
     $stmt = $conn->prepare("INSERT INTO personarol (idUsuariosPROA, idRol) VALUES (?, ?)");
     $stmt->bind_param("ii", $idProa, $idRol);
     if (!$stmt->execute()) {
@@ -140,6 +143,6 @@ foreach ($roles as $rol) {
     }
     $stmt->close();
 }
-
 $conn->close();
+echo "OK";
 ?>
