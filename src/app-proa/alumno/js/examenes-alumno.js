@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const data = await res.json();
 
+        if (data.error) {
+            mostrarAviso(data.error);
+            return;
+        }
+
         if (data && (data.realizar.length > 0 || data.porRevisar.length > 0 || data.calificados.length > 0)) {
             renderExamenes(data);
         } else {
