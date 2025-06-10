@@ -1,7 +1,34 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    const asignaturaSeleccionada = JSON.parse(document.getElementById('asignaturaSeleccionada').dataset.asignatura);
-    const codigo = asignaturaSeleccionada?.codigoAsignatura;
+(async () => {
+    const divDatos = document.getElementById('asignaturaSeleccionada');
+    let asignaturaSeleccionada = null;
 
+    // Si no existe el div o está vacío, usar localStorage
+    if (!divDatos || !divDatos.dataset.asignatura || divDatos.dataset.asignatura === "null") {
+        const local = localStorage.getItem("asignaturaSeleccionada");
+        if (local) {
+            try {
+                asignaturaSeleccionada = JSON.parse(local);
+                // Guardar en sesión PHP
+                await fetch("../app/guardar-asignatura-sesion.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify(asignaturaSeleccionada)
+                });
+            } catch (e) {
+                console.error("Error guardando asignatura en sesión:", e);
+                mostrarAviso("Error al seleccionar la asignatura.");
+                return;
+            }
+        } else {
+            mostrarAviso("No se ha proporcionado una asignatura válida.");
+            return;
+        }
+    } else {
+        asignaturaSeleccionada = JSON.parse(divDatos.dataset.asignatura);
+    }
+
+    const codigo = asignaturaSeleccionada?.codigoAsignatura;
     if (!codigo) {
         mostrarAviso("No se ha proporcionado un código de asignatura.");
         return;
@@ -9,8 +36,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         const res = await fetch(`../app/ver_examenes.php?codigo=${encodeURIComponent(codigo)}`);
-        if (!res.ok) throw new Error("Error en la respuesta del servidor");
-
         const data = await res.json();
 
         if (data.error) {
@@ -27,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error(err);
         mostrarAviso("Error al cargar exámenes.");
     }
-});
+})();
 
 function renderExamenes(data) {
     const seccion = document.querySelector(".fondoPanel");
@@ -62,32 +87,34 @@ function crearBloque(titulo, examenes, tipo) {
 
         if (tipo === 'realizar') {
             html += `
-            <div class="item-examen item-examen-realizar">
-                <div class="info">
-                    <h4>${ex.titulo}</h4>
-                    <p class="fecha-limite">
-                        <img src="../icons/advertenciaFecha.svg" class="icono-fecha" alt="Icono advertencia">
-                        Fecha límite: ${fechaLimite}
-                    </p>
-                </div>
-                <button class="btn">Comenzar</button>
-            </div>`;
+    <div class="item-examen item-examen-realizar">
+        <div class="info">
+            <h4>${ex.titulo}</h4>
+            <p class="fecha-limite">
+                <img src="../icons/advertenciaFecha.svg" class="icono-fecha" alt="Icono advertencia">
+                Fecha límite: ${fechaLimite}
+            </p>
+        </div>
+        <button class="btn" data-id="${ex.idExamen}">Comenzar</button>
+    </div>`;
         } else if (tipo === 'porRevisar') {
             html += `
-            <div class="item-examen solo-info">
-                <h4>${ex.titulo}</h4>
-                <p class="fecha-envio">Enviado: ${fechaEnvio}</p>
-            </div>`;
+    <div class="item-examen solo-info">
+        <h4>${ex.titulo}</h4>
+        <p class="fecha-envio">Enviado: ${fechaEnvio}</p>
+    </div>`;
         } else if (tipo === 'calificados') {
-            const nota = ex.notaExamenAlumno !== null ? `${ex.notaExamenAlumno}/10` : '—';
+            const nota = (ex.notaExamenAlumno !== null)
+                ? `${ex.notaExamenAlumno}/${ex.valorExamen ?? ex.puntosExamen}`
+                : '—';
             html += `
-            <div class="item-examen item-examen-calificado" data-cuestionario="${ex.titulo}">
-                <div class="info">
-                    <h4>${ex.titulo}</h4>
-                    <p class="fecha-envio">Enviado: ${fechaEnvio}</p>
-                </div>
-                <span class="nota">${nota}</span>
-            </div>`;
+    <div class="item-examen item-examen-calificado" data-cuestionario="${ex.titulo}">
+        <div class="info">
+            <h4>${ex.titulo}</h4>
+            <p class="fecha-envio">Enviado: ${fechaEnvio}</p>
+        </div>
+        <span class="nota">${nota}</span>
+    </div>`;
         }
     });
 
@@ -100,7 +127,11 @@ function mostrarAviso(mensaje) {
     seccion.insertAdjacentHTML("beforeend", `<p>${mensaje}</p>`);
 }
 
-function redireccionarPagina() {
-    console.log("Redirigiendo al examen...");
-    window.location.href = "realizar-examen.php";
+function redireccionarPagina(e) {
+    const idExamen = e.currentTarget.dataset.id;
+    if (!idExamen) {
+        alert("No se pudo determinar el ID del examen.");
+        return;
+    }
+    window.location.href = `realizar-examen.php?idExamen=${idExamen}`;
 }

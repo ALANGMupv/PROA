@@ -19,19 +19,22 @@ if (!$asignatura || !$codigoAsignatura) {
 }
 
 $sql = "SELECT 
-            ex.idExamen,
-            ex.codigoAsignatura,
-            ex.idGrupo,
-            ce.titulo,
-            ce.fechaApertura,
-            ce.fechaFin,
-            ce.duracion,
-            ex.idEstado,
-            cal.notaExamenAlumno
-        FROM examenes ex
-        INNER JOIN contenidoexamen ce ON ex.idContenido = ce.idContenido
-        LEFT JOIN calificaciones cal ON cal.idExamen = ex.idExamen AND cal.idUsuariosPROA = ?
-        WHERE ex.codigoAsignatura = ? AND ex.idEstado IN (1, 2, 3)";
+    ex.idExamen,
+    ex.codigoAsignatura,
+    ex.idGrupo,
+    ce.titulo,
+    ce.fechaApertura,
+    ce.fechaFin,
+    ce.duracion,
+    ex.idEstado,
+    ce.puntosExamen,
+    cal.notaExamenAlumno,
+    cal.valorExamen
+FROM examenes ex
+INNER JOIN contenidoexamen ce ON ex.idContenido = ce.idContenido
+LEFT JOIN calificaciones cal ON cal.idExamen = ex.idExamen AND cal.idUsuariosPROA = ?
+WHERE ex.codigoAsignatura = ?";
+
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $idUsuario, $codigoAsignatura);
@@ -50,11 +53,16 @@ $examenes = [
 ];
 
 while ($row = $result->fetch_assoc()) {
-    if ($row['idEstado'] == 1) {
+    $tieneCalificacion = !is_null($row['notaExamenAlumno']);
+
+    // Solo aparece como "a realizar" si está abierto y NO tiene calificación
+    if ($row['idEstado'] == 1 && !$tieneCalificacion) {
         $examenes['realizar'][] = $row;
-    } elseif ($row['idEstado'] == 2) {
+    }
+
+    // Por revisar y calificados: si hay calificación, se muestran siempre
+    if ($tieneCalificacion) {
         $examenes['porRevisar'][] = $row;
-    } elseif ($row['idEstado'] == 3) {
         $examenes['calificados'][] = $row;
     }
 }

@@ -5,9 +5,6 @@ header('Content-Type: application/json');
 // Leer datos JSON del body
 $data = json_decode(file_get_contents("php://input"), true);
 
-// TEMPORAL: Ver qué llega exactamente
-file_put_contents("debug_input.txt", file_get_contents("php://input"));
-
 // Validar que se han recibido los campos necesarios
 if (
     !isset($data["codigoAsignatura"]) || empty($data["codigoAsignatura"]) ||
