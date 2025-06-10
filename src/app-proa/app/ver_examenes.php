@@ -12,11 +12,16 @@ if (!$idUsuario) {
     exit;
 }
 
-// Obtener el código de asignatura desde la URL (GET)
-$codigoAsignatura = $_GET['codigo'] ?? null; // Se obtiene de la URL
+$asignatura = $_SESSION['asignaturaSeleccionada'] ?? null;
+$codigoAsignatura = $asignatura['codigoAsignatura'] ?? null;
+
+if (!$asignatura) {
+    echo json_encode(['error' => 'No se ha seleccionado una asignatura.']);
+    exit;
+}
 
 if (!$codigoAsignatura) {
-    echo json_encode(['error' => 'No se ha proporcionado un código de asignatura.']);
+    echo json_encode(['error' => 'No hay código.']);
     exit;
 }
 

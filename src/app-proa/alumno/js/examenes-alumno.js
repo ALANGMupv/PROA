@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const asignaturaSeleccionada = JSON.parse(document.getElementById('asignaturaSeleccionada').dataset.asignatura);
 
     // Verifica si el código de la asignatura está presente
-    const codigo = asignaturaSeleccionada?.codigo;
+    const codigo = asignaturaSeleccionada?.codigoAsignatura;
 
     if (!codigo) {
         mostrarAviso("No se ha proporcionado un código de asignatura.");

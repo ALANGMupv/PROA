@@ -1,16 +1,15 @@
 fetch('../app/chequear-sesion.php', { credentials: 'include' })
     .then(res => res.json())
-    .then(usuario => {
+    .then(async usuario => {
         if (!usuario.rol) {
             window.location.replace("../../index.php");
             return;
         }
 
-        const asignatura = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
         const submenu = document.getElementById("submenu");
         const dropdown = document.getElementById("dropdown-asignaturas");
 
-        if (!usuario || !asignatura || !submenu || !dropdown) {
+        if (!submenu || !dropdown) {
             window.location.replace("../../index.php");
             return;
         }
@@ -18,14 +17,36 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
         const rol = usuario.rol;
         const esAlumno = rol === "alumno";
         const esProfesor = rol === "profesor";
+
         if (!esAlumno && !esProfesor) {
             window.location.replace("../../index.php");
             return;
         }
 
+        let asignatura = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
+
+        // Guardar en la sesión de PHP al cargar
+        if (asignatura && asignatura.codigoAsignatura && asignatura.nombre) {
+            try {
+                await fetch("../app/guardar-asignatura-sesion.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        codigoAsignatura: asignatura.codigoAsignatura,
+                        nombre: asignatura.nombre
+                    }),
+                    credentials: "include"
+                });
+            } catch (error) {
+                console.error("Error al guardar asignatura en sesión:", error);
+            }
+        }
+
         // Cambiar título del submenú
         const tituloAsignatura = document.querySelector("#submenu .titulo-submenu h2");
-        if (tituloAsignatura) {
+        if (tituloAsignatura && asignatura?.nombre) {
             tituloAsignatura.textContent = asignatura.nombre;
         }
 
@@ -77,18 +98,44 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
                     const opcion = document.createElement("option");
                     opcion.value = asig.codigo;
                     opcion.textContent = asig.nombre;
-                    if (asig.codigo === asignatura.codigo) opcion.selected = true;
+                    if (asignatura && asig.codigo === asignatura.codigoAsignatura) opcion.selected = true;
                     dropdown.appendChild(opcion);
                 });
 
-                dropdown.addEventListener("change", e => {
+                dropdown.addEventListener("change", async e => {
                     const nueva = asignaturas.find(a => a.codigo === e.target.value);
                     if (nueva) {
-                        localStorage.setItem("asignaturaSeleccionada", JSON.stringify({
+                        const nuevaAsignatura = {
                             nombre: nueva.nombre,
-                            codigo: nueva.codigo
-                        }));
-                        window.location.href = esAlumno ? "asignatura-alumno.php" : "asignatura-profesor.php";
+                            codigoAsignatura: nueva.codigo ?? nueva.codigoAsignatura
+                        };
+
+                        console.log("Asignatura seleccionada:", nueva);
+
+                        // Guardar en localStorage
+                        localStorage.setItem("asignaturaSeleccionada", JSON.stringify(nuevaAsignatura));
+
+
+                        // Guardar también en la sesión de PHP
+                        try {
+                            const response = await fetch("../app/guardar-asignatura-sesion.php", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(nuevaAsignatura),
+                                credentials: "include"
+                            });
+
+                            const result = await response.json();
+                            if (result.success) {
+                                window.location.href = esAlumno ? "asignatura-alumno.php" : "asignatura-profesor.php";
+                            } else {
+                                console.error("Error al guardar asignatura en sesión:", result);
+                            }
+                        } catch (error) {
+                            console.error("Error al hacer fetch:", error);
+                        }
                     }
                 });
             });

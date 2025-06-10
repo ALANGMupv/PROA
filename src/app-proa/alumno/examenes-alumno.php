@@ -1,11 +1,3 @@
-<?php
-// TEMPORAL
-$asignaturaSeleccionada = [
-    'codigo' => 'PROG101',
-    'nombre' => 'Programación de videojuegos'
-];
-?>
-
 <!doctype html>
 <html lang="es">
 <head>
@@ -68,7 +60,10 @@ error_reporting(E_ALL);
     </div>
 </main>
 
-<!-- Este div se inserta aquí para que tu script JS lo pueda acceder -->
+<?php
+$asignaturaSeleccionada = $_SESSION['asignaturaSeleccionada'] ?? null;
+?>
+<!-- Este div se inserta aquí para que JS pueda acceder -->
 <div id="asignaturaSeleccionada" data-asignatura='<?php echo json_encode($asignaturaSeleccionada); ?>'></div>
 
 </body>
