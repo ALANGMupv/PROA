@@ -62,17 +62,18 @@ function crearBloque(titulo, examenes, tipo) {
 
         if (tipo === 'realizar') {
             html += `
-            <div class="item-examen item-examen-realizar">
-                <div class="info">
-                    <h4>${ex.titulo}</h4>
-                    <p class="fecha-limite">
-                        <img src="../icons/advertenciaFecha.svg" class="icono-fecha" alt="Icono advertencia">
-                        Fecha límite: ${fechaLimite}
-                    </p>
-                </div>
-                <button class="btn">Comenzar</button>
-            </div>`;
-        } else if (tipo === 'porRevisar') {
+    <div class="item-examen item-examen-realizar">
+        <div class="info">
+            <h4>${ex.titulo}</h4>
+            <p class="fecha-limite">
+                <img src="../icons/advertenciaFecha.svg" class="icono-fecha" alt="Icono advertencia">
+                Fecha límite: ${fechaLimite}
+            </p>
+        </div>
+        <button class="btn" data-id="${ex.idExamen}">Comenzar</button>
+    </div>`;
+        }
+        else if (tipo === 'porRevisar') {
             html += `
             <div class="item-examen solo-info">
                 <h4>${ex.titulo}</h4>
@@ -100,7 +101,11 @@ function mostrarAviso(mensaje) {
     seccion.insertAdjacentHTML("beforeend", `<p>${mensaje}</p>`);
 }
 
-function redireccionarPagina() {
-    console.log("Redirigiendo al examen...");
-    window.location.href = "realizar-examen.php";
+function redireccionarPagina(e) {
+    const idExamen = e.currentTarget.dataset.id;
+    if (!idExamen) {
+        alert("No se pudo determinar el ID del examen.");
+        return;
+    }
+    window.location.href = `realizar-examen.php?idExamen=${idExamen}`;
 }
