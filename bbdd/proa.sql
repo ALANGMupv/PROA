@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2025 a las 22:34:48
+-- Tiempo de generación: 10-06-2025 a las 23:51:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -46,10 +46,10 @@ INSERT INTO `asignacionalumno` (`idUsuariosPROA`, `codigoAsignatura`, `idGrupo`,
                                                                                                            (1, 'UIUX102', 1, 0),
                                                                                                            (2, 'COMM101', NULL, 0),
                                                                                                            (2, 'MULT203', NULL, 0),
-                                                                                                           (2, 'PROG101', NULL, 0),
+                                                                                                           (2, 'PROG101', NULL, 1),
                                                                                                            (2, 'SIGS301', NULL, 0),
                                                                                                            (2, 'SOUND204', NULL, 0),
-                                                                                                           (2, 'TFG401', 2, 1),
+                                                                                                           (2, 'TFG401', 2, 0),
                                                                                                            (7, 'DIU666', NULL, 0),
                                                                                                            (7, 'PROG101', NULL, 0),
                                                                                                            (7, 'SOUND204', NULL, 0),
@@ -75,6 +75,7 @@ CREATE TABLE `asignaciondocentes` (
 
 INSERT INTO `asignaciondocentes` (`idUsuariosPROA`, `codigoAsignatura`, `responsable`, `asignaturaFavorita`) VALUES
                                                                                                                  (3, 'COMM101', 1, 1),
+                                                                                                                 (3, 'DIU666', 1, NULL),
                                                                                                                  (3, 'MULT203', 1, NULL),
                                                                                                                  (3, 'PROG101', 1, 1),
                                                                                                                  (3, 'SIGS301', 0, NULL),
@@ -546,6 +547,97 @@ CREATE TABLE `titulacion` (
 INSERT INTO `titulacion` (`codigoTitulacion`, `nombreTitulacion`) VALUES
                                                                       ('GTI', 'Grado en Tecnologías Interactivas'),
                                                                       ('TEL', 'Grado en Ingeniería de Telecomunicaciones');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_asignaturas_alumnos`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `vista_asignaturas_alumnos` (
+                                             `codigoAsignatura` varchar(10)
+    ,`nombre` varchar(64)
+    ,`creditos` tinyint(2)
+    ,`alumnos` mediumtext
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_calificaciones_examen`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `vista_calificaciones_examen` (
+                                               `idExamen` int(11)
+    ,`codigoAsignatura` varchar(10)
+    ,`nombre` varchar(64)
+    ,`apellidos` varchar(64)
+    ,`notaExamenAlumno` tinyint(3)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_examenes_respuestas`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `vista_examenes_respuestas` (
+                                             `idExamen` int(11)
+    ,`codigoAsignatura` varchar(10)
+    ,`titulo` varchar(255)
+    ,`pregunta` text
+    ,`respuesta` text
+    ,`valorRespuesta` tinyint(1)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_profesores_asignaturas`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `vista_profesores_asignaturas` (
+                                                `codigoAsignatura` varchar(10)
+    ,`nombre` varchar(64)
+    ,`profesores` mediumtext
+    ,`tipo_profesor` mediumtext
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_asignaturas_alumnos`
+--
+DROP TABLE IF EXISTS `vista_asignaturas_alumnos`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_asignaturas_alumnos`  AS SELECT `a`.`codigoAsignatura` AS `codigoAsignatura`, `a`.`nombre` AS `nombre`, `a`.`creditos` AS `creditos`, group_concat(concat(`p`.`nombre`,' ',`p`.`apellidos`) order by `p`.`nombre` ASC separator ',') AS `alumnos` FROM ((`asignaturas` `a` join `asignacionalumno` `aa` on(`a`.`codigoAsignatura` = `aa`.`codigoAsignatura`)) join `personas` `p` on(`aa`.`idUsuariosPROA` = `p`.`idUsuariosPROA`)) GROUP BY `a`.`codigoAsignatura` ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_calificaciones_examen`
+--
+DROP TABLE IF EXISTS `vista_calificaciones_examen`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_calificaciones_examen`  AS SELECT `e`.`idExamen` AS `idExamen`, `a`.`codigoAsignatura` AS `codigoAsignatura`, `p`.`nombre` AS `nombre`, `p`.`apellidos` AS `apellidos`, `c`.`notaExamenAlumno` AS `notaExamenAlumno` FROM (((`calificaciones` `c` join `examenes` `e` on(`c`.`idExamen` = `e`.`idExamen`)) join `asignaturas` `a` on(`e`.`codigoAsignatura` = `a`.`codigoAsignatura`)) join `personas` `p` on(`c`.`idUsuariosPROA` = `p`.`idUsuariosPROA`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_examenes_respuestas`
+--
+DROP TABLE IF EXISTS `vista_examenes_respuestas`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_examenes_respuestas`  AS SELECT `e`.`idExamen` AS `idExamen`, `e`.`codigoAsignatura` AS `codigoAsignatura`, `c`.`titulo` AS `titulo`, `q`.`enunciado` AS `pregunta`, `re`.`respuesta` AS `respuesta`, `re`.`valorRespuesta` AS `valorRespuesta` FROM ((((`examenes` `e` join `contenidoexamen` `c` on(`e`.`idContenido` = `c`.`idContenido`)) join `preguntasexamen` `q` on(`c`.`idContenido` = `q`.`idContenido`)) join `respuestasalumno` `r` on(`r`.`idExamen` = `e`.`idExamen` and `r`.`idPregunta` = `q`.`idPregunta`)) join `respuestasexamen` `re` on(`r`.`idRespuesta` = `re`.`idRespuesta`)) ORDER BY `e`.`idExamen` ASC, `q`.`idPregunta` ASC ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_profesores_asignaturas`
+--
+DROP TABLE IF EXISTS `vista_profesores_asignaturas`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_profesores_asignaturas`  AS SELECT `a`.`codigoAsignatura` AS `codigoAsignatura`, `a`.`nombre` AS `nombre`, group_concat(concat(`p`.`nombre`,' ',`p`.`apellidos`) order by `p`.`nombre` ASC separator ',') AS `profesores`, group_concat(case when `ad`.`responsable` = 1 then 'Responsable' else 'Colaborador' end order by `p`.`nombre` ASC separator ',') AS `tipo_profesor` FROM ((`asignaciondocentes` `ad` join `asignaturas` `a` on(`ad`.`codigoAsignatura` = `a`.`codigoAsignatura`)) join `personas` `p` on(`ad`.`idUsuariosPROA` = `p`.`idUsuariosPROA`)) GROUP BY `a`.`codigoAsignatura` ;
 
 --
 -- Índices para tablas volcadas
