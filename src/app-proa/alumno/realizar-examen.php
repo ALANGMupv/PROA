@@ -17,7 +17,6 @@
     <script src="../js/mini-header.js" defer></script>
     <script src="../js/asignaturas.js" defer></script>
     <script src="js/realizar-examen.js" defer></script>
-    <script src="js/pop-up.js" defer></script>
 </head>
 <body>
 <?php
@@ -65,28 +64,29 @@ $idExamen = $_GET['idExamen'] ?? 0;
                     <section class="preguntas" id="contenedorPreguntas"></section>
 
                     <div id="botones">
-                        <button class="btn-oscuros-secundario btn-inicial" type="reset">Cancelar</button>
-                        <button class="btn-oscuros btn-inicial" onclick="activarPopPup()" type="button">Enviar</button>
+                        <button class="btn-oscuros-secundario btn-inicial" type="button" id="botonCancelar">Cancelar</button>
+                        <button class="btn-oscuros btn-inicial" type="button" id="botonEnviar">Enviar</button>
                         <a href="examenes-alumno.php" class="btn-oscuros btn-atras">Atrás</a>
                     </div>
 
-                    <!-- Pop-up confirmación -->
+                    <!-- Popup: Confirmar envío -->
                     <div id="popup-confirmacion" class="popup">
                         <div class="contenido-popup">
                             <p class="parrafo-principal">¿Estás seguro de que deseas enviar el formulario?</p>
                             <div class="btn-popup">
-                                <button id="popup-cancelar" class="btn-oscuros-secundario">Cancelar</button>
-                                <button id="popup-aceptar" type="submit" class="btn-oscuros">Aceptar</button>
+                                <button id="popup-cancelar" class="btn-oscuros-secundario" type="button">Cancelar</button>
+                                <button id="popup-enviar-confirmado" class="btn-oscuros" type="button">Aceptar</button>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Popup: Cancelar examen -->
                     <div id="popup-volver-cancelar" class="popup">
                         <div class="contenido-popup">
                             <p class="parrafo-principal">¿Estás seguro de que deseas salir? Se perderán los cambios no guardados.</p>
                             <div class="btn-popup">
                                 <button id="popup-volver-cancelar-no" class="btn-oscuros-secundario" type="button">Cancelar</button>
-                                <button id="popup-volver-cancelar-si" class="btn-oscuros">Aceptar</button>
+                                <button id="popup-volver-cancelar-si" class="btn-oscuros" type="button">Aceptar</button>
                             </div>
                         </div>
                     </div>
