@@ -23,10 +23,19 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
             return;
         }
 
-        let asignatura = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
+        let asignatura = null;
+        try {
+            asignatura = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
+            // Forzar compatibilidad con propiedades anteriores
+            if (asignatura?.codigoAsignatura && !asignatura.codigo) {
+                asignatura.codigo = asignatura.codigoAsignatura;
+            }
+        } catch (e) {
+            console.warn("Asignatura en localStorage malformada o nula:", e);
+        }
 
         // Guardar en la sesión de PHP al cargar
-        if (asignatura && asignatura.codigoAsignatura && asignatura.nombre) {
+        if (asignatura && asignatura.codigo && asignatura.nombre) {
             try {
                 await fetch("../app/guardar-asignatura-sesion.php", {
                     method: "POST",
@@ -34,7 +43,7 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        codigoAsignatura: asignatura.codigoAsignatura,
+                        codigoAsignatura: asignatura.codigo,
                         nombre: asignatura.nombre
                     }),
                     credentials: "include"
@@ -94,29 +103,32 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
             .then(asignaturas => {
                 if (!Array.isArray(asignaturas)) return;
 
+                dropdown.innerHTML = "";
+
                 asignaturas.forEach(asig => {
                     const opcion = document.createElement("option");
                     opcion.value = asig.codigo;
                     opcion.textContent = asig.nombre;
-                    if (asignatura && asig.codigo === asignatura.codigoAsignatura) opcion.selected = true;
+
+                    if (asignatura?.codigo && asig.codigo === asignatura.codigo) {
+                        opcion.selected = true;
+                    }
+
                     dropdown.appendChild(opcion);
                 });
+
+                dropdown.dispatchEvent(new Event("change"));
 
                 dropdown.addEventListener("change", async e => {
                     const nueva = asignaturas.find(a => a.codigo === e.target.value);
                     if (nueva) {
                         const nuevaAsignatura = {
                             nombre: nueva.nombre,
-                            codigoAsignatura: nueva.codigo ?? nueva.codigoAsignatura
+                            codigoAsignatura: nueva.codigo
                         };
 
-                        console.log("Asignatura seleccionada:", nueva);
-
-                        // Guardar en localStorage
                         localStorage.setItem("asignaturaSeleccionada", JSON.stringify(nuevaAsignatura));
 
-
-                        // Guardar también en la sesión de PHP
                         try {
                             const response = await fetch("../app/guardar-asignatura-sesion.php", {
                                 method: "POST",
