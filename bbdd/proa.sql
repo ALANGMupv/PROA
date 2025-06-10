@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2025 a las 16:59:18
+-- Tiempo de generación: 10-06-2025 a las 19:55:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -41,16 +41,17 @@ CREATE TABLE `asignacionalumno` (
 INSERT INTO `asignacionalumno` (`idUsuariosPROA`, `codigoAsignatura`, `idGrupo`, `asignaturaFavorita`) VALUES
                                                                                                            (1, 'COMM101', NULL, 0),
                                                                                                            (1, 'DIU666', NULL, 0),
-                                                                                                           (1, 'PROG101', 1, 1),
+                                                                                                           (1, 'PROG101', NULL, 0),
                                                                                                            (1, 'SOUND204', NULL, 0),
                                                                                                            (1, 'UIUX102', 1, 0),
                                                                                                            (2, 'COMM101', NULL, 0),
                                                                                                            (2, 'MULT203', NULL, 0),
-                                                                                                           (2, 'PROG101', 2, 1),
+                                                                                                           (2, 'PROG101', NULL, 0),
                                                                                                            (2, 'SIGS301', NULL, 0),
                                                                                                            (2, 'SOUND204', NULL, 0),
                                                                                                            (2, 'TFG401', 2, 1),
                                                                                                            (7, 'COMM101', NULL, 0),
+                                                                                                           (7, 'PROG101', NULL, 0),
                                                                                                            (7, 'SOUND204', NULL, 0),
                                                                                                            (10, 'COMM101', NULL, 0),
                                                                                                            (13, 'COMM101', NULL, 0);
@@ -135,18 +136,22 @@ CREATE TABLE `avisos` (
 CREATE TABLE `calificaciones` (
                                   `idExamen` int(11) NOT NULL,
                                   `idUsuariosPROA` int(11) NOT NULL,
-                                  `notaExamenAlumno` tinyint(3) NOT NULL
+                                  `notaExamenAlumno` tinyint(3) NOT NULL,
+                                  `valorExamen` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `calificaciones`
 --
 
-INSERT INTO `calificaciones` (`idExamen`, `idUsuariosPROA`, `notaExamenAlumno`) VALUES
-                                                                                    (1, 1, 8),
-                                                                                    (4, 1, 6),
-                                                                                    (5, 1, 8),
-                                                                                    (6, 2, 7);
+INSERT INTO `calificaciones` (`idExamen`, `idUsuariosPROA`, `notaExamenAlumno`, `valorExamen`) VALUES
+                                                                                                   (1, 1, 8, 0),
+                                                                                                   (4, 1, 6, 0),
+                                                                                                   (5, 1, 8, 0),
+                                                                                                   (6, 2, 7, 0),
+                                                                                                   (8, 1, 0, 2),
+                                                                                                   (8, 2, 0, 2),
+                                                                                                   (8, 7, 0, 6);
 
 -- --------------------------------------------------------
 
@@ -430,6 +435,14 @@ CREATE TABLE `preguntasexamen` (
                                    `idContenido` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `preguntasexamen`
+--
+
+INSERT INTO `preguntasexamen` (`idPregunta`, `enunciado`, `valorPregunta`, `idContenido`) VALUES
+                                                                                              (1, '¿Qué fue antes el huevo o la gallina?', 2, 2),
+                                                                                              (2, '¿Quién es el presidente de España?', 4, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -442,6 +455,17 @@ CREATE TABLE `respuestasexamen` (
                                     `valorRespuesta` tinyint(1) NOT NULL,
                                     `idPregunta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `respuestasexamen`
+--
+
+INSERT INTO `respuestasexamen` (`idRespuesta`, `respuesta`, `valorRespuesta`, `idPregunta`) VALUES
+                                                                                                (1, 'el huevo', 0, 1),
+                                                                                                (2, 'la gallina', 1, 1),
+                                                                                                (3, 'Pedro Sánchez', 0, 2),
+                                                                                                (4, 'Jose Luis', 1, 2),
+                                                                                                (5, 'Palacios', 0, 2);
 
 -- --------------------------------------------------------
 
