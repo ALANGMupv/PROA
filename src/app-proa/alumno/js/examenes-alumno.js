@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const asignaturaSeleccionada = JSON.parse(document.getElementById('asignaturaSeleccionada').dataset.asignatura);
-
-    // Verifica si el código de la asignatura está presente
-    const codigo = asignaturaSeleccionada?.codigo;
+    const codigo = asignaturaSeleccionada?.codigoAsignatura;
 
     if (!codigo) {
         mostrarAviso("No se ha proporcionado un código de asignatura.");
@@ -15,7 +13,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const data = await res.json();
 
-        if (data && (data.realizar.length > 0 || data.porRevisar.length > 0 || data.calificados.length > 0)) {
+        if (data.error) {
+            mostrarAviso(data.error);
+            return;
+        }
+
+        if (data.realizar?.length > 0 || data.porRevisar?.length > 0 || data.calificados?.length > 0) {
             renderExamenes(data);
         } else {
             mostrarAviso("No hay exámenes disponibles para esta asignatura.");
@@ -28,24 +31,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function renderExamenes(data) {
     const seccion = document.querySelector(".fondoPanel");
-
-    // Limpiar bloques anteriores
     seccion.querySelectorAll(".bloque-examenes").forEach(b => b.remove());
 
-    // Insertar bloques con los exámenes
     seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes a realizar", data.realizar, 'realizar'));
     seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes por revisar", data.porRevisar, 'porRevisar'));
     seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes calificados", data.calificados, 'calificados'));
 
-    // Agregar event listeners a los botones "Comenzar"
     document.querySelectorAll(".item-examen-realizar .btn").forEach(el => {
-        el.addEventListener("click", redireccionarPagina); // Usamos el event listener
+        el.addEventListener("click", redireccionarPagina);
     });
 
-    // Activar clic en exámenes calificados (después de insertarlos)
     document.querySelectorAll(".item-examen-calificado").forEach(el => {
         el.addEventListener("click", () => {
-            const cuestionario = el.dataset.cuestionario; // ej: "cuestionario1"
+            const cuestionario = el.dataset.cuestionario;
             localStorage.setItem("cuestionarioSeleccionado", cuestionario);
             window.location.href = "examenes-realizados.php";
         });
@@ -54,17 +52,13 @@ function renderExamenes(data) {
 
 function crearBloque(titulo, examenes, tipo) {
     if (!examenes || examenes.length === 0) return '';
-
     let html = `<div class="bloque-examenes"><h3>${titulo}</h3>`;
 
-    // Definir una fecha fija para "fechaEnvio"
-    const fechaFijaEnvio = "2025-05-30 12:00:00"; // Fecha fija de ejemplo
-    const notaFija = 9; // Nota fija de 9/10
+    const fechaFijaEnvio = "2025-05-30 12:00:00";
 
     examenes.forEach(ex => {
-        // Mostrar la fecha limite correctamente
-        const fechaLimite = ex.fechaFin;  // Aseguramos que se está usando 'fechaFin' de la base de datos
-        const fechaEnvio = fechaFijaEnvio; // Usamos la fecha fija para todos los exámenes
+        const fechaLimite = ex.fechaFin;
+        const fechaEnvio = fechaFijaEnvio;
 
         if (tipo === 'realizar') {
             html += `
@@ -76,22 +70,23 @@ function crearBloque(titulo, examenes, tipo) {
                         Fecha límite: ${fechaLimite}
                     </p>
                 </div>
-                <button class="btn" onclick="redirigirPagina()">Comenzar</button>
+                <button class="btn">Comenzar</button>
             </div>`;
         } else if (tipo === 'porRevisar') {
             html += `
             <div class="item-examen solo-info">
                 <h4>${ex.titulo}</h4>
-                <p class="fecha-envio">Enviado: ${fechaEnvio}</p> <!-- Usamos la fecha fija -->
+                <p class="fecha-envio">Enviado: ${fechaEnvio}</p>
             </div>`;
         } else if (tipo === 'calificados') {
+            const nota = ex.notaExamenAlumno !== null ? `${ex.notaExamenAlumno}/10` : '—';
             html += `
             <div class="item-examen item-examen-calificado" data-cuestionario="${ex.titulo}">
                 <div class="info">
                     <h4>${ex.titulo}</h4>
-                    <p class="fecha-envio">Enviado: ${fechaEnvio}</p> <!-- Usamos la fecha fija -->
+                    <p class="fecha-envio">Enviado: ${fechaEnvio}</p>
                 </div>
-                <span class="nota">${notaFija}/10</span> <!-- Nota fija de 9/10 -->
+                <span class="nota">${nota}</span>
             </div>`;
         }
     });
@@ -99,7 +94,6 @@ function crearBloque(titulo, examenes, tipo) {
     html += `</div>`;
     return html;
 }
-
 
 function mostrarAviso(mensaje) {
     const seccion = document.querySelector(".fondoPanel");

@@ -1,33 +1,40 @@
 <?php
 header('Content-Type: application/json');
-
 require_once '../../../env/proa.inc';
 session_start();
 
 $idUsuario = $_SESSION['usuario']['idUsuariosPROA'] ?? null;
 
 if (!$idUsuario) {
-    // Si no está logueado, devolver un error en formato JSON
     echo json_encode(['error' => 'No estás logueado.']);
     exit;
 }
 
-// Obtener el código de asignatura desde la URL (GET)
-$codigoAsignatura = $_GET['codigo'] ?? null; // Se obtiene de la URL
+$asignatura = $_SESSION['asignaturaSeleccionada'] ?? null;
+$codigoAsignatura = $asignatura['codigoAsignatura'] ?? null;
 
-if (!$codigoAsignatura) {
-    echo json_encode(['error' => 'No se ha proporcionado un código de asignatura.']);
+if (!$asignatura || !$codigoAsignatura) {
+    echo json_encode(['error' => 'No se ha seleccionado una asignatura válida.']);
     exit;
 }
 
-// Consultar los exámenes de la asignatura desde la base de datos
-$sql = "SELECT ex.idExamen, ex.codigoAsignatura, ex.idGrupo, ce.titulo, ce.fechaApertura, ce.fechaFin, ce.duracion, ex.idEstado
-FROM examenes ex
-INNER JOIN contenidoexamen ce ON ex.idContenido = ce.idContenido
-WHERE ex.codigoAsignatura = ? AND ex.idEstado IN (1, 2, 3)"; // Exámenes abiertos, en revisión y calificados
+$sql = "SELECT 
+            ex.idExamen,
+            ex.codigoAsignatura,
+            ex.idGrupo,
+            ce.titulo,
+            ce.fechaApertura,
+            ce.fechaFin,
+            ce.duracion,
+            ex.idEstado,
+            cal.notaExamenAlumno
+        FROM examenes ex
+        INNER JOIN contenidoexamen ce ON ex.idContenido = ce.idContenido
+        LEFT JOIN calificaciones cal ON cal.idExamen = ex.idExamen AND cal.idUsuariosPROA = ?
+        WHERE ex.codigoAsignatura = ? AND ex.idEstado IN (1, 2, 3)";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $codigoAsignatura); // Usamos "s" para cadenas de texto (codigoAsignatura es una cadena)
+$stmt->bind_param("ss", $idUsuario, $codigoAsignatura);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -55,6 +62,5 @@ while ($row = $result->fetch_assoc()) {
 $stmt->close();
 $conn->close();
 
-// Enviar los exámenes al frontend como JSON
 echo json_encode($examenes);
 ?>

@@ -56,10 +56,10 @@ while ($row = $resultado->fetch_assoc()) {
         case 'abierto':
             $examenes['abiertos'][] = $examen;
             break;
-        case 'Cerrado':
+        case 'cerrado':
             $examenes['cerrados'][] = $examen;
             break;
-        case 'Borrador':
+        case 'borrador':
             $examenes['borradores'][] = $examen;
             break;
         default:

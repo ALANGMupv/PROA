@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2025 a las 16:51:56
+-- Tiempo de generación: 10-06-2025 a las 16:59:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -145,7 +145,8 @@ CREATE TABLE `calificaciones` (
 INSERT INTO `calificaciones` (`idExamen`, `idUsuariosPROA`, `notaExamenAlumno`) VALUES
                                                                                     (1, 1, 8),
                                                                                     (4, 1, 6),
-                                                                                    (5, 1, 8);
+                                                                                    (5, 1, 8),
+                                                                                    (6, 2, 7);
 
 -- --------------------------------------------------------
 
@@ -293,12 +294,11 @@ CREATE TABLE `estadosexamen` (
 --
 
 INSERT INTO `estadosexamen` (`idEstado`, `nombreEstado`) VALUES
-                                                             (1, 'Por realizar'),
+                                                             (1, 'Abierto'),
                                                              (2, 'En revisión'),
                                                              (3, 'Calificado'),
-                                                             (4, 'Abierto'),
-                                                             (5, 'Cerrado'),
-                                                             (6, 'Borrador');
+                                                             (4, 'Cerrado'),
+                                                             (5, 'Borrador');
 
 -- --------------------------------------------------------
 
@@ -320,14 +320,14 @@ CREATE TABLE `examenes` (
 --
 
 INSERT INTO `examenes` (`idExamen`, `codigoAsignatura`, `idGrupo`, `idContenido`, `idEstado`, `idUsuariosPROA`) VALUES
-                                                                                                                    (1, 'PROG101', 1, 1, 4, 3),
+                                                                                                                    (1, 'PROG101', 1, 1, 1, 3),
                                                                                                                     (4, 'PROG101', 1, 1, 1, 3),
                                                                                                                     (5, 'PROG101', 1, 11, 2, 3),
                                                                                                                     (6, 'PROG101', 1, 4, 3, 3),
                                                                                                                     (8, 'PROG101', 1, 2, 1, 3),
                                                                                                                     (13, 'PROG101', 1, 3, 2, 3),
                                                                                                                     (16, 'SIGS301', NULL, 18, 4, 4),
-                                                                                                                    (17, 'SIGS301', NULL, 20, 4, 4);
+                                                                                                                    (17, 'SIGS301', NULL, 20, 1, 4);
 
 -- --------------------------------------------------------
 
