@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2025 a las 20:36:34
+-- Tiempo de generación: 10-06-2025 a las 22:34:48
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -50,7 +50,7 @@ INSERT INTO `asignacionalumno` (`idUsuariosPROA`, `codigoAsignatura`, `idGrupo`,
                                                                                                            (2, 'SIGS301', NULL, 0),
                                                                                                            (2, 'SOUND204', NULL, 0),
                                                                                                            (2, 'TFG401', 2, 1),
-                                                                                                           (7, 'COMM101', NULL, 0),
+                                                                                                           (7, 'DIU666', NULL, 0),
                                                                                                            (7, 'PROG101', NULL, 0),
                                                                                                            (7, 'SOUND204', NULL, 0),
                                                                                                            (10, 'COMM101', NULL, 0),
@@ -148,9 +148,9 @@ INSERT INTO `calificaciones` (`idExamen`, `idUsuariosPROA`, `notaExamenAlumno`, 
                                                                                                    (1, 1, 8, 0),
                                                                                                    (4, 1, 6, 0),
                                                                                                    (5, 1, 8, 0),
-                                                                                                   (6, 2, 7, 0),
                                                                                                    (8, 1, 0, 2),
-                                                                                                   (8, 2, 0, 2);
+                                                                                                   (8, 2, 0, 6),
+                                                                                                   (8, 7, 4, 6);
 
 -- --------------------------------------------------------
 
@@ -454,6 +454,16 @@ CREATE TABLE `respuestasalumno` (
                                     `idPregunta` int(11) NOT NULL,
                                     `idRespuesta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `respuestasalumno`
+--
+
+INSERT INTO `respuestasalumno` (`idUsuariosPROA`, `idExamen`, `idPregunta`, `idRespuesta`) VALUES
+                                                                                               (2, 8, 1, 1),
+                                                                                               (7, 8, 1, 1),
+                                                                                               (2, 8, 2, 3),
+                                                                                               (7, 8, 2, 4);
 
 -- --------------------------------------------------------
 

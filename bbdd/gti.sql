@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2025 a las 19:58:15
+-- Tiempo de generación: 10-06-2025 a las 22:24:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -89,7 +89,7 @@ INSERT INTO `usuariosgti` (`idUsuariosGTI`, `email`, `nombre`, `apellidos`, `con
                                                                                                                                                                    (1, 'dapasa@har.upv.es', 'Daniel', 'Palacio', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', NULL, NULL, 1, NULL, NULL),
                                                                                                                                                                    (2, 'jogilo@upvnet.upv.es', 'José Luis', 'Gimenez', 'db2e7f1bd5ab9968ae76199b7cc74795ca7404d5a08d78567715ce532f9d2669', NULL, NULL, 1, NULL, NULL),
                                                                                                                                                                    (4, 'aguemar@teleco.upv.es', 'Alan', 'Guevara', '49e6d696bd587bc7ba9c705ca9b6b432b68a2d6da1e9f10ab7c943d8afb79ea8', '001', '722575818', 1, NULL, NULL),
-                                                                                                                                                                   (5, 'jvaldeo@upv.edu.es', 'Julia', 'Valén ', 'fa8fab9d741708503b5010d9adf3b1511ce97b753e70a8234439fb2882612f09', '001', '633744802', 1, NULL, NULL),
+                                                                                                                                                                   (5, 'jvaldeo@upv.edu.es', 'Julia', 'Valén ', 'fa8fab9d741708503b5010d9adf3b1511ce97b753e70a8234439fb2882612f09', '001', '633744802', 1, 'NULL', NULL),
                                                                                                                                                                    (6, 'sagucre@upv.edu.es', 'Santiago Alejandro', 'Aguirre Crespo', 'bdbf522d486159cb66770f7ce5756e533ab7502f9fb99af91e667d2a3d3b3573', '001', '696666696', 1, NULL, NULL);
 
 --
