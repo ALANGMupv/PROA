@@ -80,13 +80,21 @@ function enviarExamen() {
     document.getElementById('mensajeExito').innerHTML = `<span>Calificación:</span><p class="calificacion">${puntajeTotal}/${puntajeMaximo}</p>`;
     document.querySelectorAll('.btn-inicial').forEach(btn => btn.style.display = 'none');
 
+    // Guardar nota
     fetch('../app/guardar-calificacion.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ idExamen, puntajeTotal, puntajeMaximo })
     });
 
-    // Oculta el popup al finalizar
+    // Guardar respuestas seleccionadas
+    fetch('../app/guardar-respuestas.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idExamen, respuestasAlumno })
+    });
+
+    // Ocultar popup
     document.getElementById('popup-confirmacion').style.display = 'none';
 }
 

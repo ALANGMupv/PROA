@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2025 a las 19:55:58
+-- Tiempo de generación: 10-06-2025 a las 20:36:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -150,8 +150,7 @@ INSERT INTO `calificaciones` (`idExamen`, `idUsuariosPROA`, `notaExamenAlumno`, 
                                                                                                    (5, 1, 8, 0),
                                                                                                    (6, 2, 7, 0),
                                                                                                    (8, 1, 0, 2),
-                                                                                                   (8, 2, 0, 2),
-                                                                                                   (8, 7, 0, 6);
+                                                                                                   (8, 2, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -446,6 +445,19 @@ INSERT INTO `preguntasexamen` (`idPregunta`, `enunciado`, `valorPregunta`, `idCo
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `respuestasalumno`
+--
+
+CREATE TABLE `respuestasalumno` (
+                                    `idUsuariosPROA` int(11) NOT NULL,
+                                    `idExamen` int(11) NOT NULL,
+                                    `idPregunta` int(11) NOT NULL,
+                                    `idRespuesta` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `respuestasexamen`
 --
 
@@ -651,6 +663,15 @@ ALTER TABLE `preguntasexamen`
   ADD KEY `idContenido` (`idContenido`);
 
 --
+-- Indices de la tabla `respuestasalumno`
+--
+ALTER TABLE `respuestasalumno`
+    ADD PRIMARY KEY (`idUsuariosPROA`,`idExamen`,`idPregunta`),
+  ADD KEY `idExamen` (`idExamen`),
+  ADD KEY `idPregunta` (`idPregunta`),
+  ADD KEY `idRespuesta` (`idRespuesta`);
+
+--
 -- Indices de la tabla `respuestasexamen`
 --
 ALTER TABLE `respuestasexamen`
@@ -823,6 +844,15 @@ ALTER TABLE `personarol`
 --
 ALTER TABLE `preguntasexamen`
     ADD CONSTRAINT `preguntasexamen_ibfk_2` FOREIGN KEY (`idContenido`) REFERENCES `contenidoexamen` (`idContenido`);
+
+--
+-- Filtros para la tabla `respuestasalumno`
+--
+ALTER TABLE `respuestasalumno`
+    ADD CONSTRAINT `respuestasalumno_ibfk_1` FOREIGN KEY (`idUsuariosPROA`) REFERENCES `personas` (`idUsuariosPROA`) ON DELETE CASCADE,
+  ADD CONSTRAINT `respuestasalumno_ibfk_2` FOREIGN KEY (`idExamen`) REFERENCES `examenes` (`idExamen`) ON DELETE CASCADE,
+  ADD CONSTRAINT `respuestasalumno_ibfk_3` FOREIGN KEY (`idPregunta`) REFERENCES `preguntasexamen` (`idPregunta`) ON DELETE CASCADE,
+  ADD CONSTRAINT `respuestasalumno_ibfk_4` FOREIGN KEY (`idRespuesta`) REFERENCES `respuestasexamen` (`idRespuesta`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `respuestasexamen`
