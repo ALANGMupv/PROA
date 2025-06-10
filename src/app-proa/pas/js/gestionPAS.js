@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span data-label="Nombre">${asig.nombre}</span>
                 <span data-label="Departamento">${asig.departamento}</span>
                 <span data-label="Créditos">${asig.creditos}</span>
-                <a href="ficha-asignatura-pas.php" class="btn ver-detalles" data-codigo="${asig.codigo}">Ver detalles</a>
+                <button class="btn ver-detalles" data-codigo="${asig.codigo}" data-nombre="${asig.nombre}">Ver detalles</button>
                 <div class="menu-opciones-wrapper" data-label="Asignar">
                     <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" onclick="toggleOpciones(this)" />
                     <div class="menu-desplegable">
@@ -115,9 +115,29 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
 
-            /*fila.querySelector('.ver-detalles').addEventListener('click', () => {
-                localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asig));
-            });*/
+            // Añadir evento al botón "Ver detalles"
+            fila.querySelector('.ver-detalles').addEventListener('click', e => {
+                const boton = e.currentTarget;
+                const codigo = boton.dataset.codigo;
+                const nombre = boton.dataset.nombre;
+
+                fetch("../app/guardar-asignatura-sesion.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        codigoAsignatura: codigo,
+                        nombre: nombre
+                    })
+                })
+                    .then(res => res.json())
+                    .then(resp => {
+                        if (resp.success) {
+                            window.location.href = "ficha-asignatura-pas.php";
+                        } else {
+                            alert("Error al guardar la asignatura: " + resp.error);
+                        }
+                    });
+            });
 
             tabla.appendChild(fila);
         });

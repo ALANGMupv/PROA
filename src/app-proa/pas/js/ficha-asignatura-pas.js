@@ -1,76 +1,76 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const datos = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
-    if (!datos) return;
+fetch("../app/obtener-ficha-asignatura.php")
+    .then(res => res.json())
+    .then(data => {
+        if (!data.success) {
+            alert("Error al cargar la asignatura");
+            return;
+        }
 
-    // Mostrar datos básicos
-    document.getElementById("nombre-asignatura").textContent = datos.nombre;
-    document.getElementById("codigo-asignatura").textContent = datos.codigo;
-    document.getElementById("departamento-asignatura").textContent = datos.departamento;
-    document.getElementById("curso-asignatura").textContent = datos.curso;
-    document.getElementById("semestre-asignatura").textContent = datos.semestre;
-    document.getElementById("anyo-asignatura").textContent = datos.anyo;
-    document.getElementById("creditos-asignatura").textContent = datos.creditos;
+        const asig = data.asignatura;
 
-    const listaAlumnos = document.getElementById("lista-alumnos");
-    const listaProfesores = document.getElementById("lista-profesores");
+        document.getElementById("nombre-asignatura").textContent = asig.nombre;
+        document.getElementById("codigo-asignatura").textContent = asig.codigo;
+        document.getElementById("departamento-asignatura").textContent = asig.departamento;
+        document.getElementById("curso-asignatura").textContent = asig.curso;
+        document.getElementById("semestre-asignatura").textContent = asig.semestre;
+        document.getElementById("anyo-asignatura").textContent = "2024/2025"; // puedes ajustar esto si deseas
 
-    // Render alumnos
-    datos.alumnos.forEach(nombre => {
-        const li = document.createElement("li");
-        li.textContent = nombre;
-        listaAlumnos.appendChild(li);
-    });
+        document.getElementById("creditos-asignatura").textContent = asig.creditos;
 
-    // Render profesores (titular y colaboradores)
-    const profes = [datos.titular, ...(datos.colaboradores || [])];
+        // Añadir los nuevos campos: carácter y titulación
+        const info = document.querySelector(".informacion");
+        info.insertAdjacentHTML("beforeend", `
+            <p><strong>Carácter:</strong> ${asig.caracter}</p>
+            <p><strong>Titulación:</strong> ${asig.titulacion}</p>
+        `);
 
-    profes.forEach(nombre => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-        ${nombre} 
-        <span class="rol-profesor">
-            ${nombre === datos.titular ? " (Responsable)" : " (Colaborador)"}
-        </span>
-    `;
-        listaProfesores.appendChild(li);
-    });
+        const listaAlumnos = document.getElementById("lista-alumnos");
+        data.alumnos.forEach(nombre => {
+            const li = document.createElement("li");
+            li.textContent = nombre;
+            listaAlumnos.appendChild(li);
+        });
 
+        const listaProfesores = document.getElementById("lista-profesores");
+        const profes = [data.titular, ...(data.colaboradores || [])];
 
-    // Botón volver
-    document.getElementById("btn-volver").addEventListener("click", (e) => {
-        e.preventDefault();
-        window.history.back();
-    });
+        profes.forEach(nombre => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                ${nombre} 
+                <span class="rol-profesor">
+                    ${nombre === data.titular ? " (Responsable)" : " (Colaborador)"}
+                </span>
+            `;
+            listaProfesores.appendChild(li);
+        });
 
-    // Buscador alumnos activo por defecto
-    const inputBuscar = document.getElementById("input-buscar-alumno");
-    inputBuscar.addEventListener("input", () => {
-        const texto = inputBuscar.value.toLowerCase();
-        Array.from(listaAlumnos.children).forEach(li => {
-            li.style.display = li.textContent.toLowerCase().includes(texto) ? "" : "none";
+        // Buscadores
+        document.getElementById("input-buscar-alumno").addEventListener("input", e => {
+            const texto = e.target.value.toLowerCase();
+            Array.from(listaAlumnos.children).forEach(li => {
+                li.style.display = li.textContent.toLowerCase().includes(texto) ? "" : "none";
+            });
+        });
+
+        document.getElementById("input-buscar-profesor").addEventListener("input", e => {
+            const texto = e.target.value.toLowerCase();
+            Array.from(listaProfesores.children).forEach(li => {
+                li.style.display = li.textContent.toLowerCase().includes(texto) ? "" : "none";
+            });
         });
     });
 
-    // Buscador profesores activo por defecto
-    const inputBuscarProfesor = document.getElementById("input-buscar-profesor");
-    inputBuscarProfesor.addEventListener("input", () => {
-        const texto = inputBuscarProfesor.value.toLowerCase();
-        Array.from(listaProfesores.children).forEach(li => {
-            li.style.display = li.textContent.toLowerCase().includes(texto) ? "" : "none";
-        });
-    });
+// Botones fuera del fetch
+document.getElementById("btn-volver").addEventListener("click", (e) => {
+    e.preventDefault();
+    window.history.back();
 });
 
-const btnAsignarAlumnos = document.getElementById("btn-ir-asignacion-alumnos");
-if (btnAsignarAlumnos) {
-    btnAsignarAlumnos.addEventListener("click", () => {
-        window.location.href = "asignacion-alumnos-pas.php";
-    });
-}
+document.getElementById("btn-ir-asignacion-alumnos").addEventListener("click", () => {
+    window.location.href = "asignacion-alumnos-pas.php";
+});
 
-const btnAsignarProfesores = document.getElementById("btn-ir-asignacion-profesores");
-if (btnAsignarProfesores) {
-    btnAsignarProfesores.addEventListener("click", () => {
-        window.location.href = "asignacion-profesor-pas.php";
-    });
-}
+document.getElementById("btn-ir-asignacion-profesores").addEventListener("click", () => {
+    window.location.href = "asignacion-profesor-pas.php";
+});
