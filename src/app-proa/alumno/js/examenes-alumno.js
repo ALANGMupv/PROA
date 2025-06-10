@@ -108,7 +108,7 @@ function crearBloque(titulo, examenes, tipo) {
                 ? `${ex.notaExamenAlumno}/${ex.valorExamen ?? ex.puntosExamen}`
                 : '—';
             html += `
-    <div class="item-examen item-examen-calificado" data-cuestionario="${ex.titulo}">
+    <div class="item-examen item-examen-calificado" data-cuestionario="${ex.idExamen}">
         <div class="info">
             <h4>${ex.titulo}</h4>
             <p class="fecha-envio">Enviado: ${fechaEnvio}</p>
