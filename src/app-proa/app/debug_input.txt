@@ -1,1 +1,1 @@
-{"codigoAsignatura":"PROG101","nombre":"Programación de videojuegos"}
+{"codigoAsignatura":"SIGS301","nombre":"Procesado de señal"}
