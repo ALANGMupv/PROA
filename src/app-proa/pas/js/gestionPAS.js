@@ -48,88 +48,108 @@ function asignarProfesor(asignatura) {
         });
 }
 
-// Ejecutar cuando el DOM se ha cargado completamente
-document.addEventListener("DOMContentLoaded", () => {
-    const tabla = document.querySelector('.tabla-asignaturas');
-    const inputBusqueda = document.querySelector('.input-textoBusqueda');
-    const dropdown = document.getElementById('dropdown-asignaturas');
+// --------------------
+// Código principal
+// --------------------
+const tabla = document.querySelector('.tabla-asignaturas');
+const inputBusqueda = document.querySelector('.input-textoBusqueda');
+const dropdown = document.getElementById('dropdown-asignaturas');
 
-    let asignaturasOriginal = [];
+let asignaturasOriginal = [];
 
-    fetch('../app/asignaturasPAS.php')
-        .then(response => response.json())
-        .then(asignaturas => {
-            asignaturasOriginal = asignaturas;
+fetch('../app/asignaturasPAS.php')
+    .then(response => response.json())
+    .then(asignaturas => {
+        asignaturasOriginal = asignaturas;
 
-            // Crear lista de departamentos únicos
-            const departamentos = [...new Set(asignaturas.map(a => a.departamento))].sort();
-            dropdown.innerHTML = `<option value="todos">Todos los departamentos</option>`;
-            departamentos.forEach(dep => {
-                const option = document.createElement("option");
-                option.value = normalizarTexto(dep);
-                option.textContent = dep;
-                dropdown.appendChild(option);
-            });
-
-            renderTabla(); // Mostrar la tabla al cargar
-        })
-        .catch(error => {
-            console.error('Error al cargar las asignaturas:', error);
+        // Crear lista de departamentos únicos
+        const departamentos = [...new Set(asignaturas.map(a => a.departamento))].sort();
+        dropdown.innerHTML = `<option value="todos">Todos los departamentos</option>`;
+        departamentos.forEach(dep => {
+            const option = document.createElement("option");
+            option.value = normalizarTexto(dep);
+            option.textContent = dep;
+            dropdown.appendChild(option);
         });
 
-    function normalizarTexto(texto) {
-        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-    }
-
-    function renderTabla() {
-        const filtroTexto = normalizarTexto(inputBusqueda.value);
-        const filtroDepartamento = dropdown.value;
-
-        tabla.querySelectorAll('.fila:not(.encabezado)').forEach(e => e.remove());
-
-        const asignaturasFiltradas = asignaturasOriginal.filter(asig => {
-            const texto = normalizarTexto(`${asig.nombre} ${asig.codigo} ${asig.departamento}`);
-            const coincideTexto = texto.includes(filtroTexto);
-            const coincideDepartamento = filtroDepartamento === "todos" ||
-                normalizarTexto(asig.departamento) === filtroDepartamento;
-
-            return coincideTexto && coincideDepartamento;
-        });
-
-        asignaturasFiltradas.forEach(asig => {
-            const fila = document.createElement('div');
-            fila.classList.add('fila');
-
-            fila.innerHTML = `
-                <span data-label="Código">${asig.codigo}</span>
-                <span data-label="Nombre">${asig.nombre}</span>
-                <span data-label="Departamento">${asig.departamento}</span>
-                <span data-label="Créditos">${asig.creditos}</span>
-                <a href="ficha-asignatura-pas.php" class="btn ver-detalles" data-codigo="${asig.codigo}">Ver detalles</a>
-                <div class="menu-opciones-wrapper" data-label="Asignar">
-                    <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" onclick="toggleOpciones(this)" />
-                    <div class="menu-desplegable">
-                        <button onclick='asignarAlumno(${JSON.stringify(asig)})'>Asignar alumno</button>
-                        <button onclick='asignarProfesor(${JSON.stringify(asig)})'>Asignar profesor</button>
-                    </div>
-                </div>
-            `;
-
-            /*fila.querySelector('.ver-detalles').addEventListener('click', () => {
-                localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asig));
-            });*/
-
-            tabla.appendChild(fila);
-        });
-    }
-
-    inputBusqueda.addEventListener("input", renderTabla);
-    dropdown.addEventListener("change", renderTabla);
-
-    // Cerrar todos los menús desplegables si se hace clic fuera
-    document.addEventListener('click', function (e) {
-        if (!e.target.closest('.menu-opciones-wrapper')) {
-            document.querySelectorAll('.menu-opciones-wrapper').forEach(el => el.classList.remove('abierto'));
-        }
+        renderTabla(); // Mostrar la tabla al cargar
+    })
+    .catch(error => {
+        console.error('Error al cargar las asignaturas:', error);
     });
+
+function normalizarTexto(texto) {
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+function renderTabla() {
+    const filtroTexto = normalizarTexto(inputBusqueda.value);
+    const filtroDepartamento = dropdown.value;
+
+    tabla.querySelectorAll('.fila:not(.encabezado)').forEach(e => e.remove());
+
+    const asignaturasFiltradas = asignaturasOriginal.filter(asig => {
+        const texto = normalizarTexto(`${asig.nombre} ${asig.codigo} ${asig.departamento}`);
+        const coincideTexto = texto.includes(filtroTexto);
+        const coincideDepartamento = filtroDepartamento === "todos" ||
+            normalizarTexto(asig.departamento) === filtroDepartamento;
+
+        return coincideTexto && coincideDepartamento;
+    });
+
+    asignaturasFiltradas.forEach(asig => {
+        const fila = document.createElement('div');
+        fila.classList.add('fila');
+
+        fila.innerHTML = `
+            <span data-label="Código">${asig.codigo}</span>
+            <span data-label="Nombre">${asig.nombre}</span>
+            <span data-label="Departamento">${asig.departamento}</span>
+            <span data-label="Créditos">${asig.creditos}</span>
+            <button class="btn ver-detalles" data-codigo="${asig.codigo}" data-nombre="${asig.nombre}">Ver detalles</button>
+            <div class="menu-opciones-wrapper" data-label="Asignar">
+                <img src="../icons/menu.svg" alt="Opciones" class="icono-opciones" onclick="toggleOpciones(this)" />
+                <div class="menu-desplegable">
+                    <button onclick='asignarAlumno(${JSON.stringify(asig)})'>Asignar alumno</button>
+                    <button onclick='asignarProfesor(${JSON.stringify(asig)})'>Asignar profesor</button>
+                </div>
+            </div>
+        `;
+
+        // Añadir evento al botón "Ver detalles"
+        fila.querySelector('.ver-detalles').addEventListener('click', e => {
+            const boton = e.currentTarget;
+            const codigo = boton.dataset.codigo;
+            const nombre = boton.dataset.nombre;
+
+            fetch("../app/guardar-asignatura-sesion.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    codigoAsignatura: codigo,
+                    nombre: nombre
+                })
+            })
+                .then(res => res.json())
+                .then(resp => {
+                    if (resp.success) {
+                        window.location.href = "ficha-asignatura-pas.php";
+                    } else {
+                        alert("Error al guardar la asignatura: " + resp.error);
+                    }
+                });
+        });
+
+        tabla.appendChild(fila);
+    });
+}
+
+inputBusqueda.addEventListener("input", renderTabla);
+dropdown.addEventListener("change", renderTabla);
+
+// Cerrar todos los menús desplegables si se hace clic fuera
+document.addEventListener('click', function (e) {
+    if (!e.target.closest('.menu-opciones-wrapper')) {
+        document.querySelectorAll('.menu-opciones-wrapper').forEach(el => el.classList.remove('abierto'));
+    }
 });

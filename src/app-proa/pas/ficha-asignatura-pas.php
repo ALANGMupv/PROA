@@ -45,7 +45,7 @@ error_reporting(E_ALL);
 
                 <div class="bloque-datos-asignatura">
                     <div class="datos">
-                        <h4>Datos de la asignatura:</h4>
+                        <h4>Datos de la asignatura</h4>
                     </div>
                     <div class="informacion">
                         <p><strong>Código:</strong> <span id="codigo-asignatura"></span></p>
@@ -54,6 +54,9 @@ error_reporting(E_ALL);
                         <p><strong>Semestre:</strong> <span id="semestre-asignatura"></span></p>
                         <p><strong>Año:</strong> <span id="anyo-asignatura"></span></p>
                         <p><strong>Créditos:</strong> <span id="creditos-asignatura"></span> cts</p>
+                        <p><strong>Carácter:</strong> <span id="caracter-asignatura"></span></p>
+                        <p><strong>Titulación:</strong> <span id="titulacion-asignatura"></span></p>
+
                     </div>
 
                 </div>

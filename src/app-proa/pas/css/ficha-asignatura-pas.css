@@ -96,6 +96,10 @@ li {
     justify-content: space-between;
 }
 
+h4{
+    font-weight: 700;
+}
+
 .columna ul {
     list-style: none;
     padding-left: 0;
