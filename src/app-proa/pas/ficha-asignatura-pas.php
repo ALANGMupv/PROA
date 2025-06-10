@@ -45,7 +45,7 @@ error_reporting(E_ALL);
 
                 <div class="bloque-datos-asignatura">
                     <div class="datos">
-                        <h4>Datos de la asignatura:</h4>
+                        <h4>Datos de la asignatura</h4>
                     </div>
                     <div class="informacion">
                         <p><strong>Código:</strong> <span id="codigo-asignatura"></span></p>
