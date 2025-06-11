@@ -17,6 +17,12 @@ h4{
     display: flex;
     align-self: flex-end;
 }
+.contenedor-btn-crear {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1em;
+}
+
 
 .bloque-examenes button{
     align-self: flex-end;

@@ -64,12 +64,13 @@ error_reporting(E_ALL);
                     </div>
                 </div> -->
 
-      <section class="panel-contenido fondoPanel"> <!-- Panel donde se mostrará el contenido según la opción elegida -->
-          <button class="btn-oscuros" id="btn-crear" onclick="redireccionarPagina()">Crear examen</button>
+            <section class="panel-contenido fondoPanel">
+                <div class="contenedor-btn-crear">
+                    <button class="btn-oscuros" id="btn-crear" onclick="redireccionarPagina()">Crear examen</button>
+                </div>
+            </section>
 
-      </section>
-
-    </div>
+        </div>
   </div> <!-- Fin del contenedor contenido principal -->
 </main>
 

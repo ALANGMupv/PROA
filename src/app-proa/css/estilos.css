@@ -556,8 +556,9 @@ label {
     color: #444;
 }
 
-
-
+.btnAmarillo {
+    filter: invert(68%) sepia(100%) saturate(800%) hue-rotate(10deg) brightness(95%) contrast(105%);
+}
 
 
 

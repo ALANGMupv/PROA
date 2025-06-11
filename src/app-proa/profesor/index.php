@@ -49,7 +49,7 @@ error_reporting(E_ALL);
                     </div>
 
                     <button class="boton-favoritas" id="btnFavoritas">
-                        <img src="../icons/favoritos.svg" alt="Favoritas" class="icono-azul" width="16" height="16" />
+                        <img src="../icons/star.svg" alt="Favoritas" class="btnAmarillo" width="16" height="16" />
                         Favoritas
                     </button>
                 </div>
