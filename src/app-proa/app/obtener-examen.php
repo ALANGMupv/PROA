@@ -9,19 +9,23 @@ require_once '../../../env/proa.inc';
 $idUsuario = $_SESSION['usuario']['idUsuariosPROA'] ?? null;
 
 if (!$idUsuario) {
-    echo json_encode([]);
+    echo json_encode(['error' => 'Usuario no autenticado']);
     exit;
 }
 
-// Recoger examenId desde GET, con validación mínima
+// Recoger examenId desde GET
 $examenId = isset($_GET['examenId']) ? intval($_GET['examenId']) : 0;
 if ($examenId <= 0) {
     echo json_encode(['error' => 'ID de examen inválido']);
     exit;
 }
 
-// Obtener datos del examen
-$sqlExamen = "SELECT titulo, fecha_limite, hora_limite FROM examenes WHERE id = ?";
+// Obtener datos del examen desde la tabla contenidoexamen (no directamente de examenes)
+$sqlExamen = "SELECT ce.titulo, ce.descripcion, ce.fechaFin, ce.puntosExamen
+              FROM contenidoexamen ce
+              INNER JOIN examenes e ON ce.idContenido = e.idContenido
+              WHERE e.idExamen = ?";
+
 $stmt = $conn->prepare($sqlExamen);
 $stmt->bind_param("i", $examenId);
 $stmt->execute();
@@ -34,12 +38,13 @@ if ($resultExamen->num_rows === 0) {
 
 $examen = $resultExamen->fetch_assoc();
 
-// Obtener preguntas y opciones del examen
-$sqlPreguntas = "SELECT p.id as pregunta_id, p.texto_pregunta, o.id as opcion_id, o.texto_opcion, o.es_correcta
-                 FROM preguntas p
-                 LEFT JOIN opciones o ON p.id = o.pregunta_id
-                 WHERE p.examen_id = ?
-                 ORDER BY p.id, o.id";
+// Obtener preguntas y respuestas del examen
+$sqlPreguntas = "SELECT p.idPregunta, p.enunciado, p.valorPregunta AS valor, 
+                        r.idRespuesta, r.respuesta AS texto, r.valorRespuesta AS correcta
+                 FROM preguntasexamen p
+                 LEFT JOIN respuestasexamen r ON p.idPregunta = r.idPregunta
+                 WHERE p.idContenido = (SELECT idContenido FROM examenes WHERE idExamen = ?)
+                 ORDER BY p.idPregunta";
 
 $stmt = $conn->prepare($sqlPreguntas);
 $stmt->bind_param("i", $examenId);
@@ -48,22 +53,23 @@ $resultPreguntas = $stmt->get_result();
 
 $preguntas = [];
 while ($row = $resultPreguntas->fetch_assoc()) {
-    $pid = $row['pregunta_id'];
-    if (!isset($preguntas[$pid])) {
-        $preguntas[$pid] = [
-            'texto_pregunta' => $row['texto_pregunta'],
-            'opciones' => []
+    $idPregunta = $row['idPregunta'];
+    if (!isset($preguntas[$idPregunta])) {
+        $preguntas[$idPregunta] = [
+            'idPregunta' => $idPregunta,
+            'enunciado' => $row['enunciado'],
+            'valor' => $row['valor'],
+            'respuestas' => []
         ];
     }
-    $preguntas[$pid]['opciones'][] = [
-        'id' => $row['opcion_id'],
-        'texto_opcion' => $row['texto_opcion'],
-        'es_correcta' => $row['es_correcta']
+
+    $preguntas[$idPregunta]['respuestas'][] = [
+        'idRespuesta' => $row['idRespuesta'],
+        'texto' => $row['texto'],
+        'correcta' => $row['correcta']
     ];
 }
 
-// Devolver JSON con examenId incluido
-header('Content-Type: application/json');
 echo json_encode([
     'examenId' => $examenId,
     'examen' => $examen,
