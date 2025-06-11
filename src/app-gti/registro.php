@@ -33,9 +33,13 @@ include 'includes/headerNoLogueado.inc';
         <!-- Texto explicativo que acompaña el formulario -->
         <div class="registro-texto">
             <h2>Regístrate y empieza a probar la demo de nuestros módulos educativos</h2>
-            <p class="parrafo-principal">
+            <p class="parrafo-principal desktop-only">
                 Si representas a una institución educativa, completa el registro y recibirás por correo las credenciales de acceso a las demos disponibles. Prueba nuestros módulos educativos desde dentro y evalúa cómo pueden adaptarse a tu centro.
             </p>
+            <p class="parrafo-principal mobile-only">
+                Regístrate para acceder a los módulos demo y evaluarlos en tu centro.
+            </p>
+
         </div>
 
         <!-- Formulario para el registro de usuarios -->

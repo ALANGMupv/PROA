@@ -197,6 +197,25 @@
 }
 /* endregion */
 
+/* Mostrar solo en escritorio */
+.desktop-only {
+    display: block;
+}
+
+/* Mostrar solo en móvil */
+.mobile-only {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+}
 
 
 
