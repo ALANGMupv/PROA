@@ -62,7 +62,7 @@ function renderExamenes(data) {
     seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes en revisión", data.porRevisar, 'porRevisar'));
     seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes calificados", data.calificados, 'calificados'));
 
-    document.querySelectorAll(".item-examen-realizar .btn").forEach(el => {
+    document.querySelectorAll(".item-examen-realizar .btn-secundario").forEach(el => {
         el.addEventListener("click", redireccionarPagina);
     });
 

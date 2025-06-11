@@ -71,7 +71,7 @@ error_reporting(E_ALL);
                 <?php
                 $migas = [
                     ['label' => 'Asignaturas', 'url' => 'index.php'],
-                    ['label' => 'Página Inicial de la Asignatura', 'url' => 'asignatura-alumno.php'],
+                    ['label' => 'Página Inicial de la Asignatura', 'url' => 'asignatura-profesor.php'],
                     ['label' => 'Exámenes de la Asignatura', 'url' => 'examenes-profesor.php'],
                     ['label' => 'Ficha del Examen']
                 ];
