@@ -48,12 +48,12 @@ $usuario = $_SESSION['usuario'] ?? null;
                 <div class="campo">
                     <label for="nombre">Nombre *</label>
                     <input type="text" id="nombre" class="input-base" placeholder="Tu nombre"
-                           value="<?= $usuario['nombre'] ?? '' ?>" <?= $usuario ? 'readonly' : '' ?> />
+                           value="<?= $usuario['nombre'] ?? '' ?>" />
                 </div>
                 <div class="campo">
                     <label for="apellidos">Apellidos *</label>
                     <input type="text" id="apellidos" class="input-base" placeholder="Tus apellidos"
-                           value="<?= $usuario['apellidos'] ?? '' ?>" <?= $usuario ? 'readonly' : '' ?> />
+                           value="<?= $usuario['apellidos'] ?? '' ?>" />
                 </div>
             </div>
 
@@ -62,12 +62,12 @@ $usuario = $_SESSION['usuario'] ?? null;
                 <div class="campo">
                     <label for="email">Correo institucional *</label>
                     <input type="email" id="email" class="input-base" placeholder="correo@institucion.edu"
-                           value="<?= $usuario['email'] ?? '' ?>" <?= $usuario ? 'readonly' : '' ?> />
+                           value="<?= $usuario['email'] ?? '' ?>" />
                 </div>
                 <div class="campo">
                     <label for="codigoInstitucion">Nombre de la institución *</label>
                     <input type="text" id="codigoInstitucion" class="input-base" placeholder="Nombre de tu institución"
-                           value="<?= $usuario['nombreInstitucion'] ?? '' ?>" <?= $usuario ? 'readonly' : '' ?> />
+                           value="<?= $usuario['nombreInstitucion'] ?? '' ?>" />
                 </div>
             </div>
 
@@ -76,7 +76,7 @@ $usuario = $_SESSION['usuario'] ?? null;
                 <div class="campo">
                     <label for="tipo">Tipo de institución *</label>
                     <div class="input-dropdown">
-                        <select id="tipo" class="seleccionador-dropdown" <?= $usuario ? 'disabled' : '' ?>>
+                        <select id="tipo" class="seleccionador-dropdown">
                             <option disabled <?= !$usuario ? 'selected' : '' ?> hidden>Selecciona tu institución</option>
                             <?php
                             $tipos = ['Universidad', 'Instituto', 'Colegio', 'Academia Particular', 'Otros (especificar en campo mensaje)'];

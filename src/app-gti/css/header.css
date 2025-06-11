@@ -64,7 +64,7 @@ header nav a:focus {
 .perfil-logeado {
     display: flex;
     align-items: center;
-    margin-left: 2em;
+    margin-left: 4em;
 }
 
 .nombre-usuario {
