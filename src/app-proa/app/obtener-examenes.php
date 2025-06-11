@@ -19,6 +19,7 @@ if (!$codigo) {
     exit;
 }
 
+// Consulta modificada para permitir que cualquier profesor vea los exámenes de la asignatura
 $sql = "
     SELECT 
         ce.titulo,
@@ -29,11 +30,11 @@ $sql = "
     FROM examenes e
     INNER JOIN contenidoexamen ce ON e.idContenido = ce.idContenido
     INNER JOIN estadosexamen ee ON e.idEstado = ee.idEstado
-    WHERE e.codigoAsignatura = ? AND e.idUsuariosPROA = ?
+    WHERE e.codigoAsignatura = ?
 ";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("si", $codigo, $idUsuario);
+$stmt->bind_param("s", $codigo);  // Solo pasamos el código de la asignatura
 $stmt->execute();
 $resultado = $stmt->get_result();
 

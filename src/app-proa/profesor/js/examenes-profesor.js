@@ -14,7 +14,7 @@ async function cargarExamenesProfesor() {
         const data = await res.json();
 
         // Mantenemos tu condición original
-        if (data && (data.realizar || data.calificados || data.borradores)) {
+        if (data && (data.abiertos || data.calificados || data.borradores)) {
             renderExamenes(data);
         } else {
             mostrarAviso("No hay exámenes disponibles para esta asignatura.");
@@ -79,15 +79,14 @@ function crearBloque(titulo, examenes, tipo) {
                         <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
                     </div>
                 </div>`;
-        }else if (tipo === 'borradores') {
+        } else if (tipo === 'borradores') {
             html += `
-                <div class="item-examen" data-titulo="${ex.titulo}" data-examen="${ex.id}>
+                <div class="item-examen" data-titulo="${ex.titulo}" data-examen="${ex.id}">
                     <div class="info">
                         <h4>${ex.titulo}</h4>
                         <button class="btn-oscuros-secundario btn-visualizar-entregas btn-terminar">Continuar</button>
                     </div>
                 </div>`;
-
         }
     });
 
@@ -122,6 +121,4 @@ document.addEventListener("click", (e) => {
         // Redirige a la ficha del examen
         window.location.href = "ficha-examen-profesor.php";
     }
-
-
 });
