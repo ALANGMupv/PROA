@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-06-2025 a las 11:48:26
+-- Tiempo de generación: 11-06-2025 a las 19:29:16
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -150,7 +150,6 @@ INSERT INTO `calificaciones` (`idExamen`, `idUsuariosPROA`, `notaExamenAlumno`, 
                                                                                                    (1, 1, 8, 0),
                                                                                                    (4, 1, 6, 0),
                                                                                                    (5, 1, 8, 0),
-                                                                                                   (8, 1, 0, 2),
                                                                                                    (8, 2, 0, 6),
                                                                                                    (8, 7, 4, 6);
 
@@ -578,6 +577,31 @@ CREATE TABLE `vista_calificaciones_examen` (
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `vista_detalle_examenes_alumnos`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `vista_detalle_examenes_alumnos` (
+                                                  `id_alumno` int(11)
+    ,`nombre_alumno` varchar(129)
+    ,`codigo_asignatura` varchar(10)
+    ,`nombre_asignatura` varchar(64)
+    ,`id_examen` int(11)
+    ,`titulo_examen` varchar(255)
+    ,`id_pregunta` int(11)
+    ,`pregunta` text
+    ,`valor_pregunta` tinyint(3)
+    ,`respuesta_correcta` text
+    ,`valor_respuesta` tinyint(1)
+    ,`id_respuesta_alumno` int(11)
+    ,`respuesta_alumno` text
+    ,`acierto_alumno` tinyint(1)
+    ,`calificacion_total` tinyint(3)
+    ,`valor_total_examen` tinyint(3)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura Stand-in para la vista `vista_examenes_respuestas`
 -- (Véase abajo para la vista actual)
 --
@@ -620,6 +644,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vista_calificaciones_examen`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_calificaciones_examen`  AS SELECT `e`.`idExamen` AS `idExamen`, `a`.`codigoAsignatura` AS `codigoAsignatura`, `p`.`nombre` AS `nombre`, `p`.`apellidos` AS `apellidos`, `c`.`notaExamenAlumno` AS `notaExamenAlumno` FROM (((`calificaciones` `c` join `examenes` `e` on(`c`.`idExamen` = `e`.`idExamen`)) join `asignaturas` `a` on(`e`.`codigoAsignatura` = `a`.`codigoAsignatura`)) join `personas` `p` on(`c`.`idUsuariosPROA` = `p`.`idUsuariosPROA`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_detalle_examenes_alumnos`
+--
+DROP TABLE IF EXISTS `vista_detalle_examenes_alumnos`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_detalle_examenes_alumnos`  AS SELECT `p`.`idUsuariosPROA` AS `id_alumno`, concat(`p`.`nombre`,' ',`p`.`apellidos`) AS `nombre_alumno`, `a`.`codigoAsignatura` AS `codigo_asignatura`, `asig`.`nombre` AS `nombre_asignatura`, `e`.`idExamen` AS `id_examen`, `ce`.`titulo` AS `titulo_examen`, `pe`.`idPregunta` AS `id_pregunta`, `pe`.`enunciado` AS `pregunta`, `pe`.`valorPregunta` AS `valor_pregunta`, `re`.`respuesta` AS `respuesta_correcta`, `re`.`valorRespuesta` AS `valor_respuesta`, `ra`.`idRespuesta` AS `id_respuesta_alumno`, `re_alumno`.`respuesta` AS `respuesta_alumno`, `re_alumno`.`valorRespuesta` AS `acierto_alumno`, `c`.`notaExamenAlumno` AS `calificacion_total`, `ce`.`puntosExamen` AS `valor_total_examen` FROM (((((((((`personas` `p` join `respuestasalumno` `ra` on(`p`.`idUsuariosPROA` = `ra`.`idUsuariosPROA`)) join `examenes` `e` on(`ra`.`idExamen` = `e`.`idExamen`)) join `asignaturas` `asig` on(`e`.`codigoAsignatura` = `asig`.`codigoAsignatura`)) join `contenidoexamen` `ce` on(`e`.`idContenido` = `ce`.`idContenido`)) join `preguntasexamen` `pe` on(`ra`.`idPregunta` = `pe`.`idPregunta`)) join `respuestasexamen` `re_alumno` on(`ra`.`idRespuesta` = `re_alumno`.`idRespuesta`)) join `respuestasexamen` `re` on(`pe`.`idPregunta` = `re`.`idPregunta` and `re`.`valorRespuesta` = 1)) left join `calificaciones` `c` on(`e`.`idExamen` = `c`.`idExamen` and `p`.`idUsuariosPROA` = `c`.`idUsuariosPROA`)) left join `asignacionalumno` `a` on(`p`.`idUsuariosPROA` = `a`.`idUsuariosPROA` and `e`.`codigoAsignatura` = `a`.`codigoAsignatura`)) ORDER BY `p`.`idUsuariosPROA` ASC, `e`.`idExamen` ASC, `pe`.`idPregunta` ASC ;
 
 -- --------------------------------------------------------
 

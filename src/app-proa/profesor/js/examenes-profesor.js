@@ -106,19 +106,28 @@ document.addEventListener("click", (e) => {
     if (e.target.closest(".btn-terminar")) {
         window.location.href = "crear-examen-borrador.php";
         return;
-    } else if(e.target.closest(".btn-visualizar-entregas")){
-        window.location.href = "entregas-examen-profesor.php";
-        return;
     }
 
     const item = e.target.closest(".item-examen");
+    const idExamen = item?.dataset.examen;
+    const codigo = JSON.parse(localStorage.getItem('asignaturaSeleccionada'))?.codigo ??
+        JSON.parse(localStorage.getItem('asignaturaSeleccionada'))?.codigoAsignatura ?? '';
+
+    if (e.target.closest(".btn-visualizar-entregas")) {
+        if (idExamen && codigo) {
+            window.location.href = `entregas-examen-profesor.php?codigoAsignatura=${codigo}&idExamen=${idExamen}`;
+        } else {
+            console.error("Faltan datos para redirigir a entregas.");
+        }
+        return;
+    }
+
     if (item && item.dataset.titulo) {
         localStorage.setItem("examenSeleccionado", JSON.stringify({
             titulo: item.dataset.titulo,
-            examen: item.dataset.examen,
+            examen: idExamen,
         }));
 
-        // Redirige a la ficha del examen
         window.location.href = "ficha-examen-profesor.php";
     }
 });
