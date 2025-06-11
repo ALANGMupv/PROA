@@ -38,8 +38,10 @@ $idExamen = $_GET['idExamen'] ?? 0;
             <section class="panel-contenido fondoPanel" id="panelRealizarExamen">
                 <?php
                 $migas = [
-                    ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-alumno.php'],
-                    ['label' => 'Realizar examen']
+                    ['label' => 'Asignaturas', 'url' => 'index.php'],
+                    ['label' => 'Asignatura', 'url' => 'asignatura-alumno.php'],
+                    ['label' => 'Exámenes de la Asignatura', 'url' => 'examenes-alumno.php'],
+                    ['label' => 'Realizar Examen']
                 ];
                 include '../includes/migas-de-pan.inc';
                 ?>

@@ -44,6 +44,13 @@ error_reporting(E_ALL);
 
       <!-- Contenedor del contenido que se muestra según la opción seleccionada en el submenú -->
       <section class="panel-contenido fondoPanel">
+          <?php
+          $migas = [
+              ['label' => 'Asignaturas', 'url' => 'index.php'],
+              ['label' => 'Asignatura']
+          ];
+          include '../includes/migas-de-pan.inc';
+          ?>
         <p>
           Selecciona una opción del submenú lateral para ver los contenidos de esta asignatura.
         </p>

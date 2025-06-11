@@ -153,6 +153,19 @@ html, body {
     border-radius: 6px;
 }
 
+.submenu-item.desactivado {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: default;
+    text-decoration: none;
+}
+
+.menu .submenu-item.admin-item,
+#submenu a.admin-item {
+    margin-left: 0;
+}
+
+
 /* Clon del botón submenu en cabecera responsive */
 @media (max-width: 850px) {
     .submenu-toggle-btn-cabecera {

@@ -95,7 +95,7 @@ function crearBloque(titulo, examenes, tipo) {
                 Fecha límite: ${fechaLimite}
             </p>
         </div>
-        <button class="btn" data-id="${ex.idExamen}">Comenzar</button>
+        <button class="btn-secundario" data-id="${ex.idExamen}">Comenzar</button>
     </div>`;
         } else if (tipo === 'porRevisar') {
             html += `

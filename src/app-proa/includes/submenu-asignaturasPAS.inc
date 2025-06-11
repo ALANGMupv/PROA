@@ -6,8 +6,8 @@
         Administración <span class="flecha">&#9662;</span>
     </button>
     <div class="submenu-items">
-        <a href="asignaturas.php" class="submenu-item">
-            <span>Creación de Asignaturas</span>
+        <a href="asignaturas.php" class="submenu-item admin-item">
+            <span>Gestión de Asignaturas</span>
         </a>
     </div>
 </nav>
