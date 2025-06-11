@@ -1,7 +1,6 @@
 .fondoPanel{
     overflow: auto;
     max-height: calc(100vh - 80px - 6em);
-    margin-right: unset;
 }
 
 h4{
@@ -15,6 +14,8 @@ h4{
 
 #btn-crear{
     padding: 0.5em 0.75em;
+    display: flex;
+    align-self: flex-end;
 }
 
 .bloque-examenes button{
