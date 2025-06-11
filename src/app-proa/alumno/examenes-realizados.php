@@ -23,8 +23,8 @@
 
 <?php
 $rutaBase = '../';
-include $rutaBase . 'includes/header-proa.inc';;
 include $rutaBase . 'includes/mini-header-proa.inc';
+include $rutaBase . 'includes/header-proa.inc';;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -43,17 +43,15 @@ error_reporting(E_ALL);
 
       <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->
       <div class="contenido-asignatura">
-          <!-- Cabecera superior del contenido (zona fija arriba del panel derecho) -->
-          <!-- Aquí va el dropdown para cambiar de asignatura -->
-          <?php include $rutaBase . 'includes/dropdown-asignaturas.inc'; ?>
-
 
       <!-- Contenido del examen corregido -->
       <section id="panelRealizarExamen" class="fondoPanel">
           <?php
           $migas = [
-              ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-alumno.php'],
-              ['label' => 'Exámenes realizados']
+              ['label' => 'Asignaturas', 'url' => 'index.php'],
+              ['label' => 'Página Inicial de la Asignatura', 'url' => 'asignatura-alumno.php'],
+              ['label' => 'Exámenes de la Asignatura', 'url' => 'examenes-alumno.php'],
+              ['label' => 'Exámenes Realizados']
           ];
           include '../includes/migas-de-pan.inc';
           ?>

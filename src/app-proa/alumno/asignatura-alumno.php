@@ -21,8 +21,8 @@
 
 <?php
 $rutaBase = '../';
-include $rutaBase . 'includes/header-proa.inc';;
 include $rutaBase . 'includes/mini-header-proa.inc';
+include $rutaBase . 'includes/header-proa.inc';;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -41,12 +41,16 @@ error_reporting(E_ALL);
 
       <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->
       <div class="contenido-asignatura">
-          <!-- Cabecera superior del contenido (zona fija arriba del panel derecho) -->
-          <!-- Aquí va el dropdown para cambiar de asignatura -->
-          <?php include $rutaBase . 'includes/dropdown-asignaturas.inc'; ?>
 
       <!-- Contenedor del contenido que se muestra según la opción seleccionada en el submenú -->
       <section class="panel-contenido fondoPanel">
+          <?php
+          $migas = [
+              ['label' => 'Asignaturas', 'url' => 'index.php'],
+              ['label' => 'Página Inicial de la Asignatura']
+          ];
+          include '../includes/migas-de-pan.inc';
+          ?>
         <p>
           Selecciona una opción del submenú lateral para ver los contenidos de esta asignatura.
         </p>

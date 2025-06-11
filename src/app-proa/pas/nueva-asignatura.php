@@ -21,8 +21,8 @@
 
 <?php
 $rutaBase = '../';
-include $rutaBase . 'includes/header-proa.inc';;
 include $rutaBase . 'includes/mini-header-proa.inc';
+include $rutaBase . 'includes/header-proa.inc';;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -34,9 +34,15 @@ error_reporting(E_ALL);
         </aside>
 
         <div class="container">
-            <a href="#" id="btn-volver" class="volver-enlace">← Volver</a>
 
             <section class="contenido-asignatura fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Gestión de Asignaturas', 'url' => 'asignaturas.php'],
+                    ['label' => 'Crear Nueva Asignatura']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
                 <h2>Nueva Asignatura</h2>
 
                 <form class="datos" id="formulario">

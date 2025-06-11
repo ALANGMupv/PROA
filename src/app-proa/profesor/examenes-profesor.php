@@ -20,8 +20,8 @@
 
 <?php
 $rutaBase = '../';
-include $rutaBase . 'includes/header-proa.inc';;
 include $rutaBase . 'includes/mini-header-proa.inc';
+include $rutaBase . 'includes/header-proa.inc';;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -39,9 +39,6 @@ error_reporting(E_ALL);
 
         <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->
         <div class="contenido-asignatura">
-            <!-- Cabecera superior del contenido (zona fija arriba del panel derecho) -->
-            <!-- Aquí va el dropdown para cambiar de asignatura -->
-            <?php include $rutaBase . 'includes/dropdown-asignaturas.inc'; ?>
 
             <!-- <div class="contenido-asignatura"> <!- Área principal donde se muestra el contenido relacionado con la asignatura
                 <div class="cabecera-dropdown-fija-profesor"> <!- Barra superior con filtros desplegables para el profesor
@@ -67,12 +64,21 @@ error_reporting(E_ALL);
                     </div>
                 </div> -->
 
-      <section class="panel-contenido fondoPanel"> <!-- Panel donde se mostrará el contenido según la opción elegida -->
-          <button class="btn-oscuros" id="btn-crear" onclick="redireccionarPagina()">Crear examen</button>
+            <section class="panel-contenido fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Asignaturas', 'url' => 'index.php'],
+                    ['label' => 'Página Inicial de la Asignatura', 'url' => 'asignatura-alumno.php'],
+                    ['label' => 'Exámenes de la Asignatura']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
+                <div class="contenedor-btn-crear">
+                    <button class="btn-oscuros" id="btn-crear" onclick="redireccionarPagina()">Crear examen</button>
+                </div>
+            </section>
 
-      </section>
-
-    </div>
+        </div>
   </div> <!-- Fin del contenedor contenido principal -->
 </main>
 

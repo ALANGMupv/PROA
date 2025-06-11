@@ -21,8 +21,8 @@
 
 <?php
 $rutaBase = '../';
-include $rutaBase . 'includes/header-proa.inc';;
 include $rutaBase . 'includes/mini-header-proa.inc';
+include $rutaBase . 'includes/header-proa.inc';;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -59,7 +59,7 @@ error_reporting(E_ALL);
                     </div>
 
                     <button class="boton-favoritas" id="btnFavoritas">
-                        <img src="../icons/favoritos.svg" alt="Favoritas" class="icono-azul" width="16" height="16" />
+                        <img src="../icons/star.svg" alt="Favoritas" class="btnAmarillo" width="16" height="16" />
                         Favoritas
                     </button>
                 </div>

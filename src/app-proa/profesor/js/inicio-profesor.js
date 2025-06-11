@@ -42,9 +42,9 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
                     </div>
                     <div class="asignatura-derecha">
                         <span class="rol-profesor">Profesor ${asig.rol === 'colaborador' ? 'colaborador' : 'responsable'}</span>
-                        <img src="${asig.favorita ? "../icons/favoritos-relleno.svg" : "../icons/favoritos.svg"}"
+                        <img src="${asig.favorita ? "../icons/star-fill.svg" : "../icons/star.svg"}"
                              alt="Favorito"
-                             class="icono-azul icono-favorito"
+                             class="btnAmarillo icono-favorito"
                              data-favorita="${asig.favorita}" />
                     </div>
                 `;
@@ -71,7 +71,7 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
                     const contenedor = icono.closest(".item-asignatura");
                     const esFavorita = icono.dataset.favorita === "true";
 
-                    icono.src = esFavorita ? "../icons/favoritos.svg" : "../icons/favoritos-relleno.svg";
+                    icono.src = esFavorita ? "../icons/star.svg" : "../icons/star-fill.svg";
                     icono.dataset.favorita = esFavorita ? "false" : "true";
                     contenedor.classList.toggle("favorita", !esFavorita);
 

@@ -21,8 +21,8 @@
 <body>
 <?php
 $rutaBase = '../';
-include $rutaBase . 'includes/header-proa.inc';
 include $rutaBase . 'includes/mini-header-proa.inc';
+include $rutaBase . 'includes/header-proa.inc';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -35,12 +35,13 @@ $idExamen = $_GET['idExamen'] ?? 0;
         </aside>
 
         <div class="contenido-asignatura">
-            <?php include $rutaBase . 'includes/dropdown-asignaturas.inc'; ?>
             <section class="panel-contenido fondoPanel" id="panelRealizarExamen">
                 <?php
                 $migas = [
-                    ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-alumno.php'],
-                    ['label' => 'Realizar examen']
+                    ['label' => 'Asignaturas', 'url' => 'index.php'],
+                    ['label' => 'Página Inicial de la Asignatura', 'url' => 'asignatura-alumno.php'],
+                    ['label' => 'Exámenes de la Asignatura', 'url' => 'examenes-alumno.php'],
+                    ['label' => 'Realizar Examen']
                 ];
                 include '../includes/migas-de-pan.inc';
                 ?>

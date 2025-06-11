@@ -53,9 +53,9 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
                         </div>
                     </div>
                     <div class="asignatura-derecha">
-                        <img src="${asig.favorita ? "../icons/favoritos-relleno.svg" : "../icons/favoritos.svg"}"
+                        <img src="${asig.favorita ? "../icons/star-fill.svg" : "../icons/star.svg"}"
                             alt="Favorito"
-                            class="icono-azul icono-favorito"
+                            class="btnAmarillo icono-favorito"
                             data-favorita="${asig.favorita}" />
                     </div>
                 `;
@@ -87,7 +87,7 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
                     // FETCH PARA CAMBIAR O DESASIGNAR UNA ASIGNATURA COMO FAVORITA
                     const nuevaFavorita = !esFavorita;
 
-                    icono.src = nuevaFavorita ? "../icons/favoritos-relleno.svg" : "../icons/favoritos.svg";
+                    icono.src = nuevaFavorita ? "../icons/star-fill.svg" : "../icons/star.svg";
                     icono.dataset.favorita = nuevaFavorita ? "true" : "false";
                     contenedor.classList.toggle("favorita", nuevaFavorita);
 

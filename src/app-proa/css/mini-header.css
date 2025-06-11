@@ -8,7 +8,7 @@
     font-size: 0.9rem;
     font-family: var(--fuente-lato, sans-serif);
     border-bottom: 1px solid #ccc;
-    flex-wrap: wrap; /* Por si se rompe en pantallas pequeñas */
+    flex-wrap: wrap;
 }
 
 .form-mini-header {
@@ -31,4 +31,15 @@
 .btn-header-rol:hover {
     background-color: var(--color-primario);
     color: white;
+}
+
+.mini-header-proa select {
+    padding: 0.5em 1em;
+    font-size: 1em;
+    border: 2px solid var(--color-primario);
+    border-radius: 8px;
+    background-color: white;
+    color: var(--color-primario);
+    font-weight: 500;
+    cursor: pointer;
 }

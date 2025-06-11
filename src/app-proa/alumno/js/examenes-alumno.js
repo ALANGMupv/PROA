@@ -59,7 +59,7 @@ function renderExamenes(data) {
     seccion.querySelectorAll(".bloque-examenes").forEach(b => b.remove());
 
     seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes a realizar", data.realizar, 'realizar'));
-    seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes por revisar", data.porRevisar, 'porRevisar'));
+    seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes en revisión", data.porRevisar, 'porRevisar'));
     seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes calificados", data.calificados, 'calificados'));
 
     document.querySelectorAll(".item-examen-realizar .btn").forEach(el => {
@@ -95,7 +95,7 @@ function crearBloque(titulo, examenes, tipo) {
                 Fecha límite: ${fechaLimite}
             </p>
         </div>
-        <button class="btn" data-id="${ex.idExamen}">Comenzar</button>
+        <button class="btn-secundario" data-id="${ex.idExamen}">Comenzar</button>
     </div>`;
         } else if (tipo === 'porRevisar') {
             html += `
