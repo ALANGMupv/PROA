@@ -6,9 +6,11 @@ $esAlumno = $rol === 'alumno';
 $esProfesor = $rol === 'profesor';
 ?>
 
-<div class="titulo-submenu">
-    <h2 id="titulo-asignatura">Asignatura</h2>
+<!-- Dropdown en lugar del título -->
+<div class="cabecera-asignatura">
+    <?php include $rutaBase . 'includes/dropdown-asignaturas.inc'; ?>
 </div>
+
 <nav class="menu colapsable" id="submenu-toggle">
     <button class="submenu-toggle-btn">
         Asignatura <span class="flecha">&#9662;</span>

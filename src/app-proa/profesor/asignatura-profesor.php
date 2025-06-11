@@ -21,8 +21,8 @@
 
 <?php
 $rutaBase = '../';
-include $rutaBase . 'includes/header-proa.inc';;
 include $rutaBase . 'includes/mini-header-proa.inc';
+include $rutaBase . 'includes/header-proa.inc';;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -40,9 +40,6 @@ error_reporting(E_ALL);
 
         <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->
         <div class="contenido-asignatura">
-            <!-- Cabecera superior del contenido (zona fija arriba del panel derecho) -->
-            <!-- Aquí va el dropdown para cambiar de asignatura -->
-            <?php include $rutaBase . 'includes/dropdown-asignaturas.inc'; ?>
 
         <!-- <div class="contenido-asignatura"> <!- Área principal donde se muestra el contenido relacionado con la asignatura
             <div class="cabecera-dropdown-fija-profesor"> <!- Barra superior con filtros desplegables para el profesor

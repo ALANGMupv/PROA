@@ -8,7 +8,7 @@
     font-size: 0.9rem;
     font-family: var(--fuente-lato, sans-serif);
     border-bottom: 1px solid #ccc;
-    flex-wrap: wrap; /* Por si se rompe en pantallas pequeñas */
+    flex-wrap: wrap;
 }
 
 .form-mini-header {
