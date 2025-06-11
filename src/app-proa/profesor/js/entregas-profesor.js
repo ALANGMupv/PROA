@@ -1,8 +1,36 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const asignatura = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
-    const codigo = asignatura?.codigo || "PROG101";
-    const idExamen = obtenerIdExamenDeURL(); // extrae el ID desde la URL si existe
+document.addEventListener("DOMContentLoaded", async () => {
+    const params = new URLSearchParams(window.location.search);
+    const codigoDesdeURL = params.get("codigoAsignatura");
+    const idExamen = params.get("idExamen");
 
+    let asignatura = null;
+
+    try {
+        asignatura = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
+    } catch (e) {
+        console.warn("Asignatura malformada en localStorage:", e);
+    }
+
+    if ((!asignatura || !asignatura.codigoAsignatura) && codigoDesdeURL) {
+        asignatura = {
+            nombre: "(Asignatura desde URL)",
+            codigoAsignatura: codigoDesdeURL
+        };
+        localStorage.setItem("asignaturaSeleccionada", JSON.stringify(asignatura));
+
+        try {
+            await fetch("../app/guardar-asignatura-sesion.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(asignatura),
+                credentials: "include"
+            });
+        } catch (error) {
+            console.error("Error al guardar asignatura en sesión:", error);
+        }
+    }
+
+    const codigo = asignatura?.codigoAsignatura;
     let url = `../app/entregas-examen.php?codigoAsignatura=${codigo}`;
     if (idExamen !== null && idExamen !== "null") {
         url += `&idExamen=${idExamen}`;
@@ -26,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderLista(filtradas);
     });
 
-    function obtenerIdExamenDeURL() {
+function obtenerIdExamenDeURL() {
         const params = new URLSearchParams(window.location.search);
         return params.get("idExamen");
     }
