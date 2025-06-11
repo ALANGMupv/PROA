@@ -18,7 +18,6 @@ $response = [
     'respuestasAlumnos' => []
 ];
 
-// Usamos la vista directamente
 $sql = "SELECT * FROM vista_detalle_examenes_alumnos 
         WHERE codigo_asignatura = ? AND id_examen = ?";
 $stmt = $conn->prepare($sql);
@@ -36,13 +35,11 @@ while ($row = $result->fetch_assoc()) {
     $nombreAlumno = $row['nombre_alumno'];
     $idPregunta = $row['id_pregunta'];
     $idRespuestaAlumno = $row['id_respuesta_alumno'];
-    $respuestaCorrecta = $row['respuesta_correcta'];
     $respuestaAlumno = $row['respuesta_alumno'];
     $acierto = $row['acierto_alumno'];
     $nota = $row['calificacion_total'] ?? 0;
-    $respuestaCorrectaId = null;
 
-    // Añadir alumno si no estaba ya
+    // Añadir alumno
     if (!isset($alumnos[$idAlumno])) {
         $alumnos[$idAlumno] = ['id' => $idAlumno, 'nombre' => $nombreAlumno];
         $calificaciones[$idAlumno] = $nota;
@@ -51,33 +48,34 @@ while ($row = $result->fetch_assoc()) {
     // Guardar respuesta del alumno
     $respuestasAlumnos[$idAlumno][$idPregunta] = $idRespuestaAlumno;
 
-    // Guardar pregunta y sus opciones
+    // Guardar pregunta y todas sus opciones (solo si no se ha hecho antes)
     if (!isset($preguntas[$idPregunta])) {
         $preguntas[$idPregunta] = [
             'texto' => $row['pregunta'],
-            'valor' => $row['valor_total_examen'], // o valor por pregunta si lo tienes
+            'valor' => $row['valor_total_examen'],
             'opciones' => []
         ];
-    }
 
-    // Añadir opción si no está
-    $yaExiste = false;
-    foreach ($preguntas[$idPregunta]['opciones'] as $opcion) {
-        if ($opcion['texto'] === $respuestaAlumno) {
-            $yaExiste = true;
-            break;
+        // Consulta todas las opciones reales de esa pregunta
+        $sqlOpciones = "SELECT idRespuesta, respuesta, valorRespuesta
+                    FROM respuestasexamen
+                    WHERE idPregunta = ?";
+        $stmtOpciones = $conn->prepare($sqlOpciones);
+        $stmtOpciones->bind_param("i", $idPregunta);
+        $stmtOpciones->execute();
+        $resOpciones = $stmtOpciones->get_result();
+
+        while ($op = $resOpciones->fetch_assoc()) {
+            $preguntas[$idPregunta]['opciones'][] = [
+                'id' => $op['idRespuesta'],
+                'texto' => $op['respuesta'],
+                'correcta' => $op['valorRespuesta'] == 1
+            ];
         }
     }
-    if (!$yaExiste) {
-        $preguntas[$idPregunta]['opciones'][] = [
-            'id' => $idRespuestaAlumno,
-            'texto' => $respuestaAlumno,
-            'correcta' => $acierto == 1
-        ];
-    }
+
 }
 
-// Formato final
 $response['alumnos'] = array_values($alumnos);
 $response['preguntas'] = $preguntas;
 $response['calificaciones'] = $calificaciones;
@@ -85,3 +83,4 @@ $response['respuestasAlumnos'] = $respuestasAlumnos;
 
 $conn->close();
 echo json_encode($response);
+
