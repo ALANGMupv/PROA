@@ -6,8 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Fetch al backend para obtener las entregas de los exámenes
     fetch(`../app/ver-entregas-examen-profesor.php?codigoAsignatura=${encodeURIComponent(codigo)}`)
-        .then(res => res.json())
+        .then(res => res.json())  // Asegurarse de que la respuesta sea JSON
         .then(data => {
+            if (data.error) {
+                mostrarError(data.error);
+                return;
+            }
             entregasOriginales = data.entregas || [];
             renderLista(entregasOriginales);  // Renderiza la lista de entregas
         })
@@ -94,6 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function mostrarError(mensaje) {
-        document.getElementById('contenedorPreguntas').innerHTML = `<p>${mensaje}</p>`;
+        const contenedor = document.getElementById('contenedorPreguntas');
+        if (contenedor) {
+            contenedor.innerHTML = `<p>${mensaje}</p>`;
+        }
     }
 });

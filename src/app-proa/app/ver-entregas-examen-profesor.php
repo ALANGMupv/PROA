@@ -14,17 +14,21 @@ if (!$codigoAsignatura) {
 }
 
 // Obtener las entregas de los exámenes de la asignatura seleccionada
-$sql = "SELECT p.nombre, c.notaExamenAlumno, re.respuesta AS respuestaAlumno, p.idUsuariosPROA
+$sql = "SELECT p.nombre, c.notaExamenAlumno, c.idExamen, p.idUsuariosPROA
         FROM calificaciones c
         JOIN personas p ON c.idUsuariosPROA = p.idUsuariosPROA
-        JOIN respuestasalumno ra ON c.idExamen = ra.idExamen AND ra.idUsuariosPROA = p.idUsuariosPROA
-        JOIN respuestasexamen re ON ra.idRespuesta = re.idRespuesta
-        WHERE c.codigoAsignatura = ?";
+        JOIN examenes e ON c.idExamen = e.idExamen
+        WHERE e.codigoAsignatura = ?";  // Cambié la tabla de 'calificaciones' a 'examenes'
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $codigoAsignatura);
 $stmt->execute();
 $result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    echo json_encode(['error' => 'No se encontraron entregas para esta asignatura.']);
+    exit;
+}
 
 $entregas = [];
 while ($row = $result->fetch_assoc()) {
@@ -38,7 +42,7 @@ while ($row = $result->fetch_assoc()) {
                      LEFT JOIN respuestasalumno ra 
                         ON ra.idPregunta = p.idPregunta 
                         AND ra.idUsuariosPROA = ?
-                        AND ra.idExamen = ? 
+                        AND ra.idExamen = ?
                      WHERE p.idContenido = ?";
 
     $stmtRespuestas = $conn->prepare($sqlRespuestas);
@@ -53,10 +57,10 @@ while ($row = $result->fetch_assoc()) {
             'enunciado' => $r['enunciado'],
             'valor' => $r['valor'],
             'opciones' => [
-                'A' => $r['A'],
-                'B' => $r['B'],
-                'C' => $r['C'],
-                'D' => $r['D'],
+                'A' => $r['A'] ?? null, // Agregar validación si las opciones no están en la BD
+                'B' => $r['B'] ?? null,
+                'C' => $r['C'] ?? null,
+                'D' => $r['D'] ?? null,
             ],
             'respuestaAlumno' => $r['respuestaAlumno'],
             'correcta' => $r['correcta']
