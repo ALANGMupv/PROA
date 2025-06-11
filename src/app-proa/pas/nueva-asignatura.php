@@ -34,9 +34,15 @@ error_reporting(E_ALL);
         </aside>
 
         <div class="container">
-            <a href="#" id="btn-volver" class="volver-enlace">← Volver</a>
 
             <section class="contenido-asignatura fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Gestión de Asignaturas', 'url' => 'asignaturas.php'],
+                    ['label' => 'Crear Nueva Asignatura']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
                 <h2>Nueva Asignatura</h2>
 
                 <form class="datos" id="formulario">

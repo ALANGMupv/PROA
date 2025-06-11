@@ -37,6 +37,12 @@ error_reporting(E_ALL);
 
         <!-- Contenido principal derecho del panel -->
         <section class="contenido-asignatura fondoPanel">
+            <?php
+            $migas = [
+                ['label' => 'Gestión de Asignaturas']
+            ];
+            include '../includes/migas-de-pan.inc';
+            ?>
             <div class="gestion-asignaturas">
                 <h2>Gestión de Asignaturas</h2>
 

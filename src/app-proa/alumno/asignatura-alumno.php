@@ -47,7 +47,7 @@ error_reporting(E_ALL);
           <?php
           $migas = [
               ['label' => 'Asignaturas', 'url' => 'index.php'],
-              ['label' => 'Asignatura']
+              ['label' => 'Página Inicial de la Asignatura']
           ];
           include '../includes/migas-de-pan.inc';
           ?>

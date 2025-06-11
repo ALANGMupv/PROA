@@ -71,8 +71,10 @@ error_reporting(E_ALL);
             <section class="panel-contenido fondoPanel">
                 <?php
                 $migas = [
-                    ['label' => 'Exámenes de la asignatura', 'url' => 'examenes-profesor.php'],
-                    ['label' => 'Entregas del examen']
+                    ['label' => 'Asignaturas', 'url' => 'index.php'],
+                    ['label' => 'Página Inicial de la Asignatura', 'url' => 'asignatura-alumno.php'],
+                    ['label' => 'Exámenes de la Asignatura', 'url' => 'examenes-profesor.php'],
+                    ['label' => 'Visualizar Entregas del Examen']
                 ];
                 include '../includes/migas-de-pan.inc';
                 ?>

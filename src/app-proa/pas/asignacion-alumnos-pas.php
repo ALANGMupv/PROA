@@ -49,10 +49,14 @@ error_reporting(E_ALL);
             <?php include $rutaBase . 'includes/submenu-asignaturasPAS.inc'; ?>
         </aside>
 
-        <div class="container">
-            <a href="#" id="btn-volver" class="volver-enlace">← Volver</a>
-
             <section class="contenido-asignatura fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Gestión de Asignaturas', 'url' => 'asignaturas.php'],
+                    ['label' => 'Asignar Alumnos']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
                 <h2 id="titulo-asignacion">Asignación Alumnos</h2>
 
                 <div class="bloque-listas-asignacion">
@@ -69,7 +73,6 @@ error_reporting(E_ALL);
                     </div>
                 </div>
             </section>
-        </div>
     </div>
 </main>
 <div id="notificacion" class="notificacion" style="display:none;"></div>

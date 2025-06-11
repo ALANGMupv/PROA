@@ -65,6 +65,14 @@ error_reporting(E_ALL);
                 </div> -->
 
             <section class="panel-contenido fondoPanel">
+                <?php
+                $migas = [
+                    ['label' => 'Asignaturas', 'url' => 'index.php'],
+                    ['label' => 'Página Inicial de la Asignatura', 'url' => 'asignatura-alumno.php'],
+                    ['label' => 'Exámenes de la Asignatura']
+                ];
+                include '../includes/migas-de-pan.inc';
+                ?>
                 <div class="contenedor-btn-crear">
                     <button class="btn-oscuros" id="btn-crear" onclick="redireccionarPagina()">Crear examen</button>
                 </div>

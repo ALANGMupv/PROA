@@ -39,7 +39,7 @@ $idExamen = $_GET['idExamen'] ?? 0;
                 <?php
                 $migas = [
                     ['label' => 'Asignaturas', 'url' => 'index.php'],
-                    ['label' => 'Asignatura', 'url' => 'asignatura-alumno.php'],
+                    ['label' => 'Página Inicial de la Asignatura', 'url' => 'asignatura-alumno.php'],
                     ['label' => 'Exámenes de la Asignatura', 'url' => 'examenes-alumno.php'],
                     ['label' => 'Realizar Examen']
                 ];
