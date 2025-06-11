@@ -13,10 +13,16 @@
         </nav>
 
         <div class="perfil-logeado">
+            <?php if (isset($_SESSION['usuario'])): ?>
+                <span class="nombre-usuario">
+            Bienvenido, <?= htmlspecialchars($_SESSION['usuario']['nombre'] . ' ' . $_SESSION['usuario']['apellidos']) ?>
+        </span>
+            <?php endif; ?>
             <a href="#" class="btn-cerrar-sesion">
                 <img src="<?= $rutaBase ?>icons/cerrarSesion.svg" alt="Cerrar sesión" class="icono-perfil">
             </a>
         </div>
+
     </div>
 
     <button id="hamburguesa">

@@ -27,16 +27,15 @@ if (isset($_SESSION['usuario'])) {
 } else {
     include $rutaBase . 'includes/headerNoLogueado.inc';
 }
+
+$usuario = $_SESSION['usuario'] ?? null;
 ?>
+
 <!-- Cerramos sección header -->
 
 <!-- Formulario Contacto -->
 <main>
 <section class="contacto">
-    <?php
-    session_start();
-    $usuario = $_SESSION['usuario'] ?? null;
-    ?>
     <form class="formulario-contacto">
         <h2>Contáctanos</h2>
         <p class="parrafo-principal">
@@ -68,7 +67,7 @@ if (isset($_SESSION['usuario'])) {
                 <div class="campo">
                     <label for="codigoInstitucion">Nombre de la institución *</label>
                     <input type="text" id="codigoInstitucion" class="input-base" placeholder="Nombre de tu institución"
-                           value="<?= $usuario['codigoInstitucion'] ?? '' ?>" <?= $usuario ? 'readonly' : '' ?> />
+                           value="<?= $usuario['nombreInstitucion'] ?? '' ?>" <?= $usuario ? 'readonly' : '' ?> />
                 </div>
             </div>
 
