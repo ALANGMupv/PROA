@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2025 a las 23:51:31
+-- Tiempo de generación: 11-06-2025 a las 11:48:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -77,9 +77,10 @@ INSERT INTO `asignaciondocentes` (`idUsuariosPROA`, `codigoAsignatura`, `respons
                                                                                                                  (3, 'COMM101', 1, 1),
                                                                                                                  (3, 'DIU666', 1, NULL),
                                                                                                                  (3, 'MULT203', 1, NULL),
-                                                                                                                 (3, 'PROG101', 1, 1),
+                                                                                                                 (3, 'PROG101', 1, NULL),
                                                                                                                  (3, 'SIGS301', 0, NULL),
                                                                                                                  (3, 'TFG401', 0, 0),
+                                                                                                                 (4, 'PROG101', 0, NULL),
                                                                                                                  (4, 'SIGS301', 1, NULL),
                                                                                                                  (4, 'SOUND204', 0, 0),
                                                                                                                  (4, 'UIUX102', 0, 0);
@@ -302,8 +303,7 @@ INSERT INTO `estadosexamen` (`idEstado`, `nombreEstado`) VALUES
                                                              (1, 'Abierto'),
                                                              (2, 'En revisión'),
                                                              (3, 'Calificado'),
-                                                             (4, 'Cerrado'),
-                                                             (5, 'Borrador');
+                                                             (4, 'Borrador');
 
 -- --------------------------------------------------------
 
@@ -331,7 +331,7 @@ INSERT INTO `examenes` (`idExamen`, `codigoAsignatura`, `idGrupo`, `idContenido`
                                                                                                                     (6, 'PROG101', 1, 4, 3, 3),
                                                                                                                     (8, 'PROG101', 1, 2, 1, 3),
                                                                                                                     (13, 'PROG101', 1, 3, 2, 3),
-                                                                                                                    (16, 'SIGS301', NULL, 18, 4, 4),
+                                                                                                                    (16, 'SIGS301', 1, 18, 4, 4),
                                                                                                                     (17, 'SIGS301', NULL, 20, 1, 4);
 
 -- --------------------------------------------------------
