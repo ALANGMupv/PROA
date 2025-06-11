@@ -11,11 +11,38 @@ if (empty($codigoAsignatura) || empty($idExamen) || $idExamen === 'null') {
     exit;
 }
 
+// Obtener el título del examen
+$tituloExamen = "(Título no disponible)";
+$sqlTitulo = "SELECT ce.titulo 
+              FROM examenes e
+              JOIN contenidoexamen ce ON e.idContenido = ce.idContenido
+              WHERE e.idExamen = ?";
+$stmtTitulo = $conn->prepare($sqlTitulo);
+$stmtTitulo->bind_param("i", $idExamen);
+$stmtTitulo->execute();
+$resTitulo = $stmtTitulo->get_result();
+if ($rowTitulo = $resTitulo->fetch_assoc()) {
+    $tituloExamen = $rowTitulo['titulo'];
+}
+
+// Obtener valor total del examen
+$valorExamen = 10; // por defecto
+$sqlValor = "SELECT valorExamen FROM calificaciones WHERE idExamen = ? LIMIT 1";
+$stmtValor = $conn->prepare($sqlValor);
+$stmtValor->bind_param("i", $idExamen);
+$stmtValor->execute();
+$resValor = $stmtValor->get_result();
+if ($rowValor = $resValor->fetch_assoc()) {
+    $valorExamen = $rowValor['valorExamen'];
+}
+
 $response = [
     'alumnos' => [],
     'preguntas' => [],
     'calificaciones' => [],
-    'respuestasAlumnos' => []
+    'respuestasAlumnos' => [],
+    'tituloExamen' => $tituloExamen,
+    'valorExamen' => $valorExamen
 ];
 
 $sql = "SELECT * FROM vista_detalle_examenes_alumnos 
@@ -35,35 +62,31 @@ while ($row = $result->fetch_assoc()) {
     $nombreAlumno = $row['nombre_alumno'];
     $idPregunta = $row['id_pregunta'];
     $idRespuestaAlumno = $row['id_respuesta_alumno'];
-    $respuestaAlumno = $row['respuesta_alumno'];
-    $acierto = $row['acierto_alumno'];
     $nota = $row['calificacion_total'] ?? 0;
 
-    // Añadir alumno
     if (!isset($alumnos[$idAlumno])) {
         $alumnos[$idAlumno] = ['id' => $idAlumno, 'nombre' => $nombreAlumno];
         $calificaciones[$idAlumno] = $nota;
     }
 
-    // Guardar respuesta del alumno
     $respuestasAlumnos[$idAlumno][$idPregunta] = $idRespuestaAlumno;
 
-    // Guardar pregunta y todas sus opciones (solo si no se ha hecho antes)
     if (!isset($preguntas[$idPregunta])) {
         $preguntas[$idPregunta] = [
             'texto' => $row['pregunta'],
-            'valor' => $row['valor_total_examen'],
+            'valor' => $row['valor_pregunta'],
             'opciones' => []
         ];
 
-        // Consulta todas las opciones reales de esa pregunta
+        // Obtener las opciones de respuesta
         $sqlOpciones = "SELECT idRespuesta, respuesta, valorRespuesta
-                    FROM respuestasexamen
-                    WHERE idPregunta = ?";
+                        FROM respuestasexamen
+                        WHERE idPregunta = ?";
         $stmtOpciones = $conn->prepare($sqlOpciones);
         $stmtOpciones->bind_param("i", $idPregunta);
         $stmtOpciones->execute();
         $resOpciones = $stmtOpciones->get_result();
+
 
         while ($op = $resOpciones->fetch_assoc()) {
             $preguntas[$idPregunta]['opciones'][] = [
@@ -73,8 +96,8 @@ while ($row = $result->fetch_assoc()) {
             ];
         }
     }
-
 }
+
 
 $response['alumnos'] = array_values($alumnos);
 $response['preguntas'] = $preguntas;
@@ -83,4 +106,3 @@ $response['respuestasAlumnos'] = $respuestasAlumnos;
 
 $conn->close();
 echo json_encode($response);
-

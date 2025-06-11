@@ -3,6 +3,7 @@ const codigoDesdeURL = params.get("codigoAsignatura");
 const idExamen = params.get("idExamen");
 
 let asignatura = null;
+let valorExamen = 10;
 
 try {
     asignatura = JSON.parse(localStorage.getItem("asignaturaSeleccionada"));
@@ -38,6 +39,10 @@ let entregasOriginales = [];
 fetch(url)
     .then(res => res.json())
     .then(data => {
+        console.log("Datos recibidos:", data);
+        document.querySelector("h1").textContent = `Entregas del ${data.tituloExamen}`;
+        document.title = `Entregas del ${data.tituloExamen}`;
+        valorExamen = data.valorExamen || 10;
         entregasOriginales = transformarDatosBD(data);
         renderLista(entregasOriginales);
     })
@@ -73,7 +78,8 @@ function transformarDatosBD(data) {
                             correcta: opcion.correcta,
                             pregunta: {
                                 texto: pregunta.texto,
-                                opciones: pregunta.opciones
+                                opciones: pregunta.opciones,
+                                valor: pregunta.valor  // <-- Se agregó el valor de la pregunta
                             }
                         };
                     }
@@ -85,7 +91,6 @@ function transformarDatosBD(data) {
             id: alumno.id,
             nombre: alumno.nombre,
             nota,
-            fechaEntrega: new Date().toISOString(),
             respuestas
         };
     });
@@ -97,7 +102,7 @@ function renderLista(entregas) {
     entregas.forEach(entrega => {
         const div = document.createElement("div");
         div.classList.add("alumno-item");
-        div.innerHTML = `<strong>${entrega.nombre}</strong><p>Nota: ${entrega.nota}/10</p>`;
+        div.innerHTML = `<strong>${entrega.nombre}</strong><p>Nota: ${entrega.nota}/${valorExamen}</p>`;
         div.addEventListener("click", () => {
             document.querySelectorAll(".alumno-item").forEach(i => i.classList.remove("activo"));
             div.classList.add("activo");
@@ -114,8 +119,7 @@ function renderDetalle(entrega) {
             <h2>${entrega.nombre}</h2>
             <button id="btn-volver2" class="btn-oscuros btn-atras">Atrás</button>
         </section>
-        <p>Fecha de entrega: ${new Date(entrega.fechaEntrega).toLocaleString()}</p>
-        <p>Calificación: ${entrega.nota}/10</p>
+        <p>Calificación: ${entrega.nota}/${valorExamen}</p>
         <hr class="separador" />
         ${renderPreguntas(entrega.respuestas)}
     `;
@@ -127,12 +131,22 @@ function renderDetalle(entrega) {
 
 function renderPreguntas(respuestas) {
     return Object.entries(respuestas).map(([clave, r], i) => {
-        const correcta = r.pregunta.opciones.find(op => op.correcta)?.id;
+        console.log('r.pregunta:', r.pregunta);
+        const valor = r.pregunta.valor !== undefined ? r.pregunta.valor : 0;
+        let notaPregunta = 0;
+
+        console.log(`Valor de la pregunta ${i + 1}:`, valor);
+
+        const respuestaSeleccionada = r.pregunta.opciones.find(op => op.id === r.id);
+        if (respuestaSeleccionada) {
+            notaPregunta = respuestaSeleccionada.correcta ? valor : 0;
+        }
+
         return `
             <section class="pregunta">
                 <h3>Pregunta ${i + 1}</h3>
                 <p class="parrafo-principal"><strong>${r.pregunta.texto}</strong></p>
-                <div class="calificacion-pregunta">${r.id === correcta ? "2/2 puntos" : "0/2 puntos"}</div>
+                <div class="calificacion-pregunta">${notaPregunta}/${valor} puntos</div>  
                 <div class="opciones">
                     ${r.pregunta.opciones.map(op => {
             const checked = op.id === r.id ? "checked" : "";
@@ -142,11 +156,11 @@ function renderPreguntas(respuestas) {
                     ? "color-box boton-opcion-incorrecta-deshabilitado"
                     : "boton-opcion-deshabilitado";
             return `
-                        <label class="boton-opcion ${clase}">
-                            <input type="radio" name="${clave}" value="${op.id}" disabled ${checked}>
-                            <span class="letra">${String.fromCharCode(65 + i)}.</span>
-                            <span class="texto">${op.texto}</span>
-                        </label>`;
+                            <label class="boton-opcion ${clase}">
+                                <input type="radio" name="${clave}" value="${op.id}" disabled ${checked}>
+                                <span class="letra">${String.fromCharCode(65 + i)}.</span>
+                                <span class="texto">${op.texto}</span>
+                            </label>`;
         }).join("")}
                 </div>
             </section>`;
