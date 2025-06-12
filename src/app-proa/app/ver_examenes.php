@@ -62,7 +62,6 @@ while ($row = $result->fetch_assoc()) {
 
     // Por revisar y calificados: si hay calificación, se muestran siempre
     if ($tieneCalificacion) {
-        $examenes['porRevisar'][] = $row;
         $examenes['calificados'][] = $row;
     }
 }
