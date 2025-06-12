@@ -149,6 +149,7 @@ document.getElementById("confirmar-guardar").addEventListener("click", () => {
         idCaracter: parseInt(caracterSelect.value)
     };
 
+    console.log("Datos que se envían:", datos);
     fetch("../app/guardar-asignatura.php", {
         method: "POST",
         headers: {

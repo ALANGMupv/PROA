@@ -57,9 +57,6 @@ error_reporting(E_ALL);
                         <p><strong>Semestre:</strong> <span id="semestre-asignatura"></span></p>
                         <p><strong>Año:</strong> <span id="anyo-asignatura"></span></p>
                         <p><strong>Créditos:</strong> <span id="creditos-asignatura"></span> cts</p>
-                        <p><strong>Carácter:</strong> <span id="caracter-asignatura"></span></p>
-                        <p><strong>Titulación:</strong> <span id="titulacion-asignatura"></span></p>
-
                     </div>
 
                 </div>

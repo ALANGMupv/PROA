@@ -40,7 +40,7 @@ fetch('../app/chequear-sesion.php', { credentials: 'include' })
                 div.dataset.codigo = asig.codigo.toLowerCase();
                 div.dataset.curso = asig.curso;
                 div.dataset.semestre = asig.semestre;
-                div.dataset.anyo = asig.anyo;
+                div.dataset.anyo = "2024"; // Solo hay asignaturas de ese curso
                 if (asig.favorita) div.classList.add("favorita");
 
                 // HTML interno con icono, datos y favorito

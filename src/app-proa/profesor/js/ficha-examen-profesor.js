@@ -1,26 +1,24 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const examenSeleccionadoStr = localStorage.getItem('examenSeleccionado');
-    let examenId = null;  // Declarar fuera del if
+const examenSeleccionadoStr = localStorage.getItem('examenSeleccionado');
+let examenId = null;  // Declarar fuera del if
 
-    if (examenSeleccionadoStr) {
-        const examenSeleccionado = JSON.parse(examenSeleccionadoStr);
-        examenId = examenSeleccionado?.examen;  // Asignar dentro
-    } else {
-        console.error("No se pudo obtener el examen seleccionado del localStorage");
-    }
+if (examenSeleccionadoStr) {
+    const examenSeleccionado = JSON.parse(examenSeleccionadoStr);
+    examenId = examenSeleccionado?.examen;  // Asignar dentro
+} else {
+    console.error("No se pudo obtener el examen seleccionado del localStorage");
+}
 
-    console.log(examenId);
+console.log(examenId);
 
-    fetch(`../app/obtener-examen.php?examenId=${examenId}`)
-        .then(res => res.json())
-        .then(data => {
-            console.log("Examen ID recibido:", data.examenId);
-            console.log("Examen:", data.examen);
-            console.log("Preguntas:", data.preguntas);
-            renderizarExamenProfesor(data);
-        })
-        .catch(err => console.error(err));
-});
+fetch(`../app/obtener-examen.php?examenId=${examenId}`)
+    .then(res => res.json())
+    .then(data => {
+        console.log("Examen ID recibido:", data.examenId);
+        console.log("Examen:", data.examen);
+        console.log("Preguntas:", data.preguntas);
+        renderizarExamenProfesor(data);
+    })
+    .catch(err => console.error(err));
 
 function renderizarExamenProfesor(data) {
     const examen = data.examen;
@@ -37,7 +35,7 @@ function renderizarExamenProfesor(data) {
     preguntas.forEach((p, idx) => {
         const opcionesHtml = p.respuestas.map(r => {
             const esCorrecta = r.correcta == 1;
-            return `
+            return ` 
                 <label class="boton-opcion ${esCorrecta ? "color-box boton-opcion-correcta-deshabilitado" : "boton-opcion-deshabilitado"}">
                     <input type="radio" name="pregunta${idx + 1}" value="${r.idRespuesta}" disabled ${esCorrecta ? "checked" : ""}>
                     <span class="letra">${r.texto}</span>

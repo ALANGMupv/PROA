@@ -1,12 +1,7 @@
 let contadorPreguntas = 1; // Ya existe Pregunta 1 en el HTML
 let suma = 0; // Inicializamos la suma de puntos
 
-// Limitar el valor máximo del peso del examen
-document.getElementById("peso-examen").addEventListener("input", function () {
-    if (this.value > 40) {
-        this.value = 40;
-    }
-});
+document.getElementById("duracion-examen").value = "00:00";
 
 // Función para actualizar los puntos totales (solo en modo personalizado)
 function actualizarEstadoValorPreguntas() {
@@ -107,50 +102,124 @@ function eliminarElemento(elemento) {
     actualizarEstadoValorPreguntas();
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const formulario = document.getElementById("formulario-examen");
+// Función para manejar el envío del formulario
+const formulario = document.getElementById("formulario-examen");
 
-    formulario.addEventListener("submit", function (e) {
-        e.preventDefault(); // Evita que se recargue la página
+formulario.addEventListener("submit", function (e) {
+    e.preventDefault(); // Evita que se recargue la página
 
-        // Validación de que todos los campos estén completos
-        const inputsRequeridos = formulario.querySelectorAll('[required]');
-        let camposCompletos = true;
+    // Validación de que todos los campos estén completos
+    const inputsRequeridos = formulario.querySelectorAll('[required]');
+    let camposCompletos = true;
 
-        inputsRequeridos.forEach(input => {
-            if (!input.value.trim()) {
-                camposCompletos = false;
-                input.classList.add('error'); // Agregar clase de error
-            } else {
-                input.classList.remove('error');
-            }
-        });
-
-        if (!camposCompletos) {
-            alert('Por favor, completa todos los campos obligatorios.');
-            return; // Detiene la ejecución si algún campo está vacío
+    inputsRequeridos.forEach(input => {
+        if (!input.value.trim()) {
+            camposCompletos = false;
+            input.classList.add('error'); // Agregar clase de error
+        } else {
+            input.classList.remove('error');
         }
-
-        // Validación de las fechas
-        const fechaApertura = document.getElementById("fecha-apertura-examen").value;
-        const fechaCierre = document.getElementById("fecha-cierre-examen").value;
-        const fechaHoy = new Date().toISOString().slice(0, 16); // Para comparar solo la fecha y hora (sin segundos)
-
-        if (fechaApertura < fechaHoy || fechaCierre < fechaHoy) {
-            alert("Las fechas de apertura y cierre no pueden ser anteriores al día de hoy.");
-            return; // Detiene la ejecución si las fechas no son válidas
-        }
-
-        // Aquí ya no enviamos nada al servidor, solo mostramos un mensaje de éxito
-        alert("El examen se ha creado exitosamente con los puntos calculados.");
     });
 
-    // Ejecutar al inicio para establecer el estado inicial correctamente
-    actualizarEstadoValorPreguntas();
-});
+    if (!camposCompletos) {
+        alert('Por favor, completa todos los campos obligatorios.');
+        return; // Detiene la ejecución si algún campo está vacío
+    }
 
-// Popup cuando se publica el examen
-async function popupPublicar() {
-    const popup = document.getElementById('popup-publicado');
-    popup.style.display = 'flex';
-}
+    // Validación de las fechas
+    const fechaApertura = document.getElementById("fecha-apertura-examen").value;
+    const fechaCierre = document.getElementById("fecha-cierre-examen").value;
+    const ahora = new Date().toISOString().slice(0, 16); // Fecha y hora actual (sin segundos)
+
+// Validar que apertura y cierre sean posteriores al momento actual
+    if (fechaApertura < ahora) {
+        alert("La fecha de apertura no puede ser anterior al momento actual.");
+        return;
+    }
+
+    if (fechaCierre < ahora) {
+        alert("La fecha de cierre no puede ser anterior al momento actual.");
+        return;
+    }
+
+// Validar que el cierre no sea anterior a la apertura
+    if (fechaCierre < fechaApertura) {
+        alert("La fecha de cierre no puede ser anterior a la fecha de apertura.");
+        return;
+    }
+
+    document.getElementById("duracion-examen").addEventListener("input", function () {
+        const [h, m] = this.value.split(":").map(Number);
+        if (h > 5 || (h === 5 && m > 0)) {
+            this.setCustomValidity("La duración no puede superar las 5 horas.");
+        } else {
+            this.setCustomValidity("");
+        }
+    });
+
+    // Preparar los datos del examen
+    const examenData = {
+        titulo: document.getElementById("titulo-examen").value,
+        descripcion: document.getElementById("descripcion-examen").value,
+        fecha_apertura: document.getElementById("fecha-apertura-examen").value,
+        fecha_cierre: document.getElementById("fecha-cierre-examen").value,
+        peso: document.getElementById("peso-examen").value,
+        duracion: document.getElementById("duracion-examen").value,
+        codigo_asignatura: document.getElementById("dropdown-asignaturas").value,
+        preguntas: []
+    };
+
+    // Recoger las preguntas y respuestas dinámicamente
+    const preguntas = document.querySelectorAll(".pregunta-contenedor");
+    preguntas.forEach(pregunta => {
+        const idPregunta = pregunta.getAttribute("data-id");
+        const enunciado = pregunta.querySelector(".input-pregunta").value;
+        const valor = pregunta.querySelector(".input-pregunta-valor").value;
+
+        const respuestas = [];
+        const opcionesRespuesta = pregunta.querySelectorAll(".respuesta-opcion");
+        opcionesRespuesta.forEach(opcion => {
+            const respuesta = opcion.querySelector(".input-respuesta").value;
+            const correcta = opcion.querySelector("input[type='radio']").checked;
+            respuestas.push({ respuesta, correcta });
+        });
+
+        examenData.preguntas.push({ enunciado, valor, respuestas });
+    });
+
+    // Verificación de datos antes de enviarlos
+    console.log(examenData);
+    console.log(JSON.stringify(examenData)); // Verifica los datos enviados
+
+    // Enviar los datos al servidor
+    fetch("../app/guardar-examen.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(examenData)
+    })
+        .then(response => {
+            // Verificar si la respuesta es JSON
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                return response.json(); // Si es JSON, parsearlo
+            } else {
+                return response.text(); // Si no es JSON, manejarlo como texto
+            }
+        })
+        .then(data => {
+            console.log('Respuesta del servidor:', data);
+            if (data.success) {
+                alert("El examen se ha creado exitosamente.");
+                window.location.href = "examenes-profesor.php";
+            } else {
+                alert("Hubo un error al crear el examen: " + data.error);
+            }
+        })
+        .catch(error => {
+            console.error("Error en la solicitud:", error);
+            alert("Hubo un error al enviar los datos.");
+        });
+
+});

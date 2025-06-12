@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
-    if (typeof datos === "undefined" || !datos.codigoAsignatura) return;
-
+// Verificamos si 'datos' está definido y contiene lo necesario
+if (typeof datos === "undefined" || !datos || !datos.codigoAsignatura) {
+    console.error('Datos no válidos, deteniendo ejecución.');
+} else {
     document.getElementById("titulo-asignacion").textContent = `Asignación Profesores – ${datos.nombre}`;
 
     const listaDisponibles = document.getElementById("lista-profesor-disponibles");
@@ -125,12 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
         renderDisponibles(inputBuscar.value);
     });
 
-    document.getElementById("btn-volver").addEventListener("click", (e) => {
-        e.preventDefault();
-        if (hayCambios) dialog.showModal();
-        else history.back();
-    });
-
     btnCancelar.addEventListener("click", () => dialog.close());
     btnConfirmarSalida.addEventListener("click", () => {
         dialog.close();
@@ -176,14 +171,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
     });
-});
 
-function mostrarNotificacion(mensaje, callback = null) {
-    const notif = document.getElementById("notificacion");
-    notif.textContent = mensaje;
-    notif.style.display = "block";
-    setTimeout(() => {
-        notif.style.display = "none";
-        if (callback) callback();
-    }, 2000);
+    function mostrarNotificacion(mensaje, callback = null) {
+        const notif = document.getElementById("notificacion");
+        notif.textContent = mensaje;
+        notif.style.display = "block";
+        setTimeout(() => {
+            notif.style.display = "none";
+            if (callback) callback();
+        }, 2000);
+    }
 }

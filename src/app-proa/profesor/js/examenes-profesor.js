@@ -133,9 +133,15 @@ document.addEventListener("click", (e) => {
 
     if (e.target.closest(".btn-ver-ficha")) {
         if (idExamen && codigo) {
+            // Actualizamos el localStorage con los datos del examen seleccionado
+            localStorage.setItem("examenSeleccionado", JSON.stringify({
+                titulo: item.dataset.titulo,
+                examen: idExamen,
+            }));
+            // Luego redirigimos a la ficha del examen
             window.location.href = `ficha-examen-profesor.php?codigoAsignatura=${codigo}&idExamen=${idExamen}`;
         } else {
-            console.error("Faltan datos para redirigir a entregas.");
+            console.error("Faltan datos para redirigir a la ficha del examen.");
         }
         return;
     }

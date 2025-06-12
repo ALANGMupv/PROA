@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-06-2025 a las 20:16:10
+-- Tiempo de generación: 12-06-2025 a las 17:09:29
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -151,7 +151,8 @@ INSERT INTO `calificaciones` (`idExamen`, `idUsuariosPROA`, `notaExamenAlumno`, 
                                                                                                    (4, 1, 6, 0),
                                                                                                    (5, 1, 8, 0),
                                                                                                    (8, 2, 0, 6),
-                                                                                                   (8, 7, 4, 6);
+                                                                                                   (8, 7, 4, 6),
+                                                                                                   (18, 2, 3, 10);
 
 -- --------------------------------------------------------
 
@@ -228,7 +229,8 @@ INSERT INTO `contenidoexamen` (`idContenido`, `titulo`, `descripcion`, `pesoExam
                                                                                                                                                   (17, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59'),
                                                                                                                                                   (18, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59'),
                                                                                                                                                   (19, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59'),
-                                                                                                                                                  (20, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59');
+                                                                                                                                                  (20, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59'),
+                                                                                                                                                  (21, 'Examen de Programación de Videojuegos en Unity con C#', 'Este examen está diseñado para evaluar los conocimientos fundamentales de programación de videojuegos en Unity utilizando C#. Las preguntas abordan conceptos esenciales de Unity, como el manejo de GameObjects, Componentes, Transformaciones, Colisiones, Animaciones y la implementación de sistemas básicos como la puntuación y cámaras en primera persona.', 10, 0, '2025-06-12 20:00:00', '2025-06-19 17:00:00', '01:05:00');
 
 -- --------------------------------------------------------
 
@@ -331,7 +333,8 @@ INSERT INTO `examenes` (`idExamen`, `codigoAsignatura`, `idGrupo`, `idContenido`
                                                                                                                     (8, 'PROG101', 1, 2, 1, 3),
                                                                                                                     (13, 'PROG101', 1, 3, 2, 3),
                                                                                                                     (16, 'SIGS301', 1, 18, 4, 4),
-                                                                                                                    (17, 'SIGS301', NULL, 20, 1, 4);
+                                                                                                                    (17, 'SIGS301', NULL, 20, 1, 4),
+                                                                                                                    (18, 'PROG101', NULL, 21, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -440,7 +443,9 @@ CREATE TABLE `preguntasexamen` (
 
 INSERT INTO `preguntasexamen` (`idPregunta`, `enunciado`, `valorPregunta`, `idContenido`) VALUES
                                                                                               (1, '¿Qué fue antes el huevo o la gallina?', 2, 2),
-                                                                                              (2, '¿Quién es el presidente de España?', 4, 2);
+                                                                                              (2, '¿Quién es el presidente de España?', 4, 2),
+                                                                                              (3, 'Pregunta 1: ¿Qué es un GameObject en Unity?', 3, 21),
+                                                                                              (4, '¿Cómo se puede mover un objeto en Unity usando C#?', 7, 21);
 
 -- --------------------------------------------------------
 
@@ -461,9 +466,11 @@ CREATE TABLE `respuestasalumno` (
 
 INSERT INTO `respuestasalumno` (`idUsuariosPROA`, `idExamen`, `idPregunta`, `idRespuesta`) VALUES
                                                                                                (2, 8, 1, 1),
-                                                                                               (7, 8, 1, 1),
+                                                                                               (7, 8, 1, 2),
                                                                                                (2, 8, 2, 3),
-                                                                                               (7, 8, 2, 4);
+                                                                                               (7, 8, 2, 4),
+                                                                                               (2, 18, 3, 7),
+                                                                                               (2, 18, 4, 11);
 
 -- --------------------------------------------------------
 
@@ -487,7 +494,13 @@ INSERT INTO `respuestasexamen` (`idRespuesta`, `respuesta`, `valorRespuesta`, `i
                                                                                                 (2, 'la gallina', 1, 1),
                                                                                                 (3, 'Pedro Sánchez', 0, 2),
                                                                                                 (4, 'Jose Luis', 1, 2),
-                                                                                                (5, 'Palacios', 0, 2);
+                                                                                                (5, 'Palacios', 0, 2),
+                                                                                                (6, 'Un objeto que contiene scripts', 0, 3),
+                                                                                                (7, 'Un objeto que representa cualquier cosa en el juego', 1, 3),
+                                                                                                (8, 'Una función que mueve objetos', 0, 3),
+                                                                                                (9, 'Modificando el Rigidbody', 0, 4),
+                                                                                                (10, 'Modificando la propiedad Transform.position', 1, 4),
+                                                                                                (11, 'Usando un script de animación', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -857,7 +870,7 @@ ALTER TABLE `contenidoavisos`
 -- AUTO_INCREMENT de la tabla `contenidoexamen`
 --
 ALTER TABLE `contenidoexamen`
-    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `cursos`
@@ -887,7 +900,7 @@ ALTER TABLE `estadosexamen`
 -- AUTO_INCREMENT de la tabla `examenes`
 --
 ALTER TABLE `examenes`
-    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos`
@@ -900,6 +913,18 @@ ALTER TABLE `grupos`
 --
 ALTER TABLE `personas`
     MODIFY `idUsuariosPROA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `preguntasexamen`
+--
+ALTER TABLE `preguntasexamen`
+    MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `respuestasexamen`
+--
+ALTER TABLE `respuestasexamen`
+    MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`

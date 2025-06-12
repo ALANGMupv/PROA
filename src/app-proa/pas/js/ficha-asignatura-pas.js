@@ -35,15 +35,18 @@ fetch("../app/obtener-ficha-asignatura.php")
         const profes = [data.titular, ...(data.colaboradores || [])];
 
         profes.forEach(nombre => {
+            if (!nombre) return; // Salta si es null, undefined o string vacío
+
             const li = document.createElement("li");
+            const esResponsable = nombre === data.titular;
+
             li.innerHTML = `
-                ${nombre} 
-                <span class="rol-profesor">
-                    ${nombre === data.titular ? " (Responsable)" : " (Colaborador)"}
-                </span>
-            `;
+        ${nombre}
+        ${esResponsable ? '<span class="rol-profesor"> (Responsable)</span>' : '<span class="rol-profesor"> (Colaborador)</span>'}
+    `;
             listaProfesores.appendChild(li);
         });
+
 
         // Buscadores
         document.getElementById("input-buscar-alumno").addEventListener("input", e => {
@@ -62,10 +65,6 @@ fetch("../app/obtener-ficha-asignatura.php")
     });
 
 // Botones fuera del fetch
-document.getElementById("btn-volver").addEventListener("click", (e) => {
-    e.preventDefault();
-    window.history.back();
-});
 
 document.getElementById("btn-ir-asignacion-alumnos").addEventListener("click", () => {
     window.location.href = "asignacion-alumnos-pas.php";
