@@ -125,13 +125,7 @@ if (typeof datos === "undefined" || !datos || !datos.codigoAsignatura) {
     inputBuscar.addEventListener("input", () => {
         renderDisponibles(inputBuscar.value);
     });
-
-    document.getElementById("btn-volver").addEventListener("click", (e) => {
-        e.preventDefault();
-        if (hayCambios) dialog.showModal();
-        else history.back();
-    });
-
+    
     btnCancelar.addEventListener("click", () => dialog.close());
     btnConfirmarSalida.addEventListener("click", () => {
         dialog.close();
