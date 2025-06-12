@@ -233,6 +233,31 @@ textarea{
     margin-left: 2em;
 }
 
+#guardar-borrador {
+    font-family: var(--fuente-principal);
+    background-color: #7F7F7F;
+    font-weight: 400;
+    color: #FFFFFF;
+    padding: 0.75em 1.5em;
+    border-radius: 10px;
+    border: none;
+    cursor: not-allowed;
+    outline: none;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Eliminamos el hover */
+#guardar-borrador:hover,
+#guardar-borrador:focus {
+    filter: none;
+}
+
+input.error, textarea.error {
+    border: 2px solid #f15555;
+}
+
+
 @media (max-width: 1250px) {
     .parametros{
         flex-direction: column;

@@ -81,10 +81,10 @@ function crearBloque(titulo, examenes, tipo) {
                 </div>`;
         } else if (tipo === 'borradores') {
             html += `
-                <div class="item-examen" data-titulo="${ex.titulo}" data-examen="${ex.id}">
+                <div class="item-examen item-examen-borrador" data-titulo="${ex.titulo}" data-examen="${ex.id}">
                     <div class="info">
                         <h4>${ex.titulo}</h4>
-                        <button class="btn-oscuros-secundario btn-visualizar-entregas btn-terminar">Continuar</button>
+                        <button class="btn-oscuros-secundario btn-visualizar-entregas btn-terminar" disabled>Continuar</button>
                     </div>
                 </div>`;
         }
@@ -98,13 +98,14 @@ function mostrarAviso(mensaje) {
     const seccion = document.querySelector(".fondoPanel");
     seccion.insertAdjacentHTML("beforeend", `<p>${mensaje}</p>`);
 }
+
 function redireccionarPagina(){
     window.location.replace("crear-examen-nuevo.php");
 }
 
 document.addEventListener("click", (e) => {
     if (e.target.closest(".btn-terminar")) {
-        window.location.href = "crear-examen-borrador.php";
+        // No permitir hacer clic en exámenes en borrador
         return;
     }
 
@@ -122,7 +123,7 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    if (item && item.dataset.titulo) {
+    if (item && item.dataset.titulo && !item.classList.contains("item-examen-borrador")) {
         localStorage.setItem("examenSeleccionado", JSON.stringify({
             titulo: item.dataset.titulo,
             examen: idExamen,

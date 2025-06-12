@@ -91,7 +91,7 @@ error_reporting(E_ALL);
                                 <label>
                                     <span>Peso: *</span>
                                     <div class="peso">
-                                        <input type="number" class="input-base" id="peso-examen" max="40" required>
+                                        <input type="number" class="input-base" id="peso-examen" max="40" min="0" required>
                                         <span>%</span>
                                     </div>
                                 </label>
@@ -179,7 +179,7 @@ error_reporting(E_ALL);
 
                         <div id="botones">
                             <button class="btn-oscuros-secundario btn-inicial" type="button" id="cancelar" onclick="activarPopPup(this)">Cancelar</button>
-                            <button class="btn-oscuros-secundario btn-inicial" type="button" id="guardar" onclick="activarPopPup(this)">Guardar Borrador</button>
+                            <button class="btn-oscuros-secundario btn-inicial" type="button" id="guardar-borrador" onclick="activarPopPup(this)">Guardar Borrador</button>
                             <button class="btn-oscuros" type="button" id="publicar" onclick="activarPopPup(this)">Publicar</button>
                         </div>
 
