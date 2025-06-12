@@ -125,7 +125,7 @@ if (typeof datos === "undefined" || !datos || !datos.codigoAsignatura) {
     inputBuscar.addEventListener("input", () => {
         renderDisponibles(inputBuscar.value);
     });
-    
+
     btnCancelar.addEventListener("click", () => dialog.close());
     btnConfirmarSalida.addEventListener("click", () => {
         dialog.close();
