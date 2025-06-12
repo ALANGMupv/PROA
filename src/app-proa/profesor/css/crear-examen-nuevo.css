@@ -42,10 +42,13 @@
     gap: 0.75em;
 }
 
+textarea#descripcion-examen {
+    height: 9em;
+}
+
 .parametros{
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-around;
+    flex-direction: row;
     gap: 1em;
 }
 
@@ -61,14 +64,13 @@
     white-space: nowrap;
 }
 
-
-
 .puntos{
     display: flex;
     align-items: baseline;
     gap: 0.5em;
     font-size: 1.25em;
 }
+
 
 #puntos{
     color: var(--color-primario);
@@ -114,9 +116,22 @@
     width: 100%;
 }
 
+.duracion{
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.33em;
+    width: 100%;
+}
+
+.duracion input{
+    width: 100%;
+}
+
 .parametros label input{
     max-height: 2.25em;
     padding: 0.5em 0.5em;
+    text-align: center;
 }
 
 .parametros label input[type="number"]{
@@ -218,7 +233,32 @@ textarea{
     margin-left: 2em;
 }
 
-@media (max-width: 1100px) {
+#guardar-borrador {
+    font-family: var(--fuente-principal);
+    background-color: #7F7F7F;
+    font-weight: 400;
+    color: #FFFFFF;
+    padding: 0.75em 1.5em;
+    border-radius: 10px;
+    border: none;
+    cursor: not-allowed;
+    outline: none;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Eliminamos el hover */
+#guardar-borrador:hover,
+#guardar-borrador:focus {
+    filter: none;
+}
+
+input.error, textarea.error {
+    border: 2px solid #f15555;
+}
+
+
+@media (max-width: 1250px) {
     .parametros{
         flex-direction: column;
     }
@@ -232,7 +272,7 @@ textarea{
     }
 
     .titulo-valor{
-       gap: 0.5em
+        gap: 0.5em
     }
 
     .respuesta-opcion{
@@ -349,3 +389,4 @@ textarea{
     .input-base{
     }
 }
+

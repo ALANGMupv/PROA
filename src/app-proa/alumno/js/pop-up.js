@@ -39,7 +39,7 @@ document.getElementById('volver').addEventListener('click', function(e) {
 
 // Acción si el usuario confirma salir
 btnSalirSi.addEventListener('click', function() {
-    window.location.href = 'examenes-alumno.html';
+    window.location.href = 'examenes-alumno.php';
 });
 
 // Cierra el pop-up si el usuario cancela

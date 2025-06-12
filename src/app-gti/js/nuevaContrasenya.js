@@ -1,61 +1,49 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const email = params.get('email');
-    const formulario = document.querySelector('.formulario-login');
-    const seccion = document.querySelector('.nueva');
+const form = document.querySelector('.formulario-login');
+if (!form) {
+    // El formulario no está en el DOM (token inválido o caducado), no hacemos nada
+    console.warn('Formulario no disponible: el token puede haber expirado.');
+}
 
-    // Si no hay email en la URL, muestra un mensaje de error
-    if (!email) {
-        seccion.innerHTML = '<p class="parrafo-principal">Acceso no autorizado.</p>';
-        return;
+const email = form.dataset.email;
+const token = form.dataset.token;
+
+form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const nueva = document.getElementById('nueva');
+    const confirmar = document.getElementById('confirmar');
+    const passRegex = /^(?=.*[\d!@#$%^&*(),.?":{}|<>]).{6,}$/;
+    let valido = true;
+
+    document.querySelectorAll('label small').forEach(el => el.remove());
+
+    function mostrarError(campo, mensaje) {
+        const label = document.querySelector(`label[for="${campo.id}"]`);
+        const small = document.createElement('small');
+        small.textContent = mensaje;
+        small.classList.add('error-texto');
+        label.appendChild(small);
+        valido = false;
     }
 
-    fetch('../api/data/usuarios.json')
-        .then(res => res.json())
-        .then(usuarios => {
-            const ultimosUsuarios = usuarios.slice(-3);
-            const usuario = ultimosUsuarios.find(u => u.correo === email);
+    if (!passRegex.test(nueva.value)) {
+        mostrarError(nueva, 'Mínimo 6 caracteres con número o símbolo');
+    }
 
-            if (!usuario) { // Si no se encuentra el usuario en el JSON
-                seccion.innerHTML = '<p class="parrafo-principal">Acceso no autorizado.</p>';
-                return;
-            }
+    if (nueva.value !== confirmar.value) {
+        mostrarError(confirmar, 'Las contraseñas no coinciden');
+    }
 
-            formulario.addEventListener('submit', function (e) {
-                e.preventDefault();
-                let valido = true;
+    if (!valido) return;
 
-                const nueva = document.getElementById('nueva');
-                const confirmar = document.getElementById('confirmar');
-                const passRegex = /^(?=.*[\d!@#$%^&*(),.?":{}|<>]).{6,}$/;
-
-                document.querySelectorAll('label small').forEach(el => el.remove());
-
-                function mostrarError(campo, mensaje) {
-                    const label = document.querySelector(`label[for="${campo.id}"]`);
-                    const small = document.createElement('small');
-                    small.textContent = mensaje;
-                    small.classList.add('error-texto');
-                    label.appendChild(small);
-                    valido = false;
-                }
-
-                if (!passRegex.test(nueva.value)) {
-                    mostrarError(nueva, 'Mínimo 6 caracteres con número o símbolo');
-                }
-
-                if (nueva.value !== confirmar.value) {
-                    mostrarError(confirmar, 'Las contraseñas no coinciden');
-                }
-
-                // Verificar si es igual a la actual
-                if (nueva.value === usuario.clave) {
-                    mostrarError(nueva, 'La nueva contraseña no puede ser igual a la actual');
-                }
-
-                if (!valido) return;
-
-                // Crear fondo difuminado detrás del toast
+    fetch('guardarContrasenya.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, token, nueva: nueva.value })
+    })
+        .then(res => res.text())
+        .then(respuesta => {
+            if (respuesta === 'OK') {
                 const overlay = document.createElement('div');
                 overlay.style.position = 'fixed';
                 overlay.style.top = 0;
@@ -66,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
                 overlay.style.zIndex = '999';
 
-                // Crear el toast encima del fondo
                 const toast = document.createElement('div');
                 toast.textContent = 'Contraseña cambiada con éxito';
                 toast.style.position = 'fixed';
@@ -85,20 +72,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 toast.style.textAlign = 'center';
                 toast.style.zIndex = '1000';
 
-                // Añadir al DOM
                 document.body.appendChild(overlay);
                 document.body.appendChild(toast);
 
-                // Ocultar y redirigir
                 setTimeout(() => {
                     toast.remove();
                     overlay.remove();
-                    window.location.href = 'login.html';
+                    window.location.href = 'login.php';
                 }, 1500);
-            });
+            } else if (respuesta === 'REPETIDA') {
+                mostrarError(nueva, 'La nueva contraseña no puede ser igual a la actual');
+            } else {
+                alert('Error: ' + respuesta);
+            }
         })
-        .catch(error => {
-            alert('Error al cargar los datos');
-            console.error(error);
+        .catch(err => {
+            alert('Error al cambiar contraseña');
+            console.error(err);
         });
 });

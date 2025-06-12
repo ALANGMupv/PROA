@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login PROA</title>
+    <!-- Icono pestaña del navegador -->
+    <link rel="icon" href="icons/gorritoAzul.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="stylesheet" href="./css/mini-header.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <script src="./js/login.js" defer></script>
+
+</head>
+<body>
+
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+$rutaBase = '';
+include $rutaBase . 'includes/mini-header-proa.inc';
+?>
+
+
+<!-- Contenedor login PROA -->
+<div class="contenedor-login">
+    <div class="panel-login">
+
+        <!-- Logo de PROA -->
+        <img src="icons/logoAzul.svg" alt="Logo PROA" class="logo-login">
+
+        <h2>Introduce tus credenciales</h2>
+        <p class="demo-indicador">Inicia sesión en nuestra versión de demostración de PROA</p>
+
+        <!-- Formulario login PROA -->
+        <form class="formulario-login" action="app/login-proa.php" method="POST">
+        <!-- Correo -->
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" class="input-base" placeholder="Correo">
+
+            <!-- Contraseña -->
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" class="input-base" placeholder="Contraseña">
+
+            <!-- Botones de entrar y volver a gti -->
+            <div class="grupo-botones">
+                <button type="submit" class="btn-oscuros">Entrar a la Demo</button>
+                <button type="button" class="btn-oscuros-secundario" onclick="window.location.href='../index.php'">
+                    Volver a GTI
+                </button>
+            </div>
+
+
+        </form>
+        <!-- Fin formulario login PROA -->
+    </div>
+</div>
+<!-- Fin contenedor login PROA -->
+
+</body>
+</html>

@@ -1,10 +1,9 @@
 document.querySelector('.registro-formulario')?.addEventListener('submit', function (e) {
-    e.preventDefault(); // Evitamos que el formulario se envíe y recargue la página
+    e.preventDefault();
 
     const formulario = this;
     let formularioValido = true;
 
-    // Seleccionamos todos los campos relevantes del formulario
     const campos = {
         nombre: formulario.querySelector('#nombre'),
         apellidos: formulario.querySelector('#apellidos'),
@@ -16,15 +15,12 @@ document.querySelector('.registro-formulario')?.addEventListener('submit', funct
         repetir: formulario.querySelector('#repetir'),
     };
 
-    // Expresiones regulares para validaciones
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Validación de email básico
-    const passRegex = /^(?=.*[\d!@#$%^&*(),.?":{}|<>]).{6,}$/; // Mínimo 6 caracteres con número o símbolo
-    const telRegex = /^\d+$/; // Solo dígitos para el teléfono
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passRegex = /^(?=.*[\d!@#$%^&*(),.?":{}|<>]).{6,}$/;
+    const telRegex = /^\d+$/;
 
-    // Limpiamos mensajes de error anteriores
     formulario.querySelectorAll('label small').forEach(el => el.remove());
 
-    // Función para mostrar errores debajo del label correspondiente
     function mostrarError(campo, mensaje) {
         const label = formulario.querySelector(`label[for="${campo.id}"]`);
         if (label) {
@@ -33,21 +29,12 @@ document.querySelector('.registro-formulario')?.addEventListener('submit', funct
             small.classList.add('error-texto');
             label.appendChild(small);
         }
-        formularioValido = false; // Marcamos el formulario como inválido
+        formularioValido = false;
     }
 
-    // Validaciones campo por campo
-    if (campos.nombre.value.trim() === '') {
-        mostrarError(campos.nombre, 'Campo obligatorio');
-    }
-
-    if (campos.apellidos.value.trim() === '') {
-        mostrarError(campos.apellidos, 'Campo obligatorio');
-    }
-
-    if (campos.institucion.value.trim() === '') {
-        mostrarError(campos.institucion, 'Campo obligatorio');
-    }
+    if (campos.nombre.value.trim() === '') mostrarError(campos.nombre, 'Campo obligatorio');
+    if (campos.apellidos.value.trim() === '') mostrarError(campos.apellidos, 'Campo obligatorio');
+    if (campos.institucion.value.trim() === '') mostrarError(campos.institucion, 'Campo obligatorio');
 
     const correoValor = campos.correo.value.trim();
     if (correoValor === '') {
@@ -75,98 +62,66 @@ document.querySelector('.registro-formulario')?.addEventListener('submit', funct
         mostrarError(campos.repetir, 'Las contraseñas no coinciden');
     }
 
-    // Si el formulario no pasa las validaciones, no continuamos
     if (!formularioValido) return;
 
-    // Verificar si el correo ya está registrado
-    fetch('../api/data/usuarios.json')
-        .then(res => res.json())
-        .then(usuarios => {
-            const correoIngresado = campos.correo.value.trim();
-            const ultimosUsuarios = usuarios.slice(-3); // Solo los últimos 3, se podrían registrar alumnos...en este caso
-            const correoYaExiste = ultimosUsuarios.some(u => u.correo === correoIngresado);
+    // Mostrar spinner circular
+    const overlay = document.createElement('div');
+    overlay.id = 'spinner-overlay';
+    overlay.style.position = 'fixed';
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.zIndex = '9999';
 
-            if (correoYaExiste) {
-                // Mostrar toast de error con fondo difuminado
-                const overlay = document.createElement('div');
-                overlay.style.position = 'fixed';
-                overlay.style.top = 0;
-                overlay.style.left = 0;
-                overlay.style.width = '100%';
-                overlay.style.height = '100%';
-                overlay.style.backdropFilter = 'blur(4px)';
-                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
-                overlay.style.zIndex = '999';
+    const spinner = document.createElement('div');
+    spinner.style.width = '48px';
+    spinner.style.height = '48px';
+    spinner.style.border = '5px solid #ccc';
+    spinner.style.borderTop = '5px solid rgb(160, 58, 111)';
+    spinner.style.borderRadius = '50%';
+    spinner.style.animation = 'spin 1s linear infinite';
 
-                const toast = document.createElement('div');
-                toast.textContent = 'Este correo ya está registrado';
-                toast.style.position = 'fixed';
-                toast.style.top = '50%';
-                toast.style.left = '50%';
-                toast.style.transform = 'translate(-50%, -50%)';
-                toast.style.padding = '1em 2em';
-                toast.style.width = 'max-content';
-                toast.style.maxWidth = '80%';
-                toast.style.fontSize = '1.15rem';
-                toast.style.backgroundColor = '#c45f5f';
-                toast.style.color = '#fff';
-                toast.style.borderRadius = '12px';
-                toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
-                toast.style.fontFamily = 'var(--fuente-lato)';
-                toast.style.textAlign = 'center';
-                toast.style.zIndex = '1000';
+    overlay.appendChild(spinner);
+    document.body.appendChild(overlay);
 
-                document.body.appendChild(overlay);
-                document.body.appendChild(toast);
+    // Inyectar animación @keyframes
+    if (!document.getElementById('spinner-style')) {
+        const style = document.createElement('style');
+        style.id = 'spinner-style';
+        style.textContent = `
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        `;
+        document.head.appendChild(style);
+    }
 
-                setTimeout(() => {
-                    toast.remove();
-                    overlay.remove();
-                }, 850);
+    const formData = new FormData(formulario);
 
-                return; // Detener el flujo del registro
+    fetch('registrarUsuario.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.text())
+        .then(respuesta => {
+            overlay.remove();
+
+            if (respuesta.trim() === 'OK') {
+                document.getElementById('dialog-confirmacion')?.showModal();
+                formulario.reset();
+            } else {
+                alert('Error: ' + respuesta);
             }
-
-            // Si el correo no está en uso → continuar con registro exitoso
-            const overlay = document.createElement('div');
-            overlay.style.position = 'fixed';
-            overlay.style.top = 0;
-            overlay.style.left = 0;
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.backdropFilter = 'blur(4px)';
-            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
-            overlay.style.zIndex = '999';
-
-            const toast = document.createElement('div');
-            toast.textContent = 'Registro exitoso. Redirigiendo...';
-            toast.style.position = 'fixed';
-            toast.style.top = '50%';
-            toast.style.left = '50%';
-            toast.style.transform = 'translate(-50%, -50%)';
-            toast.style.padding = '1em 2em';
-            toast.style.width = 'max-content';
-            toast.style.maxWidth = '80%';
-            toast.style.fontSize = '1.15rem';
-            toast.style.backgroundColor = 'var(--color-principal)';
-            toast.style.color = '#fff';
-            toast.style.borderRadius = '12px';
-            toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
-            toast.style.fontFamily = 'var(--fuente-lato)';
-            toast.style.textAlign = 'center';
-            toast.style.zIndex = '1000';
-
-            document.body.appendChild(overlay);
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.remove();
-                overlay.remove();
-                window.location.href = 'login.html';
-            }, 1500);
         })
         .catch(error => {
-            alert('Error al comprobar los usuarios existentes.');
+            overlay.remove();
+            alert('Error al conectar con el servidor.');
             console.error(error);
         });
 });

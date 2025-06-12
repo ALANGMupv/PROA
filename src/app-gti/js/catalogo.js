@@ -75,20 +75,25 @@ document.querySelector('.formulario-sugerencia')?.addEventListener('submit', fun
         overlay.remove();
         formulario.reset();
     }, 1500);
+});const btnDemo = document.getElementById('btnProbarDemo');
+const btnProd = document.getElementById('btnVisualizarProd');
 
+btnDemo?.addEventListener('click', () => {
+    fetch('chequear-sesion.php')
+        .then(res => res.json())
+        .then(data => {
+            if (data.logueado) {
+                window.location.href = '../app-proa/index.php'; // acceso directo a PROA
+            } else {
+                window.location.href = 'login.php'; // login GTI
+            }
+        })
+        .catch(err => {
+            console.error('Error al verificar sesión:', err);
+            window.location.href = 'login.php'; // fallback
+        });
 });
 
-// Redirección condicional según login
-document.addEventListener('DOMContentLoaded', () => {
-    const btnDemo = document.getElementById('btnProbarDemo');
-    const btnProd = document.getElementById('btnVisualizarProd');
-    const usuarioGTI = JSON.parse(localStorage.getItem('usuario'));
-
-    btnDemo?.addEventListener('click', () => {
-        window.location.href = usuarioGTI ? '../app-proa/index.html' : 'login.html';
-    });
-
-    btnProd?.addEventListener('click', () => {
-        window.location.href = 'pagProducto.html';
-    });
+btnProd?.addEventListener('click', () => {
+    window.location.href = 'pagProducto.php';
 });

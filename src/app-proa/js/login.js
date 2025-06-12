@@ -1,37 +1,10 @@
-// Redirección inmediata si el usuario ya está logueado
-const usuarioLogueado = JSON.parse(localStorage.getItem('usuario'));
-
-if (usuarioLogueado) {
-    fetch('api/data/usuarios.json')
-        .then(res => res.json())
-        .then(usuarios => {
-            const usuarioValido = usuarios.find(u =>
-                u.correo === usuarioLogueado.correo &&
-                (u.rol === "alumno" || u.rol === "profesor" || u.rol === "pas")
-            );
-
-            if (usuarioValido.rol === "pas") {
-                window.location.replace('pas/index.html');
-            } else if (usuarioValido.rol === "alumno") {
-                window.location.replace('alumno/index.html');
-            } else if (usuarioValido.rol === "profesor") {
-                window.location.replace('profesor/index.html');
-            }
-
-        });
-}
-
-// Lógica de login
-document.querySelector('.formulario-login')?.addEventListener('submit', function (e) {
-    e.preventDefault(); // Prevenimos el envío del formulario
-
+function procesarLogin() {
     const correoInput = document.getElementById('correo');
     const contrasenaInput = document.getElementById('contrasena');
 
     const correo = correoInput.value.trim();
-    const contrasena = contrasenaInput.value;
+    const contrasena = contrasenaInput.value.trim();
 
-    // Limpiar errores previos
     document.querySelectorAll('label small').forEach(el => el.remove());
 
     function mostrarError(campo, mensaje) {
@@ -44,7 +17,6 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
 
     let valido = true;
 
-    // Validaciones
     if (!correo) {
         mostrarError(correoInput, 'Campo obligatorio');
         valido = false;
@@ -62,113 +34,135 @@ document.querySelector('.formulario-login')?.addEventListener('submit', function
 
     if (!valido) return;
 
-    // Login simulado
-    fetch('../api/data/usuarios.json')
-        .then(res => res.json())
-        .then(usuarios => {
-            const usuariosPermitidos = usuarios.filter(u =>
-                u.rol === "alumno" || u.rol === "profesor" || u.rol === "pas"
-            );
+    fetch('app/login-proa.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ correo, contrasena })
+    })
+        .then(res => res.text())
+        .then(text => {
+            console.log("Respuesta cruda del servidor:", text);
+            let respuesta;
+            try {
+                respuesta = JSON.parse(text);
+            } catch (e) {
+                console.error("No se pudo parsear la respuesta como JSON:", e);
+                return;
+            }
 
-            const usuario = usuariosPermitidos.find(u =>
-                u.correo === correo && u.clave === contrasena
-            );
+            if (respuesta.exito) {
+                fetch('app/chequear-sesion.php', { credentials: 'include' })
+                    .then(res => res.json())
+                    .then(usuario => {
+                        console.log("Usuario desde sesión:", usuario);
 
-            if (usuario) {
-                localStorage.setItem('usuario', JSON.stringify(usuario));
-                const overlay = document.createElement('div');
-                overlay.style.position = 'fixed';
-                overlay.style.top = 0;
-                overlay.style.left = 0;
-                overlay.style.width = '100%';
-                overlay.style.height = '100%';
-                overlay.style.backdropFilter = 'blur(4px)';
-                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
-                overlay.style.zIndex = '999';
+                        if (!usuario.rol) {
+                            alert("Error al recuperar la sesión. Intenta de nuevo.");
+                            return;
+                        }
 
-                const toast = document.createElement('div');
-                toast.textContent = 'Inicio de sesión exitoso. Redirigiendo...';
-                toast.style.position = 'fixed';
-                toast.style.top = '50%';
-                toast.style.left = '50%';
-                toast.style.transform = 'translate(-50%, -50%)';
-                toast.style.padding = '1em 2em';
-                toast.style.width = 'max-content';
-                toast.style.maxWidth = '80%';
-                toast.style.fontSize = '1.15rem';
-                toast.style.backgroundColor = 'var(--color-primario)';
-                toast.style.color = '#fff';
-                toast.style.borderRadius = '12px';
-                toast.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
-                toast.style.fontFamily = 'var(--fuente-lato)';
-                toast.style.textAlign = 'center';
-                toast.style.zIndex = '1000';
-
-                document.body.appendChild(overlay);
-                document.body.appendChild(toast);
-
-                setTimeout(() => {
-                    toast.remove();
-                    overlay.remove();
-                    if (usuario.rol === "pas") {
-                        window.location.replace('pas/index.html');
-                    } else if (usuario.rol === "alumno") {
-                        window.location.replace('alumno/index.html');
-                    } else if (usuario.rol === "profesor") {
-                        window.location.replace('profesor/index.html');
-                    }
-                }, 1500);
-
+                        const rol = usuario.rol;
+                        if (rol === "pas") {
+                            window.location.replace('./pas/index.php');
+                        } else if (rol === "alumno") {
+                            window.location.href = './alumno/index.php';
+                        } else if (rol === "profesor") {
+                            window.location.replace('./profesor/index.php');
+                        } else {
+                            alert("Rol no reconocido");
+                        }
+                    });
             } else {
-                const overlayError = document.createElement('div');
-                overlayError.style.position = 'fixed';
-                overlayError.style.top = 0;
-                overlayError.style.left = 0;
-                overlayError.style.width = '100%';
-                overlayError.style.height = '100%';
-                overlayError.style.backdropFilter = 'blur(4px)';
-                overlayError.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
-                overlayError.style.zIndex = '999';
-
-                const toastError = document.createElement('div');
-                toastError.textContent = 'Usuario o contraseña incorrectos';
-                toastError.style.position = 'fixed';
-                toastError.style.top = '50%';
-                toastError.style.left = '50%';
-                toastError.style.transform = 'translate(-50%, -50%)';
-                toastError.style.padding = '1em 2em';
-                toastError.style.width = 'max-content';
-                toastError.style.maxWidth = '80%';
-                toastError.style.fontSize = '1.15rem';
-                toastError.style.backgroundColor = '#c45f5f';
-                toastError.style.color = '#fff';
-                toastError.style.borderRadius = '12px';
-                toastError.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
-                toastError.style.fontFamily = 'var(--fuente-lato)';
-                toastError.style.textAlign = 'center';
-                toastError.style.zIndex = '1000';
-
-                document.body.appendChild(overlayError);
-                document.body.appendChild(toastError);
-
-                setTimeout(() => {
-                    toastError.remove();
-                    overlayError.remove();
-                }, 850);
+                mostrarToastError('Usuario o contraseña incorrectos');
             }
         })
         .catch(error => {
             alert('Error al iniciar sesión. Intenta de nuevo más tarde.');
             console.error('Error:', error);
         });
+}
+
+// Activar login manual por botón
+document.querySelector('.formulario-login')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+    procesarLogin();
 });
 
-// Forzar recarga si se accede desde caché después de cerrar sesión
-window.addEventListener('pageshow', (event) => {
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
-    if (event.persisted && !usuario) {
-        window.location.reload();
-    }
+// Autocompletar login al hacer clic en los botones del mini-header (solo en login de PROA)
+document.querySelectorAll('.btn-header-rol').forEach(boton => {
+    boton.addEventListener('click', () => {
+        const rol = boton.dataset.rol;
+
+        // Primero: autocompletar login
+        fetch('app/obtener-persona-proa.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            credentials: 'include',
+            body: new URLSearchParams({ rol })
+        })
+            .then(res => res.json())
+            .then(datos => {
+                if (datos.email && datos.contraseña) {
+                    document.getElementById('correo').value = datos.email;
+                    document.getElementById('contrasena').value = datos.contraseña;
+                }
+            });
+
+        // Segundo: guardar el rol en la sesión
+        fetch('app/marcar-rol-en-sesion.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            credentials: 'include',
+            body: new URLSearchParams({ rol })
+        })
+            .then(() => {
+                // Tercero: marcar botón activo en el DOM
+                document.querySelectorAll('.btn-header-rol').forEach(btn => {
+                    btn.classList.remove('activo');
+                });
+                boton.classList.add('activo');
+            });
+    });
 });
 
 
+function mostrarToastError(mensaje) {
+    const overlayError = document.createElement('div');
+    overlayError.style.position = 'fixed';
+    overlayError.style.top = 0;
+    overlayError.style.left = 0;
+    overlayError.style.width = '100%';
+    overlayError.style.height = '100%';
+    overlayError.style.backdropFilter = 'blur(4px)';
+    overlayError.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+    overlayError.style.zIndex = '999';
+
+    const toastError = document.createElement('div');
+    toastError.textContent = mensaje;
+    toastError.style.position = 'fixed';
+    toastError.style.top = '50%';
+    toastError.style.left = '50%';
+    toastError.style.transform = 'translate(-50%, -50%)';
+    toastError.style.padding = '1em 2em';
+    toastError.style.width = 'max-content';
+    toastError.style.maxWidth = '80%';
+    toastError.style.fontSize = '1.15rem';
+    toastError.style.backgroundColor = '#c45f5f';
+    toastError.style.color = '#fff';
+    toastError.style.borderRadius = '12px';
+    toastError.style.boxShadow = '0 6px 12px rgba(0,0,0,0.3)';
+    toastError.style.fontFamily = 'var(--fuente-lato)';
+    toastError.style.textAlign = 'center';
+    toastError.style.zIndex = '1000';
+
+    document.body.appendChild(overlayError);
+    document.body.appendChild(toastError);
+
+    setTimeout(() => {
+        toastError.remove();
+        overlayError.remove();
+    }, 1000);
+}

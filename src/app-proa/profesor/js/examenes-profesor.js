@@ -1,50 +1,52 @@
-document.addEventListener("DOMContentLoaded", () => {
+async function cargarExamenesProfesor() {
     const asignaturaSeleccionada = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
+    const codigo = asignaturaSeleccionada?.codigo ?? asignaturaSeleccionada?.codigoAsignatura;
 
-    fetch("/src/api/data/examenes-alumno.json")
-        .then(res => res.json())
-        .then(data => {
-            const codigo = asignaturaSeleccionada?.codigo; // ejemplo: "PRO303"
-            const examenes = data[codigo];
-
-            if (examenes) {
-                renderExamenes(examenes);
-            } else {
-                console.warn("No hay exámenes para esta asignatura");
-                mostrarAviso("No hay exámenes disponibles para esta asignatura.");
-            }
-        })
-        .catch(err => {
-            console.error("Error al cargar exámenes:", err);
-            mostrarAviso("Error al cargar exámenes.");
-        });
-
-    function renderExamenes(data) {
-        const seccion = document.querySelector(".fondoPanel");
-
-        seccion.querySelectorAll(".bloque-examenes").forEach(b => b.remove());
-
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes abiertos", data.realizar, 'abiertos'));
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes cerrados", data.calificados, 'cerrados'));
-        seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes borradores", data.borradores, 'borradores'));
-
+    if (!codigo) {
+        mostrarAviso("No hay asignatura seleccionada.");
+        return;
     }
 
-    function crearBloque(titulo, examenes, tipo) {
-        if (!examenes || examenes.length === 0) return '';
+    try {
+        const res = await fetch(`../app/obtener-examenes.php?codigo=${encodeURIComponent(codigo)}`);
+        if (!res.ok) throw new Error("Error en la respuesta del servidor");
 
-        let html;
-        if (tipo === 'abiertos'){
-            html = `<div class="bloque-examenes"><h3>${titulo}</h3>
-            <button class="btn-oscuros" id="btn-crear" onclick="redireccionarPagina()">Crear examen</button>`;
+        const data = await res.json();
+
+        // Mantenemos tu condición original
+        if (data && (data.abiertos || data.calificados || data.borradores)) {
+            renderExamenes(data);
         } else {
-            html = `<div class="bloque-examenes"><h3>${titulo}</h3>`;
+            mostrarAviso("No hay exámenes disponibles para esta asignatura.");
         }
+    } catch (err) {
+        console.error(err);
+        mostrarAviso("Error al cargar exámenes.");
+    }
+}
 
-        examenes.forEach(ex => {
-            if (tipo === 'abiertos') {
-                html += `
-                <div class="item-examen item-examen-realizar" data-titulo="${ex.titulo}">
+// Ejecutar directamente si el script tiene defer
+cargarExamenesProfesor();
+
+function renderExamenes(data) {
+    const seccion = document.querySelector(".fondoPanel");
+
+    seccion.querySelectorAll(".bloque-examenes").forEach(b => b.remove());
+
+    seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes abiertos", data.abiertos ?? data.realizar, 'abiertos'));
+    seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes cerrados", data.cerrados ?? data.porRevisar, 'cerrados'));
+    seccion.insertAdjacentHTML("beforeend", crearBloque("Exámenes borradores", data.borradores, 'borradores'));
+}
+
+function crearBloque(titulo, examenes, tipo) {
+    if (!examenes || examenes.length === 0) return '';
+
+    let html = `<div class="bloque-examenes"><h3>${titulo}</h3>`;
+
+    examenes.forEach(ex => {
+        if (tipo === 'abiertos') {
+            html += `
+                <div class="item-examen item-examen-realizar" data-titulo="${ex.titulo}" data-examen="${ex.id}">
                     <div class="info">
                         <div class="titulo-fecha-envio">
                             <h4>${ex.titulo}</h4>
@@ -53,17 +55,19 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <p class="fecha-envio">Fecha límite: ${ex.fechaLimite}</p>
                             </div>
                             <div class="icono-item">
-                                <img src="../icons/pesoExamen.svg" alt="advertencia">
+                                <img src="../icons/pesoExamen.svg" alt="peso">
                                 <p class="fecha-envio">Peso: ${ex.peso}</p>
                             </div>  
                         </div>  
-                                              
-                        <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
+                        <div class="botones-profesor">
+                            <button class="btn-oscuros-secundario btn-ver-ficha">Ver ficha examen</button>
+                            <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
+                        </div>
                     </div>
                 </div>`;
-            } else if (tipo == 'cerrados'){
-                html += `
-                <div class="item-examen" data-titulo="${ex.titulo}">
+        } else if (tipo === 'cerrados') {
+            html += `
+                <div class="item-examen" data-titulo="${ex.titulo}" data-examen="${ex.id}">
                     <div class="info">
                         <div class="titulo-fecha-envio">
                             <h4>${ex.titulo}</h4>
@@ -74,52 +78,81 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <img src="../icons/pesoExamen.svg" alt="advertencia"><p class="fecha-envio">Peso: ${ex.peso}</p>
                             </div>  
                         </div>  
-                                              
+                        <button class="btn-oscuros-secundario btn-ver-ficha">Ver ficha examen</button>                      
                         <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
                     </div>
                 </div>`;
-            }else if (tipo === 'borradores') {
-                html += `
-                <div class="item-examen" data-titulo="${ex.titulo}">
+        } else if (tipo === 'borradores') {
+            html += `
+                <div class="item-examen item-examen-borrador" data-titulo="${ex.titulo}" data-examen="${ex.id}">
                     <div class="info">
                         <h4>${ex.titulo}</h4>
-                        <button class="btn-oscuros-secundario btn-visualizar-entregas btn-terminar">Continuar</button>
+                        <button class="btn-oscuros-secundario btn-visualizar-entregas btn-terminar" disabled>Continuar</button>
                     </div>
                 </div>`;
+        }
+    });
 
-            }
-        });
+    html += `</div>`;
+    return html;
+}
 
-        html += `</div>`;
-        return html;
-    }
-
-    function mostrarAviso(mensaje) {
-        const seccion = document.querySelector(".fondoPanel");
-        seccion.insertAdjacentHTML("beforeend", `<p>${mensaje}</p>`);
-    }
-});
+function mostrarAviso(mensaje) {
+    const seccion = document.querySelector(".fondoPanel");
+    seccion.insertAdjacentHTML("beforeend", `<p>${mensaje}</p>`);
+}
 
 function redireccionarPagina(){
-    window.location.replace("crear-examen-nuevo.html");
+    window.location.replace("crear-examen-nuevo.php");
 }
 
 document.addEventListener("click", (e) => {
+    const item = e.target.closest(".item-examen");
+    const idExamen = item?.dataset.examen;
+    const codigo = JSON.parse(localStorage.getItem('asignaturaSeleccionada'))?.codigo ??
+        JSON.parse(localStorage.getItem('asignaturaSeleccionada'))?.codigoAsignatura ?? '';
+
+    // Si el examen es un borrador, no hacer nada si se hace click
+    if (item && item.classList.contains("item-examen-borrador")) {
+        return; // No permitir hacer clic en los exámenes en borrador
+    }
+
     if (e.target.closest(".btn-terminar")) {
-        window.location.href = "crear-examen-borrador.html";
-        return;
-    } else if(e.target.closest(".btn-visualizar-entregas")){
-        window.location.href = "entregas-examen-profesor.html";
+        // No permitir hacer clic en los exámenes en borrador
         return;
     }
 
-    const item = e.target.closest(".item-examen");
-    if (item && item.dataset.titulo) {
+    if (e.target.closest(".btn-visualizar-entregas")) {
+        if (idExamen && codigo) {
+            window.location.href = `entregas-examen-profesor.php?codigoAsignatura=${codigo}&idExamen=${idExamen}`;
+        } else {
+            console.error("Faltan datos para redirigir a entregas.");
+        }
+        return;
+    }
+
+    if (e.target.closest(".btn-ver-ficha")) {
+        if (idExamen && codigo) {
+            // Actualizamos el localStorage con los datos del examen seleccionado
+            localStorage.setItem("examenSeleccionado", JSON.stringify({
+                titulo: item.dataset.titulo,
+                examen: idExamen,
+            }));
+            // Luego redirigimos a la ficha del examen
+            window.location.href = `ficha-examen-profesor.php?codigoAsignatura=${codigo}&idExamen=${idExamen}`;
+        } else {
+            console.error("Faltan datos para redirigir a la ficha del examen.");
+        }
+        return;
+    }
+
+    // Si no es un examen en borrador, redirigir a la ficha del examen
+    if (item && item.dataset.titulo && !item.classList.contains("item-examen-borrador")) {
         localStorage.setItem("examenSeleccionado", JSON.stringify({
-            titulo: item.dataset.titulo
+            titulo: item.dataset.titulo,
+            examen: idExamen,
         }));
 
-        // Redirige a la ficha del examen
-        window.location.href = "ficha-examen-profesor.html";
+        window.location.href = "ficha-examen-profesor.php";
     }
 });

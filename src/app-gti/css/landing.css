@@ -1,7 +1,7 @@
 /* region --- Primera sección --- */
 .contenedor {
     position: relative;
-    min-height: calc(100dvh - 80px);
+    min-height: calc(100dvh - var(--header-height));
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,6 +82,7 @@
     height: 60px;
     opacity: 0.85;
     transition: opacity 0.3s ease;
+    fill: var(--color-principal);
 }
 
 .scroll-flecha:hover img {

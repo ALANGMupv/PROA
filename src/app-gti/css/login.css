@@ -1,4 +1,4 @@
-/* ESTILOS USADOS EN: login.html, olvidoContrasenya.html, nuevaContrasenya.html */
+/* ESTILOS USADOS EN: login.php, olvidoContrasenya.php, nuevaContrasenya.php */
 
 /* region --- Estilos solo para página de login--- */
 .login-container.login-solo {
@@ -124,10 +124,10 @@
 
 .enlace-secundario {
     color: var(--color-principal);
-    text-decoration: none;
+    text-decoration: underline;
     margin-left: 0.5em;
     font-weight: 500;
-    font-size: 1em;
+    font-size: 1.15em;
 }
 
 .enlace-secundario:hover {

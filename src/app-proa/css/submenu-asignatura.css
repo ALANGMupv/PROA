@@ -57,7 +57,7 @@ html, body {
 #submenu a {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
     gap: 0.75em;
     text-decoration: none;
@@ -68,6 +68,7 @@ html, body {
     font-size: 1.15em;
     border-bottom: 1px solid var(--color-bordes);
     padding: 1.1em;
+    margin-left: 1.5em;
 }
 
 .menu .submenu-item:hover,
@@ -115,10 +116,8 @@ html, body {
 /* region --- MENÚ ASIGNATURAS --- */
 .cabecera-dropdown-fija {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    padding: 1.5em 2em 0 2em;
-    gap: 1em;
+    padding: 1.5em;
 }
 
 .contenido-asignatura {
@@ -153,6 +152,19 @@ html, body {
     font-size: 1.1em;
     border-radius: 6px;
 }
+
+.submenu-item.desactivado {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: default;
+    text-decoration: none;
+}
+
+.menu .submenu-item.admin-item,
+#submenu a.admin-item {
+    margin-left: 0;
+}
+
 
 /* Clon del botón submenu en cabecera responsive */
 @media (max-width: 850px) {
