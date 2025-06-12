@@ -40,30 +40,6 @@ error_reporting(E_ALL);
         <!-- Zona principal de contenido relacionada con la asignatura seleccionada -->
         <div class="contenido-asignatura">
 
-            <!-- <div class="contenido-asignatura"> <!- Área principal donde se muestra el contenido relacionado con la asignatura
-                <div class="cabecera-dropdown-fija-profesor"> <!- Barra superior con filtros desplegables para el profesor
-
-                    <!- Aquí se inyecta dinámicamente el botón del submenú en responsive
-
-                    <div class="contenedor-dropdowns"> <!- Contenedor agrupador de los dos dropdowns
-                        <!- Dropdown para seleccionar grupo (PL1, PL2...)
-                        <div class="input-con-icono grupo-dropdown">
-                            <select id="dropdown-grupo" class="input-base seleccionador-dropdown">
-                                <option value="todos">Todos</option>
-                                <option value="pl1">Grupo PL1</option>
-                                <option value="pl2">Grupo PL2</option>
-                            </select>
-                            <img src="../icons/dropdownAsignaturasAzul.svg" alt="Flecha" class="icono-dropdown">
-                        </div>
-
-                        <!- Dropdown para seleccionar asignatura (rellenado dinámicamente con JS)
-                        <div class="input-con-icono asignatura-dropdown">
-                            <select id="dropdown-asignaturas" class="input-base seleccionador-dropdown"></select>
-                            <img src="../icons/dropdownAsignaturas.svg" alt="Flecha" class="icono-dropdown">
-                        </div>
-                    </div>
-                </div> -->
-
             <section class="panel-contenido fondoPanel">
                 <?php
                 $migas = [

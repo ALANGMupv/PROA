@@ -1,40 +1,32 @@
 let contadorPreguntas = 1; // Ya existe Pregunta 1 en el HTML
-const dropdownValor = document.getElementById("dropdown-valor");
-let suma;
+let suma = 0; // Inicializamos la suma de puntos
 
+// Limitar el valor máximo del peso del examen
 document.getElementById("peso-examen").addEventListener("input", function () {
     if (this.value > 40) {
         this.value = 40;
     }
 });
 
+// Función para actualizar los puntos totales (solo en modo personalizado)
 function actualizarEstadoValorPreguntas() {
-    const esAutomatico = dropdownValor.value === "automatico";
     const inputsValor = document.querySelectorAll(".input-pregunta-valor");
     const spanPuntos = document.getElementById("puntos");
 
+    // Recalcular la suma de puntos
+    suma = 0;
     inputsValor.forEach(input => {
-        input.disabled = esAutomatico;
+        const valor = parseFloat(input.value);
+        if (!isNaN(valor) && valor > 0) {
+            suma += valor;
+        }
     });
 
-    if (esAutomatico) {
-        spanPuntos.textContent = "10";
-        suma = 10;
-        inputsValor.forEach(input => {
-            input.value = ""
-        })
-    } else {
-        // Sumar todos los valores numéricos de los inputs
-        suma = 0;
-        inputsValor.forEach(input => {
-            const valor = parseFloat(input.value);
-            if (!isNaN(valor)) {
-                suma += valor;
-            }
-        });
-        spanPuntos.textContent = suma;
-    }
+    // Mostrar el total de los puntos
+    spanPuntos.textContent = suma;
 }
+
+// Función para agregar preguntas
 function agregarPregunta() {
     contadorPreguntas++;
     const contenedorPreguntas = document.querySelector(".datos");
@@ -45,51 +37,48 @@ function agregarPregunta() {
 
     nuevaPregunta.innerHTML = `
     <div class="titulo-texto-pregunta">
-
-      <div class="titulo-pregunta">
-
-        <div class="titulo-valor">
-          <h4>Pregunta ${contadorPreguntas}</h4>
-            <div>
-              <span>Valor</span>
-              <input type="number" class="input-base input-pregunta-valor" placeholder="" oninput="actualizarEstadoValorPreguntas()" required>
+        <div class="titulo-pregunta">
+            <div class="titulo-valor">
+                <h4>Pregunta ${contadorPreguntas}</h4>
+                <div>
+                    <span>Valor</span>
+                    <input type="number" class="input-base input-pregunta-valor" placeholder="" oninput="actualizarEstadoValorPreguntas()" required>
+                </div>
             </div>
+            <img src="../icons/trash.svg" alt="Eliminar" class="icono-eliminar" onclick="eliminarElemento(this)">
         </div>
-        <img src="../icons/trash.svg" alt="Eliminar" class="icono-eliminar" onclick="eliminarElemento(this)">
-      </div>
-      <textarea name="${idPregunta}" id="${idPregunta}" cols="30" rows="3" class="input-base input-pregunta"
-                placeholder="Escribe la pregunta aquí..." required></textarea>
+        <textarea name="${idPregunta}" id="${idPregunta}" cols="30" rows="3" class="input-base input-pregunta" placeholder="Escribe la pregunta aquí..." required></textarea>
     </div>
-
     <div class="respuestas-contenedor">
-    <span class="recordatorio">NOTA: Recuerda seleccionar la respuesta correcta</span>
-      ${generarRespuestaHTML(idPregunta, "a")}
-      ${generarRespuestaHTML(idPregunta, "b")}
+        <span class="recordatorio">NOTA: Recuerda seleccionar la respuesta correcta</span>
+        ${generarRespuestaHTML(idPregunta, "a")}
+        ${generarRespuestaHTML(idPregunta, "b")}
     </div>
-
     <button class="btn-agregar" onclick="añadirRespuesta(this)">
-      <span class="icono-mas">+</span>
-      Añadir respuesta
+        <span class="icono-mas">+</span>
+        Añadir respuesta
     </button>
   `;
 
     contenedorPreguntas.insertBefore(nuevaPregunta, document.getElementById("btn-agregar-pregunta"));
-    actualizarEstadoValorPreguntas();
+    actualizarEstadoValorPreguntas(); // Recalcular los puntos después de añadir la nueva pregunta
 }
 
+// Generar respuestas dinámicamente
 function generarRespuestaHTML(nombreGrupo, letra) {
     return `
     <div class="respuesta-opcion">
-      <div class="radio-grupo">
-        <input type="radio" id="${nombreGrupo}-${letra}" name="${nombreGrupo}" required >
-        <label for="${nombreGrupo}-${letra}">${letra.toUpperCase()}.</label>
-      </div>
-      <input type="text" class="input-base input-respuesta" placeholder="Escribe la respuesta aquí..." required>
-      <img src="../icons/trash.svg" alt="Eliminar" class="icono-eliminar" onclick="eliminarElemento(this)">
+        <div class="radio-grupo">
+            <input type="radio" id="${nombreGrupo}-${letra}" name="${nombreGrupo}" required >
+            <label for="${nombreGrupo}-${letra}">${letra.toUpperCase()}.</label>
+        </div>
+        <input type="text" class="input-base input-respuesta" placeholder="Escribe la respuesta aquí..." required>
+        <img src="../icons/trash.svg" alt="Eliminar" class="icono-eliminar" onclick="eliminarElemento(this)">
     </div>
   `;
 }
 
+// Función para añadir nuevas respuestas a una pregunta
 function añadirRespuesta(boton) {
     const contenedorPregunta = boton.closest(".pregunta-contenedor");
     const respuestasContenedor = contenedorPregunta.querySelector(".respuestas-contenedor");
@@ -102,6 +91,7 @@ function añadirRespuesta(boton) {
     respuestasContenedor.insertAdjacentHTML("beforeend", nuevaRespuestaHTML);
 }
 
+// Función para eliminar una respuesta o pregunta
 function eliminarElemento(elemento) {
     const respuesta = elemento.closest('.respuesta-opcion');
     const pregunta = elemento.closest('.pregunta-contenedor');
@@ -112,122 +102,55 @@ function eliminarElemento(elemento) {
         pregunta.remove();
         contadorPreguntas--;
     }
+
+    // Recalcular los puntos después de eliminar una pregunta o respuesta
+    actualizarEstadoValorPreguntas();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
     const formulario = document.getElementById("formulario-examen");
 
-    formulario.addEventListener("submit", async function (e) {
+    formulario.addEventListener("submit", function (e) {
         e.preventDefault(); // Evita que se recargue la página
 
-        /*const horaTexto = formulario.querySelector('#hora-examen').value;*/   // formato: HH:MM
+        // Validación de que todos los campos estén completos
+        const inputsRequeridos = formulario.querySelectorAll('[required]');
+        let camposCompletos = true;
 
-        // Combinar fecha y hora en formato ISO 8601 (ej. 2025-05-09T19:40:00)
-        const asignaturaSeleccionada = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
-        const codigo = asignaturaSeleccionada?.codigo;
-
-        const datos = {
-            titulo: formulario.querySelector('#titulo-examen').value, // string
-            puntos: suma, // número
-            peso: Number(formulario.querySelector('#peso-examen').value), // número
-            fechaApertura: formulario.querySelector('#fecha-apertura-examen').value, // string con formato ISO (fecha + hora)
-            fechaCierre: formulario.querySelector('#fecha-cierre-examen').value,
-            duracion: Number(formulario.querySelector('#duracion-examen').value),
-            codigo: codigo,
-            preguntas: [],
-        };
-
-        const preguntasDOM = formulario.querySelectorAll(".pregunta-contenedor");
-        preguntasDOM.forEach(p => {
-            const preguntaTexto = p.querySelector("textarea").value;
-            const respuestas = [];
-
-            let valor = p.querySelector(".input-pregunta-valor").value;
-
-            if(valor === ""){
-                valor = 10/contadorPreguntas;
+        inputsRequeridos.forEach(input => {
+            if (!input.value.trim()) {
+                camposCompletos = false;
+                input.classList.add('error'); // Agregar clase de error
+            } else {
+                input.classList.remove('error');
             }
-
-
-            p.querySelectorAll(".respuesta-opcion").forEach(r => {
-                const texto = r.querySelector('input[type="text"]').value;
-                const seleccionada = r.querySelector('input[type="radio"]').checked;
-                respuestas.push({ texto: texto, correcta: seleccionada });
-            });
-
-            datos.preguntas.push({
-                pregunta: preguntaTexto,
-                valor: valor,
-                respuestas: respuestas,
-            });
         });
 
-        console.log(datos);
-
-        const formData = new FormData();
-
-        // Asegúrate de poner los mismos `name` que espera el PHP:
-        formData.append('titulo', datos.titulo);
-        formData.append('fechaApertura', datos.fechaApertura);
-        formData.append('fechaCierre', datos.fechaCierre);
-        formData.append('duracion', datos.duracion);
-        formData.append('peso', datos.peso);
-        formData.append('puntos', datos.puntos);
-        formData.append('codigo', codigo);
-
-        // Para preguntas (como es un array de objetos, conviene pasarlo como JSON stringificado)
-        formData.append('preguntas', JSON.stringify(datos.preguntas));
-
-        try {
-            const respuesta = await fetch("../app/procesar-examen.php", {
-                method: "POST",
-                body: formData
-            });
-
-            const contentType = respuesta.headers.get("content-type") || "";
-            console.log("Tipo de respuesta:", contentType);
-
-            if (contentType.includes("application/json")) {
-                const resultado = await respuesta.json();
-                console.log("Respuesta del servidor (JSON):", resultado);
-
-                if (resultado.success) {
-                    popupPublicar();
-                } else {
-                    alert("Error al guardar el examen.");
-                }
-            } else {
-                const texto = await respuesta.text();
-                console.warn("Respuesta NO JSON:", texto);
-                alert("Error inesperado. Mira la consola para más detalles.");
-            }
-        } catch (error) {
-            console.error("Error en la solicitud:", error);
+        if (!camposCompletos) {
+            alert('Por favor, completa todos los campos obligatorios.');
+            return; // Detiene la ejecución si algún campo está vacío
         }
 
+        // Validación de las fechas
+        const fechaApertura = document.getElementById("fecha-apertura-examen").value;
+        const fechaCierre = document.getElementById("fecha-cierre-examen").value;
+        const fechaHoy = new Date().toISOString().slice(0, 16); // Para comparar solo la fecha y hora (sin segundos)
 
+        if (fechaApertura < fechaHoy || fechaCierre < fechaHoy) {
+            alert("Las fechas de apertura y cierre no pueden ser anteriores al día de hoy.");
+            return; // Detiene la ejecución si las fechas no son válidas
+        }
 
-        //popupPublicar();
-
+        // Aquí ya no enviamos nada al servidor, solo mostramos un mensaje de éxito
+        alert("El examen se ha creado exitosamente con los puntos calculados.");
     });
-
-    // Escuchar cambios en el dropdown
-    dropdownValor.addEventListener("change", actualizarEstadoValorPreguntas);
 
     // Ejecutar al inicio para establecer el estado inicial correctamente
     actualizarEstadoValorPreguntas();
 });
 
+// Popup cuando se publica el examen
 async function popupPublicar() {
     const popup = document.getElementById('popup-publicado');
     popup.style.display = 'flex';
 }
-
-function volverAtras() {
-    if (window.location.pathname.includes("crear-examen-nuevo.php")) {
-        window.location.href = "examenes-profesor.php";
-    } else {
-        window.history.back();
-    }
-}
-

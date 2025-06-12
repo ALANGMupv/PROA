@@ -121,6 +121,41 @@ h4{
     gap: 0.5em;
 }
 
+/* EXÁMENES EN BORRADORES */
+.item-examen-borrador {
+    pointer-events: none; /* Evita la interacción con los exámenes borradores */
+}
+
+/* Quitamos el efecto hover para los exámenes en borrador */
+.item-examen-borrador:hover {
+    box-shadow: none; /* Quita el efecto de sombra al pasar el ratón */
+    border: 1px solid var(--color-bordes); /* Deja el borde tal como está, sin cambios */
+}
+.item-examen-borrador .btn-visualizar-entregas {
+
+}
+    cursor: not-allowed;
+.btn-terminar {
+
+    font-family: var(--fuente-principal);
+    background-color: #7F7F7F;
+    font-weight: 400;
+    color: #FFFFFF;
+    padding: 0.75em 1.5em;
+    border-radius: 10px;
+    border: none;
+    cursor: not-allowed;
+    outline: none;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Eliminamos el hover */
+.btn-terminar:hover,
+.btn-terminar:focus {
+    filter: none;
+}
+
 @media (max-width: 500px) {
     .item-examen {
         flex-wrap: nowrap;
@@ -140,7 +175,5 @@ h4{
         margin-top: 1em;
 
     }
-
-
 }
 
