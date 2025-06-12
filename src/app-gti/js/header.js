@@ -98,9 +98,10 @@ function inicializarEventosHeader() {
             // Detecta si estás en index.php dentro de src/
             const esIndex = ruta.endsWith('/index.php') || ruta.endsWith('/src/') || ruta.endsWith('/src');
 
-            // Si estás en index.php, la ruta a login es relativa a app-gti/
+
             // Si estás dentro de app-gti, login.php está en la misma carpeta
-            const destino = esIndex ? 'app-gti/login.php' : 'login.php';
+            const destino = esIndex ? '/proa/app-gti/login.php' : '/proa/app-gti/login.php';
+
 
             // Redirige
             window.location.href = destino;
