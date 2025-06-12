@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-06-2025 a las 17:09:29
+-- Tiempo de generación: 12-06-2025 a las 22:27:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -39,22 +39,15 @@ CREATE TABLE `asignacionalumno` (
 --
 
 INSERT INTO `asignacionalumno` (`idUsuariosPROA`, `codigoAsignatura`, `idGrupo`, `asignaturaFavorita`) VALUES
-                                                                                                           (1, 'COMM101', NULL, 0),
-                                                                                                           (1, 'DIU666', NULL, 0),
-                                                                                                           (1, 'PROG101', NULL, 0),
-                                                                                                           (1, 'SOUND204', NULL, 0),
-                                                                                                           (1, 'UIUX102', 1, 0),
-                                                                                                           (2, 'COMM101', NULL, 0),
-                                                                                                           (2, 'MULT203', NULL, 0),
-                                                                                                           (2, 'PROG101', NULL, 1),
-                                                                                                           (2, 'SIGS301', NULL, 0),
-                                                                                                           (2, 'SOUND204', NULL, 0),
-                                                                                                           (2, 'TFG401', 2, 0),
-                                                                                                           (7, 'DIU666', NULL, 0),
-                                                                                                           (7, 'PROG101', NULL, 0),
-                                                                                                           (7, 'SOUND204', NULL, 0),
-                                                                                                           (10, 'COMM101', NULL, 0),
-                                                                                                           (13, 'COMM101', NULL, 0);
+                                                                                                           (1, 'DIU101', NULL, 0),
+                                                                                                           (1, 'PRG666', NULL, 0),
+                                                                                                           (2, 'DIU101', NULL, 0),
+                                                                                                           (2, 'IDS020', NULL, 1),
+                                                                                                           (2, 'PRG666', NULL, 0),
+                                                                                                           (2, 'RDA189', NULL, 1),
+                                                                                                           (7, 'DIU101', NULL, 0),
+                                                                                                           (10, 'DIU101', NULL, 0),
+                                                                                                           (13, 'DIU101', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -74,16 +67,15 @@ CREATE TABLE `asignaciondocentes` (
 --
 
 INSERT INTO `asignaciondocentes` (`idUsuariosPROA`, `codigoAsignatura`, `responsable`, `asignaturaFavorita`) VALUES
-                                                                                                                 (3, 'COMM101', 1, 1),
-                                                                                                                 (3, 'DIU666', 1, NULL),
-                                                                                                                 (3, 'MULT203', 1, NULL),
-                                                                                                                 (3, 'PROG101', 1, NULL),
-                                                                                                                 (3, 'SIGS301', 0, NULL),
-                                                                                                                 (3, 'TFG401', 0, 0),
-                                                                                                                 (4, 'PROG101', 0, NULL),
-                                                                                                                 (4, 'SIGS301', 1, NULL),
-                                                                                                                 (4, 'SOUND204', 0, 0),
-                                                                                                                 (4, 'UIUX102', 0, 0);
+                                                                                                                 (3, 'DIU101', 0, NULL),
+                                                                                                                 (3, 'PRG666', 1, NULL),
+                                                                                                                 (4, 'DIU101', 1, NULL),
+                                                                                                                 (4, 'IDS020', 1, NULL),
+                                                                                                                 (4, 'PRG666', 0, NULL),
+                                                                                                                 (4, 'RDA189', 1, 1),
+                                                                                                                 (8, 'DIU101', 0, NULL),
+                                                                                                                 (11, 'DIU101', 0, NULL),
+                                                                                                                 (14, 'DIU101', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -107,14 +99,10 @@ CREATE TABLE `asignaturas` (
 --
 
 INSERT INTO `asignaturas` (`codigoAsignatura`, `codigoTitulacion`, `nombre`, `creditos`, `idCurso`, `idSemestre`, `idDepartamento`, `idCaracter`) VALUES
-                                                                                                                                                      ('COMM101', 'TEL', 'Fundamentos de comunicaciones', 6, 1, 1, 4, 1),
-                                                                                                                                                      ('DIU666', 'GTI', 'Diseño de Interfaces', 6, 1, 2, 2, 1),
-                                                                                                                                                      ('MULT203', 'GTI', 'Sistemas multimedia', 6, 2, 1, 1, 2),
-                                                                                                                                                      ('PROG101', 'GTI', 'Programación de videojuegos', 6, 1, 1, 1, 1),
-                                                                                                                                                      ('SIGS301', 'TEL', 'Procesado de señal', 6, 3, 1, 4, 2),
-                                                                                                                                                      ('SOUND204', 'GTI', 'Sonido interactivo', 6, 2, 2, 3, 2),
-                                                                                                                                                      ('TFG401', 'GTI', 'Trabajo Fin de Grado', 12, 4, 2, 1, 5),
-                                                                                                                                                      ('UIUX102', 'GTI', 'Diseño de interfaces', 6, 1, 2, 2, 1);
+                                                                                                                                                      ('DIU101', 'GTI', 'Diseño de Interfaces y Experiencia de Usuario', 6, 1, 2, 2, 1),
+                                                                                                                                                      ('IDS020', 'GTI', 'Introducción al tratamiento digital de la señal', 6, 2, 2, 3, 1),
+                                                                                                                                                      ('PRG666', 'GTI', 'Programación 1', 6, 1, 1, 7, 1),
+                                                                                                                                                      ('RDA189', 'GTI', 'Redes de Área Local', 6, 2, 1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -147,12 +135,9 @@ CREATE TABLE `calificaciones` (
 --
 
 INSERT INTO `calificaciones` (`idExamen`, `idUsuariosPROA`, `notaExamenAlumno`, `valorExamen`) VALUES
-                                                                                                   (1, 1, 8, 0),
-                                                                                                   (4, 1, 6, 0),
-                                                                                                   (5, 1, 8, 0),
-                                                                                                   (8, 2, 0, 6),
-                                                                                                   (8, 7, 4, 6),
-                                                                                                   (18, 2, 3, 10);
+                                                                                                   (25, 2, 7, 10),
+                                                                                                   (27, 2, 6, 8),
+                                                                                                   (29, 2, 0, 10);
 
 -- --------------------------------------------------------
 
@@ -210,27 +195,12 @@ CREATE TABLE `contenidoexamen` (
 --
 
 INSERT INTO `contenidoexamen` (`idContenido`, `titulo`, `descripcion`, `pesoExamen`, `puntosExamen`, `fechaApertura`, `fechaFin`, `duracion`) VALUES
-                                                                                                                                                  (1, 'Examen Final de Programación', 'Contenidos de programación avanzada en videojuegos', 30, 10, '2025-05-30 00:15:46', '2025-06-06 00:15:46', '01:30:00'),
-                                                                                                                                                  (2, 'Examen Parcial', 'Parte intermedia del curso de programación', 25, 10, '2025-04-20 00:00:00', '2025-05-02 09:00:00', '01:00:00'),
-                                                                                                                                                  (3, 'Cuestionario 1', 'Preguntas básicas de teoría', 15, 10, '2025-04-25 00:00:00', '2025-05-05 23:59:00', '00:45:00'),
-                                                                                                                                                  (4, 'Test unidad 3', 'Evaluación del tema 3', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
-                                                                                                                                                  (5, 'Test unidad 1', 'Evaluación del tema 1', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
-                                                                                                                                                  (6, 'Test unidad 2', 'Evaluación del tema 2', 20, 10, '2025-03-24 00:00:00', '2025-03-24 17:15:00', '00:45:00'),
-                                                                                                                                                  (7, 'Examen Parcial', 'Parte intermedia del curso de programación', 25, 10, '2025-04-20 00:00:00', '2025-05-02 09:00:00', '01:00:00'),
-                                                                                                                                                  (8, 'Cuestionario 1', 'Preguntas básicas de teoría', 15, 10, '2025-04-25 00:00:00', '2025-05-05 23:59:00', '00:45:00'),
-                                                                                                                                                  (9, 'Test unidad 3', 'Evaluación del tema 3', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
-                                                                                                                                                  (10, 'Test unidad 1', 'Evaluación del tema 1', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
-                                                                                                                                                  (11, 'Test unidad 2', 'Evaluación del tema 2', 20, 10, '2025-03-24 00:00:00', '2025-03-24 17:15:00', '00:45:00'),
-                                                                                                                                                  (12, 'Examen Parcial', 'Parte intermedia del curso', 25, 10, '2025-04-20 00:00:00', '2025-05-02 09:00:00', '01:00:00'),
-                                                                                                                                                  (13, 'Cuestionario 1', 'Preguntas básicas', 15, 10, '2025-04-25 00:00:00', '2025-05-05 23:59:00', '00:45:00'),
-                                                                                                                                                  (14, 'Test unidad 3', 'Tema 3', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
-                                                                                                                                                  (15, 'Test unidad 1', 'Tema 1', 20, 10, '2025-03-01 00:00:00', '2025-03-02 08:00:00', '00:45:00'),
-                                                                                                                                                  (16, 'Test unidad 2', 'Tema 2', 20, 10, '2025-03-24 00:00:00', '2025-03-24 17:15:00', '00:45:00'),
-                                                                                                                                                  (17, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59'),
-                                                                                                                                                  (18, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59'),
-                                                                                                                                                  (19, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59'),
-                                                                                                                                                  (20, 'Cuestionario Procesado de Señal', NULL, 15, 10, '2025-05-30 00:00:00', '2025-06-06 00:00:00', '00:00:59'),
-                                                                                                                                                  (21, 'Examen de Programación de Videojuegos en Unity con C#', 'Este examen está diseñado para evaluar los conocimientos fundamentales de programación de videojuegos en Unity utilizando C#. Las preguntas abordan conceptos esenciales de Unity, como el manejo de GameObjects, Componentes, Transformaciones, Colisiones, Animaciones y la implementación de sistemas básicos como la puntuación y cámaras en primera persona.', 10, 0, '2025-06-12 20:00:00', '2025-06-19 17:00:00', '01:05:00');
+                                                                                                                                                  (28, 'Ejercicios Examenes Capitulo 5', 'Este examen evalúa los conocimientos teóricos y prácticos del alumno en el diseño, funcionamiento y análisis de redes de computadoras. Incluye preguntas tipo test, cuestiones de desarrollo y ejercicios de diseño de redes físicas y lógicas. Se abordan temas como direccionamiento IP, protocolos de red (como ARP y PPP), dispositivos de interconexión (switches, hubs, routers, puntos de acceso), segmentación mediante VLANs, y análisis del flujo de datos en una red. Las preguntas están orientadas a situaciones reales que requieren razonamiento técnico, configuración de equipos y comprensión del modelo OSI.', 10, 0, '2025-06-12 22:50:00', '2025-06-20 22:50:00', '00:30:00'),
+                                                                                                                                                  (29, 'Ejercicios Examenes Capitulo 4', 'Este examen abarca contenidos fundamentales relacionados con redes de computadoras, centrándose en los estándares Ethernet, Token Ring e IEEE 802.11 (redes inalámbricas). A través de preguntas tipo test, se evalúan los conocimientos del alumno sobre conceptos técnicos como estructuras de tramas, funcionamiento de protocolos de acceso al medio (CSMA/CD, CSMA/CA), direccionamiento MAC, cableado, y funcionamiento de redes cableadas e inalámbricas.', 5, 0, '2025-06-12 22:55:00', '2025-06-26 21:55:00', '00:30:00'),
+                                                                                                                                                  (30, 'Ejercicios Examenes Capitulo 3', 'Este examen evalúa los conocimientos fundamentales sobre el diseño e implementación de redes inalámbricas (WLAN). A través de preguntas tipo test, se analiza la capacidad del alumno para identificar buenas prácticas en la planificación, análisis de cobertura, detección de interferencias y documentación de redes inalámbricas en entornos reales.', 5, 0, '2025-06-12 23:55:00', '2025-06-15 23:55:00', '00:30:00'),
+                                                                                                                                                  (31, 'Ejercicios Examenes Capitulo 6', 'Este examen evalúa los conocimientos del alumno sobre la conmutación en redes LAN, el uso de VLANs y el protocolo Spanning Tree Protocol (STP). A través de preguntas tipo test y ejercicios prácticos de análisis de topologías, se valoran conceptos clave relacionados con el funcionamiento de los switches, tipos de conmutación (como store and forward, cut-through), segmentación de redes mediante VLANs y prevención de bucles en redes conmutadas.', 10, 0, '2025-06-12 23:05:00', '2025-06-30 00:00:00', '00:45:00'),
+                                                                                                                                                  (32, 'Cuestiones - TEMA 1', 'Este examen evalúa los conocimientos fundamentales sobre señales y sistemas discretos en el tiempo, enfocados en operaciones como convolución, análisis de periodicidad, y caracterización de sistemas lineales invariantes en el tiempo (LTI).', 5, 0, '2025-06-12 22:10:00', '2025-06-20 22:10:00', '01:00:00'),
+                                                                                                                                                  (33, 'Cuestiones - TEMA 2', 'Este examen evalúa los conocimientos fundamentales sobre señales y sistemas discretos en el tiempo, enfocados en operaciones como convolución, análisis de periodicidad, y caracterización de sistemas lineales invariantes en el tiempo (LTI).', 10, 0, '2025-06-12 22:15:00', '2025-06-19 00:00:00', '01:00:00');
 
 -- --------------------------------------------------------
 
@@ -269,10 +239,14 @@ CREATE TABLE `departamentos` (
 --
 
 INSERT INTO `departamentos` (`idDepartamento`, `nombreDepartamento`) VALUES
-                                                                         (1, 'Informática'),
-                                                                         (2, 'Diseño'),
-                                                                         (3, 'Sonido'),
-                                                                         (4, 'Comunicaciones');
+                                                                         (1, 'Ingeniería Electrónica'),
+                                                                         (2, 'Expresión Gráfica en Ingeniería'),
+                                                                         (3, 'Comunicaciones'),
+                                                                         (4, 'Física Aplicada'),
+                                                                         (5, 'Matemática Aplicada'),
+                                                                         (6, 'Organización de Empresas'),
+                                                                         (7, 'Informática de Sistemas y Computadores'),
+                                                                         (8, 'Biotecnología');
 
 -- --------------------------------------------------------
 
@@ -326,15 +300,12 @@ CREATE TABLE `examenes` (
 --
 
 INSERT INTO `examenes` (`idExamen`, `codigoAsignatura`, `idGrupo`, `idContenido`, `idEstado`, `idUsuariosPROA`) VALUES
-                                                                                                                    (1, 'PROG101', 1, 1, 1, 3),
-                                                                                                                    (4, 'PROG101', 1, 1, 1, 3),
-                                                                                                                    (5, 'PROG101', 1, 11, 2, 3),
-                                                                                                                    (6, 'PROG101', 1, 4, 3, 3),
-                                                                                                                    (8, 'PROG101', 1, 2, 1, 3),
-                                                                                                                    (13, 'PROG101', 1, 3, 2, 3),
-                                                                                                                    (16, 'SIGS301', 1, 18, 4, 4),
-                                                                                                                    (17, 'SIGS301', NULL, 20, 1, 4),
-                                                                                                                    (18, 'PROG101', NULL, 21, 1, 4);
+                                                                                                                    (25, 'RDA189', NULL, 28, 1, 4),
+                                                                                                                    (26, 'RDA189', NULL, 29, 1, 4),
+                                                                                                                    (27, 'RDA189', NULL, 30, 1, 4),
+                                                                                                                    (28, 'RDA189', NULL, 31, 1, 4),
+                                                                                                                    (29, 'IDS020', NULL, 32, 1, 4),
+                                                                                                                    (30, 'IDS020', NULL, 33, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -442,10 +413,27 @@ CREATE TABLE `preguntasexamen` (
 --
 
 INSERT INTO `preguntasexamen` (`idPregunta`, `enunciado`, `valorPregunta`, `idContenido`) VALUES
-                                                                                              (1, '¿Qué fue antes el huevo o la gallina?', 2, 2),
-                                                                                              (2, '¿Quién es el presidente de España?', 4, 2),
-                                                                                              (3, 'Pregunta 1: ¿Qué es un GameObject en Unity?', 3, 21),
-                                                                                              (4, '¿Cómo se puede mover un objeto en Unity usando C#?', 7, 21);
+                                                                                              (11, ' Cómo podemos logar que todos los mensajes de los ordenadores de la red que vayan hacia una dirección en Internet pasen a través de un ordenador en particular antes de ir hacia Internet:\n', 4, 28),
+                                                                                              (12, '¿En qué parte de una estación de trabajo se encuentra la dirección de capa 2?', 3, 28),
+                                                                                              (13, '¿Cuál es la función de ARP?', 3, 28),
+                                                                                              (14, 'La función cuyo su funcionamiento se basa en técnicas de contienda por el medio se llama\n', 2, 29),
+                                                                                              (15, 'En IEEE 802.11 con MACA, ¿Qué trama tiene más bits de las siguientes?', 2, 29),
+                                                                                              (16, 'En la trama IEEE 802.11', 1, 29),
+                                                                                              (17, 'En el diseño de una red inalámbrica se debe:\n', 2, 30),
+                                                                                              (18, 'Para planificar la cobertura de una red inalámbrica en una planta de un edificio, se debe empezar:', 4, 30),
+                                                                                              (19, 'Cual de los siguientes ítems no es parte de la documentación que debe generarse durante el diseño de la red:', 2, 30),
+                                                                                              (20, 'He observado que después de cambiar los 10 HUBS que tenía mi red por 10 switches, la red es más lenta de lo que se espera. ¿Qué tipo de conmutación estará utilizando mis switches?:', 1, 31),
+                                                                                              (21, '¿Qué es necesario para comunicar los ordenadores de 2 VLANs distintas?', 1, 31),
+                                                                                              (22, 'Un switch utilizando el método corte es aquel que:', 1, 31),
+                                                                                              (23, 'El Estándar IEEE 802.D define:\n', 1, 31),
+                                                                                              (24, '¿Cual de las siguientes afirmaciones el falsa del protocolo Spanning Tree Protocol (STP)?', 1, 31),
+                                                                                              (25, 'Sea la señal x[n] = δ[n] + δ[n − 1]. Calcula la señal y[n] = x[n] ∗ x[n + 1], e indica cuál de los siguientes resultados es el correcto.', 5, 32),
+                                                                                              (26, 'Sea h[n] = δ[n] − δ[n − 1] la respuesta impulsional de un LTI, ¿qué clase de sistema es?\n', 5, 32),
+                                                                                              (27, 'Sea la secuencia discreta x[n] = n·u[n+1], ¿cuál sería el resultado de la siguiente convolución?\nz[n] = x[n] ∗ δ[n − 1]\n', 1, 33),
+                                                                                              (28, 'Las siguientes expresiones relacionan la salida con la entrada de un sistema discreto:\n\n1. y[n] = e<sup>x[n]</sup>\n\n2.y[n] = x[n − 1] + x[n + 1]\n\n3.y[n] = n·x[n]\n\nIndica cuál de las siguientes afirmaciones es cierta:', 2, 33),
+                                                                                              (29, 'Dada la señal discreta x[n] = u[n] − u[n − 5], ¿cuál será la duración de la señal y[n] = x[n] ∗ x[n]?', 2, 33),
+                                                                                              (30, 'Dada la secuencia x[n] = cos(6πn):', 2, 33),
+                                                                                              (31, 'El resultado de la operación δ[n − 2] ∗ δ[n − 2] es:', 3, 33);
 
 -- --------------------------------------------------------
 
@@ -465,12 +453,14 @@ CREATE TABLE `respuestasalumno` (
 --
 
 INSERT INTO `respuestasalumno` (`idUsuariosPROA`, `idExamen`, `idPregunta`, `idRespuesta`) VALUES
-                                                                                               (2, 8, 1, 1),
-                                                                                               (7, 8, 1, 2),
-                                                                                               (2, 8, 2, 3),
-                                                                                               (7, 8, 2, 4),
-                                                                                               (2, 18, 3, 7),
-                                                                                               (2, 18, 4, 11);
+                                                                                               (2, 25, 11, 26),
+                                                                                               (2, 25, 12, 28),
+                                                                                               (2, 25, 13, 34),
+                                                                                               (2, 27, 17, 48),
+                                                                                               (2, 27, 18, 51),
+                                                                                               (2, 27, 19, 53),
+                                                                                               (2, 29, 25, 76),
+                                                                                               (2, 29, 26, 79);
 
 -- --------------------------------------------------------
 
@@ -490,17 +480,85 @@ CREATE TABLE `respuestasexamen` (
 --
 
 INSERT INTO `respuestasexamen` (`idRespuesta`, `respuesta`, `valorRespuesta`, `idPregunta`) VALUES
-                                                                                                (1, 'el huevo', 0, 1),
-                                                                                                (2, 'la gallina', 1, 1),
-                                                                                                (3, 'Pedro Sánchez', 0, 2),
-                                                                                                (4, 'Jose Luis', 1, 2),
-                                                                                                (5, 'Palacios', 0, 2),
-                                                                                                (6, 'Un objeto que contiene scripts', 0, 3),
-                                                                                                (7, 'Un objeto que representa cualquier cosa en el juego', 1, 3),
-                                                                                                (8, 'Una función que mueve objetos', 0, 3),
-                                                                                                (9, 'Modificando el Rigidbody', 0, 4),
-                                                                                                (10, 'Modificando la propiedad Transform.position', 1, 4),
-                                                                                                (11, 'Usando un script de animación', 0, 4);
+                                                                                                (24, 'Poniendo en la tabla de conmutación del switch la dirección MAC del router en el puerto donde está ese ordenador', 0, 11),
+                                                                                                (25, 'Poniendo en todos los ordenadores como puerta de enlace la dirección IP del ordenador y poniendo un software en el router para que acepte la información que le llegue y la envíe hacia Internet.', 0, 11),
+                                                                                                (26, 'Enviando a todos los ordenadores una respuesta ARP con la dirección IP de su puerta de enlace y la dirección MAC de ese ordenador. En el ordenador se deberá poner un software para que redirija toda la información a la puerta de enlace.', 1, 11),
+                                                                                                (27, 'Poniendo un Hub en la red en vez de un Switch.', 0, 11),
+                                                                                                (28, 'En la tabla de enrutamiento', 0, 12),
+                                                                                                (29, 'En la tarjeta de interfaz de red ', 1, 12),
+                                                                                                (30, 'En la tabla del servidor de nombre ', 0, 12),
+                                                                                                (31, 'Se encuentra en el servidor DHCP ', 0, 12),
+                                                                                                (32, 'Se utiliza para asignar una dirección MAC conocida a una dirección IP desconocida', 0, 13),
+                                                                                                (33, 'Se utiliza para desarrollar una tabla de recursos de direcciones capa 4 en caché ', 0, 13),
+                                                                                                (34, 'Se utiliza para asignar una dirección MAC desconocida a una dirección IP conocida', 1, 13),
+                                                                                                (35, 'Envía un mensaje de broadcast para buscar la dirección IP del router', 0, 13),
+                                                                                                (36, 'Función de coordinación distribuida', 1, 14),
+                                                                                                (37, 'Función de coordinación puntual', 0, 14),
+                                                                                                (38, 'Función de servicios de tipo síncrono', 0, 14),
+                                                                                                (39, 'ACK', 0, 15),
+                                                                                                (40, 'RTS', 1, 15),
+                                                                                                (41, 'El campo FCS es mas grande que el campo de la dirección MAC origen', 0, 16),
+                                                                                                (42, 'Existen 2 campos las direcciones MAC.', 0, 16),
+                                                                                                (43, 'Existen 4 campos las direcciones MAC.', 1, 16),
+                                                                                                (44, 'El campo de datos (Cuerpo de la trama) no puede ser el más pequeño', 0, 16),
+                                                                                                (45, 'Tener en cuenta que el ancho de banda efectivo en las WLAN es menor que el teórico.', 0, 17),
+                                                                                                (46, 'Testear la cobertura producida por el punto de acceso tanto visualmente como con un analizador de espectros de Radio Frecuencia', 0, 17),
+                                                                                                (47, 'Realizar el análisis de espectros diferentes días y diferentes horas del día para observar posibles interferencias', 0, 17),
+                                                                                                (48, 'Tener en cuenta todas los ítems anteriores', 1, 17),
+                                                                                                (49, 'Midiendo cual es el radio de cobertura de los puntos de acceso que vamos a instalar', 0, 18),
+                                                                                                (50, 'Midiendo el ancho de banda efectivo de la red inalámbrica que vamos a instalar', 0, 18),
+                                                                                                (51, 'Eligiendo una esquina y situar el punto de acceso allí para medir la zona de cobertura', 1, 18),
+                                                                                                (52, 'Midiendo si hay interferencias en alguno de los canales de la banda de 2,4 Ghz ', 0, 18),
+                                                                                                (53, 'Topología Lógica', 0, 19),
+                                                                                                (54, 'Número de usuarios que van a utilizar la red', 1, 19),
+                                                                                                (55, 'Diario de Ingeniería', 0, 19),
+                                                                                                (56, 'Metodo de Corte', 0, 20),
+                                                                                                (57, 'Cut-through', 0, 20),
+                                                                                                (58, 'Conmutación libre de fragmentos', 0, 20),
+                                                                                                (59, 'Almacenamiento y envio', 1, 20),
+                                                                                                (60, 'Hacer un trunk entre 2 switches', 0, 21),
+                                                                                                (61, 'Poner el switch como puerta de enlace por defecto (gateway)', 0, 21),
+                                                                                                (62, 'Poner un router que enrute entre las VLANs', 0, 21),
+                                                                                                (63, 'Todas las anteriores', 1, 21),
+                                                                                                (64, 'Es capaz de procesar los datos entrantes a la vez que los va retransmitiendo a la salida correcta', 0, 22),
+                                                                                                (65, 'Puede procesar un paquete tan pronto como se recibe la dirección MAC de origen redirigiéndose a la salida correcta', 0, 22),
+                                                                                                (66, 'Puede procesar un paquete tan pronto como se recibe la dirección MAC de destino redirigiéndose a la salida correcta', 1, 22),
+                                                                                                (67, 'Procesa todo el paquete antes de retransmitirlo a la salida correcta', 0, 22),
+                                                                                                (68, 'Como modificar la cabecera Ethernet para incluir etiquetas', 0, 23),
+                                                                                                (69, 'Como indicar la pertenencia de una trama a una VLAN', 0, 23),
+                                                                                                (70, 'Que el nuevo tamaño de una trama Ethernet pasa a ser 1518 bytes.', 0, 23),
+                                                                                                (71, 'Un protocolo de spanning tree de extension', 1, 23),
+                                                                                                (72, 'Evita bucles entre dos puentes o switches ', 0, 24),
+                                                                                                (73, 'Establece una topología lógica tipo árbol ', 0, 24),
+                                                                                                (74, 'Si hay más de un enlace entre 2 puentes o switches, sólo uno estará activo, los demás bloqueados ', 0, 24),
+                                                                                                (75, 'Envía tramas desde todos los puertos del switch para alcanzar el destino deseado.', 1, 24),
+                                                                                                (76, 'y[n] = δ[n] + 2δ[n − 1] + δ[n − 2]', 0, 25),
+                                                                                                (77, 'y[n] = δ[n − 1] + 2δ[n − 2] + δ[n − 3]', 0, 25),
+                                                                                                (78, 'Ninguna de las anteriores es cierta.', 1, 25),
+                                                                                                (79, 'Es el sistema acumulador.', 0, 26),
+                                                                                                (80, 'Es la primera diferencia.', 1, 26),
+                                                                                                (81, 'Es el sistema identidad.', 0, 26),
+                                                                                                (82, 'Ninguna de las anteriores.', 0, 26),
+                                                                                                (83, 'z[n] = nu[n]', 0, 27),
+                                                                                                (84, 'z[n] = nu[n − 1]', 1, 27),
+                                                                                                (85, 'z[n] = nu[n + 1] − 1', 0, 27),
+                                                                                                (86, 'z[n] = (n − 1)u[n]', 0, 27),
+                                                                                                (87, 'Ninguno de los sistemas es LTI.', 0, 28),
+                                                                                                (88, 'Los sistemas 1 y 2 no son LTI.', 1, 28),
+                                                                                                (89, 'Los sistemas 2 y 3 no son LTI.', 0, 28),
+                                                                                                (90, 'Los sistemas 1 y 3 no son LTI.', 0, 28),
+                                                                                                (91, '12', 0, 29),
+                                                                                                (92, '10', 0, 29),
+                                                                                                (93, '8', 0, 29),
+                                                                                                (94, '11', 1, 29),
+                                                                                                (95, ' Es una secuencia periódica de periodo 2π', 0, 30),
+                                                                                                (96, 'Es una secuencia periódica de periodo 1', 0, 30),
+                                                                                                (97, 'Es una secuencia periódica de periodo 1/(2π)', 1, 30),
+                                                                                                (98, 'No es periódica', 0, 30),
+                                                                                                (99, ' δ[n]', 0, 31),
+                                                                                                (100, 'δ[n − 2]', 0, 31),
+                                                                                                (101, ' 1', 1, 31),
+                                                                                                (102, ' δ[n − 4]', 0, 31);
 
 -- --------------------------------------------------------
 
@@ -557,8 +615,11 @@ CREATE TABLE `titulacion` (
 --
 
 INSERT INTO `titulacion` (`codigoTitulacion`, `nombreTitulacion`) VALUES
+                                                                      ('CAU', 'Grado en Comunicación Audiovisual'),
+                                                                      ('GCA', 'Grado en Ciencias Ambientales'),
                                                                       ('GTI', 'Grado en Tecnologías Interactivas'),
-                                                                      ('TEL', 'Grado en Ingeniería de Telecomunicaciones');
+                                                                      ('TEL', 'Grado en Ingeniería de Telecomunicaciones'),
+                                                                      ('TUR', 'Grado en Turismo');
 
 -- --------------------------------------------------------
 
@@ -870,7 +931,7 @@ ALTER TABLE `contenidoavisos`
 -- AUTO_INCREMENT de la tabla `contenidoexamen`
 --
 ALTER TABLE `contenidoexamen`
-    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+    MODIFY `idContenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `cursos`
@@ -882,7 +943,7 @@ ALTER TABLE `cursos`
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-    MODIFY `idDepartamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+    MODIFY `idDepartamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `estadosavisos`
@@ -900,7 +961,7 @@ ALTER TABLE `estadosexamen`
 -- AUTO_INCREMENT de la tabla `examenes`
 --
 ALTER TABLE `examenes`
-    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+    MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `grupos`
@@ -918,13 +979,13 @@ ALTER TABLE `personas`
 -- AUTO_INCREMENT de la tabla `preguntasexamen`
 --
 ALTER TABLE `preguntasexamen`
-    MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+    MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestasexamen`
 --
 ALTER TABLE `respuestasexamen`
-    MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+    MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
