@@ -35,6 +35,7 @@ function actualizarEstadoValorPreguntas() {
         spanPuntos.textContent = suma;
     }
 }
+
 function agregarPregunta() {
     contadorPreguntas++;
     const contenedorPreguntas = document.querySelector(".datos");
@@ -114,109 +115,98 @@ function eliminarElemento(elemento) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const formulario = document.getElementById("formulario-examen");
+const formulario = document.getElementById("formulario-examen");
 
-    formulario.addEventListener("submit", async function (e) {
-        e.preventDefault(); // Evita que se recargue la página
+formulario.addEventListener("submit", async function (e) {
+    e.preventDefault(); // Evita que se recargue la página
 
-        /*const horaTexto = formulario.querySelector('#hora-examen').value;*/   // formato: HH:MM
+    const asignaturaSeleccionada = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
+    const codigo = asignaturaSeleccionada?.codigo;
 
-        // Combinar fecha y hora en formato ISO 8601 (ej. 2025-05-09T19:40:00)
-        const asignaturaSeleccionada = JSON.parse(localStorage.getItem('asignaturaSeleccionada'));
-        const codigo = asignaturaSeleccionada?.codigo;
+    const datos = {
+        titulo: formulario.querySelector('#titulo-examen').value, // string
+        puntos: suma, // número
+        peso: Number(formulario.querySelector('#peso-examen').value), // número
+        fechaApertura: formulario.querySelector('#fecha-apertura-examen').value, // string con formato ISO (fecha + hora)
+        fechaCierre: formulario.querySelector('#fecha-cierre-examen').value,
+        duracion: Number(formulario.querySelector('#duracion-examen').value),
+        codigo: codigo,
+        preguntas: [],
+    };
 
-        const datos = {
-            titulo: formulario.querySelector('#titulo-examen').value, // string
-            puntos: suma, // número
-            peso: Number(formulario.querySelector('#peso-examen').value), // número
-            fechaApertura: formulario.querySelector('#fecha-apertura-examen').value, // string con formato ISO (fecha + hora)
-            fechaCierre: formulario.querySelector('#fecha-cierre-examen').value,
-            duracion: Number(formulario.querySelector('#duracion-examen').value),
-            codigo: codigo,
-            preguntas: [],
-        };
+    const preguntasDOM = formulario.querySelectorAll(".pregunta-contenedor");
+    preguntasDOM.forEach(p => {
+        const preguntaTexto = p.querySelector("textarea").value;
+        const respuestas = [];
 
-        const preguntasDOM = formulario.querySelectorAll(".pregunta-contenedor");
-        preguntasDOM.forEach(p => {
-            const preguntaTexto = p.querySelector("textarea").value;
-            const respuestas = [];
+        let valor = p.querySelector(".input-pregunta-valor").value;
 
-            let valor = p.querySelector(".input-pregunta-valor").value;
-
-            if(valor === ""){
-                valor = 10/contadorPreguntas;
-            }
-
-
-            p.querySelectorAll(".respuesta-opcion").forEach(r => {
-                const texto = r.querySelector('input[type="text"]').value;
-                const seleccionada = r.querySelector('input[type="radio"]').checked;
-                respuestas.push({ texto: texto, correcta: seleccionada });
-            });
-
-            datos.preguntas.push({
-                pregunta: preguntaTexto,
-                valor: valor,
-                respuestas: respuestas,
-            });
-        });
-
-        console.log(datos);
-
-        const formData = new FormData();
-
-        // Asegúrate de poner los mismos `name` que espera el PHP:
-        formData.append('titulo', datos.titulo);
-        formData.append('fechaApertura', datos.fechaApertura);
-        formData.append('fechaCierre', datos.fechaCierre);
-        formData.append('duracion', datos.duracion);
-        formData.append('peso', datos.peso);
-        formData.append('puntos', datos.puntos);
-        formData.append('codigo', codigo);
-
-        // Para preguntas (como es un array de objetos, conviene pasarlo como JSON stringificado)
-        formData.append('preguntas', JSON.stringify(datos.preguntas));
-
-        try {
-            const respuesta = await fetch("../app/procesar-examen.php", {
-                method: "POST",
-                body: formData
-            });
-
-            const contentType = respuesta.headers.get("content-type") || "";
-            console.log("Tipo de respuesta:", contentType);
-
-            if (contentType.includes("application/json")) {
-                const resultado = await respuesta.json();
-                console.log("Respuesta del servidor (JSON):", resultado);
-
-                if (resultado.success) {
-                    popupPublicar();
-                } else {
-                    alert("Error al guardar el examen.");
-                }
-            } else {
-                const texto = await respuesta.text();
-                console.warn("Respuesta NO JSON:", texto);
-                alert("Error inesperado. Mira la consola para más detalles.");
-            }
-        } catch (error) {
-            console.error("Error en la solicitud:", error);
+        if(valor === ""){
+            valor = 10/contadorPreguntas;
         }
 
+        p.querySelectorAll(".respuesta-opcion").forEach(r => {
+            const texto = r.querySelector('input[type="text"]').value;
+            const seleccionada = r.querySelector('input[type="radio"]').checked;
+            respuestas.push({ texto: texto, correcta: seleccionada });
+        });
 
-
-        //popupPublicar();
-
+        datos.preguntas.push({
+            pregunta: preguntaTexto,
+            valor: valor,
+            respuestas: respuestas,
+        });
     });
 
-    // Escuchar cambios en el dropdown
-    dropdownValor.addEventListener("change", actualizarEstadoValorPreguntas);
+    console.log(datos);
 
-    // Ejecutar al inicio para establecer el estado inicial correctamente
-    actualizarEstadoValorPreguntas();
+    const formData = new FormData();
+
+    // Asegúrate de poner los mismos `name` que espera el PHP:
+    formData.append('titulo', datos.titulo);
+    formData.append('fechaApertura', datos.fechaApertura);
+    formData.append('fechaCierre', datos.fechaCierre);
+    formData.append('duracion', datos.duracion);
+    formData.append('peso', datos.peso);
+    formData.append('puntos', datos.puntos);
+    formData.append('codigo', codigo);
+
+    // Para preguntas (como es un array de objetos, conviene pasarlo como JSON stringificado)
+    formData.append('preguntas', JSON.stringify(datos.preguntas));
+
+    try {
+        const respuesta = await fetch("../app/procesar-examen.php", {
+            method: "POST",
+            body: formData
+        });
+
+        const contentType = respuesta.headers.get("content-type") || "";
+        console.log("Tipo de respuesta:", contentType);
+
+        if (contentType.includes("application/json")) {
+            const resultado = await respuesta.json();
+            console.log("Respuesta del servidor (JSON):", resultado);
+
+            if (resultado.success) {
+                popupPublicar();
+            } else {
+                alert("Error al guardar el examen.");
+            }
+        } else {
+            const texto = await respuesta.text();
+            console.warn("Respuesta NO JSON:", texto);
+            alert("Error inesperado. Mira la consola para más detalles.");
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error);
+    }
 });
+
+// Escuchar cambios en el dropdown
+dropdownValor.addEventListener("change", actualizarEstadoValorPreguntas);
+
+// Ejecutar al inicio para establecer el estado inicial correctamente
+actualizarEstadoValorPreguntas();
 
 async function popupPublicar() {
     const popup = document.getElementById('popup-publicado');
@@ -230,4 +220,3 @@ function volverAtras() {
         window.history.back();
     }
 }
-
