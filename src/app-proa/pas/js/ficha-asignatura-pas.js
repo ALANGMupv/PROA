@@ -62,10 +62,6 @@ fetch("../app/obtener-ficha-asignatura.php")
     });
 
 // Botones fuera del fetch
-document.getElementById("btn-volver").addEventListener("click", (e) => {
-    e.preventDefault();
-    window.history.back();
-});
 
 document.getElementById("btn-ir-asignacion-alumnos").addEventListener("click", () => {
     window.location.href = "asignacion-alumnos-pas.php";
