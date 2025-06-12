@@ -1,12 +1,7 @@
 let contadorPreguntas = 1; // Ya existe Pregunta 1 en el HTML
 let suma = 0; // Inicializamos la suma de puntos
 
-// Limitar el valor máximo del peso del examen
-document.getElementById("peso-examen").addEventListener("input", function () {
-    if (this.value > 40) {
-        this.value = 40;
-    }
-});
+document.getElementById("duracion-examen").value = "00:00";
 
 // Función para actualizar los puntos totales (solo en modo personalizado)
 function actualizarEstadoValorPreguntas() {
@@ -134,12 +129,33 @@ formulario.addEventListener("submit", function (e) {
     // Validación de las fechas
     const fechaApertura = document.getElementById("fecha-apertura-examen").value;
     const fechaCierre = document.getElementById("fecha-cierre-examen").value;
-    const fechaHoy = new Date().toISOString().slice(0, 16); // Para comparar solo la fecha y hora (sin segundos)
+    const ahora = new Date().toISOString().slice(0, 16); // Fecha y hora actual (sin segundos)
 
-    if (fechaApertura < fechaHoy || fechaCierre < fechaHoy) {
-        alert("Las fechas de apertura y cierre no pueden ser anteriores al día de hoy.");
-        return; // Detiene la ejecución si las fechas no son válidas
+// Validar que apertura y cierre sean posteriores al momento actual
+    if (fechaApertura < ahora) {
+        alert("La fecha de apertura no puede ser anterior al momento actual.");
+        return;
     }
+
+    if (fechaCierre < ahora) {
+        alert("La fecha de cierre no puede ser anterior al momento actual.");
+        return;
+    }
+
+// Validar que el cierre no sea anterior a la apertura
+    if (fechaCierre < fechaApertura) {
+        alert("La fecha de cierre no puede ser anterior a la fecha de apertura.");
+        return;
+    }
+
+    document.getElementById("duracion-examen").addEventListener("input", function () {
+        const [h, m] = this.value.split(":").map(Number);
+        if (h > 5 || (h === 5 && m > 0)) {
+            this.setCustomValidity("La duración no puede superar las 5 horas.");
+        } else {
+            this.setCustomValidity("");
+        }
+    });
 
     // Preparar los datos del examen
     const examenData = {
@@ -205,6 +221,5 @@ formulario.addEventListener("submit", function (e) {
             console.error("Error en la solicitud:", error);
             alert("Hubo un error al enviar los datos.");
         });
-
 
 });

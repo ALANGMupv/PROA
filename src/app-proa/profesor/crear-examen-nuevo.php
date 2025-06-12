@@ -95,10 +95,14 @@ error_reporting(E_ALL);
                                         <span>%</span>
                                     </div>
                                 </label>
+
                                 <label>
                                     <span>Duracion: *</span>
                                     <div class="duracion">
-                                        <input type="time" class="input-base" id="duracion-examen" max="500" required>
+                                        <input type="time" class="input-base" id="duracion-examen" value="00:00"
+                                               step="60"
+                                               min="00:00"
+                                               max="05:00" required>
                                         <span>h:min</span>
                                     </div>
                                 </label>
