@@ -109,10 +109,10 @@ error_reporting(E_ALL);
                                 <div class="input-con-icono">
                                     <select id="dropdown-curso-logico" class="input-base seleccionador-dropdown">
                                         <option disabled selected hidden>Seleccionar curso</option>
-                                        <option value="primero">Primero</option>
-                                        <option value="segundo">Segundo</option>
-                                        <option value="tercero">Tercero</option>
-                                        <option value="cuarto">Cuarto</option>
+                                        <option value="1">Primero</option>
+                                        <option value="2">Segundo</option>
+                                        <option value="3">Tercero</option>
+                                        <option value="4">Cuarto</option>
                                     </select>
                                     <img src="../icons/dropdown.svg" alt="Flecha" class="icono-dropdown">
                                 </div>
