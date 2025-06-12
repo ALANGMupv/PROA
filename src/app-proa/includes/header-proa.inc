@@ -1,6 +1,6 @@
 <header>
     <div class="header-izquierda">
-        <a id="logo-proa-link" href="#">
+        <a id="logo-proa-link" href="index.php">
             <img src="<?= $rutaBase ?>icons/logoBlanco.svg" alt="Logo PROA" class="logo" />
         </a>
     </div>
