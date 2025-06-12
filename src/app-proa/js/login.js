@@ -94,6 +94,7 @@ document.querySelectorAll('.btn-header-rol').forEach(boton => {
     boton.addEventListener('click', () => {
         const rol = boton.dataset.rol;
 
+        // Primero: autocompletar login
         fetch('app/obtener-persona-proa.php', {
             method: 'POST',
             headers: {
@@ -104,20 +105,29 @@ document.querySelectorAll('.btn-header-rol').forEach(boton => {
         })
             .then(res => res.json())
             .then(datos => {
-                console.log("Datos recibidos:", datos);
                 if (datos.email && datos.contraseña) {
                     document.getElementById('correo').value = datos.email;
                     document.getElementById('contrasena').value = datos.contraseña;
-                } else {
-                    alert('No se encontró persona con el rol seleccionado.');
                 }
-            })
-            .catch(err => {
-                console.error(err);
-                alert('Error al obtener los datos del rol.');
+            });
+
+        // Segundo: guardar el rol en la sesión
+        fetch('app/marcar-rol-en-sesion.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            credentials: 'include',
+            body: new URLSearchParams({ rol })
+        })
+            .then(() => {
+                // Tercero: marcar botón activo en el DOM
+                document.querySelectorAll('.btn-header-rol').forEach(btn => {
+                    btn.classList.remove('activo');
+                });
+                boton.classList.add('activo');
             });
     });
 });
+
 
 function mostrarToastError(mensaje) {
     const overlayError = document.createElement('div');

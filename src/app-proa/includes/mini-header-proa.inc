@@ -47,6 +47,10 @@ if ($idUsuarioGTI) {
         $roles[] = $fila['nombreRol'];
     }
 }
+
+?>
+<?php
+$rolActual = strtolower($_SESSION['usuario']['rol'] ?? '');
 ?>
 
 <!-- MINI HEADER -->
@@ -54,9 +58,15 @@ if ($idUsuarioGTI) {
     <p>
         Sesión GTI: <strong><?= htmlspecialchars($nombreCompletoGTI) ?></strong> | Navegar como:
         <?php foreach ($roles as $rol): ?>
-            <button class="btn-header-rol" data-rol="<?= htmlspecialchars($rol) ?>">
-                <?= ucfirst($rol) ?>
+            <?php
+            $rolLower = strtolower($rol);
+            $clase = $rolLower === $rolActual ? 'activo' : '';
+            ?>
+            <button class="btn-header-rol <?= $clase ?>" data-rol="<?= htmlspecialchars($rolLower) ?>">
+                <?= ucfirst($rolLower) ?>
             </button>
         <?php endforeach; ?>
     </p>
 </div>
+
+
