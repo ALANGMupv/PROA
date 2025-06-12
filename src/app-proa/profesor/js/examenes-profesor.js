@@ -59,9 +59,14 @@ function crearBloque(titulo, examenes, tipo) {
                                 <p class="fecha-envio">Peso: ${ex.peso}</p>
                             </div>  
                         </div>  
+                        <div class="botones-profesor">
+                        <button class="btn-oscuros-secundario btn-ver-ficha">Ver ficha examen</button>
                         <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
+                        </div>
+                        
                     </div>
                 </div>`;
+
         } else if (tipo === 'cerrados') {
             html += `
                 <div class="item-examen" data-titulo="${ex.titulo}" data-examen="${ex.id}">
@@ -75,7 +80,7 @@ function crearBloque(titulo, examenes, tipo) {
                                 <img src="../icons/pesoExamen.svg" alt="advertencia"><p class="fecha-envio">Peso: ${ex.peso}</p>
                             </div>  
                         </div>  
-                                              
+                        <button class="btn-oscuros-secundario btn-ver-ficha">Ver ficha examen</button>                      
                         <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
                     </div>
                 </div>`;
@@ -122,12 +127,12 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    if (item && item.dataset.titulo) {
-        localStorage.setItem("examenSeleccionado", JSON.stringify({
-            titulo: item.dataset.titulo,
-            examen: idExamen,
-        }));
-
-        window.location.href = "ficha-examen-profesor.php";
+    if (e.target.closest(".btn-ver-ficha")) {
+        if (idExamen && codigo) {
+            window.location.href = `ficha-examen-profesor.php?codigoAsignatura=${codigo}&idExamen=${idExamen}`;
+        } else {
+            console.error("Faltan datos para redirigir a entregas.");
+        }
+        return;
     }
 });
