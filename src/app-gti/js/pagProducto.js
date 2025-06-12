@@ -1,18 +1,14 @@
-// Por defecto, el enlace del botón será a la página de login
-let ctaLink = 'login.php';
-
-// Intentamos recuperar al usuario desde localStorage (si está logueado)
-const usuario = JSON.parse(localStorage.getItem('usuario'));
-
-// Si el usuario existe, redirigimos el botón a la demo privada
-if (usuario) {
-    ctaLink = '../app-proa/index.php'; // Ruta hacia el login de PROA
-}
-
-// Seleccionamos el botón con id "ctaDemo"
 const botonDemo = document.getElementById("ctaDemo");
+fetch('chequear-sesion.php')
+    .then(response => response.json())
+    .then(data => {
+        const ctaLink = data.logueado
+            ? '../app-proa/index.php' // Si está logueado, va a PROA
+            : 'login.php';           // Si no, va al login de GTI
 
-// Si existe el botón, le asignamos dinámicamente el enlace correspondiente
-if (botonDemo) {
-    botonDemo.setAttribute("href", ctaLink);
-}
+        botonDemo.setAttribute("href", ctaLink);
+    })
+    .catch(error => {
+        console.error('Error al verificar sesión:', error);
+        botonDemo.setAttribute("href", 'login.php'); // Por defecto
+    });
