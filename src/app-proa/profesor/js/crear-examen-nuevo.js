@@ -1,5 +1,4 @@
 let contadorPreguntas = 1; // Ya existe Pregunta 1 en el HTML
-const dropdownValor = document.getElementById("dropdown-valor");
 let suma;
 
 document.getElementById("peso-examen").addEventListener("input", function () {
@@ -9,31 +8,20 @@ document.getElementById("peso-examen").addEventListener("input", function () {
 });
 
 function actualizarEstadoValorPreguntas() {
-    const esAutomatico = dropdownValor.value === "automatico";
+    // El comportamiento siempre será el de "personalizado"
     const inputsValor = document.querySelectorAll(".input-pregunta-valor");
     const spanPuntos = document.getElementById("puntos");
 
+    // Sumar todos los valores numéricos de los inputs
+    suma = 0;
     inputsValor.forEach(input => {
-        input.disabled = esAutomatico;
+        const valor = parseFloat(input.value);
+        if (!isNaN(valor)) {
+            suma += valor;
+        }
     });
 
-    if (esAutomatico) {
-        spanPuntos.textContent = "10";
-        suma = 10;
-        inputsValor.forEach(input => {
-            input.value = ""
-        })
-    } else {
-        // Sumar todos los valores numéricos de los inputs
-        suma = 0;
-        inputsValor.forEach(input => {
-            const valor = parseFloat(input.value);
-            if (!isNaN(valor)) {
-                suma += valor;
-            }
-        });
-        spanPuntos.textContent = suma;
-    }
+    spanPuntos.textContent = suma;
 }
 
 function agregarPregunta() {
@@ -201,12 +189,6 @@ formulario.addEventListener("submit", async function (e) {
         console.error("Error en la solicitud:", error);
     }
 });
-
-// Escuchar cambios en el dropdown
-dropdownValor.addEventListener("change", actualizarEstadoValorPreguntas);
-
-// Ejecutar al inicio para establecer el estado inicial correctamente
-actualizarEstadoValorPreguntas();
 
 async function popupPublicar() {
     const popup = document.getElementById('popup-publicado');

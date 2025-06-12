@@ -48,7 +48,7 @@ textarea#descripcion-examen {
 
 .parametros{
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     gap: 1em;
 }
 

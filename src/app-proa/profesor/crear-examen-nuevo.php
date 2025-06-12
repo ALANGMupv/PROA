@@ -102,7 +102,8 @@ error_reporting(E_ALL);
                                         <span>h:min</span>
                                     </div>
                                 </label>
-                                <label>
+
+                                <!-- <label>
                                     <span>Distribucion: *</span>
                                     <div class="input-con-icono grupo-dropdown">
                                         <select id="dropdown-valor" class="input-base seleccionador-dropdown">
@@ -111,7 +112,8 @@ error_reporting(E_ALL);
                                         </select>
                                         <img src="../icons/dropdown.svg" alt="Flecha" class="icono-dropdown">
                                     </div>
-                                </label>
+                                </label> -->
+
                             </div>
 
                         </div>
