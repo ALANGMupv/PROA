@@ -77,7 +77,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-inicializarEventosHeader(); // 💡 Llama a la función para manejar icono de perfil
+inicializarEventosHeader(); //Llama a la función para manejar icono de perfil
 
 window.addEventListener('pageshow', (event) => {
     const usuario = JSON.parse(localStorage.getItem('usuario'));
@@ -94,10 +94,15 @@ function inicializarEventosHeader() {
             e.preventDefault();
 
             const ruta = location.pathname;
-            const esIndex = ruta.endsWith('/index.php') || ruta === '/proa/src/' || ruta === '/proa/src';
 
-            // Decide la ruta según la página actual
+            // Detecta si estás en index.php dentro de src/
+            const esIndex = ruta.endsWith('/index.php') || ruta.endsWith('/src/') || ruta.endsWith('/src');
+
+            // Si estás en index.php, la ruta a login es relativa a app-gti/
+            // Si estás dentro de app-gti, login.php está en la misma carpeta
             const destino = esIndex ? 'app-gti/login.php' : 'login.php';
+
+            // Redirige
             window.location.href = destino;
         });
     }
