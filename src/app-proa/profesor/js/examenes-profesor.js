@@ -60,13 +60,11 @@ function crearBloque(titulo, examenes, tipo) {
                             </div>  
                         </div>  
                         <div class="botones-profesor">
-                        <button class="btn-oscuros-secundario btn-ver-ficha">Ver ficha examen</button>
-                        <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
+                            <button class="btn-oscuros-secundario btn-ver-ficha">Ver ficha examen</button>
+                            <button class="btn-oscuros-secundario btn-visualizar-entregas">Visualizar entregas</button>
                         </div>
-                        
                     </div>
                 </div>`;
-
         } else if (tipo === 'cerrados') {
             html += `
                 <div class="item-examen" data-titulo="${ex.titulo}" data-examen="${ex.id}">
@@ -109,15 +107,20 @@ function redireccionarPagina(){
 }
 
 document.addEventListener("click", (e) => {
-    if (e.target.closest(".btn-terminar")) {
-        // No permitir hacer clic en exámenes en borrador
-        return;
-    }
-
     const item = e.target.closest(".item-examen");
     const idExamen = item?.dataset.examen;
     const codigo = JSON.parse(localStorage.getItem('asignaturaSeleccionada'))?.codigo ??
         JSON.parse(localStorage.getItem('asignaturaSeleccionada'))?.codigoAsignatura ?? '';
+
+    // Si el examen es un borrador, no hacer nada si se hace click
+    if (item && item.classList.contains("item-examen-borrador")) {
+        return; // No permitir hacer clic en los exámenes en borrador
+    }
+
+    if (e.target.closest(".btn-terminar")) {
+        // No permitir hacer clic en los exámenes en borrador
+        return;
+    }
 
     if (e.target.closest(".btn-visualizar-entregas")) {
         if (idExamen && codigo) {
@@ -128,6 +131,16 @@ document.addEventListener("click", (e) => {
         return;
     }
 
+    if (e.target.closest(".btn-ver-ficha")) {
+        if (idExamen && codigo) {
+            window.location.href = `ficha-examen-profesor.php?codigoAsignatura=${codigo}&idExamen=${idExamen}`;
+        } else {
+            console.error("Faltan datos para redirigir a entregas.");
+        }
+        return;
+    }
+
+    // Si no es un examen en borrador, redirigir a la ficha del examen
     if (item && item.dataset.titulo && !item.classList.contains("item-examen-borrador")) {
         localStorage.setItem("examenSeleccionado", JSON.stringify({
             titulo: item.dataset.titulo,

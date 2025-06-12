@@ -131,10 +131,7 @@ h4{
     box-shadow: none; /* Quita el efecto de sombra al pasar el ratón */
     border: 1px solid var(--color-bordes); /* Deja el borde tal como está, sin cambios */
 }
-.item-examen-borrador .btn-visualizar-entregas {
 
-}
-    cursor: not-allowed;
 .btn-terminar {
 
     font-family: var(--fuente-principal);
